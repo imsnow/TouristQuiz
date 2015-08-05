@@ -2,4 +2,14 @@
     <string name="app_name">Tourist Quiz</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="quiz_point">157</string>
+
+    <string name="quiz_text">В Какой стране находятся Великие Пирамиды Гизы?</string>
+    <string name="quiz_button1">Турция</string>
+    <string name="quiz_button2">Египет</string>
+    <string name="quiz_button3">Иран</string>
+    <string name="quiz_button4">Саудовская Аравия</string>
+
+    <string name="quiz_error">Нашли ошбику?</string>
 </resources>
