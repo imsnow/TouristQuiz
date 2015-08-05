@@ -34,7 +34,7 @@ public class QuizStorage {
         db = dbHelper.getWritableDatabase();
     }
 
-    public QuizStorage getStorage(Context context){
+    public static QuizStorage getStorage(Context context){
         if(storage == null) storage = new QuizStorage(context);
         return storage;
     }

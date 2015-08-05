@@ -31,10 +31,10 @@ public class DBHelper extends SQLiteOpenHelper{
         Log.d(TAG, "onCreate");
 
         db.execSQL("create table " + TABLE + "("
-                + QUIZ_ID + " integer primary key autoincrement"
-                + QUIZ_TEXT + " text"
-                + QUIZ_ANSWERS + " text"
-                + QUIZ_TYPE + " text"
+                + QUIZ_ID + " integer primary key autoincrement,"
+                + QUIZ_TEXT + " text,"
+                + QUIZ_ANSWERS + " text,"
+                + QUIZ_TYPE + " text,"
                 + QUIZ_IS + " integer" + ");");
     }
 
