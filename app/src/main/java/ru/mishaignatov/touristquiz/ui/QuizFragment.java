@@ -1,10 +1,12 @@
-package ru.mishaignatov.touristquiz;
+package ru.mishaignatov.touristquiz.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import ru.mishaignatov.touristquiz.R;
 
 /**
  * Created by Ignatov on 05.08.2015.

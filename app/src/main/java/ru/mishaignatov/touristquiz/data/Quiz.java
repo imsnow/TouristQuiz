@@ -9,20 +9,35 @@ public class Quiz {
 
     private String quizText;
     private String strAnswers;
-    private int type;
+    private String type;
 
-    public Quiz(final String text, final String answers, int type){
+    public Quiz(final String text, final String answers, final String type){
+        /*
+        int type = 0;
+
+        switch (arr[3]){
+            case "lions": type = QuizStorage.SIGHT; break;
+            case "kitchen": type = QuizStorage.KITCHEN; break;
+            case "geo": type = QuizStorage.GEO; break;
+            case "history": type = QuizStorage.HISTORY; break;
+        }
+        */
         quizText = text;
         strAnswers = answers;
         this.type = type;
     }
 
+    public Quiz(final String[] arr){
+        this(arr[0], arr[1], arr[2]);
+    }
+
     public String getText()                   {   return quizText;   }
-    public int getType()                      {   return type;       }
+    public String getType()                   {   return type;       }
     public String getStringAnswers()          {   return strAnswers; }
     //public boolean isAnswered()               {   return is_answered;}
 
     public String[] getListAnswers(){
         return strAnswers.trim().split(",");
     }
+
 }

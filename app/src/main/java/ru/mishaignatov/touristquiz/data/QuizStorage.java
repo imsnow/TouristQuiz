@@ -57,7 +57,7 @@ public class QuizStorage {
         Cursor cursor = db.query(DBHelper.TABLE, null, null, null, null, null, null);
         int random = new Random(cursor.getCount()).nextInt();
         cursor.moveToPosition(random);
-        Quiz quiz = new Quiz(cursor.getString(0), cursor.getString(1), cursor.getInt(2));
+        Quiz quiz = new Quiz(cursor.getString(0), cursor.getString(1), cursor.getString(2));
         return quiz;
     }
 }
