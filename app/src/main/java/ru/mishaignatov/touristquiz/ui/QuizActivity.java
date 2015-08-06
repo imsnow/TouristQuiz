@@ -2,9 +2,11 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Quiz;
@@ -19,6 +21,8 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     private TextView quizText;
     private Button button1, button2, button3, button4;
+
+    private Quiz currentQuiz = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +43,10 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     private void updateQuiz(){
 
-        Quiz quiz = QuizStorage.getQuiz();
-        String[] list = quiz.getRandomListAnswers();
+        currentQuiz = QuizStorage.getQuiz();
+        String[] list = currentQuiz.getRandomListAnswers();
 
-        quizText.setText(quiz.getText());
+        quizText.setText(currentQuiz.getText());
         button1.setText(list[0].trim());
         button2.setText(list[1].trim());
         button3.setText(list[2].trim());
@@ -51,6 +55,20 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        String s = ((Button)v).getText().toString();
+
+        boolean result = Quiz.isAnswer(currentQuiz, s);
+        makeToast(result);
+
         updateQuiz();
+    }
+
+    private void makeToast(boolean isTrue){
+        String s;
+        if(isTrue) s = "Поздравляю! В выбрали правильный вариант =)";
+        else s = "Жаль, но это не правильный ответ! =(";
+
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 }

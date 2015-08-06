@@ -1,7 +1,5 @@
 package ru.mishaignatov.touristquiz.data;
 
-import android.util.Log;
-
 import ru.mishaignatov.touristquiz.Utils;
 
 /**
@@ -49,8 +47,7 @@ public class Quiz {
     }
 
     public static boolean isAnswer(final Quiz quiz, final String choice){
-        if(quiz.getListAnswers()[0] == choice)
-            return true;
-        return false;
+        String answer = quiz.getListAnswers()[0].trim();
+        return answer.equals(choice);
     }
 }
