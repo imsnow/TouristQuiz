@@ -1,5 +1,7 @@
 package ru.mishaignatov.touristquiz.data;
 
+import android.util.Log;
+
 /**
  * Created by Ignatov Misha on 02.08.15.
  *
@@ -37,7 +39,7 @@ public class Quiz {
     //public boolean isAnswered()               {   return is_answered;}
 
     public String[] getListAnswers(){
-        return strAnswers.trim().split(",");
+        return strAnswers.split(",");
     }
 
 }

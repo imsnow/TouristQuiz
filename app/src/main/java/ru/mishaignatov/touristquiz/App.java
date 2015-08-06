@@ -30,8 +30,8 @@ public class App extends Application {
         Log.d(TAG, "App created");
 
         storage = QuizStorage.getStorage(this);
+        storage.loadFile(this, FILE);
 
-        readFile(FILE);
         /*
         // Test only
         Quiz quiz = new Quiz("В какой стране находятся Влеикие Пирамиды Гизы?", "Египет, Турция, Иран, Манголия", QuizStorage.SIGHT);
@@ -41,25 +41,4 @@ public class App extends Application {
         */
     }
 
-
-    private void readFile(final String filename){
-
-        AssetManager assets = getAssets();
-        try {
-            InputStream is = assets.open(filename);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String s;
-            while((s = reader.readLine()) != null) {
-
-                String[] arr = s.split(";");
-                if (arr.length == 3) {
-                    Quiz quiz = new Quiz(arr);
-                    storage.addQuiz(quiz);
-                }
-            }
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
