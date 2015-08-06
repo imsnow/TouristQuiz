@@ -40,7 +40,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     private void updateQuiz(){
 
         Quiz quiz = QuizStorage.getQuiz();
-        String[] list = quiz.getListAnswers();
+        String[] list = quiz.getRandomListAnswers();
 
         quizText.setText(quiz.getText());
         button1.setText(list[0].trim());

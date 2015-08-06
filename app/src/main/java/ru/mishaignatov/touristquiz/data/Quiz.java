@@ -2,6 +2,8 @@ package ru.mishaignatov.touristquiz.data;
 
 import android.util.Log;
 
+import ru.mishaignatov.touristquiz.Utils;
+
 /**
  * Created by Ignatov Misha on 02.08.15.
  *
@@ -42,4 +44,13 @@ public class Quiz {
         return strAnswers.split(",");
     }
 
+    public String[] getRandomListAnswers(){
+        return Utils.shuffleStringArray(getListAnswers());
+    }
+
+    public static boolean isAnswer(final Quiz quiz, final String choice){
+        if(quiz.getListAnswers()[0] == choice)
+            return true;
+        return false;
+    }
 }
