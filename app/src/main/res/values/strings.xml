@@ -12,4 +12,5 @@
     <string name="quiz_button4">Саудовская Аравия</string>
 
     <string name="quiz_error">Нашли ошбику?</string>
+    <string name="button_my_quiz">My quiz</string>
 </resources>

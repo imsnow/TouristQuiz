@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Quiz;
 import ru.mishaignatov.touristquiz.data.QuizStorage;
@@ -58,14 +59,17 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         String s = ((Button)v).getText().toString();
 
         boolean result = Quiz.isAnswer(currentQuiz, s);
-        makeToast(result);
+        userAnswered(result);
 
         updateQuiz();
     }
 
-    private void makeToast(boolean isTrue){
+    private void userAnswered(boolean isTrue){
         String s;
-        if(isTrue) s = "Поздравляю! В выбрали правильный вариант =)";
+        if(isTrue) {
+            App.userAnsweredTrue();
+            s = "Поздравляю! В выбрали правильный вариант =)";
+        }
         else s = "Жаль, но это не правильный ответ! =(";
 
         Toast.makeText(this, s, Toast.LENGTH_LONG).show();

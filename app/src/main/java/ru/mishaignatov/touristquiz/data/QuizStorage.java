@@ -76,7 +76,7 @@ public class QuizStorage {
     }
 
     // Load file with quizzes
-    public static void loadFile(Context context, final String filename){
+    public void loadFile(Context context, final String filename){
 
         AssetManager assets = context.getAssets();
         try {
@@ -95,5 +95,24 @@ public class QuizStorage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Get numbers of quizzes in file
+    public int getNumberOfQuizzes(Context context, final String filename){
+        int n = 0;
+
+        AssetManager assets = context.getAssets();
+        try {
+            InputStream is = assets.open(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            while((reader.readLine()) != null) {
+                n++;
+            }
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return n;
     }
 }
