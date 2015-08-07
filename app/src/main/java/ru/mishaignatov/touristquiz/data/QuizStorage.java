@@ -34,9 +34,7 @@ public class QuizStorage {
 
     // Initialize storage
     private QuizStorage(Context context) {
-
-        DBHelper dbHelper = new DBHelper(context);
-        db = dbHelper.getWritableDatabase();
+        createDB(context);
     }
 
     public static QuizStorage getStorage(Context context){
@@ -114,5 +112,18 @@ public class QuizStorage {
         }
 
         return n;
+    }
+
+    private void createDB(Context context){
+        DBHelper dbHelper = new DBHelper(context);
+        db = dbHelper.getWritableDatabase();
+    }
+
+    public void updateDB(Context context){
+        if(db != null) {
+            int n = db.delete(DBHelper.TABLE, null, null);
+            Log.d(TAG, "Database deleted, entries = " + n);
+        }
+        createDB(context);
     }
 }

@@ -46,6 +46,7 @@ public class App extends Application {
         int current_total = storage.getNumberOfQuizzes(this, FILE);
         if(current_total != total_size_file) {
             // TODO update db - remove and create new from FILE
+            storage.updateDB(this);
             storage.loadFile(this, FILE);
             total_size_file = current_total;
         }

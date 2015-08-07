@@ -72,6 +72,6 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         }
         else s = "Жаль, но это не правильный ответ! =(";
 
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
