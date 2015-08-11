@@ -42,19 +42,6 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         updateQuiz();
     }
 
-    private void updateQuiz(){
-
-        currentQuiz = QuizStorage.getQuiz();
-        String[] list = currentQuiz.getRandomListAnswers();
-
-        scoreText.setText(App.getScore());
-        quizText.setText(currentQuiz.getText());
-        button1.setText(list[0].trim());
-        button2.setText(list[1].trim());
-        button3.setText(list[2].trim());
-        button4.setText(list[3].trim());
-    }
-
     @Override
     public void onClick(View v) {
 
@@ -75,5 +62,18 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         else s = "Жаль, но это не правильный ответ! =(";
 
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateQuiz(){
+
+        currentQuiz = QuizStorage.getQuiz();
+        String[] list = currentQuiz.getRandomListAnswers();
+
+        scoreText.setText(String.valueOf(App.getScore()));
+        quizText.setText(currentQuiz.getText());
+        button1.setText(list[0].trim());
+        button2.setText(list[1].trim());
+        button3.setText(list[2].trim());
+        button4.setText(list[3].trim());
     }
 }
