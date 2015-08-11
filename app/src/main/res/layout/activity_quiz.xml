@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/quiz_point"
-        android:id="@+id/point_text"
+        android:id="@+id/score_text"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

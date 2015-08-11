@@ -19,7 +19,7 @@ import ru.mishaignatov.touristquiz.data.QuizStorage;
  */
 public class QuizActivity extends Activity implements View.OnClickListener {
 
-    private TextView quizText;
+    private TextView scoreText, quizText;
     private Button button1, button2, button3, button4;
 
     private Quiz currentQuiz = null;
@@ -29,6 +29,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        scoreText = (TextView)findViewById(R.id.score_text);
         quizText = (TextView)findViewById(R.id.quiz_text);
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
@@ -46,6 +47,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         currentQuiz = QuizStorage.getQuiz();
         String[] list = currentQuiz.getRandomListAnswers();
 
+        scoreText.setText(App.getScore());
         quizText.setText(currentQuiz.getText());
         button1.setText(list[0].trim());
         button2.setText(list[1].trim());
