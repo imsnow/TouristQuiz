@@ -14,16 +14,7 @@ public class Quiz {
     private String type;
 
     public Quiz(final String text, final String answers, final String type){
-        /*
-        int type = 0;
 
-        switch (arr[3]){
-            case "lions": type = QuizStorage.SIGHT; break;
-            case "kitchen": type = QuizStorage.KITCHEN; break;
-            case "geo": type = QuizStorage.GEO; break;
-            case "history": type = QuizStorage.HISTORY; break;
-        }
-        */
         quizText = text;
         strAnswers = answers;
         this.type = type;
@@ -34,7 +25,19 @@ public class Quiz {
     }
 
     public String getText()                   {   return quizText;   }
-    public String getType()                   {   return type;       }
+    public int getType()                   {
+        switch (type) {
+            case "lions":
+                return QuizStorage.SIGHT;
+            case "kitchen":
+                return QuizStorage.KITCHEN;
+            case "geo":
+                return QuizStorage.GEO;
+            case "history":
+                return QuizStorage.HISTORY;
+        }
+        return 0;
+    }
     public String getStringAnswers()          {   return strAnswers; }
     //public boolean isAnswered()               {   return is_answered;}
 

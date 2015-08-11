@@ -1,9 +1,11 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +23,18 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     private TextView scoreText, quizText;
     private Button button1, button2, button3, button4;
+    private RelativeLayout layout;
 
     private Quiz currentQuiz = null;
+
+    private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        layout = (RelativeLayout)findViewById(R.id.quiz_layout);
         scoreText = (TextView)findViewById(R.id.score_text);
         quizText = (TextView)findViewById(R.id.quiz_text);
         button1 = (Button)findViewById(R.id.button1);
@@ -75,5 +81,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         button2.setText(list[1].trim());
         button3.setText(list[2].trim());
         button4.setText(list[3].trim());
+
+        layout.setBackgroundResource(drawables[currentQuiz.getType()]);
     }
 }
