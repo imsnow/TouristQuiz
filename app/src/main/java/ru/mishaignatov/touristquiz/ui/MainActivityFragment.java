@@ -35,14 +35,12 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getActivity().getApplicationContext(), QuizActivity.class));
+                //startActivity(new Intent(getActivity().getApplicationContext(), QuizActivity.class));
+                ((MainActivity)getActivity()).changeFragment(new CountryListFragment());
             }
         });
 
         stat = (TextView)v.findViewById(R.id.main_stat);
-
-        //ImageView gif = (ImageView)v.findViewById(R.id.imageView);
-        //Ion.with(gif).load()
 
         updateFragment();
 
