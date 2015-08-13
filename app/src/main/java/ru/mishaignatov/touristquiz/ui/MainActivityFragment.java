@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 
@@ -39,6 +40,9 @@ public class MainActivityFragment extends Fragment {
         });
 
         stat = (TextView)v.findViewById(R.id.main_stat);
+
+        //ImageView gif = (ImageView)v.findViewById(R.id.imageView);
+        //Ion.with(gif).load()
 
         updateFragment();
 
