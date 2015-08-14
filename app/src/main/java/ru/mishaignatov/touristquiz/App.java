@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import ru.mishaignatov.touristquiz.data.AssetsLoader;
+import ru.mishaignatov.touristquiz.data.CountryStorage;
 import ru.mishaignatov.touristquiz.data.Quiz;
 import ru.mishaignatov.touristquiz.data.QuizStorage;
 
@@ -42,6 +44,8 @@ public class App extends Application {
 
         // Load previous result
         loadPreference();
+
+        AssetsLoader loader = AssetsLoader.getLoader(this, CountryStorage.getStorage());
 
         storage = QuizStorage.getStorage(this);
 

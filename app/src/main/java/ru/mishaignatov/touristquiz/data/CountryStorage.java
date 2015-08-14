@@ -14,14 +14,14 @@ public class CountryStorage {
 
     private CountryStorage(){
         list = new ArrayList<>();
-
+/*
         // test only
         Country item = new Country("Египет", 15);
         list.add(item);
         item = new Country("Франция", 12);
         list.add(item);
         item = new Country("Россия", 25);
-        list.add(item);
+        list.add(item); */
     }
 
     public static CountryStorage getStorage(){
