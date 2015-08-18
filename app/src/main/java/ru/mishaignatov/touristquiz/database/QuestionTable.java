@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.data;
+package ru.mishaignatov.touristquiz.database;
 
 import android.provider.BaseColumns;
 
