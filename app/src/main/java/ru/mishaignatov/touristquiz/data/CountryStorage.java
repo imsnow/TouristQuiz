@@ -14,14 +14,6 @@ public class CountryStorage {
 
     private CountryStorage(){
         list = new ArrayList<>();
-/*
-        // test only
-        Country item = new Country("Египет", 15);
-        list.add(item);
-        item = new Country("Франция", 12);
-        list.add(item);
-        item = new Country("Россия", 25);
-        list.add(item); */
     }
 
     public static CountryStorage getStorage(){
@@ -32,12 +24,6 @@ public class CountryStorage {
 
     public void addCountry(Country country){
         list.add(country);
-    }
-
-    public Country getCountry(int position){
-        if(list.size() >= position )
-            return list.get(position);
-        return null;
     }
 
     public List<Country> getCountryList(){

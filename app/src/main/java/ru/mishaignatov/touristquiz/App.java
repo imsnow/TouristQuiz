@@ -3,17 +3,15 @@ package ru.mishaignatov.touristquiz;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
+
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import ru.mishaignatov.touristquiz.data.AssetsLoader;
+import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.CountryStorage;
-import ru.mishaignatov.touristquiz.data.Quiz;
 import ru.mishaignatov.touristquiz.data.QuizStorage;
 
 /**
@@ -26,6 +24,7 @@ public class App extends Application {
     private static final String TAG = "Application";
 
     private static final String FILE = "quizzes.txt";
+    private List<Country> list = new ArrayList<>();
     private QuizStorage storage;
 
     private static SharedPreferences prefs;
@@ -86,4 +85,13 @@ public class App extends Application {
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
+
+
+    //Interface to countries list
+    public void addCountry(Country country){
+        list.add(country);
+    }
+    public List<Country> getCountryList(){
+        return list;
+    }
 }

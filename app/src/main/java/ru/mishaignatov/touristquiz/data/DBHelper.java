@@ -13,7 +13,7 @@ import android.util.Log;
 public class DBHelper extends SQLiteOpenHelper{
 
     private static final String TAG = "DBHelper";
-
+    private static DBHelper helper;
     public static final String TABLE = "dbquiz";
 
     public static final String QUIZ_ID     = "_id";
@@ -22,20 +22,27 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String QUIZ_IS     = "is_answered";
     public static final String QUIZ_TYPE   = "type";
 
-    public DBHelper(Context context) {
+    private DBHelper(Context context) {
         super(context, "database", null, 1);
+    }
+
+    public static DBHelper getInstance(Context context){
+        if(helper == null) helper = new DBHelper(context);
+        return helper;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "onCreate");
-
+        db.execSQL(QuestionTable.CREATE);
+        /*
         db.execSQL("create table " + TABLE + "("
                 + QUIZ_ID + " integer primary key autoincrement,"
                 + QUIZ_TEXT + " text,"
                 + QUIZ_ANSWERS + " text,"
                 + QUIZ_TYPE + " text,"
                 + QUIZ_IS + " integer" + ");");
+                */
     }
 
     @Override

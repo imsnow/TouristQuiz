@@ -23,6 +23,8 @@ import ru.mishaignatov.touristquiz.data.CountryStorage;
  */
 public class CountryListFragment extends ListFragment {
 
+    private List<Country> list;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +40,13 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        Log.d("TAG", "position = " + position + " v = " + v.toString());
+        Log.d("TAG", "position = " + position + " country = " + list.get(position).getName());
     }
 
 
     private class CountryAdapter extends ArrayAdapter<Country> {
 
-        private List<Country> list;
+        //private List<Country> list;
         public CountryAdapter(Context context) {
             super(context, 0, CountryStorage.getStorage().getCountryList());
             list =  CountryStorage.getStorage().getCountryList();
