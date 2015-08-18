@@ -115,7 +115,7 @@ public class QuizStorage {
     }
 
     private void createDB(Context context){
-        DBHelper dbHelper = new DBHelper(context);
+        DBHelper dbHelper = DBHelper.getInstance(context);
         db = dbHelper.getWritableDatabase();
     }
 

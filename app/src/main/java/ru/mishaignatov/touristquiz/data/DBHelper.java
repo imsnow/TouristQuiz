@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static final String TAG = "DBHelper";
     private static DBHelper helper;
-    public static final String TABLE = "dbquiz";
+    public static final String TABLE = "database";
 
     public static final String QUIZ_ID     = "_id";
     public static final String QUIZ_TEXT   = "quiz";
@@ -29,6 +29,10 @@ public class DBHelper extends SQLiteOpenHelper{
     public static DBHelper getInstance(Context context){
         if(helper == null) helper = new DBHelper(context);
         return helper;
+    }
+
+    private void fillTable(SQLiteDatabase db){
+
     }
 
     @Override
@@ -48,7 +52,7 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "onUpgrade SQL Database: old version = " + oldVersion + " new version = " + newVersion);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.NAME);
         onCreate(db);
     }
 }
