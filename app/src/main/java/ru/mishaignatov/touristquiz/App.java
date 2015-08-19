@@ -13,6 +13,7 @@ import ru.mishaignatov.touristquiz.data.AssetsLoader;
 import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.CountryStorage;
 import ru.mishaignatov.touristquiz.data.QuizStorage;
+import ru.mishaignatov.touristquiz.database.DBHelper;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -44,6 +45,9 @@ public class App extends Application {
         // Load previous result
         loadPreference();
 
+        DBHelper helper = DBHelper.getInstance(this);
+        helper.getWritableDatabase();
+        /*
         AssetsLoader loader = AssetsLoader.getLoader(this, CountryStorage.getStorage());
 
         storage = QuizStorage.getStorage(this);
@@ -56,6 +60,7 @@ public class App extends Application {
             storage.loadFile(this, FILE);
             total_size_file = current_total;
         }
+        */
         savePreference();
     }
 
