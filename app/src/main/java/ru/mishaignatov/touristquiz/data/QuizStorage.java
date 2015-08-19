@@ -36,7 +36,7 @@ public class QuizStorage {
 
     // Initialize storage
     private QuizStorage(Context context) {
-        createDB(context);
+        //createDB(context);
     }
 
     public static QuizStorage getStorage(Context context){
@@ -96,30 +96,11 @@ public class QuizStorage {
             e.printStackTrace();
         }
     }
-
-    // Get numbers of quizzes in file
-    public int getNumberOfQuizzes(Context context, final String filename){
-        int n = 0;
-
-        AssetManager assets = context.getAssets();
-        try {
-            InputStream is = assets.open(filename);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            while((reader.readLine()) != null) {
-                n++;
-            }
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return n;
-    }
-
-    private void createDB(Context context){
-        DBHelper dbHelper = DBHelper.getInstance(context);
-        db = dbHelper.getWritableDatabase();
-    }
+/*
+    //private void createDB(Context context){
+        //DBHelper dbHelper = DBHelper.getInstance(context);
+        //db = dbHelper.getWritableDatabase();
+    //}
 
     public void updateDB(Context context){
         if(db != null) {
@@ -128,4 +109,5 @@ public class QuizStorage {
         }
         createDB(context);
     }
+    */
 }

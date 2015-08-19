@@ -18,8 +18,9 @@ public interface QuestionTable {
     String PROJECTION[] = new String[]{
             COLUMN_ID, COLUMN_QUIZ, COLUMN_ANSWERS, COLUMN_COUNTRY, COLUMN_TYPE};
 
+
     String CREATE = "CREATE TABLE " + NAME + " (" +
-            COLUMN_ID + " INTEGER PRIMARY KEY, " +
+            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_QUIZ + " TEXT NOT NULL, " +
             COLUMN_ANSWERS + " TEXT NOT NULL, " +
             COLUMN_COUNTRY + " TEXT NOT NULL, " +

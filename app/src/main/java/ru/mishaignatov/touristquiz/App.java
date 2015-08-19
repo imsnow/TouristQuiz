@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class App extends Application {
     private static final String TAG = "Application";
 
     private static final String FILE = "quizzes.txt";
-    private List<Country> list = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
     private QuizStorage storage;
 
     private static SharedPreferences prefs;
@@ -37,6 +38,9 @@ public class App extends Application {
     private static final String KEY_ANSWERED = "answered";
     private static final String KEY_SCORE = "score";
 
+    private DBHelper mDbHelper;
+    private SQLiteDatabase mDataBase;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -45,8 +49,10 @@ public class App extends Application {
         // Load previous result
         loadPreference();
 
-        DBHelper helper = DBHelper.getInstance(this);
-        helper.getWritableDatabase();
+        mDbHelper = DBHelper.getInstance(this);
+        mDataBase = mDbHelper.getWritableDatabase();
+
+        list = mDbHelper.getCountryColumn(mDataBase);
         /*
         AssetsLoader loader = AssetsLoader.getLoader(this, CountryStorage.getStorage());
 
@@ -66,7 +72,7 @@ public class App extends Application {
 
     private void loadPreference(){
         prefs = getSharedPreferences("quiz", Context.MODE_PRIVATE);
-        total_size_file = prefs.getInt(KEY_TOTAL,    0);
+        total_size_file = prefs.getInt(KEY_TOTAL, 0);
         answered_size   = prefs.getInt(KEY_ANSWERED, 0);
         score           = prefs.getInt(KEY_SCORE,    0);
     }
@@ -87,16 +93,21 @@ public class App extends Application {
         savePreference();
     }
 
+    public static void setTotalQuizzes(int n)   { total_size_file = n;}
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
 
-
-    //Interface to countries list
-    public void addCountry(Country country){
-        list.add(country);
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mDbHelper.close();
     }
-    public List<Country> getCountryList(){
-        return list;
+
+    @Override
+    public void onTerminate(){
+        Log.d(TAG, "App terminate");
+        mDbHelper.close();
+        super.onTerminate();
     }
 }
