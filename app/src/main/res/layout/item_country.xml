@@ -7,14 +7,19 @@
         android:id="@+id/country_name"
         android:text="Египет"
         android:layout_width="0dp"
+        android:gravity="center|left"
+        android:textSize="24sp"
+        android:padding="8dp"
         android:layout_weight="0.8"
         android:layout_height="match_parent" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_weight="0.2"
+        android:gravity="center"
+        android:padding="8dp"
         android:id="@+id/country_result"
-        android:text="10 / 15"
+        android:text="0/15"
         android:layout_height="match_parent" />
 
 </LinearLayout>

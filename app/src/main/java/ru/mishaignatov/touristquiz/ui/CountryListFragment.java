@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.CountryStorage;
@@ -23,7 +24,8 @@ import ru.mishaignatov.touristquiz.data.CountryStorage;
  */
 public class CountryListFragment extends ListFragment {
 
-    private List<Country> list;
+    //private List<Country> list;
+    private List<String> list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,16 +42,18 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        Log.d("TAG", "position = " + position + " country = " + list.get(position).getName());
+        Log.d("TAG", "position = " + position + " country = " + list.get(position));
     }
 
-
-    private class CountryAdapter extends ArrayAdapter<Country> {
+    private class CountryAdapter extends ArrayAdapter<String> {
+    //private class CountryAdapter extends ArrayAdapter<Country> {
 
         //private List<Country> list;
         public CountryAdapter(Context context) {
-            super(context, 0, CountryStorage.getStorage().getCountryList());
-            list =  CountryStorage.getStorage().getCountryList();
+            //super(context, 0, CountryStorage.getStorage().getCountryList());
+            //list =  CountryStorage.getStorage().getCountryList();
+            super(context, 0, App.getCoutriesList());
+            list =  App.getCoutriesList();
         }
 
         @Override
@@ -57,12 +61,13 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            Country item = list.get(position);
+            ///Country item = list.get(position);
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
-            name.setText(item.getName());
+            //name.setText(item.getName());
+            name.setText(list.get(position));
 
-            TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            result.setText("" + item.getAnswered() + "/" + item.getTotal());
+            //TextView result = (TextView)convertView.findViewById(R.id.country_result);
+            //result.setText("" + item.getAnswered() + "/" + item.getTotal());
 
             return convertView;
         }

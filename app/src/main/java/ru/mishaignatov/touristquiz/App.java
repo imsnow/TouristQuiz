@@ -26,7 +26,7 @@ public class App extends Application {
     private static final String TAG = "Application";
 
     private static final String FILE = "quizzes.txt";
-    private List<String> list = new ArrayList<>();
+    private static ArrayList<String> list;
     private QuizStorage storage;
 
     private static SharedPreferences prefs;
@@ -97,6 +97,8 @@ public class App extends Application {
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
+
+    public static ArrayList<String> getCoutriesList(){ return list; }
 
     @Override
     public void onLowMemory() {
