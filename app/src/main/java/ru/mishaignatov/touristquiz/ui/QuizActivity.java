@@ -3,11 +3,15 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
@@ -27,6 +31,8 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     private Quiz currentQuiz = null;
 
+    private ArrayList<Quiz> list;
+
     private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
 
     @Override
@@ -45,6 +51,9 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+
+        list = getIntent().getParcelableArrayListExtra("QUIZZES");
+
         updateQuiz();
     }
 
@@ -72,7 +81,12 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     private void updateQuiz(){
 
-        currentQuiz = QuizStorage.getQuiz();
+        int size = list.size();
+        Random r = new Random();
+        int random = r.nextInt(size);
+
+
+        currentQuiz = list.get(random);
         String[] list = currentQuiz.getRandomListAnswers();
 
         scoreText.setText(String.valueOf(App.getScore()));
@@ -85,7 +99,4 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         layout.setBackgroundResource(drawables[currentQuiz.getType()]);
     }
 
-    private void getQuizList(){
-        //getIntent().getData()
-    }
 }
