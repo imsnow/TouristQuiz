@@ -8,13 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ru.mishaignatov.touristquiz.data.AssetsLoader;
-import ru.mishaignatov.touristquiz.data.Country;
-import ru.mishaignatov.touristquiz.data.CountryStorage;
-import ru.mishaignatov.touristquiz.data.Quiz;
-import ru.mishaignatov.touristquiz.data.QuizStorage;
 import ru.mishaignatov.touristquiz.database.DBHelper;
 
 /**
@@ -28,7 +22,6 @@ public class App extends Application {
 
     private static final String FILE = "quizzes.txt";
     private static ArrayList<String> countriesList;
-    private QuizStorage storage;
 
     private static SharedPreferences prefs;
     private static int total_size_file = 0;     // Сколько всего загадок находится в файле
@@ -55,9 +48,7 @@ public class App extends Application {
 
         countriesList = mDbHelper.getCountryList(mDataBase);
         /*
-        AssetsLoader loader = AssetsLoader.getLoader(this, CountryStorage.getStorage());
 
-        storage = QuizStorage.getStorage(this);
 
         // Check has the file changed?
         int current_total = storage.getNumberOfQuizzes(this, FILE);

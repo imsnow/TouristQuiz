@@ -1,9 +1,7 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -16,7 +14,6 @@ import java.util.Random;
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Quiz;
-import ru.mishaignatov.touristquiz.data.QuizStorage;
 
 /**
  * Created by Ignatov Work on 05.08.2015.

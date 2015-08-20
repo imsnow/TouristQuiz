@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.data.Quiz;
-import ru.mishaignatov.touristquiz.data.QuizStorage;
 
 /**
  * Created by Ignatov Misha on 02.08.15.
