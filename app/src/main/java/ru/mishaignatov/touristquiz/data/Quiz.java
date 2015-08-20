@@ -35,13 +35,13 @@ public class Quiz implements Parcelable {
     public int getType()                   {
         switch (type) {
             case "lions":
-                return QuizStorage.SIGHT;
+                return 0;
             case "kitchen":
-                return QuizStorage.KITCHEN;
+                return 1;
             case "geo":
-                return QuizStorage.GEO;
+                return 2;
             case "history":
-                return QuizStorage.HISTORY;
+                return 3;
         }
         return 0;
     }
