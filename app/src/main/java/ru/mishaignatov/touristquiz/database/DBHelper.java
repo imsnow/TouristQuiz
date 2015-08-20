@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.data.Quiz;
+import ru.mishaignatov.touristquiz.data.QuizStorage;
 
 /**
  * Created by Ignatov Misha on 02.08.15.
@@ -52,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
         // read Questions From FILE
         AssetManager assets = context.getAssets();
-        InputStream is = null;
+        InputStream is;
         int cnt=0;
         try {
             is = assets.open(FILE);
@@ -98,18 +99,37 @@ public class DBHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public ArrayList<String> getCountryColumn(SQLiteDatabase db){
+    //=============================================================
+    // Queries to DataBase
+    //
+    public ArrayList<String> getCountryList(SQLiteDatabase db){
         ArrayList<String> list = new ArrayList<>();
         Cursor c = db.query(QuestionTable.NAME, new String[]{QuestionTable.COLUMN_COUNTRY}, null, null, QuestionTable.COLUMN_COUNTRY,null,null);
         if(c!=null && c.moveToFirst()){
             do {
-                int indx = c.getColumnIndex(QuestionTable.COLUMN_COUNTRY);
-                String s = c.getString(indx);
+                // 0 - Country
+                String s = c.getString(0);
                 Log.d(TAG, "Query result: " + s);
                 list.add(s);
             } while (c.moveToNext());
+            c.close();
         }
-        c.close();
+
+        return list;
+    }
+
+    public ArrayList<Quiz> getQuizzesList(SQLiteDatabase db, String country){
+        ArrayList<Quiz> list = new ArrayList<>();
+        Cursor c = db.query(QuestionTable.NAME, QuestionTable.TAKE_QUIZZES, QuestionTable.COLUMN_COUNTRY + " = ?", new String[]{ country }, null, null, null);
+        // 0 - Quiz, 1 - answers, 2 - type
+        if(c != null && c.moveToFirst()){
+            do {
+                Quiz item = new Quiz(c.getString(0), c.getString(1), c.getString(2));
+                list.add(item);
+                Log.d(TAG, "Quiz item added. Text = " + item.getText() + " answers = " + item.getStringAnswers() + " type = " + item.getType());
+            }while (c.moveToNext());
+            c.close();
+        }
         return list;
     }
 

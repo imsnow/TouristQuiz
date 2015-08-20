@@ -11,12 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.data.Country;
-import ru.mishaignatov.touristquiz.data.CountryStorage;
+import ru.mishaignatov.touristquiz.data.Quiz;
 
 /**
  * Created by Ignatov on 13.08.2015.
@@ -25,7 +25,7 @@ import ru.mishaignatov.touristquiz.data.CountryStorage;
 public class CountryListFragment extends ListFragment {
 
     //private List<Country> list;
-    private List<String> list;
+    private List<String> list = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,8 @@ public class CountryListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         Log.d("TAG", "position = " + position + " country = " + list.get(position));
+        ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
+
     }
 
     private class CountryAdapter extends ArrayAdapter<String> {
@@ -52,8 +54,8 @@ public class CountryListFragment extends ListFragment {
         public CountryAdapter(Context context) {
             //super(context, 0, CountryStorage.getStorage().getCountryList());
             //list =  CountryStorage.getStorage().getCountryList();
-            super(context, 0, App.getCoutriesList());
-            list =  App.getCoutriesList();
+            super(context, 0, App.getCountriesList());
+            list =  App.getCountriesList();
         }
 
         @Override

@@ -4,6 +4,7 @@ import android.provider.BaseColumns;
 
 /**
  * Created by Ignatov on 18.08.2015.
+ * Strings for Question Table
  */
 public interface QuestionTable {
 
@@ -15,9 +16,10 @@ public interface QuestionTable {
     String COLUMN_COUNTRY = "country";
     String COLUMN_TYPE    = "type";
 
-    String PROJECTION[] = new String[]{
-            COLUMN_ID, COLUMN_QUIZ, COLUMN_ANSWERS, COLUMN_COUNTRY, COLUMN_TYPE};
+    //String PROJECTION[] = new String[]{
+    //       COLUMN_ID, COLUMN_QUIZ, COLUMN_ANSWERS, COLUMN_COUNTRY, COLUMN_TYPE};
 
+    String TAKE_QUIZZES[] = new String[] { COLUMN_QUIZ, COLUMN_ANSWERS, COLUMN_TYPE };
 
     String CREATE = "CREATE TABLE " + NAME + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

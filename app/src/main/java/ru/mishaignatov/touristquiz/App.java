@@ -13,6 +13,7 @@ import java.util.List;
 import ru.mishaignatov.touristquiz.data.AssetsLoader;
 import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.CountryStorage;
+import ru.mishaignatov.touristquiz.data.Quiz;
 import ru.mishaignatov.touristquiz.data.QuizStorage;
 import ru.mishaignatov.touristquiz.database.DBHelper;
 
@@ -26,7 +27,7 @@ public class App extends Application {
     private static final String TAG = "Application";
 
     private static final String FILE = "quizzes.txt";
-    private static ArrayList<String> list;
+    private static ArrayList<String> countriesList;
     private QuizStorage storage;
 
     private static SharedPreferences prefs;
@@ -38,8 +39,8 @@ public class App extends Application {
     private static final String KEY_ANSWERED = "answered";
     private static final String KEY_SCORE = "score";
 
-    private DBHelper mDbHelper;
-    private SQLiteDatabase mDataBase;
+    private static DBHelper mDbHelper;
+    private static SQLiteDatabase mDataBase;
 
     @Override
     public void onCreate() {
@@ -52,7 +53,7 @@ public class App extends Application {
         mDbHelper = DBHelper.getInstance(this);
         mDataBase = mDbHelper.getWritableDatabase();
 
-        list = mDbHelper.getCountryColumn(mDataBase);
+        countriesList = mDbHelper.getCountryList(mDataBase);
         /*
         AssetsLoader loader = AssetsLoader.getLoader(this, CountryStorage.getStorage());
 
@@ -93,12 +94,15 @@ public class App extends Application {
         savePreference();
     }
 
+    public static DBHelper getDBHelper()        { return mDbHelper; }
+    public static SQLiteDatabase getDataBase()  { return mDataBase; }
     public static void setTotalQuizzes(int n)   { total_size_file = n;}
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
 
-    public static ArrayList<String> getCoutriesList(){ return list; }
+    public static ArrayList<String> getCountriesList(){ return countriesList; }
+
 
     @Override
     public void onLowMemory() {
