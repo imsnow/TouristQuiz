@@ -84,4 +84,8 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
         layout.setBackgroundResource(drawables[currentQuiz.getType()]);
     }
+
+    private void getQuizList(){
+        //getIntent().getData()
+    }
 }

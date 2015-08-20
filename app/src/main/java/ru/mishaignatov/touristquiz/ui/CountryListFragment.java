@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -45,6 +46,11 @@ public class CountryListFragment extends ListFragment {
         Log.d("TAG", "position = " + position + " country = " + list.get(position));
         ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
 
+
+        Intent i = new Intent(getActivity(), QuizActivity.class);
+        i.putParcelableArrayListExtra("QUIZZES", quizzes);
+
+        startActivity(i);
     }
 
     private class CountryAdapter extends ArrayAdapter<String> {
