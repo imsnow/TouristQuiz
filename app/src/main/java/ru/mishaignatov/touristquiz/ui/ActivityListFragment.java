@@ -7,6 +7,7 @@ import ru.mishaignatov.touristquiz.R;
 
 /**
  * Created by Ignatov on 24.08.2015.
+ * Temporary class
  */
 public class ActivityListFragment extends AppCompatActivity {
 
