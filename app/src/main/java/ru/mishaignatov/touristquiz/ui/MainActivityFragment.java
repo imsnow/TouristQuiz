@@ -35,8 +35,8 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //startActivity(new Intent(getActivity().getApplicationContext(), QuizActivity.class));
-                ((MainActivity)getActivity()).changeFragment(new CountryListFragment());
+                startActivity(new Intent(getActivity().getApplicationContext(), ActivityListFragment.class));
+                //((MainActivity)getActivity()).changeFragment(new CountryListFragment());
             }
         });
 
