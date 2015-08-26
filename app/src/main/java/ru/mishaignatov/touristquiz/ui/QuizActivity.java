@@ -1,12 +1,13 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +21,7 @@ import ru.mishaignatov.touristquiz.data.Quiz;
  *
  * Display quiz
  */
-public class QuizActivity extends Activity implements View.OnClickListener {
+public class QuizActivity extends Activity implements View.OnClickListener, DialogInterface.OnClickListener {
 
     private TextView scoreText, quizText;
     private Button button1, button2, button3, button4;
@@ -60,20 +61,11 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         String s = ((Button)v).getText().toString();
 
         boolean result = Quiz.isAnswer(currentQuiz, s);
-        userAnswered(result);
-
-        updateQuiz();
-    }
-
-    private void userAnswered(boolean isTrue){
-        String s;
-        if(isTrue) {
+        if(result){
             App.userAnsweredTrue();
-            s = "Поздравляю! В выбрали правильный вариант =)";
+            DialogHelper.showDialogSuccess(this, this);
         }
-        else s = "Жаль, но это не правильный ответ! =(";
-
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        else DialogHelper.showDialogFailure(this, this);
     }
 
     private void updateQuiz(){
@@ -96,4 +88,9 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         layout.setBackgroundResource(drawables[currentQuiz.getType()]);
     }
 
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        Log.d("TAG", "Dialog was clicked");
+        updateQuiz();
+    }
 }
