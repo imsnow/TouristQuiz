@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Туристическия викторина</string>
+    <string name="hello_world">Начать игру</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="quiz_point">157</string>
+
+    <string name="quiz_text">В Какой стране находятся Великие Пирамиды Гизы?</string>
+    <string name="quiz_button1">Турция</string>
+    <string name="quiz_button2">Египет</string>
+    <string name="quiz_button3">Иран</string>
+    <string name="quiz_button4">Саудовская Аравия</string>
+
+    <string name="quiz_error">Нашли ошибку?</string>
+    <string name="button_my_quiz">Мой вопрос</string>
+
+
+    <string name="france">Франция</string>
+    <string name="usa">США</string>
+    <string name="spain">Испания</string>
+    <string name="china">Китай</string>
+    <string name="italy">Италия</string>
+    <string name="turkey">Турция</string>
+    <string name="germany">Германия</string>
+    <string name="england">Великобритания</string>
+    <string name="russia">Россия</string>
+    <string name="mexico">Мексика</string>
+
+    <string-array name="countries">
+        <item>@string/france</item>
+        <item>@string/usa</item>
+        <item>@string/spain</item>
+        <item>@string/china</item>
+        <item>@string/italy</item>
+        <item>@string/turkey</item>
+        <item>@string/germany</item>
+        <item>@string/england</item>
+        <item>@string/russia</item>
+        <item>@string/mexico</item>
+    </string-array>
+</resources>

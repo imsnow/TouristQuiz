@@ -11,6 +11,30 @@
     <string name="quiz_button3">Иран</string>
     <string name="quiz_button4">Саудовская Аравия</string>
 
-    <string name="quiz_error">Нашли ошибку?</string>
+    <string name="quiz_error">Found a mistake?</string>
     <string name="button_my_quiz">My quiz</string>
+
+    <string name="france">France</string>
+    <string name="usa">USA</string>
+    <string name="spain">Spain</string>
+    <string name="china">China</string>
+    <string name="italy">Italy</string>
+    <string name="turkey">Turkey</string>
+    <string name="germany">Germany</string>
+    <string name="england">United Kingdom</string>
+    <string name="russia">Russia</string>
+    <string name="mexico">Mexico</string>
+    
+    <string-array name="countries">
+        <item>@string/france</item>
+        <item>@string/usa</item>
+        <item>@string/spain</item>
+        <item>@string/china</item>
+        <item>@string/italy</item>
+        <item>@string/turkey</item>
+        <item>@string/germany</item>
+        <item>@string/england</item>
+        <item>@string/russia</item>
+        <item>@string/mexico</item>
+    </string-array>
 </resources>
