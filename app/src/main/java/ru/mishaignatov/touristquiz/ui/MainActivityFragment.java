@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.database.DBHelper;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -41,6 +42,14 @@ public class MainActivityFragment extends Fragment {
         });
 
         stat = (TextView)v.findViewById(R.id.main_stat);
+
+        Button my_quiz = (Button)v.findViewById(R.id.button_my_quiz);
+        my_quiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                App.test();
+            }
+        });
 
         updateFragment();
 

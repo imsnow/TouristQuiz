@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_my_quiz"
-        android:id="@+id/button"
+        android:id="@+id/button_my_quiz"
         android:layout_below="@+id/button_start"
         android:layout_centerHorizontal="true" />
 

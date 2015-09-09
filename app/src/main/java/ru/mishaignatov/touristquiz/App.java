@@ -95,6 +95,11 @@ public class App extends Application {
     public static ArrayList<String> getCountriesList(){ return countriesList; }
 
 
+    // Test only
+    public static void test(){
+        mDbHelper.calcQuizzesForAllCountries(mDataBase);
+    }
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();

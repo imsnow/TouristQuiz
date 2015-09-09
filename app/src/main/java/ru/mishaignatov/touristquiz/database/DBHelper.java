@@ -13,8 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import ru.mishaignatov.touristquiz.App;
+import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.Quiz;
 
 /**
@@ -135,6 +138,47 @@ public class DBHelper extends SQLiteOpenHelper{
             c.close();
         }
         return list;
+    }
+
+    public void calcQuizzesForAllCountries(SQLiteDatabase db){
+        ArrayList<Country> list = new ArrayList<>();
+
+        String previousCountry = null;
+        //Set<String> countriesNames = new HashSet<>();
+        int total = 0, no_answered = 0;
+
+        Cursor c = db.query(QuestionTable.TABLE_NAME,
+                            new String[] { QuestionTable.COLUMN_COUNTRY, QuestionTable.COLUMN_IS_ANSWERED},
+                            null,null,null,null,null);
+        if(c != null && c.moveToFirst()){
+            do{
+                String name = c.getString(0);
+                boolean is_answered = Boolean.getBoolean(c.getString(1));
+                if(is_answered) no_answered++;
+                total++;
+
+                if(!previousCountry.equals(name))
+
+                previousCountry = name;
+/*
+                if(!name.equals(currentCountry)) {
+                    if(currentCountry != null){
+                        Country country = new Country(name, no_answered, total);
+                        list.add(country);
+                        no_answered = 0;
+                        total = 0;
+                    }
+                    currentCountry = name;
+                }
+
+
+*/
+            } while (c.moveToNext());
+            c.close();
+        }
+        Log.d(TAG, "Countries List");
+        for(Country item : list)
+            Log.d(TAG, item.getName() + " " + item.getNoAnswered() + "/"  + item.getTotal());
     }
 
 }
