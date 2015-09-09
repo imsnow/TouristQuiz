@@ -47,7 +47,7 @@ public class MainActivityFragment extends Fragment {
         my_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                App.test();
+                App.test(getActivity());
             }
         });
 

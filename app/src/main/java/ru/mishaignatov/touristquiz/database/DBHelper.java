@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import ru.mishaignatov.touristquiz.App;
@@ -181,4 +182,32 @@ public class DBHelper extends SQLiteOpenHelper{
             Log.d(TAG, item.getName() + " " + item.getNoAnswered() + "/"  + item.getTotal());
     }
 
+    public void loadCountries(SQLiteDatabase db, List<String> list){
+
+        ArrayList<Country> countries = new ArrayList<>();
+
+        Cursor c = db.query(QuestionTable.TABLE_NAME,
+                new String[] { QuestionTable.COLUMN_COUNTRY, QuestionTable.COLUMN_IS_ANSWERED},
+                null,null,null,null,null);
+
+        for(String item : list){
+
+            int total = 0, no_answered = 0;
+
+            if(c != null && c.moveToFirst()) {
+                do {
+                    String name = c.getString(0);
+                    if(name.equals(item)) {
+                        boolean is_answered = Boolean.getBoolean(c.getString(1));
+                        if (is_answered) no_answered++;
+                        total++;
+                    }
+                } while (c.moveToNext());
+                c.close();
+            }
+
+            Country country = new Country(item, no_answered, total);
+            countries.add(country);
+        }
+    }
 }

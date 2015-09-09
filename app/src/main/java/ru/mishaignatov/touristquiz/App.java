@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ru.mishaignatov.touristquiz.database.DBHelper;
 
@@ -96,8 +97,11 @@ public class App extends Application {
 
 
     // Test only
-    public static void test(){
-        mDbHelper.calcQuizzesForAllCountries(mDataBase);
+    public static void test(Context context){
+
+        String[] array = context.getResources().getStringArray(R.array.countries);
+
+        mDbHelper.loadCountries(mDataBase, Arrays.asList(array));
     }
 
     @Override
