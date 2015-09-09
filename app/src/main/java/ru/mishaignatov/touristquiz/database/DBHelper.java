@@ -30,11 +30,8 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static final String FILE = "questions.txt";
 
-    public static final String QUIZ_ID     = "_id";
-    public static final String QUIZ_TEXT   = "quiz";
-    public static final String QUIZ_ANSWERS = "answer";
-    public static final String QUIZ_IS     = "is_answered";
-    public static final String QUIZ_TYPE   = "type";
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
 
     private Context context;
 
@@ -67,8 +64,9 @@ public class DBHelper extends SQLiteOpenHelper{
                     cv.put(QuestionTable.COLUMN_ANSWERS, arr[1].trim());
                     cv.put(QuestionTable.COLUMN_COUNTRY, arr[2].trim());
                     cv.put(QuestionTable.COLUMN_TYPE, arr[3].trim());
+                    cv.put(QuestionTable.COLUMN_IS_ANSWERED, FALSE);
                     // insert this values
-                    Log.d(TAG, "Added to database element, id = " + db.insert(QuestionTable.NAME, null, cv));
+                    Log.d(TAG, "Added to database element, id = " + db.insert(QuestionTable.TABLE_NAME, null, cv));
                     //db.insert(QuestionTable.NAME, null, cv);
                     // calculate all new questions
                     cnt++;
@@ -83,27 +81,28 @@ public class DBHelper extends SQLiteOpenHelper{
         return cnt;
     }
 
+    // this method is invoked by getWritableDatabase()
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate database " + QuestionTable.NAME);
+        Log.d(TAG, "onCreate database " + QuestionTable.TABLE_NAME);
         db.execSQL(QuestionTable.CREATE);
-
-        App.setTotalQuizzes(fillTable(db));
+        int db_size = fillTable(db);
+        App.setTotalQuizzes(db_size);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "onUpgrade SQL Database: old version = " + oldVersion + " new version = " + newVersion);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE_NAME);
         onCreate(db);
     }
 
     //=============================================================
     // Queries to DataBase
-    //
+    // return all existing countries form database
     public ArrayList<String> getCountryList(SQLiteDatabase db){
         ArrayList<String> list = new ArrayList<>();
-        Cursor c = db.query(QuestionTable.NAME, new String[]{QuestionTable.COLUMN_COUNTRY}, null, null, QuestionTable.COLUMN_COUNTRY,null,null);
+        Cursor c = db.query(QuestionTable.TABLE_NAME, new String[]{QuestionTable.COLUMN_COUNTRY}, null, null, QuestionTable.COLUMN_COUNTRY,null,null);
         if(c!=null && c.moveToFirst()){
             do {
                 // 0 - Country
@@ -117,9 +116,10 @@ public class DBHelper extends SQLiteOpenHelper{
         return list;
     }
 
+    // Return all quizzes for special country
     public ArrayList<Quiz> getQuizzesList(SQLiteDatabase db, String country){
         ArrayList<Quiz> list = new ArrayList<>();
-        Cursor c = db.query(QuestionTable.NAME, QuestionTable.TAKE_QUIZZES, QuestionTable.COLUMN_COUNTRY + " = ?", new String[]{ country }, null, null, null);
+        Cursor c = db.query(QuestionTable.TABLE_NAME, QuestionTable.TAKE_QUIZZES, QuestionTable.COLUMN_COUNTRY + " = ?", new String[]{ country }, null, null, null);
         // 0 - Quiz, 1 - answers, 2 - type
         if(c != null && c.moveToFirst()){
             do {
