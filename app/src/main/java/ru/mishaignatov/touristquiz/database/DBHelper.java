@@ -117,9 +117,14 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     // Return all quizzes for special country
+    // only don't unravel questions
     public ArrayList<Quiz> getQuizzesList(SQLiteDatabase db, String country){
         ArrayList<Quiz> list = new ArrayList<>();
-        Cursor c = db.query(QuestionTable.TABLE_NAME, QuestionTable.TAKE_QUIZZES, QuestionTable.COLUMN_COUNTRY + " = ?", new String[]{ country }, null, null, null);
+        //Cursor c = db.query(QuestionTable.TABLE_NAME, QuestionTable.TAKE_QUIZZES, QuestionTable.COLUMN_COUNTRY + " = ?", new String[]{ country }, null, null, null);
+        Cursor c = db.query(QuestionTable.TABLE_NAME,
+                            QuestionTable.TAKE_QUIZZES,
+                            QuestionTable.COLUMN_COUNTRY + " = ? AND " + QuestionTable.COLUMN_IS_ANSWERED + " = ?",
+                            new String[]{ country, String.valueOf(FALSE) }, null, null, null);
         // 0 - Quiz, 1 - answers, 2 - type
         if(c != null && c.moveToFirst()){
             do {
