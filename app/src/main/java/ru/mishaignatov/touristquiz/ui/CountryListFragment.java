@@ -13,11 +13,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.Quiz;
+import ru.mishaignatov.touristquiz.database.Queries;
 
 /**
  * Created by Ignatov on 13.08.2015.
@@ -25,12 +28,15 @@ import ru.mishaignatov.touristquiz.data.Quiz;
  */
 public class CountryListFragment extends ListFragment {
 
-    //private List<Country> list;
-    private List<String> list = new ArrayList<>();
+    private List<String> countriesList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String[] array = getResources().getStringArray(R.array.countries);
+        countriesList = Arrays.asList(array);
+
         setListAdapter(new CountryAdapter(getActivity()));
     }
 
@@ -43,25 +49,22 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        Log.d("TAG", "position = " + position + " country = " + list.get(position));
-        ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
+        String country = countriesList.get(position);
+        Log.d("TAG", "position = " + position + " country = " + country);
+        //ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
 
 
         Intent i = new Intent(getActivity(), QuizActivity.class);
-        i.putParcelableArrayListExtra("QUIZZES", quizzes);
+        //i.putParcelableArrayListExtra("QUIZZES", quizzes);
+        i.putExtra("COUNTRY", country);
 
         startActivity(i);
     }
 
     private class CountryAdapter extends ArrayAdapter<String> {
-    //private class CountryAdapter extends ArrayAdapter<Country> {
 
-        //private List<Country> list;
         public CountryAdapter(Context context) {
-            //super(context, 0, CountryStorage.getStorage().getCountryList());
-            //list =  CountryStorage.getStorage().getCountryList();
-            super(context, 0, App.getCountriesList());
-            list =  App.getCountriesList();
+            super(context, 0, countriesList);
         }
 
         @Override
@@ -69,13 +72,15 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            ///Country item = list.get(position);
-            TextView name = (TextView)convertView.findViewById(R.id.country_name);
-            //name.setText(item.getName());
-            name.setText(list.get(position));
+            String currentCountryName = countriesList.get(position);
+            Country country = Queries.loadCountry(App.getDataBase(), currentCountryName);
 
-            //TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            //result.setText("" + item.getAnswered() + "/" + item.getTotal());
+
+            TextView name = (TextView)convertView.findViewById(R.id.country_name);
+            name.setText(country.getName());
+
+            TextView result = (TextView)convertView.findViewById(R.id.country_result);
+            result.setText("" + country.getNoAnswered() + "/" + country.getTotal());
 
             return convertView;
         }

@@ -15,6 +15,7 @@ import java.util.Random;
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Quiz;
+import ru.mishaignatov.touristquiz.database.Queries;
 
 /**
  * Created by Ignatov Work on 05.08.2015.
@@ -28,8 +29,9 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
     private RelativeLayout layout;
 
     private Quiz currentQuiz = null;
+    private String currentCountry = null;
 
-    private ArrayList<Quiz> list;
+    private ArrayList<Quiz> quizzes;
 
     private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
 
@@ -50,7 +52,7 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
-        list = getIntent().getParcelableArrayListExtra("QUIZZES");
+        currentCountry = getIntent().getStringExtra("COUNTRY");
 
         updateQuiz();
     }
@@ -64,18 +66,17 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         if(result){
             App.userAnsweredTrue();
             DialogHelper.showDialogSuccess(this, this);
+            Queries.setQuestionAnswered(App.getDataBase(), currentQuiz, currentCountry);
         }
         else DialogHelper.showDialogFailure(this, this);
     }
 
     private void updateQuiz(){
 
-        int size = list.size();
-        Random r = new Random();
-        int random = r.nextInt(size);
+        //currentQuiz = quizzes.get(random);
 
+        currentQuiz = Queries.getRandomQuiz(App.getDataBase(), currentCountry);
 
-        currentQuiz = list.get(random);
         String[] list = currentQuiz.getRandomListAnswers();
 
         scoreText.setText(String.valueOf(App.getScore()));

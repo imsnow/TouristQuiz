@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import ru.mishaignatov.touristquiz.database.DBHelper;
+import ru.mishaignatov.touristquiz.database.Queries;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -47,7 +48,7 @@ public class App extends Application {
         mDbHelper = DBHelper.getInstance(this);
         mDataBase = mDbHelper.getWritableDatabase();
 
-        countriesList = mDbHelper.getCountryList(mDataBase);
+        countriesList = Queries.getCountryList(mDataBase);
         /*
 
 
@@ -101,7 +102,7 @@ public class App extends Application {
 
         String[] array = context.getResources().getStringArray(R.array.countries);
 
-        mDbHelper.loadCountries(mDataBase, Arrays.asList(array));
+        //mDbHelper.loadCountries(mDataBase, Arrays.asList(array));
     }
 
     @Override
