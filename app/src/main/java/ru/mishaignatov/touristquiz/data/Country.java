@@ -6,21 +6,21 @@ package ru.mishaignatov.touristquiz.data;
 public class Country {
 
     private String name;
-    private int no_answered;
+    private int answered;
     private int total;
     private boolean isClosed = true;
 
-    public Country(String name, int no_answered, int total){
+    public Country(String name, int answered, int total){
         this.name = name;
-        this.no_answered = no_answered;
+        this.answered = answered;
         this.total = total;
     }
 
     public String getName() { return name; }
-    public int getNoAnswered(){ return no_answered; }
+    public int getNoAnswered(){ return answered; }
     public int getTotal()   { return total; }
 
     public boolean isFinished(){
-        return no_answered==0;
+        return answered==total;
     }
 }

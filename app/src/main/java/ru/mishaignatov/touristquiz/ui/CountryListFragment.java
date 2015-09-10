@@ -1,6 +1,5 @@
 package ru.mishaignatov.touristquiz.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -8,7 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import java.util.List;
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Country;
-import ru.mishaignatov.touristquiz.data.Quiz;
 import ru.mishaignatov.touristquiz.database.Queries;
 
 /**
@@ -28,16 +26,27 @@ import ru.mishaignatov.touristquiz.database.Queries;
  */
 public class CountryListFragment extends ListFragment {
 
-    private List<String> countriesList = new ArrayList<>();
+    private List<String> countriesNameList = new ArrayList<>();
+    private List<Country> countriesList = new ArrayList<>();
+    private CountryAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         String[] array = getResources().getStringArray(R.array.countries);
-        countriesList = Arrays.asList(array);
+        countriesNameList = Arrays.asList(array);
+        adapter = new CountryAdapter();
+        setListAdapter(adapter);
+    }
 
-        setListAdapter(new CountryAdapter(getActivity()));
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("TAG", "Resume to CountryList");
+        updateCountriesInfo();
+        adapter.c
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -49,7 +58,7 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        String country = countriesList.get(position);
+        String country = countriesNameList.get(position);
         Log.d("TAG", "position = " + position + " country = " + country);
         //ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
 
@@ -61,10 +70,33 @@ public class CountryListFragment extends ListFragment {
         startActivity(i);
     }
 
-    private class CountryAdapter extends ArrayAdapter<String> {
+    private void updateCountriesInfo(){
 
-        public CountryAdapter(Context context) {
-            super(context, 0, countriesList);
+        for (String name : countriesNameList){
+            Country country = Queries.loadCountry(App.getDataBase(), name);
+            countriesList.add(country);
+        }
+    }
+
+    private class CountryAdapter extends BaseAdapter {
+
+        public CountryAdapter() {
+            //super(context);
+        }
+
+        @Override
+        public int getCount() {
+            return countriesList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
         }
 
         @Override
@@ -72,9 +104,7 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            String currentCountryName = countriesList.get(position);
-            Country country = Queries.loadCountry(App.getDataBase(), currentCountryName);
-
+            Country country = countriesList.get(position);
 
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
             name.setText(country.getName());

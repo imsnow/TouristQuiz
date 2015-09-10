@@ -89,7 +89,7 @@ public class Queries {
     // Load country info from database
     public static Country loadCountry(SQLiteDatabase db, String name){
 
-        int total = 0, no_answered = 0;
+        int total = 0, answered = 0;
 
         Cursor c = db.query(QuestionTable.TABLE_NAME,
                 new String[] { QuestionTable.COLUMN_COUNTRY, QuestionTable.COLUMN_IS_ANSWERED},
@@ -100,7 +100,7 @@ public class Queries {
             do {
                 //String s = c.getString(0);
                 boolean is_answered = Boolean.getBoolean(c.getString(1));
-                if (is_answered) no_answered++;
+                if (is_answered) answered++;
                 total++;
 
 
@@ -108,7 +108,7 @@ public class Queries {
             c.close();
         }
 
-        Country country = new Country(name, no_answered, total);
+        Country country = new Country(name, answered, total);
         return country;
     }
 
@@ -127,7 +127,7 @@ public class Queries {
 
         Log.d(TAG, "Quiz n = " + i + " updated");
     }
-
+    /*
     public void loadCountries(SQLiteDatabase db, List<String> list){
 
         ArrayList<Country> countries = new ArrayList<>();
@@ -160,4 +160,5 @@ public class Queries {
         for(Country item : countries)
             Log.d(TAG, item.getName() + " " + item.getNoAnswered() + "/"  + item.getTotal());
     }
+    */
 }
