@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
+import ru.mishaignatov.touristquiz.R;
+
 /**
  * Created by Ignatov on 26.08.2015.
  * Singleton
@@ -52,6 +54,17 @@ public class DialogHelper {
                         dialog.dismiss();
                     }
                 })
+                .show();
+    }
+
+    public static void showDialogErrorInQuestion(Activity activity, DialogInterface.OnClickListener listener){
+
+        new AlertDialog.Builder(activity)
+                .setCancelable(false)
+                        .setMessage(R.string.dialog_error_text)
+                //.setView(R.layout.dialog_send_error)
+                .setPositiveButton(R.string.dialog_error_send, listener)
+                .setNegativeButton(R.string.dialog_error_cancel, listener)
                 .show();
     }
 }

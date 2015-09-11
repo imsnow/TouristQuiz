@@ -2,12 +2,14 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,6 +44,9 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
 
         layout = (RelativeLayout)findViewById(R.id.quiz_layout);
         scoreText = (TextView)findViewById(R.id.score_text);
+        TextView error = (TextView)findViewById(R.id.error_text);
+        error.setOnClickListener(this);
+
         quizText = (TextView)findViewById(R.id.quiz_text);
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
@@ -60,15 +65,31 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
     @Override
     public void onClick(View v) {
 
-        String s = ((Button)v).getText().toString();
-
-        boolean result = Quiz.isAnswer(currentQuiz, s);
-        if(result){
-            App.userAnsweredTrue();
-            DialogHelper.showDialogSuccess(this, this);
-            Queries.setQuestionAnswered(App.getDataBase(), currentQuiz, currentCountry);
+        int id = v.getId();
+        if(id == R.id.error_text) { // send error
+            DialogHelper.showDialogErrorInQuestion(this, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(which == -1) {// Send
+                        //sendErrorEmail(currentQuiz);
+                        Toast.makeText(getApplicationContext(), "You can send message in next version", Toast.LENGTH_LONG).show();
+                    }
+                    if(which == -2) { // cancel
+                        dialog.dismiss();
+                    }
+                }
+            });
         }
-        else DialogHelper.showDialogFailure(this, this);
+        else { // One of fourth answers buttons
+            String s = ((Button) v).getText().toString();
+
+            boolean result = Quiz.isAnswer(currentQuiz, s);
+            if (result) {
+                App.userAnsweredTrue();
+                DialogHelper.showDialogSuccess(this, this);
+                Queries.setQuestionAnswered(App.getDataBase(), currentQuiz, currentCountry);
+            } else DialogHelper.showDialogFailure(this, this);
+        }
     }
 
     private void updateQuiz(){
@@ -102,5 +123,19 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
             updateQuiz();
         if(which == -2) // Next Level Dialog
             finish();
+    }
+
+    private void sendErrorEmail(final Quiz quiz){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ruwinmike@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "Tourist Quiz");
+        i.putExtra(Intent.EXTRA_TEXT, "Quiz = " + quiz.getText() + "\n"
+                                    + "Answers = " + quiz.getStringAnswers() + "\n");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

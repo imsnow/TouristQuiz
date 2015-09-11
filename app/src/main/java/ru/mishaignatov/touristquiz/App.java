@@ -22,8 +22,8 @@ public class App extends Application {
 
     private static final String TAG = "Application";
 
-    private static final String FILE = "quizzes.txt";
-    private static ArrayList<String> countriesList;
+    //private static final String FILE = "quizzes.txt";
+    //private static ArrayList<String> countriesList;
 
     private static SharedPreferences prefs;
     private static int total_size_file = 0;     // Сколько всего загадок находится в файле
@@ -48,19 +48,8 @@ public class App extends Application {
         mDbHelper = DBHelper.getInstance(this);
         mDataBase = mDbHelper.getWritableDatabase();
 
-        countriesList = Queries.getCountryList(mDataBase);
-        /*
+        //countriesList = Queries.getCountryList(mDataBase);
 
-
-        // Check has the file changed?
-        int current_total = storage.getNumberOfQuizzes(this, FILE);
-        if(current_total != total_size_file) {
-            // TODO update db - remove and create new from FILE
-            storage.updateDB(this);
-            storage.loadFile(this, FILE);
-            total_size_file = current_total;
-        }
-        */
         savePreference();
     }
 
@@ -87,23 +76,15 @@ public class App extends Application {
         savePreference();
     }
 
-    public static DBHelper getDBHelper()        { return mDbHelper; }
+    //public static DBHelper getDBHelper()        { return mDbHelper; }
     public static SQLiteDatabase getDataBase()  { return mDataBase; }
     public static void setTotalQuizzes(int n)   { total_size_file = n;}
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
 
-    public static ArrayList<String> getCountriesList(){ return countriesList; }
+    //public static ArrayList<String> getCountriesList(){ return countriesList; }
 
-
-    // Test only
-    public static void test(Context context){
-
-        String[] array = context.getResources().getStringArray(R.array.countries);
-
-        //mDbHelper.loadCountries(mDataBase, Arrays.asList(array));
-    }
 
     @Override
     public void onLowMemory() {

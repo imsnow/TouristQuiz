@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import ru.mishaignatov.touristquiz.App;
@@ -47,7 +48,7 @@ public class MainActivityFragment extends Fragment {
         my_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                App.test(getActivity());
+                Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
             }
         });
 

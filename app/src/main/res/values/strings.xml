@@ -12,6 +12,11 @@
     <string name="quiz_button4">Саудовская Аравия</string>
 
     <string name="quiz_error">Found a mistake?</string>
+    <string name="dialog_error_text">Oops, mistake! Thanks you, we\'ll correct it</string>
+    <string name="dialog_error_comment">Your comment</string>
+    <string name="dialog_error_send">Send</string>
+    <string name="dialog_error_cancel">Cancel</string>
+
     <string name="button_my_quiz">My quiz</string>
 
     <string name="france">France</string>
