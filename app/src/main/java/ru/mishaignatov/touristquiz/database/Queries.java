@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import ru.mishaignatov.touristquiz.data.Country;
@@ -14,6 +13,8 @@ import ru.mishaignatov.touristquiz.data.Quiz;
 
 /**
  * Created by Ignatov on 10.09.2015.
+ * Class store all queries to database
+ * All methods is static
  */
 public class Queries {
 
@@ -40,7 +41,7 @@ public class Queries {
 
         return list;
     }
-
+    /*
     // Return all quizzes for special country
     // only don't unravel questions
     public static ArrayList<Quiz> getQuizzesList(SQLiteDatabase db, String country){
@@ -61,7 +62,7 @@ public class Queries {
         }
         return list;
     }
-
+    */
     public static Quiz getRandomQuiz(SQLiteDatabase db, String country) {
 
         Quiz q = null;
@@ -73,6 +74,7 @@ public class Queries {
 
         if(c != null) {
             int size = c.getCount();
+            if(size == 0) return null; // Questions ended
             Random r = new Random();
             int random = r.nextInt(size);
 
@@ -98,15 +100,13 @@ public class Queries {
 
         if(c != null && c.moveToFirst()){
             do {
-                //String s = c.getString(0);
-                boolean is_answered = Boolean.getBoolean(c.getString(1));
-                if (is_answered) answered++;
+                int is_answered = Integer.parseInt(c.getString(1));
+                if (is_answered == TRUE) answered++;
                 total++;
 
-
             } while (c.moveToNext());
-            c.close();
         }
+        c.close();
 
         Country country = new Country(name, answered, total);
         return country;
@@ -123,7 +123,7 @@ public class Queries {
 
         int i = db.update(QuestionTable.TABLE_NAME, cv,
                 QuestionTable.COLUMN_QUIZ + " = ?",
-                new String[]{ quiz.getText() });
+                new String[]{quiz.getText()});
 
         Log.d(TAG, "Quiz n = " + i + " updated");
     }

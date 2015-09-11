@@ -77,6 +77,12 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
 
         currentQuiz = Queries.getRandomQuiz(App.getDataBase(), currentCountry);
 
+        if(currentQuiz == null) { // Вопросы по этой стране закончились
+
+            DialogHelper.showDialogNextLevel(this, this);
+            return;
+        }
+
         String[] list = currentQuiz.getRandomListAnswers();
 
         scoreText.setText(String.valueOf(App.getScore()));
@@ -91,7 +97,10 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Log.d("TAG", "Dialog was clicked");
-        updateQuiz();
+        Log.d("TAG", "DialogInterface = " + which);
+        if(which == -1) // Success and failure dialog
+            updateQuiz();
+        if(which == -2) // Next Level Dialog
+            finish();
     }
 }

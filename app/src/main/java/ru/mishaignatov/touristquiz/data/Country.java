@@ -2,13 +2,14 @@ package ru.mishaignatov.touristquiz.data;
 
 /**
  * Created by Ignatov on 13.08.2015.
+ * Storage for specific country
  */
 public class Country {
 
     private String name;
     private int answered;
     private int total;
-    private boolean isClosed = true;
+    //private boolean isClosed = true;
 
     public Country(String name, int answered, int total){
         this.name = name;
@@ -17,10 +18,10 @@ public class Country {
     }
 
     public String getName() { return name; }
-    public int getNoAnswered(){ return answered; }
+    public int getAnswered(){ return answered; }
     public int getTotal()   { return total; }
 
     public boolean isFinished(){
-        return answered==total;
+        return answered == total;
     }
 }

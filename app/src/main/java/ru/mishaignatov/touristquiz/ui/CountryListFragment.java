@@ -27,7 +27,6 @@ import ru.mishaignatov.touristquiz.database.Queries;
 public class CountryListFragment extends ListFragment {
 
     private List<String> countriesNameList = new ArrayList<>();
-    private List<Country> countriesList = new ArrayList<>();
     private CountryAdapter adapter;
 
     @Override
@@ -43,9 +42,7 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("TAG", "Resume to CountryList");
-        updateCountriesInfo();
-        adapter.c
+        //Log.d("TAG", "Resume to CountryList");
         adapter.notifyDataSetChanged();
     }
 
@@ -60,8 +57,12 @@ public class CountryListFragment extends ListFragment {
 
         String country = countriesNameList.get(position);
         Log.d("TAG", "position = " + position + " country = " + country);
-        //ArrayList<Quiz> quizzes = App.getDBHelper().getQuizzesList(App.getDataBase(), list.get(position));
 
+        Country checkedCountry = Queries.loadCountry(App.getDataBase(), country);
+        if( checkedCountry.isFinished() ) { // Вопросы уже все отгаданы
+            DialogHelper.showDialogLevelFinished(getActivity());
+            return;
+        }
 
         Intent i = new Intent(getActivity(), QuizActivity.class);
         //i.putParcelableArrayListExtra("QUIZZES", quizzes);
@@ -70,13 +71,6 @@ public class CountryListFragment extends ListFragment {
         startActivity(i);
     }
 
-    private void updateCountriesInfo(){
-
-        for (String name : countriesNameList){
-            Country country = Queries.loadCountry(App.getDataBase(), name);
-            countriesList.add(country);
-        }
-    }
 
     private class CountryAdapter extends BaseAdapter {
 
@@ -84,9 +78,10 @@ public class CountryListFragment extends ListFragment {
             //super(context);
         }
 
+
         @Override
         public int getCount() {
-            return countriesList.size();
+            return countriesNameList.size();
         }
 
         @Override
@@ -104,13 +99,16 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            Country country = countriesList.get(position);
+            //Log.d("TAG", "getView position = " + position);
+
+            String countryName = countriesNameList.get(position);
+            Country country = Queries.loadCountry(App.getDataBase(), countryName);
 
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
             name.setText(country.getName());
 
             TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            result.setText("" + country.getNoAnswered() + "/" + country.getTotal());
+            result.setText("" + country.getAnswered() + "/" + country.getTotal());
 
             return convertView;
         }
