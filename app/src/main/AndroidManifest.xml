@@ -23,6 +23,10 @@
         <activity
             android:name=".ui.QuizActivity">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7fad7c07961a1b60d12c9a689ab9a63ad8cdb610" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
