@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Туристическия викторина</string>
+    <string name="app_name">Туристическая викторина</string>
     <string name="hello_world">Начать игру</string>
     <string name="action_settings">Настройки</string>
 
