@@ -72,6 +72,7 @@ public class DBHelper extends SQLiteOpenHelper{
                     // calculate all new questions
                     cnt++;
                 }
+                else Log.d(TAG, "Error in line = " + (cnt+1) + " string = " + s);
             }
         is.close();
         } catch (IOException e) {
