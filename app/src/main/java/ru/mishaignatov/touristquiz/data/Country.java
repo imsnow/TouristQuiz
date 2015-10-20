@@ -1,5 +1,7 @@
 package ru.mishaignatov.touristquiz.data;
 
+import org.json.JSONObject;
+
 /**
  * Created by Ignatov on 13.08.2015.
  * Storage for specific country
