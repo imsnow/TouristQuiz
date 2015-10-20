@@ -8,7 +8,7 @@ import java.io.PrintWriter;
  * Created by Ignatov on 20.10.2015.
  */
 public class RespondBuilder {
-
+    /*
     private JSONObject json;
 
     private String header =
@@ -16,7 +16,7 @@ public class RespondBuilder {
     private String footer = "</rsp>";
 
     private RespondBuilder(){
-        json = new JSONObject();
+        //json = new JSONObject();
     }
 
     // This method must be first
@@ -28,12 +28,20 @@ public class RespondBuilder {
     protected RespondBuilder ok(String method) {
         this.header += "<rsp status=\"ok\">\n";
         this.header += "\t<method>" + method + "</method>\n";
-        json.put("status", "ok");
-        json.put("method", method);
+        //json.put("status", "ok");
+        //json.put("method", method);
         return this;
     }
 
     protected void write(PrintWriter writer){
+        json.write(writer);
+    }
+    */
+
+    protected static void makeSuccess(String method,PrintWriter writer){
+        JSONObject json = new JSONObject();
+        json.put("status", "ok");
+        json.put("method", method);
         json.write(writer);
     }
 }

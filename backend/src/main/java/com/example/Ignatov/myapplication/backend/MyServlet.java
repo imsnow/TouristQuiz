@@ -24,17 +24,14 @@ public class MyServlet extends HttpServlet {
 
         if(method != null){
             resp.setContentType(TouristQuizServer.TYPE);
-            RespondBuilder.make().ok(method).write(resp.getWriter());
-            resp.getWriter().println("Method = " + method);
+            RespondBuilder.makeSuccess(method, resp.getWriter());
+            //resp.getWriter().println("<br>Method = " + method);
         }
         else {
             resp.setContentType(TouristQuizServer.TYPE);
             resp.getWriter().println("Error Method = " + method);
         }
 
-
-        //resp.setContentType(TouristQuizServer.TYPE);
-        //resp.getWriter().println("Please use the form to POST to this url");
     }
 
     @Override
