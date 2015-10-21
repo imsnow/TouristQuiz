@@ -6,8 +6,6 @@
 
 package com.example.Ignatov.myapplication.backend;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 import java.io.IOException;
 
@@ -24,14 +22,13 @@ public class MyServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
         String method = req.getParameter("method");
         resp.setContentType(TouristQuizServer.TYPE);
 
         if(method != null){
-            if(method == USER_QUIZ){
-                // TODO
+            if(method.equals(USER_QUIZ)){
+                TouristQuizServer.processUserQuiz(req);
+                RespondBuilder.makeSuccess(method, resp.getWriter());
                 return;
             }
             if(method == ERROR) {
@@ -46,7 +43,6 @@ public class MyServlet extends HttpServlet {
                 // TODO
                 return;
             }
-            RespondBuilder.makeSuccess(method, resp.getWriter());
 
         }
         // This way when method is unknown or null
