@@ -1,0 +1,20 @@
+body {
+    background-color: #90EE90;
+    padding-top: 20px;
+}
+
+.store-img {
+    width: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.div-download {
+    width: 70%;
+    margin:0 auto;
+    border-radius: 25px;
+    padding: 25px;
+    background: #F0FFF0;
+}

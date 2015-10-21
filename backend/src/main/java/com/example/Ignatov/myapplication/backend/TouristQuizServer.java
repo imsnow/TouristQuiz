@@ -8,4 +8,6 @@ public class TouristQuizServer {
     protected static final String UNTRATED_QUIZZES = "UntreatedQuizzes";
 
     protected static final String TYPE = "application/json; charset=UTF-8";
+
+
 }

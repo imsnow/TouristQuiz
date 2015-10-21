@@ -14,6 +14,12 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 public class MyServlet extends HttpServlet {
+
+    private static final String USER_QUIZ = "user.quiz";
+    private static final String ERROR = "error";
+    private static final String UPDATE_BASE = "db.update";
+    private static final String RATING = "user.rating";
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
@@ -21,17 +27,30 @@ public class MyServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
         String method = req.getParameter("method");
+        resp.setContentType(TouristQuizServer.TYPE);
 
         if(method != null){
-            resp.setContentType(TouristQuizServer.TYPE);
+            if(method == USER_QUIZ){
+                // TODO
+                return;
+            }
+            if(method == ERROR) {
+                // TODO
+                return;
+            }
+            if(method == UPDATE_BASE) {
+                // TODO
+                return;
+            }
+            if(method == RATING) {
+                // TODO
+                return;
+            }
             RespondBuilder.makeSuccess(method, resp.getWriter());
-            //resp.getWriter().println("<br>Method = " + method);
-        }
-        else {
-            resp.setContentType(TouristQuizServer.TYPE);
-            resp.getWriter().println("Error Method = " + method);
-        }
 
+        }
+        // This way when method is unknown or null
+        RespondBuilder.makeFailure(method, resp.getWriter());
     }
 
     @Override
