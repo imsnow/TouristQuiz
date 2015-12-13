@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.App;
@@ -33,8 +32,10 @@ public class CountryListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String[] array = getResources().getStringArray(R.array.countries);
-        countriesNameList = Arrays.asList(array);
+        countriesNameList = Queries.getCountryList(App.getDataBase());
+        Log.d("TAG", "size " + countriesNameList.size());
+        //String[] array = getResources().getStringArray(R.array.countries);
+        //countriesNameList = Arrays.asList(array);
         adapter = new CountryAdapter();
         setListAdapter(adapter);
     }
@@ -105,7 +106,8 @@ public class CountryListFragment extends ListFragment {
             Country country = Queries.loadCountry(App.getDataBase(), countryName);
 
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
-            name.setText(country.getName());
+            String rusValue = CountryTranslator.getRusValue(position);
+            name.setText(rusValue);
 
             TextView result = (TextView)convertView.findViewById(R.id.country_result);
             result.setText("" + country.getAnswered() + "/" + country.getTotal());

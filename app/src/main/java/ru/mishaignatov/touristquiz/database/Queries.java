@@ -28,7 +28,11 @@ public class Queries {
     // return all existing countries form database
     public static ArrayList<String> getCountryList(SQLiteDatabase db){
         ArrayList<String> list = new ArrayList<>();
-        Cursor c = db.query(QuestionTable.TABLE_NAME, new String[]{QuestionTable.COLUMN_COUNTRY}, null, null, QuestionTable.COLUMN_COUNTRY,null,null);
+        Cursor c = db.query(QuestionTable.TABLE_NAME,
+                            new String[]{QuestionTable.COLUMN_COUNTRY},
+                            null, null,
+                            QuestionTable.COLUMN_COUNTRY,
+                            null, null);
         if(c!=null && c.moveToFirst()){
             do {
                 // 0 - Country

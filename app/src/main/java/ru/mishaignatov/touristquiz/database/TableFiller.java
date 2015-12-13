@@ -13,18 +13,31 @@ import java.io.InputStreamReader;
 
 /**
  * Created by Leva on 12.12.2015.
+ *
  */
-public class TabelFiller {
+public class TableFiller {
 
-    String[] filesArr = new String[] {
-            "Франция.txt", "США.txt", "Испания.txt"
+    private static final String[] filesArr = new String[] {
+            "france.txt", "usa.txt", "spain.txt"
+    };
+    private static final String[] rusValues = new String[]{
+            "Франция", "США", "Испания"
     };
 
-    public TabelFiller() {
+
+    public static void fillCountryTable(SQLiteDatabase db) {
+
+        ContentValues cv = new ContentValues();
+        for(int i=0; i<filesArr.length; i++){
+            cv.put(CountryTable.COLUMN_ID, i);
+            cv.put(CountryTable.COLUMN_FILE, filesArr[i]);
+            cv.put(CountryTable.COLUMN_VALUE, rusValues[i]);
+            db.insert(CountryTable.TABLE_NAME, null, cv);
+        }
 
     }
 
-    public int fillTable(SQLiteDatabase db, Context context){
+    public static int fillQuestionTable(SQLiteDatabase db, Context context){
 
         int quiz_cnt = 0;
 
@@ -35,7 +48,7 @@ public class TabelFiller {
         return quiz_cnt;
     }
 
-    private int readFile(Context context, SQLiteDatabase db, String filename){
+    private static int readFile(Context context, SQLiteDatabase db, String filename){
 
         // read Questions From FILE
         AssetManager assets = context.getAssets();

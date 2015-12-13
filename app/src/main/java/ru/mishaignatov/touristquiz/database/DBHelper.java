@@ -1,25 +1,11 @@
 package ru.mishaignatov.touristquiz.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import ru.mishaignatov.touristquiz.App;
-import ru.mishaignatov.touristquiz.data.Country;
-import ru.mishaignatov.touristquiz.data.Quiz;
 
 /**
  * Created by Ignatov Misha on 02.08.15.
@@ -45,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
         if(helper == null) helper = new DBHelper(context);
         return helper;
     }
-
+    /*
     private int fillTable(SQLiteDatabase db){
 
         // read Questions From FILE
@@ -82,13 +68,18 @@ public class DBHelper extends SQLiteOpenHelper{
 
         return cnt;
     }
+    */
 
     // this method is invoked by getWritableDatabase()
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate database " + QuestionTable.TABLE_NAME);
+        Log.d(TAG, "onCreate database");
+        db.execSQL(CountryTable.CREATE);
         db.execSQL(QuestionTable.CREATE);
-        int db_size = fillTable(db);
+
+        TableFiller.fillCountryTable(db);
+        //int db_size = fillTable(db);
+        int db_size = TableFiller.fillQuestionTable(db, context);
         App.setTotalQuizzes(db_size);
     }
 

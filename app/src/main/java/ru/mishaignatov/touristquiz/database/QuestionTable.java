@@ -26,7 +26,7 @@ public interface QuestionTable {
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_QUIZ + " TEXT NOT NULL, " +
             COLUMN_ANSWERS + " TEXT NOT NULL, " +
-            COLUMN_COUNTRY + " TEXT NOT NULL, " +
+            COLUMN_COUNTRY + " INTEGER NOT NULL, FOREIGN KEY" +
             COLUMN_TYPE + " TEXT NOT NULL, " +
             COLUMN_IS_ANSWERED + " INTEGER );";
 }
