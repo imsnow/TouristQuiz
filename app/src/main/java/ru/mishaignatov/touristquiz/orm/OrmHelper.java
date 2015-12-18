@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -37,5 +38,14 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
 
+    }
+
+    // create Country Dao
+    public RuntimeExceptionDao<Country, Integer> getCountryDao(){
+        return getRuntimeExceptionDao(Country.class);
+    }
+
+    public RuntimeExceptionDao<Questions, Integer> getQuestionDao(){
+        return getRuntimeExceptionDao(Questions.class);
     }
 }

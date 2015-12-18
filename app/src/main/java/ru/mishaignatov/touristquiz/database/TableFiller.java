@@ -1,41 +1,12 @@
 package ru.mishaignatov.touristquiz.database;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 /**
  * Created by Leva on 12.12.2015.
  *
  */
 public class TableFiller {
 
-    private static final String[] filesArr = new String[] {
-            "france.txt", "usa.txt", "spain.txt"
-    };
-    private static final String[] rusValues = new String[]{
-            "Франция", "США", "Испания"
-    };
-
-
-    public static void fillCountryTable(SQLiteDatabase db) {
-
-        ContentValues cv = new ContentValues();
-        for(int i=0; i<filesArr.length; i++){
-            cv.put(CountryTable.COLUMN_ID, i);
-            cv.put(CountryTable.COLUMN_FILE, filesArr[i]);
-            cv.put(CountryTable.COLUMN_VALUE, rusValues[i]);
-            db.insert(CountryTable.TABLE_NAME, null, cv);
-        }
-
-    }
+/*
 
     public static int fillQuestionTable(SQLiteDatabase db, Context context){
 
@@ -83,4 +54,5 @@ public class TableFiller {
 
         return cnt;
     }
+    */
 }

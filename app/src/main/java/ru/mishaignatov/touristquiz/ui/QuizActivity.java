@@ -12,12 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.data.Quiz;
-import ru.mishaignatov.touristquiz.database.Queries;
 
 /**
  * Created by Ignatov Work on 05.08.2015.
@@ -64,7 +61,7 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
 
     @Override
     public void onClick(View v) {
-
+        /*
         int id = v.getId();
         if(id == R.id.error_text) { // send error
             DialogHelper.showDialogErrorInQuestion(this, new DialogInterface.OnClickListener() {
@@ -90,12 +87,13 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
                 Queries.setQuestionAnswered(App.getDataBase(), currentQuiz, currentCountry);
             } else DialogHelper.showDialogFailure(this, this);
         }
+        */
     }
 
     private void updateQuiz(){
 
         //currentQuiz = quizzes.get(random);
-
+        /*
         currentQuiz = Queries.getRandomQuiz(App.getDataBase(), currentCountry);
 
         if(currentQuiz == null) { // Вопросы по этой стране закончились
@@ -114,6 +112,7 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         button4.setText(list[3].trim());
 
         layout.setBackgroundResource(drawables[currentQuiz.getType()]);
+        */
     }
 
     @Override

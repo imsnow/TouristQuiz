@@ -3,17 +3,13 @@ package ru.mishaignatov.touristquiz;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
-import java.util.ArrayList;
-import java.util.Arrays;
 
+import io.fabric.sdk.android.Fabric;
 import ru.mishaignatov.touristquiz.database.DBHelper;
-import ru.mishaignatov.touristquiz.database.Queries;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -37,7 +33,6 @@ public class App extends Application {
     private static final String KEY_SCORE = "score";
 
     private static DBHelper mDbHelper;
-    private static SQLiteDatabase mDataBase;
 
     @Override
     public void onCreate() {
@@ -48,10 +43,11 @@ public class App extends Application {
         // Load previous result
         loadPreference();
 
-        mDbHelper = DBHelper.getInstance(this);
-        mDataBase = mDbHelper.getWritableDatabase();
+        OrmDao dao = OrmDao.getInstance(this);
+        dao.createCountryEntries();
+        dao.createQuestionEntries();
 
-        //countriesList = Queries.getCountryList(mDataBase);
+        mDbHelper = DBHelper.getInstance(this);
 
         savePreference();
     }
@@ -79,8 +75,8 @@ public class App extends Application {
         savePreference();
     }
 
-    //public static DBHelper getDBHelper()        { return mDbHelper; }
-    public static SQLiteDatabase getDataBase()  { return mDataBase; }
+    public static DBHelper getDBHelper()        { return mDbHelper; }
+    //public static SQLiteDatabase getDataBase()  { return mDataBase; }
     public static void setTotalQuizzes(int n)   { total_size_file = n;}
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }

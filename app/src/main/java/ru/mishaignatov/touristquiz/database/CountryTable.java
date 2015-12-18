@@ -13,9 +13,13 @@ public interface CountryTable {
     String COLUMN_ID          = BaseColumns._ID;
     String COLUMN_FILE        = "file";
     String COLUMN_VALUE       = "value";
+    String COLUMN_TOTAL       = "total";
+    String COLUMN_ANSWERED    = "answered";
 
     String CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY, " +
             COLUMN_FILE + " TEXT NOT NULL, " +
-            COLUMN_VALUE + " TEXT NOT NULL);";
+            COLUMN_VALUE + " TEXT NOT NULL, " +
+            COLUMN_TOTAL + " INTEGER, " +
+            COLUMN_ANSWERED + " INTEGER);";
 }

@@ -10,14 +10,19 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "countries")
 public class Country {
 
-    @DatabaseField(generatedId = true, id = true)
-    private int id;
-
+    @DatabaseField(id = true, index = true)
+    public int id;
     @DatabaseField
-    private String en;
-
+    public String filename;
     @DatabaseField
-    private String ru;
+    public String value;
+    @DatabaseField
+    public int total;
+    @DatabaseField
+    public int answered;
+    @DatabaseField
+    public int cost;
 
+    Country(){}
 
 }

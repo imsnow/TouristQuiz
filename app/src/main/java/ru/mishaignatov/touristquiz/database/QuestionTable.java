@@ -27,6 +27,6 @@ public interface QuestionTable {
             COLUMN_QUIZ + " TEXT NOT NULL, " +
             COLUMN_ANSWERS + " TEXT NOT NULL, " +
             COLUMN_COUNTRY + " INTEGER NOT NULL, FOREIGN KEY" +
-            COLUMN_TYPE + " TEXT NOT NULL, " +
+            COLUMN_TYPE + " INTEGER REFERENCE " + CountryTable.TABLE_NAME + "(_id), " +
             COLUMN_IS_ANSWERED + " INTEGER );";
 }

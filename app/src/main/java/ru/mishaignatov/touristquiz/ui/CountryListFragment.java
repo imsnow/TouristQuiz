@@ -1,6 +1,5 @@
 package ru.mishaignatov.touristquiz.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -14,10 +13,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.data.Country;
-import ru.mishaignatov.touristquiz.database.Queries;
+import ru.mishaignatov.touristquiz.orm.Country;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 /**
  * Created by Ignatov on 13.08.2015.
@@ -25,17 +23,18 @@ import ru.mishaignatov.touristquiz.database.Queries;
  */
 public class CountryListFragment extends ListFragment {
 
-    private List<String> countriesNameList = new ArrayList<>();
+    private List<Country> countriesList = new ArrayList<>();
     private CountryAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        countriesNameList = Queries.getCountryList(App.getDataBase());
-        Log.d("TAG", "size " + countriesNameList.size());
+        OrmDao ormDao = OrmDao.getInstance(getActivity());
+        countriesList = ormDao.getCountryList();
+        Log.d("TAG", "size " + countriesList.size());
         //String[] array = getResources().getStringArray(R.array.countries);
-        //countriesNameList = Arrays.asList(array);
+        //countriesList = Arrays.asList(array);
         adapter = new CountryAdapter();
         setListAdapter(adapter);
     }
@@ -55,8 +54,8 @@ public class CountryListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
-        String country = countriesNameList.get(position);
+        /*
+        String country = countriesList.get(position);
         Log.d("TAG", "position = " + position + " country = " + country);
 
         Country checkedCountry = Queries.loadCountry(App.getDataBase(), country);
@@ -70,6 +69,7 @@ public class CountryListFragment extends ListFragment {
         i.putExtra("COUNTRY", country);
 
         startActivity(i);
+        */
     }
 
 
@@ -79,10 +79,9 @@ public class CountryListFragment extends ListFragment {
             //super(context);
         }
 
-
         @Override
         public int getCount() {
-            return countriesNameList.size();
+            return countriesList.size();
         }
 
         @Override
@@ -100,17 +99,20 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            //Log.d("TAG", "getView position = " + position);
+            Country item = countriesList.get(position);
 
-            String countryName = countriesNameList.get(position);
+            TextView name = (TextView)convertView.findViewById(R.id.country_name);
+            name.setText(item.value);
+            /*
+            String countryName = countriesList.get(position);
             Country country = Queries.loadCountry(App.getDataBase(), countryName);
 
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
             String rusValue = CountryTranslator.getRusValue(position);
             name.setText(rusValue);
-
+            */
             TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            result.setText("" + country.getAnswered() + "/" + country.getTotal());
+            result.setText("" + item.total);
 
             return convertView;
         }

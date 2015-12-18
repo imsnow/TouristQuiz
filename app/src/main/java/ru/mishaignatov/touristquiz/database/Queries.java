@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Random;
 
-import ru.mishaignatov.touristquiz.data.Country;
 import ru.mishaignatov.touristquiz.data.Quiz;
 
 /**
@@ -91,16 +90,14 @@ public class Queries {
 
         return q;
     }
-
+    /*
     // Load country info from database
-    public static Country loadCountry(SQLiteDatabase db, String name){
+    public static Country loadCountry(){
 
-        int total = 0, answered = 0;
+        SQLiteDatabase db = App.getDBHelper().getReadableDatabase();
 
         Cursor c = db.query(QuestionTable.TABLE_NAME,
-                new String[] { QuestionTable.COLUMN_COUNTRY, QuestionTable.COLUMN_IS_ANSWERED},
-                QuestionTable.COLUMN_COUNTRY + " = ?",
-                new String[]{name},null,null,null);
+                null, null, null,null,null,null,null);
 
         if(c != null && c.moveToFirst()){
             do {
@@ -115,7 +112,7 @@ public class Queries {
         Country country = new Country(name, answered, total);
         return country;
     }
-
+    */
     public static void setQuestionAnswered(SQLiteDatabase db, Quiz quiz, String country){
 
         ContentValues cv = new ContentValues();

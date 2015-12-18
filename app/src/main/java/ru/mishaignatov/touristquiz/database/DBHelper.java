@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper{
         db.execSQL(CountryTable.CREATE);
         db.execSQL(QuestionTable.CREATE);
 
-        TableFiller.fillCountryTable(db);
+        TableFiller.fillCountryTable(db, context);
         //int db_size = fillTable(db);
         int db_size = TableFiller.fillQuestionTable(db, context);
         App.setTotalQuizzes(db_size);

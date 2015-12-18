@@ -10,18 +10,16 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "questions")
 public class Questions {
 
-    @DatabaseField(id = true)
-    private int Id;
-
+    @DatabaseField(id = true, generatedId = true)
+    public int id;
     @DatabaseField
-    private String quiz;
-
+    public String quiz;
     @DatabaseField
-    private String answers;
-
+    public String answers;
     @DatabaseField(foreign = true)
-    private Country country;
-
+    public int country_id;
     @DatabaseField
-    private int type;
+    public String type;
+
+    Questions(){}
 }
