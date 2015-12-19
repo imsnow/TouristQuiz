@@ -8,8 +8,6 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
-import ru.mishaignatov.touristquiz.database.DBHelper;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -32,22 +30,18 @@ public class App extends Application {
     private static final String KEY_ANSWERED = "answered";
     private static final String KEY_SCORE = "score";
 
-    private static DBHelper mDbHelper;
-
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        Log.d(TAG, "App created");
 
         // Load previous result
         loadPreference();
 
-        OrmDao dao = OrmDao.getInstance(this);
-        dao.createCountryEntries();
-        dao.createQuestionEntries();
+        //OrmDao.getInstance(this);
+        //dao.createCountryEntries();
+        //dao.createQuestionEntries();
 
-        mDbHelper = DBHelper.getInstance(this);
 
         savePreference();
     }
@@ -75,26 +69,9 @@ public class App extends Application {
         savePreference();
     }
 
-    public static DBHelper getDBHelper()        { return mDbHelper; }
-    //public static SQLiteDatabase getDataBase()  { return mDataBase; }
     public static void setTotalQuizzes(int n)   { total_size_file = n;}
     public static int getTotalQuizzes()    {  return total_size_file; }
     public static int getAnsweredQuizzes() {  return answered_size;   }
     public static int getScore()           {  return score;           }
 
-    //public static ArrayList<String> getCountriesList(){ return countriesList; }
-
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mDbHelper.close();
-    }
-
-    @Override
-    public void onTerminate(){
-        Log.d(TAG, "App terminate");
-        mDbHelper.close();
-        super.onTerminate();
-    }
 }

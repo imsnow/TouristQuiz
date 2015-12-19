@@ -1,22 +1,12 @@
 package ru.mishaignatov.touristquiz.database;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Random;
-
-import ru.mishaignatov.touristquiz.data.Quiz;
-
 /**
  * Created by Ignatov on 10.09.2015.
  * Class store all queries to database
  * All methods is static
  */
 public class Queries {
-
+    /*
     private static final String TAG = "Queries";
 
     public static final int TRUE = 1;
@@ -66,6 +56,7 @@ public class Queries {
         return list;
     }
     */
+    /*
     public static Quiz getRandomQuiz(SQLiteDatabase db, String country) {
 
         Quiz q = null;
@@ -77,7 +68,7 @@ public class Queries {
 
         if(c != null) {
             int size = c.getCount();
-            if(size == 0) return null; // Questions ended
+            if(size == 0) return null; // Question ended
             Random r = new Random();
             int random = r.nextInt(size);
 
@@ -113,6 +104,7 @@ public class Queries {
         return country;
     }
     */
+    /*
     public static void setQuestionAnswered(SQLiteDatabase db, Quiz quiz, String country){
 
         ContentValues cv = new ContentValues();

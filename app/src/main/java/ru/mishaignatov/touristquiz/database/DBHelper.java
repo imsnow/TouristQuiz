@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import ru.mishaignatov.touristquiz.App;
-
 /**
  * Created by Ignatov Misha on 02.08.15.
  *
@@ -34,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper{
     /*
     private int fillTable(SQLiteDatabase db){
 
-        // read Questions From FILE
+        // read Question From FILE
         AssetManager assets = context.getAssets();
         InputStream is;
         int cnt=0;
@@ -77,10 +75,10 @@ public class DBHelper extends SQLiteOpenHelper{
         db.execSQL(CountryTable.CREATE);
         db.execSQL(QuestionTable.CREATE);
 
-        TableFiller.fillCountryTable(db, context);
+        //TableFiller.fillCountryTable(db, context);
         //int db_size = fillTable(db);
-        int db_size = TableFiller.fillQuestionTable(db, context);
-        App.setTotalQuizzes(db_size);
+        //int db_size = TableFiller.fillQuestionTable(db, context);
+        //App.setTotalQuizzes(db_size);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class TableFiller {
 
     private static int readFile(Context context, SQLiteDatabase db, String filename){
 
-        // read Questions From FILE
+        // read Question From FILE
         AssetManager assets = context.getAssets();
         InputStream is;
         int cnt = 0;

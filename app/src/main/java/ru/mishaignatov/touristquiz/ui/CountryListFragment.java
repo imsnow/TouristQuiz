@@ -1,5 +1,6 @@
 package ru.mishaignatov.touristquiz.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -54,6 +55,18 @@ public class CountryListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
+        Intent i = new Intent(getActivity(), QuizActivity.class);
+        i.putExtra("country_id", position);
+        startActivity(i);
+
+        /*
+        Country country = countriesList.get(position);
+        Log.d("TAG", "country = " + country);
+
+        List<Question> list = OrmDao.getInstance(getActivity()).getQuestionsList(country);
+        Log.d("TAG", "list size = " + list.size());
+        */
         /*
         String country = countriesList.get(position);
         Log.d("TAG", "position = " + position + " country = " + country);

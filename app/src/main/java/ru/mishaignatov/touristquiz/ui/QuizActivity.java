@@ -2,19 +2,20 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.data.Quiz;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.orm.Question;
 
 /**
  * Created by Ignatov Work on 05.08.2015.
@@ -27,10 +28,10 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
     private Button button1, button2, button3, button4;
     private RelativeLayout layout;
 
-    private Quiz currentQuiz = null;
+    private Question currentQuestion = null;
     private String currentCountry = null;
 
-    private ArrayList<Quiz> quizzes;
+    private List<Question> questions;
 
     private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
 
@@ -54,7 +55,11 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
-        currentCountry = getIntent().getStringExtra("COUNTRY");
+        int country_id = getIntent().getIntExtra("country_id", -1);
+
+        questions = OrmDao.getInstance(this).getQuestionsList(country_id);
+
+        //Log.d("TAG", "list size = " + questions.size() + " id = " + country_id);
 
         updateQuiz();
     }
@@ -92,6 +97,8 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
 
     private void updateQuiz(){
 
+        Random random = new Random();
+        currentQuestion = questions.get(random.nextInt(questions.size()));
         //currentQuiz = quizzes.get(random);
         /*
         currentQuiz = Queries.getRandomQuiz(App.getDataBase(), currentCountry);
@@ -101,18 +108,17 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
             DialogHelper.showDialogNextLevel(this, this);
             return;
         }
-
-        String[] list = currentQuiz.getRandomListAnswers();
+        */
+        String[] list = currentQuestion.getRandomListAnswers();
 
         scoreText.setText(String.valueOf(App.getScore()));
-        quizText.setText(currentQuiz.getText());
+        quizText.setText(currentQuestion.quiz);
         button1.setText(list[0].trim());
         button2.setText(list[1].trim());
         button3.setText(list[2].trim());
         button4.setText(list[3].trim());
 
-        layout.setBackgroundResource(drawables[currentQuiz.getType()]);
-        */
+        layout.setBackgroundResource(drawables[currentQuestion.getType()]);
     }
 
     @Override
@@ -123,7 +129,7 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         if(which == -2) // Next Level Dialog
             finish();
     }
-
+    /*
     private void sendErrorEmail(final Quiz quiz){
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -137,4 +143,5 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
             Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
+    */
 }

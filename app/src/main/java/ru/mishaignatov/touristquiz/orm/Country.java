@@ -25,4 +25,8 @@ public class Country {
 
     Country(){}
 
+    @Override
+    public String toString() {
+        return "Country = " + value + " answered = " + answered + " total = " + total + " id = " + id;
+    }
 }

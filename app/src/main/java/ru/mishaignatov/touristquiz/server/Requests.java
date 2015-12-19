@@ -1,23 +1,12 @@
 package ru.mishaignatov.touristquiz.server;
 
-import android.content.Context;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import ru.mishaignatov.touristquiz.data.Quiz;
-
 /**
  * Created by Ignatov on 22.10.2015.
+ *
  */
 public class Requests {
 
+    /*
     private static final String URL = "http://tourist-quiz.appspot.com/hello?method=";
 
     private static final String USER_QUIZ = "user.quiz";
@@ -47,4 +36,5 @@ public class Requests {
             return null;
         }
     }
+    */
 }

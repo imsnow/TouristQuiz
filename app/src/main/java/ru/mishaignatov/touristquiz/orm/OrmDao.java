@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
@@ -29,7 +30,7 @@ public class OrmDao {
     private Context context = null;
     private OrmHelper helper = null;
     private RuntimeExceptionDao<Country, Integer> mCountryDao;
-    private RuntimeExceptionDao<Questions, Integer> mQuestionDao;
+    private RuntimeExceptionDao<Question, Integer> mQuestionDao;
 
     private OrmDao(Context context){
         this.context = context;
@@ -42,6 +43,20 @@ public class OrmDao {
         if(instance == null)
             instance = new OrmDao(context);
         return instance;
+    }
+
+    public List<Question> getQuestionsList(int country_id){
+
+        try {
+            return mQuestionDao.query(mQuestionDao.queryBuilder()
+                    .where()
+                    .eq("country_id", country_id)
+                    .prepare());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public List<Country> getCountryList(){
@@ -82,9 +97,9 @@ public class OrmDao {
                 String s;
                 while ((s = reader.readLine()) != null){
                     String[] arr = s.split(";");
-                    if(arr.length != 3) {
+                    if(arr.length == 3) {
 
-                        Questions q = new Questions();
+                        Question q = new Question();
                         q.quiz = arr[0].trim();
                         q.answers = arr[1].trim();
                         q.type = arr[2].trim();
@@ -93,7 +108,7 @@ public class OrmDao {
                         all_questions_cnt++;
                         cnt++;
                     }
-                    else Log.d("TAG", "Added to database element, string = " + s);
+                    else Log.d("TAG", "error element, string = " + s);
                 }
             }
             catch (IOException e){

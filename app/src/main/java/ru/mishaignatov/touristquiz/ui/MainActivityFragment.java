@@ -1,8 +1,8 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.android.volley.Response;
-
-import org.json.JSONObject;
 
 import ru.mishaignatov.touristquiz.App;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.data.Quiz;
-import ru.mishaignatov.touristquiz.database.DBHelper;
-import ru.mishaignatov.touristquiz.server.Requests;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -67,7 +61,7 @@ public class MainActivityFragment extends Fragment implements Response.Listener<
     }
 
     private void send(){
-        Requests.sendUsersQuiz(getActivity(), new Quiz("My question", "My answers", "lions"), "Russia", this);
+    //    Requests.sendUsersQuiz(getActivity(), new Quiz("My question", "My answers", "lions"), "Russia", this);
     }
 
     private void updateFragment(){
