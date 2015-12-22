@@ -12,16 +12,21 @@ import ru.mishaignatov.touristquiz.Utils;
 @DatabaseTable(tableName = "questions")
 public class Question {
 
+    public static final String COLUMN_COUNTRY     = "country_id";
+    public static final String COLUMN_IS_ANSWERED = "is_answered";
+
     @DatabaseField(generatedId = true)
     public int id;
     @DatabaseField
     public String quiz;
     @DatabaseField
     public String answers;
-    @DatabaseField //(foreign = true)
+    @DatabaseField (columnName = COLUMN_COUNTRY)
     public int country_id;
     @DatabaseField
     public String type;
+    @DatabaseField(columnName = COLUMN_IS_ANSWERED)
+    public boolean is_answered;
 
     Question(){}
 
@@ -45,5 +50,10 @@ public class Question {
                 return 3;
         }
         return 0;
+    }
+
+    public static boolean isAnswer(final Question quiz, final String choice){
+        String answer = quiz.getListAnswers()[0].trim();
+        return answer.equals(choice);
     }
 }

@@ -8,11 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.List;
-import java.util.Random;
-
-import ru.mishaignatov.touristquiz.App;
+import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
@@ -28,10 +26,8 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
     private Button button1, button2, button3, button4;
     private RelativeLayout layout;
 
-    private Question currentQuestion = null;
-    private String currentCountry = null;
-
-    private List<Question> questions;
+    private Question mCurrentQuestion = null;
+    private int mCountryId;
 
     private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
 
@@ -55,18 +51,14 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
-        int country_id = getIntent().getIntExtra("country_id", -1);
+        mCountryId = getIntent().getIntExtra("country_id", -1);
 
-        questions = OrmDao.getInstance(this).getQuestionsList(country_id);
-
-        //Log.d("TAG", "list size = " + questions.size() + " id = " + country_id);
-
-        updateQuiz();
+        update();
     }
 
     @Override
     public void onClick(View v) {
-        /*
+
         int id = v.getId();
         if(id == R.id.error_text) { // send error
             DialogHelper.showDialogErrorInQuestion(this, new DialogInterface.OnClickListener() {
@@ -85,47 +77,46 @@ public class QuizActivity extends Activity implements View.OnClickListener, Dial
         else { // One of fourth answers buttons
             String s = ((Button) v).getText().toString();
 
-            boolean result = Quiz.isAnswer(currentQuiz, s);
+            boolean result = Question.isAnswer(mCurrentQuestion, s);
             if (result) {
-                App.userAnsweredTrue();
+                //App.userAnsweredTrue();
                 DialogHelper.showDialogSuccess(this, this);
-                Queries.setQuestionAnswered(App.getDataBase(), currentQuiz, currentCountry);
-            } else DialogHelper.showDialogFailure(this, this);
+                OrmDao.getInstance(this).setQuestionAnswered(mCurrentQuestion);
+            } else
+                DialogHelper.showDialogFailure(this, this);
         }
-        */
     }
 
     private void updateQuiz(){
 
-        Random random = new Random();
-        currentQuestion = questions.get(random.nextInt(questions.size()));
-        //currentQuiz = quizzes.get(random);
-        /*
-        currentQuiz = Queries.getRandomQuiz(App.getDataBase(), currentCountry);
+        mCurrentQuestion = GameManager.getInstance(this).getQuestion(mCountryId);
 
-        if(currentQuiz == null) { // Вопросы по этой стране закончились
-
+        if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
             DialogHelper.showDialogNextLevel(this, this);
             return;
         }
-        */
-        String[] list = currentQuestion.getRandomListAnswers();
 
-        scoreText.setText(String.valueOf(App.getScore()));
-        quizText.setText(currentQuestion.quiz);
+        String[] list = mCurrentQuestion.getRandomListAnswers();
+
+        quizText.setText(mCurrentQuestion.quiz);
         button1.setText(list[0].trim());
         button2.setText(list[1].trim());
         button3.setText(list[2].trim());
         button4.setText(list[3].trim());
 
-        layout.setBackgroundResource(drawables[currentQuestion.getType()]);
+        layout.setBackgroundResource(drawables[mCurrentQuestion.getType()]);
+    }
+
+    public void update(){
+        updateQuiz();
+        // scoreText.setText(String.valueOf(App.getScore()));
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         Log.d("TAG", "DialogInterface = " + which);
         if(which == -1) // Success and failure dialog
-            updateQuiz();
+            update();
         if(which == -2) // Next Level Dialog
             finish();
     }

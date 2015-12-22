@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 
-import ru.mishaignatov.touristquiz.App;
+import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.R;
 
 /**
@@ -65,7 +65,8 @@ public class MainActivityFragment extends Fragment implements Response.Listener<
     }
 
     private void updateFragment(){
-        stat.setText("Total = " + App.getTotalQuizzes() + ", answered = " + App.getAnsweredQuizzes());
+        stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
+                + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
     }
 
     @Override
