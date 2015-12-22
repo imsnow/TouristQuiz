@@ -29,6 +29,7 @@ public class GameManager {
     private int score;               // Заработанные очки пользователя
 
     //private Question mCurrentQuestion = null; // текущий вопрос пользователя
+    private int mCurrentCountryId = 0;
 
     private static GameManager instance = null;
     private Context mContext = null;
@@ -44,8 +45,8 @@ public class GameManager {
     }
 
 
-    public Question getQuestion(int country_id){
-        return OrmDao.getInstance(mContext).getRandomQuestion(country_id);
+    public Question getQuestion(){
+        return OrmDao.getInstance(mContext).getRandomQuestion(mCurrentCountryId);
     }
 
     private void loadPreference(){
@@ -67,8 +68,16 @@ public class GameManager {
         Log.d(TAG, "Preference saved, total = " + total_size + " answered = " + answered_size + " score = " + score);
     }
 
+    public int getCurrentCountryId() {
+        return mCurrentCountryId;
+    }
+
+    public void setCurrentCountryId(int mCurrentCountryId) {
+        this.mCurrentCountryId = mCurrentCountryId;
+    }
+
     public int getTotal()           {  return OrmDao.getInstance(mContext).getSizeOfQuestions(); }
     public int getAnswered()        {  return OrmDao.getInstance(mContext).getSizeOfAnswered();  }
     public int getMiles()           {  return miles; }
-    public int getScore()           {  return score;           }
+    public int getScore()           {  return score; }
 }

@@ -1,30 +1,34 @@
 package ru.mishaignatov.touristquiz.ui;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-
 import ru.mishaignatov.touristquiz.GameManager;
+import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class StartFragment extends Fragment implements Response.Listener<String>  {
+public class StartFragment extends Fragment implements View.OnClickListener {
 
 
     private TextView stat;
 
-    public StartFragment() {
+    private HeaderInterface headerInterface;
+
+    public StartFragment() {}
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        headerInterface = (MainActivity)activity;
     }
 
     @Override
@@ -33,27 +37,10 @@ public class StartFragment extends Fragment implements Response.Listener<String>
 
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button start = (Button)v.findViewById(R.id.button_start);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getActivity().getApplicationContext(), ActivityListFragment.class));
-                //((MainActivity)getActivity()).changeFragment(new CountryListFragment());
-            }
-        });
+        v.findViewById(R.id.button_start).setOnClickListener(this);
+        v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
 
         stat = (TextView)v.findViewById(R.id.main_stat);
-
-        Button my_quiz = (Button)v.findViewById(R.id.button_my_quiz);
-        my_quiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                send();
-                Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
-            }
-        });
 
         updateFragment();
 
@@ -67,6 +54,7 @@ public class StartFragment extends Fragment implements Response.Listener<String>
     private void updateFragment(){
         stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
                 + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
+        headerInterface.onUpdateHeader("");
     }
 
     @Override
@@ -76,7 +64,16 @@ public class StartFragment extends Fragment implements Response.Listener<String>
     }
 
     @Override
-    public void onResponse(String response) {
-        Log.d("TAG", "JSON response = " + response );
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.button_start:
+                ((MainActivity)getActivity()).changeFragment(new CountryListFragment());
+                break;
+            case R.id.button_my_quiz:
+                send();
+                Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }

@@ -19,10 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ActivityListFragment" >
-        </activity>
-        <activity android:name=".ui.QuizActivity" >
-        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

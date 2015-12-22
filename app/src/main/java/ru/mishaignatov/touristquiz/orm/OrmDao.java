@@ -70,6 +70,23 @@ public class OrmDao {
         return null;
     }
 
+    public boolean isAnsweredCountry(int country_id){
+
+        try {
+            int size = (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_COUNTRY, country_id)
+                    .and()
+                    .eq(Question.COLUMN_IS_ANSWERED, false)
+                    .countOf();
+            return (size == 0);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // When user answered right
     public void setQuestionAnswered(Question question) {
         question.is_answered = true;

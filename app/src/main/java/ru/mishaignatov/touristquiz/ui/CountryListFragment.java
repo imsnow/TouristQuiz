@@ -1,6 +1,6 @@
 package ru.mishaignatov.touristquiz.ui;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.mishaignatov.touristquiz.GameManager;
+import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
@@ -26,13 +28,19 @@ public class CountryListFragment extends ListFragment {
 
     private List<Country> countriesList = new ArrayList<>();
     private CountryAdapter adapter;
+    private HeaderInterface headerInterface;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        headerInterface = (MainActivity)activity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        OrmDao ormDao = OrmDao.getInstance(getActivity());
-        countriesList = ormDao.getCountryList();
+        countriesList = OrmDao.getInstance(getActivity()).getCountryList();
         Log.d("TAG", "size " + countriesList.size());
         //String[] array = getResources().getStringArray(R.array.countries);
         //countriesList = Arrays.asList(array);
@@ -56,33 +64,16 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        Intent i = new Intent(getActivity(), QuizActivity.class);
-        i.putExtra("country_id", position);
-        startActivity(i);
+        GameManager.getInstance(getActivity()).setCurrentCountryId(position);
 
-        /*
-        Country country = countriesList.get(position);
-        Log.d("TAG", "country = " + country);
-
-        List<Question> list = OrmDao.getInstance(getActivity()).getQuestionsList(country);
-        Log.d("TAG", "list size = " + list.size());
-        */
-        /*
-        String country = countriesList.get(position);
-        Log.d("TAG", "position = " + position + " country = " + country);
-
-        Country checkedCountry = Queries.loadCountry(App.getDataBase(), country);
-        if( checkedCountry.isFinished() ) { // Вопросы уже все отгаданы
+        if(OrmDao.getInstance(getActivity()).isAnsweredCountry(position)){
+            // Вопросы уже все отгаданы
             DialogHelper.showDialogLevelFinished(getActivity());
             return;
         }
+        else
+            ((MainActivity)getActivity()).changeFragment(new QuestionFagment());
 
-        Intent i = new Intent(getActivity(), QuizActivity.class);
-        //i.putParcelableArrayListExtra("QUIZZES", quizzes);
-        i.putExtra("COUNTRY", country);
-
-        startActivity(i);
-        */
     }
 
 
