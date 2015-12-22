@@ -19,12 +19,12 @@ import ru.mishaignatov.touristquiz.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements Response.Listener<String>  {
+public class StartFragment extends Fragment implements Response.Listener<String>  {
 
 
     private TextView stat;
 
-    public MainActivityFragment() {
+    public StartFragment() {
     }
 
     @Override
