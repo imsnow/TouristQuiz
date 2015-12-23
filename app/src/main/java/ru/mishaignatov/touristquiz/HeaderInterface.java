@@ -6,6 +6,6 @@ package ru.mishaignatov.touristquiz;
  */
 public interface HeaderInterface  {
 
-    void onHomePressed();
+    void showHeader();
     void onUpdateHeader(String country);
 }

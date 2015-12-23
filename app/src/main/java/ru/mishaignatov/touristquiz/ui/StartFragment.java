@@ -68,7 +68,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id){
             case R.id.button_start:
-                ((MainActivity)getActivity()).changeFragment(new CountryListFragment());
+                ((MainActivity)getActivity()).addFragment(new CountryListFragment(), "Country");
                 break;
             case R.id.button_my_quiz:
                 send();

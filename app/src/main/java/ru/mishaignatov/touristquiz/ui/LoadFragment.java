@@ -44,7 +44,7 @@ public class LoadFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            ((MainActivity)getActivity()).changeFragment(new StartFragment());
+            ((MainActivity)getActivity()).replaceFragment(new StartFragment());
         }
     }
 }

@@ -51,7 +51,9 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        //Log.d("TAG", "Resume to CountryList");
+        Log.d("TAG", "Resume to CountryList fragment");
+        headerInterface.showHeader();
+        headerInterface.onUpdateHeader("Список стран");
         adapter.notifyDataSetChanged();
     }
 
@@ -72,7 +74,7 @@ public class CountryListFragment extends ListFragment {
             return;
         }
         else
-            ((MainActivity)getActivity()).changeFragment(new QuestionFagment());
+            ((MainActivity)getActivity()).addFragment(new QuestionFagment(), "Question");
 
     }
 

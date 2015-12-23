@@ -6,7 +6,8 @@
 
     <LinearLayout
         android:padding="8dp"
-        android:id="@+id/header"
+        android:id="@+id/header_layout"
+        android:visibility="gone"
         android:layout_gravity="start|top"
         android:layout_width="match_parent"
         android:orientation="horizontal"
