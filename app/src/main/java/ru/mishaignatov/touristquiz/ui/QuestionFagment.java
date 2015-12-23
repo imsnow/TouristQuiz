@@ -111,7 +111,7 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
         }
         else if (v instanceof Button){ // One of fourth answers buttons
             String s = ((Button) v).getText().toString();
-            GameManager.getInstance(getActivity()).userAnswered(mCurrentQuestion, s, 7, this);
+            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 7, this);
         }
     }
 
@@ -121,8 +121,7 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
         if(which == -1) // Success and failure dialog
             update();
         if(which == -2) // Next Level Dialog
-            //finish()
-            ;
+            getActivity().onBackPressed();
     }
 
     /*
