@@ -18,7 +18,7 @@ import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 
-public class MainActivity extends AppCompatActivity implements HeaderInterface {
+public class MainActivity extends AppCompatActivity implements HeaderInterface, TipsInterface {
 
     // header views
     private LinearLayout mHeaderLayout;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
         if(fragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
 
-        onShowTip();
+        onShowTip(GameManager.getInstance(this).getStatusTip());
     }
 
     @Override
@@ -110,10 +110,11 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
     }
 
 
-
-    private void onShowTip(){
+    @Override
+    public void onShowTip(String s){
+        mTipsText.setText(s);
         showTip();
-        mHandler.postDelayed(mHideTipRunnable, 2000);
+        mHandler.postDelayed(mHideTipRunnable, 4000);
     }
 
     private Runnable mHideTipRunnable = new Runnable() {

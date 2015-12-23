@@ -71,10 +71,9 @@ public class CountryListFragment extends ListFragment {
         if(OrmDao.getInstance(getActivity()).isAnsweredCountry(position)){
             // Вопросы уже все отгаданы
             DialogHelper.showDialogLevelFinished(getActivity());
-            return;
         }
         else
-            ((MainActivity)getActivity()).addFragment(new QuestionFagment(), "Question");
+            ((MainActivity)getActivity()).addFragment(new QuestionFragment(), "Question");
 
     }
 
@@ -118,7 +117,7 @@ public class CountryListFragment extends ListFragment {
             name.setText(rusValue);
             */
             TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            result.setText("" + item.total);
+            result.setText("" + item.answered + "/" + item.total);
 
             return convertView;
         }

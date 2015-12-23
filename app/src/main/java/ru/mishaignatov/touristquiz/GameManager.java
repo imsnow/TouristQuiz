@@ -1,6 +1,5 @@
 package ru.mishaignatov.touristquiz;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -25,7 +24,7 @@ public class GameManager {
     private static final String KEY_MILES    = "miles";
     private static final String KEY_SCORE    = "score";
 
-    private static final int QUESTION_TIME = 10;
+    public static final int QUESTION_TIME = 10;
 
     private SharedPreferences prefs;
 
@@ -45,7 +44,7 @@ public class GameManager {
         loadPreference();
     }
 
-    public static GameManager getInstance(Activity context){
+    public static GameManager getInstance(Context context){
         if(instance == null) instance = new GameManager(context);
         return instance;
     }
@@ -79,18 +78,14 @@ public class GameManager {
 
         boolean result = Question.isAnswer(question, answer);
         if (result) {
-            userAnsweredTrue(time); // TODO this value from timer
-            DialogHelper.showDialogSuccess(fragment.getActivity(), listener);
+            int tempScore = 50 + 50*time/QUESTION_TIME;
+            score += tempScore;
+            miles += 30;
+            DialogHelper.showDialogSuccess(fragment.getActivity(), time, tempScore, 30, listener);
             OrmDao.getInstance(mContext).setQuestionAnswered(question);
         } else
             DialogHelper.showDialogFailure(fragment.getActivity(), listener);
 
-    }
-
-    // time = 0,1,.., QUESTION_TIME
-    private void userAnsweredTrue(int time){
-        score += 50 + 50*time/QUESTION_TIME;
-        miles += 30;
     }
 
     public void setCurrentCountryId(int mCurrentCountryId) {
@@ -101,4 +96,9 @@ public class GameManager {
     public int getAnswered()        {  return OrmDao.getInstance(mContext).getSizeOfAnswered();  }
     public int getMiles()           {  return miles; }
     public int getScore()           {  return score; }
+
+    public String getStatusTip(){
+        return "Вопосы: отвеченные = " + getAnswered() + ", всего = " + getTotal()
+                + "\nочки = " + getScore() + " мили = " +  getMiles();
+    }
 }

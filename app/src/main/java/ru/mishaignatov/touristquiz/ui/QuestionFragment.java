@@ -3,6 +3,7 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,15 +23,19 @@ import ru.mishaignatov.touristquiz.orm.Question;
  * Created by Leva on 22.12.2015.
  *
  */
-public class QuestionFagment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
+public class QuestionFragment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
 
-    private TextView questionText;
+    private TextView questionText, mTimerText;
     private Button button1, button2, button3, button4;
     private FrameLayout layout;
 
     private Question mCurrentQuestion;
 
     private HeaderInterface headerInterface;
+
+    private Handler mHandler = new Handler();
+    private int mTimerCnt = GameManager.QUESTION_TIME;
+    private boolean isCount = true;
 
     // temp
     private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
@@ -52,6 +57,7 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
 
         layout = (FrameLayout)v.findViewById(R.id.layout);
 
+        mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (TextView)v.findViewById(R.id.quiz_text);
         button1      = (Button)v.findViewById(R.id.button1);
         button2      = (Button)v.findViewById(R.id.button2);
@@ -67,9 +73,28 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
         return v;
     }
 
+
+    private Runnable showTimerValue = new Runnable() {
+
+        @Override
+        public void run() {
+            if(isCount) {
+                mTimerCnt--;
+                mTimerText.setText(String.valueOf(mTimerCnt));
+                if(mTimerCnt>0)
+                    mHandler.postDelayed(showTimerValue, 1000);
+            }
+        }
+    };
+
     public void update(){
+
+        mTimerCnt = GameManager.QUESTION_TIME;
+        mTimerText.setText(String.valueOf(mTimerCnt));
+        isCount = true;
         updateQuestion();
         headerInterface.onUpdateHeader("");
+        mHandler.postDelayed(showTimerValue, 1000);
     }
 
     private void updateQuestion(){
@@ -110,8 +135,9 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
             });
         }
         else if (v instanceof Button){ // One of fourth answers buttons
+            isCount = false;
             String s = ((Button) v).getText().toString();
-            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 7, this);
+            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, mTimerCnt, this);
         }
     }
 

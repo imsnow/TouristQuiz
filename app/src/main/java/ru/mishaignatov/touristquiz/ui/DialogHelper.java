@@ -14,13 +14,14 @@ import ru.mishaignatov.touristquiz.R;
  */
 public class DialogHelper {
 
-    public static void showDialogSuccess(Activity activity, DialogInterface.OnClickListener listener){
+    public static void showDialogSuccess(Activity activity, int time, int score, int mile, DialogInterface.OnClickListener listener){
 
         if(activity != null && listener != null)
             new AlertDialog.Builder(activity)
                     //.setTitle("Поздравляю!")
                     .setCancelable(false)
-                    .setMessage("Поздравляю! Вы ответили правильно! Вы получаете 30 миль")
+                    .setMessage("Поздравляю! Вы ответили правильно за " + time
+                            + " сек! Вы получаете " + score + " очков и " + mile + " миль")
                     .setPositiveButton("Отлично", listener)
                     .show();
     }

@@ -24,7 +24,10 @@ import ru.mishaignatov.touristquiz.R;
 public class OrmDao {
 
     private static final String[] filesArr = new String[] {
-            "france.txt", "usa.txt", "spain.txt"
+            "france.txt", "usa.txt", "spain.txt",
+            "china.txt", "italy.txt", "turkey.txt",
+            "germany.txt", "england.txt", "russia.txt",
+            "mexico.txt"
     };
 
     private static OrmDao instance = null;
