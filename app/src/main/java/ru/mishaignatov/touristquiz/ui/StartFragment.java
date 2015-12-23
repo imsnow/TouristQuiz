@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 
@@ -18,9 +16,6 @@ import ru.mishaignatov.touristquiz.R;
  * A placeholder fragment containing a simple view.
  */
 public class StartFragment extends Fragment implements View.OnClickListener {
-
-
-    private TextView stat;
 
     private HeaderInterface headerInterface;
 
@@ -36,12 +31,10 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_start, container, false);
 
         v.findViewById(R.id.button_start).setOnClickListener(this);
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
-
-        stat = (TextView)v.findViewById(R.id.main_stat);
 
         updateFragment();
 
@@ -54,8 +47,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
 
     private void updateFragment(){
         Log.d("TAG", "update start fragment");
-        stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
-                + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
+        //stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
+        //        + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
         headerInterface.onUpdateHeader("");
     }
 

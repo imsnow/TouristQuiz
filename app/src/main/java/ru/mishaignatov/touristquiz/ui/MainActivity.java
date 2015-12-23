@@ -1,10 +1,14 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
     private TextView mCountryText;
     private TextView mScoresText;
     private TextView mMilesText;
+
+    // tips views
+    private LinearLayout mTipsLayout;
+    private TextView mTipsText;
+
+    private Handler mHandler = new Handler();
 
     private GameManager gameManager;
     private FragmentManager fragmentManager;
@@ -51,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
             }
         });
 
+
+        mTipsLayout = (LinearLayout)findViewById(R.id.tips_view);
+        mTipsText   = (TextView)findViewById(R.id.tips_text);
+
         fragmentManager = getSupportFragmentManager();
 
         replaceFragment(new LoadFragment());
@@ -78,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
         super.onBackPressed();
         if(fragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
+
+        onShowTip();
     }
 
     @Override
@@ -91,5 +107,36 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
         mCountryText.setText(country);
         mScoresText.setText(String.valueOf(GameManager.getInstance(this).getScore()));
         mMilesText.setText(String.valueOf(GameManager.getInstance(this).getMiles()));
+    }
+
+
+
+    private void onShowTip(){
+        showTip();
+        mHandler.postDelayed(mHideTipRunnable, 2000);
+    }
+
+    private Runnable mHideTipRunnable = new Runnable() {
+        @Override
+        public void run() {
+            hideTip();
+        }
+    };
+
+    private void showTip(){
+        mTipsLayout.bringToFront();
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.bottom_in);
+        anim.setInterpolator(new FastOutSlowInInterpolator());
+        anim.setDuration(300L);
+        mTipsLayout.startAnimation(anim);
+        mTipsLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideTip(){
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.bottom_out);
+        anim.setInterpolator(new FastOutSlowInInterpolator());
+        anim.setDuration(300L);
+        mTipsLayout.startAnimation(anim);
+        mTipsLayout.setVisibility(View.GONE);
     }
 }
