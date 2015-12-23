@@ -1,11 +1,15 @@
 package ru.mishaignatov.touristquiz;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.ui.DialogHelper;
 
 /**
  * Created by Ignatov on 09.09.2015.
@@ -20,6 +24,8 @@ public class GameManager {
     private static final String KEY_ANSWERED = "answered";
     private static final String KEY_MILES    = "miles";
     private static final String KEY_SCORE    = "score";
+
+    private static final int QUESTION_TIME = 10;
 
     private SharedPreferences prefs;
 
@@ -39,7 +45,7 @@ public class GameManager {
         loadPreference();
     }
 
-    public static GameManager getInstance(Context context){
+    public static GameManager getInstance(Activity context){
         if(instance == null) instance = new GameManager(context);
         return instance;
     }
@@ -68,8 +74,23 @@ public class GameManager {
         Log.d(TAG, "Preference saved, total = " + total_size + " answered = " + answered_size + " score = " + score);
     }
 
-    public int getCurrentCountryId() {
-        return mCurrentCountryId;
+    public void userAnswered(Fragment fragment, Question question,
+                             String answer, int time, DialogInterface.OnClickListener listener){
+
+        boolean result = Question.isAnswer(question, answer);
+        if (result) {
+            userAnsweredTrue(time); // TODO this value from timer
+            DialogHelper.showDialogSuccess(fragment.getActivity(), listener);
+            OrmDao.getInstance(mContext).setQuestionAnswered(question);
+        } else
+            DialogHelper.showDialogFailure(fragment.getActivity(), listener);
+
+    }
+
+    // time = 0,1,.., QUESTION_TIME
+    private void userAnsweredTrue(int time){
+        score += 50 + 50*time/QUESTION_TIME;
+        miles += 30;
     }
 
     public void setCurrentCountryId(int mCurrentCountryId) {

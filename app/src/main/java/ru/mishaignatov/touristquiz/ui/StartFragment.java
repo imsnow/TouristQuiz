@@ -3,6 +3,7 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     }
 
     private void updateFragment(){
+        Log.d("TAG", "update start fragment");
         stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
                 + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
         headerInterface.onUpdateHeader("");

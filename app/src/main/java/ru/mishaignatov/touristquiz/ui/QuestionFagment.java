@@ -16,7 +16,6 @@ import android.widget.Toast;
 import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
 
 /**
@@ -112,14 +111,7 @@ public class QuestionFagment extends Fragment implements View.OnClickListener, D
         }
         else if (v instanceof Button){ // One of fourth answers buttons
             String s = ((Button) v).getText().toString();
-
-            boolean result = Question.isAnswer(mCurrentQuestion, s);
-            if (result) {
-                //App.userAnsweredTrue();
-                DialogHelper.showDialogSuccess(getActivity(), this);
-                OrmDao.getInstance(getActivity()).setQuestionAnswered(mCurrentQuestion);
-            } else
-                DialogHelper.showDialogFailure(getActivity(), this);
+            GameManager.getInstance(getActivity()).userAnswered(mCurrentQuestion, s, 7, this);
         }
     }
 

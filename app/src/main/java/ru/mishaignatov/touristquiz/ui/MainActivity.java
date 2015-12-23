@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 public class MainActivity extends AppCompatActivity implements HeaderInterface {
 
@@ -22,12 +23,20 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
     private TextView mScoresText;
     private TextView mMilesText;
 
+    private GameManager gameManager;
     private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // create GameManager
+        gameManager = GameManager.getInstance(this);
+        // init db
+        OrmDao.getInstance(this);
+
+        gameManager.savePreference();
 
         mHeaderLayout = (LinearLayout)findViewById(R.id.header_layout);
         mCountryText = (TextView)findViewById(R.id.header_country);
@@ -45,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface {
         fragmentManager = getSupportFragmentManager();
 
         replaceFragment(new LoadFragment());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameManager.savePreference();
     }
 
     public void replaceFragment(final Fragment frag) {
