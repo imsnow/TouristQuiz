@@ -1,4 +1,4 @@
-// If you would like more information on the gradle-appengine-plugin please refer to the github page
+ // If you would like more information on the gradle-appengine-plugin please refer to the github page
 // https://github.com/GoogleCloudPlatform/gradle-appengine-plugin
 
 buildscript {

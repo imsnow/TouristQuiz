@@ -94,6 +94,7 @@ public class OrmDao {
     public void setQuestionAnswered(Question question) {
         question.is_answered = true;
         mQuestionDao.update(question);
+        // TODO
     }
 
     // calculate all rows
