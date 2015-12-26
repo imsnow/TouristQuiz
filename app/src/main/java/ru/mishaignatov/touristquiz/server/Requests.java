@@ -1,5 +1,8 @@
 package ru.mishaignatov.touristquiz.server;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by Ignatov on 22.10.2015.
  *
@@ -7,13 +10,6 @@ package ru.mishaignatov.touristquiz.server;
 public class Requests {
 
     /*
-    private static final String URL = "http://tourist-quiz.appspot.com/hello?method=";
-
-    private static final String USER_QUIZ = "user.quiz";
-    private static final String ERROR = "error";
-    private static final String UPDATE_BASE = "db.update";
-    private static final String RATING = "user.rating";
-
     public static void sendUsersQuiz(Context context, Quiz quiz, String country, Response.Listener<String> listener){
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -27,7 +23,7 @@ public class Requests {
 
         queue.add(request);
     }
-
+    */
     private static String encode(String str){
         try {
             return URLEncoder.encode(str, "UTF-8");
@@ -36,5 +32,4 @@ public class Requests {
             return null;
         }
     }
-    */
 }

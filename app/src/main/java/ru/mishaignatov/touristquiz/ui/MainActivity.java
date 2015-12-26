@@ -16,6 +16,7 @@ import android.widget.TextView;
 import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.user.User;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 public class MainActivity extends AppCompatActivity implements HeaderInterface, TipsInterface {
@@ -67,7 +68,12 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
 
         fragmentManager = getSupportFragmentManager();
 
-        replaceFragment(new LoadFragment());
+
+        User user = User.getUser(this);
+        if(!user.isRegistered())
+            replaceFragment(new LoadFragment());   // регистрируем полльзователя
+        else
+            replaceFragment(new StartFragment());  // запускаем
     }
 
     @Override
@@ -93,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
         if(fragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
 
-        onShowTip(GameManager.getInstance(this).getStatusTip());
+        onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
     }
 
     @Override
@@ -109,12 +115,16 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
         mMilesText.setText(String.valueOf(GameManager.getInstance(this).getMiles()));
     }
 
+    @Override
+    public void onShowHiddenTip(String s) {
+        onShowTip(s);
+        mHandler.postDelayed(mHideTipRunnable, 4000);
+    }
 
     @Override
     public void onShowTip(String s){
         mTipsText.setText(s);
         showTip();
-        mHandler.postDelayed(mHideTipRunnable, 4000);
     }
 
     private Runnable mHideTipRunnable = new Runnable() {

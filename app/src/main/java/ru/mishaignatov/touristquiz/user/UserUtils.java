@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz;
+package ru.mishaignatov.touristquiz.user;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -13,33 +13,10 @@ import java.util.regex.Pattern;
  * Created by Leva on 26.12.2015.
  *
  */
-public class User {
+public class UserUtils {
 
-    private String email;
-    private String imei;   // _id
-    private String deviceName;
-    private String androidApi;
-    private static User instance;
-
-    public static User getUser(Context context){
-        if(instance == null) instance = new User(context);
-        return instance;
-    }
-
-    private User(Context context){
-        email = getGoogleEmail(context);
-        imei  = getIMEI(context);
-        deviceName = getDeviceName();
-        androidApi = getAndroidAPI();
-    }
-    /*
-    // Getter and setter
-    public String getEmail() {
-        return email;
-    }
-    */
     // get account email for google service
-    private String getGoogleEmail(Context context){
+    public static String getGoogleEmail(Context context){
 
         final String TYPE = "com.google";
 
@@ -56,16 +33,16 @@ public class User {
         return e;
     }
 
-    private String getIMEI(Context context) {
+    public static String getIMEI(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getDeviceId();
     }
 
-    public String getAndroidAPI(){
+    public static String getAndroidAPI(){
         return String.valueOf(Build.VERSION.SDK_INT);
     }
 
-    private String getDeviceName() {
+    public static String getDeviceName() {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
         if (model.startsWith(manufacturer)) {
@@ -76,7 +53,7 @@ public class User {
     }
 
 
-    private String capitalize(String s) {
+    private static String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";
         }
@@ -86,15 +63,5 @@ public class User {
         } else {
             return Character.toUpperCase(first) + s.substring(1);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", imei='" + imei + '\'' +
-                ", deviceName='" + deviceName + '\'' +
-                ", androidApi='" + androidApi + '\'' +
-                '}';
     }
 }

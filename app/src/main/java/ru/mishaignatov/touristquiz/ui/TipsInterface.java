@@ -6,5 +6,6 @@ package ru.mishaignatov.touristquiz.ui;
  */
 public interface TipsInterface {
 
+    void onShowHiddenTip(String s);
     void onShowTip(String s);
 }

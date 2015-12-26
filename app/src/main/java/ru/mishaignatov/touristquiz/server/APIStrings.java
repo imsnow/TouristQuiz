@@ -6,6 +6,8 @@ package ru.mishaignatov.touristquiz.server;
  */
 public class APIStrings {
 
+    public static final String URL = "http://tourist-quiz.appspot.com/hello?method=";
+
     // methods
     public static final String USER_REGISTER = "user.register";
 

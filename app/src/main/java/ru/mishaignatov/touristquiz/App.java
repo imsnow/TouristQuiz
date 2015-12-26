@@ -6,6 +6,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
+import ru.mishaignatov.touristquiz.user.User;
 
 /**
  * Created by Ignatov on 05.08.2015.
