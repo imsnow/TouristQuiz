@@ -22,5 +22,8 @@ public class App extends Application {
         Log.d(TAG, "App onCreate");
         if(!BuildConfig.DEBUG)
             Fabric.with(this, new Crashlytics());
+
+        User user = User.getUser(this);
+        Log.d(TAG, user.toString());
     }
 }
