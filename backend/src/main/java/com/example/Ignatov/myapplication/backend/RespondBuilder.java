@@ -10,17 +10,22 @@ import java.io.PrintWriter;
  */
 public class RespondBuilder {
 
-    protected static void makeFailure(String method, PrintWriter writer){
+    protected static void makeError(String method, PrintWriter writer, String message){
         JSONObject json = new JSONObject();
-        json.put(APIStrings.STATUS, "fail");
-        json.put(APIStrings.METHOD, "Unknown method = " + method);
+        json.put(APIStrings.STATUS, APIStrings.ERROR);
+        json.put(APIStrings.METHOD, method);
+        json.put(APIStrings.MESSAGE, message);
         json.write(writer);
     }
 
     protected static void makeSuccess(String method,PrintWriter writer){
         JSONObject json = new JSONObject();
-        json.put("status", "ok");
-        json.put("method", method);
+        json.put(APIStrings.STATUS, APIStrings.OK);
+        json.put(APIStrings.METHOD, method);
         json.write(writer);
+    }
+
+    protected static void makeUnkownMethod(String method, PrintWriter writer){
+        makeError(method, writer, "Unknown method");
     }
 }

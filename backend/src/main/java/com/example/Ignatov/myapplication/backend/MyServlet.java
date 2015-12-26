@@ -7,6 +7,9 @@
 package com.example.Ignatov.myapplication.backend;
 
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+
 import java.io.IOException;
 
 import javax.servlet.http.*;
@@ -22,17 +25,24 @@ public class MyServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 
-        String method = req.getParameter("method");
+        String method = req.getParameter(APIStrings.METHOD);
         resp.setContentType(TouristQuizServer.TYPE);
 
         if(method != null){
+
+            DatastoreService database = DatastoreServiceFactory.getDatastoreService();
+
             if(method.equals(USER_QUIZ)){
-                TouristQuizServer.processUserQuiz(req);
+                TouristQuizServer.processUserQuiz(req, database);
                 RespondBuilder.makeSuccess(method, resp.getWriter());
                 return;
             }
-            if(method == ERROR) {
-                // TODO
+            if(method.equals(APIStrings.USER_REGISTER)) {
+                String result = TouristQuizServer.processUserRegister(req, database);
+                if (result.equals(APIStrings.OK))
+                    RespondBuilder.makeSuccess(method, resp.getWriter());
+                else
+                    RespondBuilder.makeError(method, resp.getWriter(), result);
                 return;
             }
             if(method == UPDATE_BASE) {
@@ -46,7 +56,7 @@ public class MyServlet extends HttpServlet {
 
         }
         // This way when method is unknown or null
-        RespondBuilder.makeFailure(method, resp.getWriter());
+        RespondBuilder.makeUnkownMethod(method, resp.getWriter());
     }
 
     @Override
