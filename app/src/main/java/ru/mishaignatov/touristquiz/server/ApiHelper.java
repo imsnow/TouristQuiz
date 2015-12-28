@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import ru.mishaignatov.touristquiz.user.User;
+import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.TipsInterface;
 

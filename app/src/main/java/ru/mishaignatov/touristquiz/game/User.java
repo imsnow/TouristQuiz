@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.user;
+package ru.mishaignatov.touristquiz.game;
 
 import android.content.Context;
 
@@ -13,21 +13,41 @@ public class User {
     private String deviceName;
     private String androidApi;
 
+    private int miles;               // Зработанные мили пользователя
+    private int scores;               // Заработанные очки пользователя
+
+    private Context mContext;
+
     private boolean isRegistered = false;
 
     private static User instance;
 
-    public static User getUser(Context context){
+    protected static User getUser(Context context){
         if(instance == null) instance = new User(context);
         return instance;
     }
 
     private User(Context context){
+
+        mContext = context;
+
         email      = UserUtils.getGoogleEmail(context);
         imei       = UserUtils.getIMEI(context);
         deviceName = UserUtils.getDeviceName();
         androidApi = UserUtils.getAndroidAPI();
+        // load from preference
+        PreferenceStorage.getInstance(context).loadUser(this);
     }
+
+    protected void saveUser(){
+        PreferenceStorage.getInstance(mContext).saveUser(this);
+    }
+
+    protected void addResult(int progressScore, int progressMiles) {
+        scores += progressScore;
+        miles += progressMiles;
+    }
+
 
     // Getters
     public String getEmail()      { return email;      }
@@ -35,9 +55,15 @@ public class User {
     public String getDevice()     { return deviceName; }
     public String getAndroidApi() { return androidApi; }
 
+    public int getMiles()           {  return miles; }
+    public int getScores()           {  return scores; }
+
+    public void setMiles(int miles) { this.miles = miles; }
+    public void setScores(int scores){ this.scores = scores; }
+
+    public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }
     public void confirmRegistration()   { isRegistered = true;}
-
 
     @Override
     public String toString() {
@@ -46,6 +72,10 @@ public class User {
                 ", imei='" + imei + '\'' +
                 ", deviceName='" + deviceName + '\'' +
                 ", androidApi='" + androidApi + '\'' +
+                ", miles=" + miles +
+                ", scores=" + scores +
+                ", mContext=" + mContext +
+                ", isRegistered=" + isRegistered +
                 '}';
     }
 }

@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.user.User;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.server.APIStrings;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 
@@ -40,7 +40,8 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
 
         //new ImitationAsyncTask().execute();
 
-        ApiHelper.getHelper(getActivity()).userRegister(User.getUser(getActivity()), this);
+        ApiHelper.getHelper(getActivity()).userRegister(
+                GameManager.getInstance(getActivity()).getUser(), this);
 
         return v;
     }
@@ -51,7 +52,7 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
             JSONObject json = new JSONObject(response);
             String status = json.optString(APIStrings.STATUS);
             if(status.equals(APIStrings.OK)) {
-                User.getUser(getActivity()).confirmRegistration();
+                GameManager.getInstance(getActivity()).getUser().confirmRegistration();
                 ((MainActivity)getActivity()).replaceFragment(new StartFragment());
             }
             else // что-то полшло не так

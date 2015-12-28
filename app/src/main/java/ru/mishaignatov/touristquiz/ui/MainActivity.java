@@ -13,11 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ru.mishaignatov.touristquiz.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.user.User;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.game.GameManager;
+import ru.mishaignatov.touristquiz.game.User;
 
 public class MainActivity extends AppCompatActivity implements HeaderInterface, TipsInterface {
 
@@ -44,10 +43,7 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
 
         // create GameManager
         gameManager = GameManager.getInstance(this);
-        // init db
-        OrmDao.getInstance(this);
-
-        gameManager.savePreference();
+        gameManager.makeSnapshot();
 
         mHeaderLayout = (LinearLayout)findViewById(R.id.header_layout);
         mCountryText = (TextView)findViewById(R.id.header_country);
@@ -62,14 +58,12 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
             }
         });
 
-
         mTipsLayout = (LinearLayout)findViewById(R.id.tips_view);
         mTipsText   = (TextView)findViewById(R.id.tips_text);
 
         fragmentManager = getSupportFragmentManager();
 
-
-        User user = User.getUser(this);
+        User user = gameManager.getUser();
         if(!user.isRegistered())
             replaceFragment(new LoadFragment());   // регистрируем полльзователя
         else
@@ -79,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
     @Override
     protected void onPause() {
         super.onPause();
-        gameManager.savePreference();
+        gameManager.makeSnapshot();
+    }
+
+    public GameManager getGameManager(){
+        return gameManager;
     }
 
     public void replaceFragment(final Fragment frag) {
@@ -111,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
     @Override
     public void onUpdateHeader(String country) {
         mCountryText.setText(country);
-        mScoresText.setText(String.valueOf(GameManager.getInstance(this).getScore()));
-        mMilesText.setText(String.valueOf(GameManager.getInstance(this).getMiles()));
+        mScoresText.setText(String.valueOf(gameManager.getUser().getScores()));
+        mMilesText.setText(String.valueOf(gameManager.getUser().getMiles()));
     }
 
     @Override

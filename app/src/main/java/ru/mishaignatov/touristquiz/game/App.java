@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz;
+package ru.mishaignatov.touristquiz.game;
 
 import android.app.Application;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
-import ru.mishaignatov.touristquiz.user.User;
+import ru.mishaignatov.touristquiz.BuildConfig;
 
 /**
  * Created by Ignatov on 05.08.2015.

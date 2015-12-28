@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.user;
+package ru.mishaignatov.touristquiz.game;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
