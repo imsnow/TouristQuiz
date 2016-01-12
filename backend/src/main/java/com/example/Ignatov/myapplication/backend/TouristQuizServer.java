@@ -53,7 +53,7 @@ public class TouristQuizServer {
         String device = req.getParameter(APIStrings.DEVICE);
         String api    = req.getParameter(APIStrings.ANDROID);
         String date  = sdm.format(new Date());
-        String token = new UUID(16, 16).toString();
+        String token = UUID.randomUUID().toString();
 
         Entity entity = new Entity(DBStrings.USERS);
         entity.setProperty(APIStrings.TOKEN, token);
