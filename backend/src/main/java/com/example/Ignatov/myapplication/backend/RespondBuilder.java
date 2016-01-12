@@ -25,7 +25,7 @@ public class RespondBuilder {
         json.write(writer);
     }
 
-    protected static void makeUnkownMethod(String method, PrintWriter writer){
+    protected static void makeUnknownMethod(String method, PrintWriter writer){
         makeError(method, writer, "Unknown method");
     }
 }

@@ -56,7 +56,7 @@ public class MyServlet extends HttpServlet {
 
         }
         // This way when method is unknown or null
-        RespondBuilder.makeUnkownMethod(method, resp.getWriter());
+        RespondBuilder.makeUnknownMethod(method, resp.getWriter());
     }
 
     @Override

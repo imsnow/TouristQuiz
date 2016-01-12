@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.Query;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,21 +40,25 @@ public class TouristQuizServer {
     protected static String processUserRegister(HttpServletRequest req, DatastoreService database){
 
         String imei  = req.getParameter(APIStrings.IMEI);
+        String email = req.getParameter(APIStrings.EMAIL);
 
         Query query = new Query(DBStrings.USERS);
-        Query.Filter filter = new Query.FilterPredicate(APIStrings.IMEI, Query.FilterOperator.EQUAL, imei);
+        Query.Filter filter1 = new Query.FilterPredicate(APIStrings.IMEI, Query.FilterOperator.EQUAL, imei);
+        Query.Filter filter2 = new Query.FilterPredicate(APIStrings.EMAIL, Query.FilterOperator.EQUAL,email);
+        Query.Filter filter  = Query.CompositeFilterOperator.and(filter1, filter2);
         query.setFilter(filter);
         PreparedQuery preparedQuery = database.prepare(query);
         int size = preparedQuery.countEntities();
         if (size != 0)
                 return "user already exists";
 
-        String email = req.getParameter(APIStrings.EMAIL);
         String device = req.getParameter(APIStrings.DEVICE);
         String api    = req.getParameter(APIStrings.ANDROID);
         String date  = sdm.format(new Date());
+        String token = new UUID(16, 16).toString();
 
         Entity entity = new Entity(DBStrings.USERS);
+        entity.setProperty(APIStrings.TOKEN, token);
         entity.setProperty(APIStrings.IMEI,  imei);
         entity.setProperty(APIStrings.EMAIL, email);
         entity.setProperty(APIStrings.DEVICE, device);

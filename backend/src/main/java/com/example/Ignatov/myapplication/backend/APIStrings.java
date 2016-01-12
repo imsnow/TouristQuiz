@@ -16,6 +16,7 @@ public class APIStrings {
     public static final String IMEI  = "imei";
     public static final String DEVICE = "device";
     public static final String ANDROID = "android_api";
+    public static final String TOKEN    = "token";
     public static final String REG_TIME = "reg_time";
 
     public static final String OK = "ok";
