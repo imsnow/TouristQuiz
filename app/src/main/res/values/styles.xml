@@ -5,4 +5,19 @@
         <!-- <item name="android:colorBackground">@android:color/white</item> -->
      </style>
 
+    <style name="AnswerButtonStyle" parent="Base.Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:background">@color/accent_material_light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:width">0dp</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
  </resources>

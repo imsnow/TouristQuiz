@@ -9,14 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.orm.Question;
 
 /**
@@ -26,7 +25,7 @@ import ru.mishaignatov.touristquiz.orm.Question;
 public class QuestionFragment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
 
     private TextView questionText, mTimerText;
-    private Button button1, button2, button3, button4;
+    private AnswerButton button1, button2, button3, button4;
     private FrameLayout layout;
 
     private Question mCurrentQuestion;
@@ -59,10 +58,10 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
         mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (TextView)v.findViewById(R.id.quiz_text);
-        button1      = (Button)v.findViewById(R.id.button1);
-        button2      = (Button)v.findViewById(R.id.button2);
-        button3      = (Button)v.findViewById(R.id.button3);
-        button4      = (Button)v.findViewById(R.id.button4);
+        button1      = (AnswerButton)v.findViewById(R.id.button1);
+        button2      = (AnswerButton)v.findViewById(R.id.button2);
+        button3      = (AnswerButton)v.findViewById(R.id.button3);
+        button4      = (AnswerButton)v.findViewById(R.id.button4);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -119,6 +118,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
+        Log.d("TAG", "onClick");
         int id = v.getId();
         if(id == R.id.error_text) { // send error
             DialogHelper.showDialogErrorInQuestion(getActivity(), new DialogInterface.OnClickListener() {
@@ -134,9 +134,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
                 }
             });
         }
-        else if (v instanceof Button){ // One of fourth answers buttons
+        else if (v instanceof AnswerButton){ // One of fourth answers buttons
             isCount = false;
-            String s = ((Button) v).getText().toString();
+            String s = ((AnswerButton) v).getText().toString();
             GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, mTimerCnt, this);
         }
     }

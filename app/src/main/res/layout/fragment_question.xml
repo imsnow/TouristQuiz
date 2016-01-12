@@ -37,41 +37,43 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">
 
-            <Button
+            <ru.mishaignatov.touristquiz.ui.AnswerButton
                 android:id="@+id/button1"
+                style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button1"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="wrap_content" />
-            <Button
+                android:layout_height="40dp" />
+
+            <ru.mishaignatov.touristquiz.ui.AnswerButton
                 android:id="@+id/button2"
+                style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button2"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bottom_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/error_text"
-            android:layout_centerHorizontal="true">
+            android:layout_height="wrap_content">
 
-            <Button
+            <ru.mishaignatov.touristquiz.ui.AnswerButton
                 android:id="@+id/button4"
+                style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button4"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
 
-            <Button
+            <ru.mishaignatov.touristquiz.ui.AnswerButton
                 android:id="@+id/button3"
+                style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button3"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_height="40dp"/>
         </LinearLayout>
 
         <TextView
@@ -81,7 +83,5 @@
             android:layout_height="wrap_content"
             android:text="@string/quiz_error"
             android:id="@+id/error_text" />
-
     </LinearLayout>
-
 </FrameLayout>
