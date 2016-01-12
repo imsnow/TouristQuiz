@@ -2,8 +2,6 @@ package com.example.Ignatov.myapplication.backend;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,7 +39,7 @@ public class TouristQuizServer {
 
         String imei  = req.getParameter(APIStrings.IMEI);
         String email = req.getParameter(APIStrings.EMAIL);
-
+        /*
         Query query = new Query(DBStrings.USERS);
         Query.Filter filter1 = new Query.FilterPredicate(APIStrings.IMEI, Query.FilterOperator.EQUAL, imei);
         Query.Filter filter2 = new Query.FilterPredicate(APIStrings.EMAIL, Query.FilterOperator.EQUAL,email);
@@ -51,7 +49,7 @@ public class TouristQuizServer {
         int size = preparedQuery.countEntities();
         if (size != 0)
                 return "user already exists";
-
+        */
         String device = req.getParameter(APIStrings.DEVICE);
         String api    = req.getParameter(APIStrings.ANDROID);
         String date  = sdm.format(new Date());
