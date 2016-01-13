@@ -2,6 +2,8 @@ package com.example.Ignatov.myapplication.backend;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,18 +22,34 @@ public class TouristQuizServer {
 
     private static final SimpleDateFormat sdm = new SimpleDateFormat("dd MMM YYYY, HH:mm", Locale.getDefault());
 
-    protected static void processUserQuiz(HttpServletRequest req, DatastoreService database){
+    protected static String processUserQuiz(HttpServletRequest req, DatastoreService database){
 
-        String text = req.getParameter("text");
-        String answers = req.getParameter("answers");
-        String country = req.getParameter("country");
+        String token = req.getParameter(APIStrings.TOKEN);
 
+        // Check that user existes
+        Query query = new Query(DBStrings.USERS);
+        Query.Filter filter = new Query.FilterPredicate(APIStrings.TOKEN, Query.FilterOperator.EQUAL, token);
+        query.setFilter(filter);
+        PreparedQuery preparedQuery = database.prepare(query);
+        int size = preparedQuery.countEntities();
+        if (size == 0)
+            return "user doesn't exist";
+
+        String text = req.getParameter(APIStrings.TEXT);
+        String answers = req.getParameter(APIStrings.ANSWERS);
+        String country = req.getParameter(APIStrings.COUNTRY);
+        String type = req.getParameter(APIStrings.TYPE);
+
+        // change db name
         Entity entity = new Entity(DBStrings.USER_QUESTIONS);
-        entity.setProperty("text", text);
-        entity.setProperty("answers", answers);
-        entity.setProperty("country", country);
+        entity.setProperty(APIStrings.TOKEN, token);
+        entity.setProperty(APIStrings.TEXT, text);
+        entity.setProperty(APIStrings.ANSWERS, answers);
+        entity.setProperty(APIStrings.COUNTRY, country);
+        entity.setProperty(APIStrings.TYPE, type);
         database.put(entity);
 
+        return APIStrings.OK;
     }
 
     // return error message - if value equal "null" no error
@@ -64,6 +82,7 @@ public class TouristQuizServer {
         entity.setProperty(APIStrings.REG_TIME, date);
         database.put(entity);
 
-        return APIStrings.OK;
+        return token;
+        //return APIStrings.OK;
     }
 }

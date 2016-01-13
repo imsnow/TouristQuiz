@@ -8,6 +8,8 @@ import android.content.Context;
  */
 public class User {
 
+    private String token;
+
     private String email;
     private String imei;   // _id
     private String deviceName;
@@ -50,6 +52,7 @@ public class User {
 
 
     // Getters
+    public String getToken()      { return token;      }
     public String getEmail()      { return email;      }
     public String getImei()       { return imei;       }
     public String getDevice()     { return deviceName; }
@@ -58,8 +61,9 @@ public class User {
     public int getMiles()           {  return miles; }
     public int getScores()           {  return scores; }
 
-    public void setMiles(int miles) { this.miles = miles; }
-    public void setScores(int scores){ this.scores = scores; }
+    public void setToken(String token){ this.token = token; }
+    public void setMiles(int miles)   { this.miles = miles; }
+    public void setScores(int scores) { this.scores = scores; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }

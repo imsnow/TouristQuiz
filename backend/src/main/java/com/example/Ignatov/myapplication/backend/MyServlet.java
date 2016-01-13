@@ -17,7 +17,6 @@ import javax.servlet.http.*;
 public class MyServlet extends HttpServlet {
 
     private static final String USER_QUIZ = "user.quiz";
-    private static final String ERROR = "error";
     private static final String UPDATE_BASE = "db.update";
     private static final String RATING = "user.rating";
 
@@ -38,11 +37,14 @@ public class MyServlet extends HttpServlet {
                 return;
             }
             if(method.equals(APIStrings.USER_REGISTER)) {
-                String result = TouristQuizServer.processUserRegister(req, database);
+                String token = TouristQuizServer.processUserRegister(req, database);
+                RespondBuilder.makeSuccessToken(method, resp.getWriter(), token);
+                /*String result = TouristQuizServer.processUserRegister(req, database);
                 if (result.equals(APIStrings.OK))
                     RespondBuilder.makeSuccess(method, resp.getWriter());
                 else
                     RespondBuilder.makeError(method, resp.getWriter(), result);
+                    */
                 return;
             }
             if(method == UPDATE_BASE) {

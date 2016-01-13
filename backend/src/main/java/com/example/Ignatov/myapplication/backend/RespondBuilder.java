@@ -25,6 +25,14 @@ public class RespondBuilder {
         json.write(writer);
     }
 
+    protected static void makeSuccessToken(String method,PrintWriter writer, String token){
+        JSONObject json = new JSONObject();
+        json.put(APIStrings.STATUS, APIStrings.OK);
+        json.put(APIStrings.METHOD, method);
+        json.put(APIStrings.TOKEN, token);
+        json.write(writer);
+    }
+
     protected static void makeUnknownMethod(String method, PrintWriter writer){
         makeError(method, writer, "Unknown method");
     }

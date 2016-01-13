@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.server.APIStrings;
@@ -57,7 +56,9 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
             String status = json.optString(APIStrings.STATUS);
             if(status.equals(APIStrings.OK)) {
                 GameManager.getInstance(getActivity()).getUser().confirmRegistration();
-                ((MainActivity)getActivity()).replaceFragment(new StartFragment());
+                String token = json.optString(APIStrings.TOKEN);
+                GameManager.getInstance(getActivity()).getUser().setToken(token);
+                //((MainActivity)getActivity()).replaceFragment(new StartFragment());
             }
             else // что-то полшло не так
                 tipsInterface.onShowTip(response);
@@ -65,9 +66,11 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        // все равно запускаем игру
+        ((MainActivity)getActivity()).replaceFragment(new StartFragment());
     }
 
-
+    /*
     private class ImitationAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -87,4 +90,5 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
             ((MainActivity)getActivity()).replaceFragment(new StartFragment());
         }
     }
+    */
 }

@@ -17,6 +17,10 @@ public class APIStrings {
     public static final String DEVICE = "device";
     public static final String ANDROID = "android_api";
     public static final String TOKEN    = "token";
+    public static final String TEXT    = "text";
+    public static final String ANSWERS    = "answers";
+    public static final String COUNTRY    = "country";
+    public static final String TYPE    = "type";
     public static final String REG_TIME = "reg_time";
 
     public static final String OK = "ok";

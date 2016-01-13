@@ -11,7 +11,7 @@ public class PreferenceStorage {
 
     private static final String PREFS_NAME   = "user";
 
-    //private static final String KEY_TOTAL    = "total";
+    private static final String KEY_TOKEN    = "token";
     //private static final String KEY_ANSWERED = "answered";
     private static final String KEY_MILES    = "miles";
     private static final String KEY_SCORE    = "score";
@@ -35,6 +35,7 @@ public class PreferenceStorage {
         editor.putBoolean(KEY_REGISTER, user.isRegistered());
         editor.putInt(KEY_MILES, user.getMiles());
         editor.putInt(KEY_SCORE, user.getScores());
+        editor.putString(KEY_TOKEN, user.getToken());
         editor.apply();
     }
 
@@ -42,5 +43,6 @@ public class PreferenceStorage {
         user.setIsRegistration(preferences.getBoolean(KEY_REGISTER, false));
         user.setMiles(preferences.getInt(KEY_MILES, 0));
         user.setScores(preferences.getInt(KEY_SCORE, 0));
+        user.setToken(preferences.getString(KEY_TOKEN, ""));
     }
 }
