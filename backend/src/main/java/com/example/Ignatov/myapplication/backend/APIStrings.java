@@ -8,6 +8,7 @@ public class APIStrings {
 
     // methods
     public static final String USER_REGISTER = "user.register";
+    public static final String USER_QUESTION = "user.question";
 
     // attributes
     public static final String METHOD = "method";

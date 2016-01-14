@@ -7,18 +7,19 @@
 package com.example.Ignatov.myapplication.backend;
 
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class MyServlet extends HttpServlet {
 
-    private static final String USER_QUIZ = "user.quiz";
-    private static final String UPDATE_BASE = "db.update";
-    private static final String RATING = "user.rating";
+    //private static final String USER_QUIZ = "user.quiz";
+    //private static final String UPDATE_BASE = "db.update";
+    //private static final String RATING = "user.rating";
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -27,15 +28,22 @@ public class MyServlet extends HttpServlet {
         String method = req.getParameter(APIStrings.METHOD);
         resp.setContentType(TouristQuizServer.TYPE);
 
+        // if method == null that ignore request
         if(method != null){
 
-            DatastoreService database = DatastoreServiceFactory.getDatastoreService();
+            RespondBuilder respondBuilder = new RespondBuilder(method, resp.getWriter());
+            Process process = new Process(req);
+            JSONObject json = new JSONObject();
 
-            if(method.equals(USER_QUIZ)){
-                TouristQuizServer.processUserQuiz(req, database);
-                RespondBuilder.makeSuccess(method, resp.getWriter());
+            if(method.equals(APIStrings.USER_QUESTION)){
+                if(process.processUserQuestion(json))
+                    respondBuilder.makeSuccess();
+                else respondBuilder.makeError(json);
+                //TouristQuizServer.processUserQuiz(req, database);
+                //RespondBuilder.makeSuccess(method, resp.getWriter());
                 return;
             }
+            /*
             if(method.equals(APIStrings.USER_REGISTER)) {
                 String token = TouristQuizServer.processUserRegister(req, database);
                 RespondBuilder.makeSuccessToken(method, resp.getWriter(), token);
@@ -44,7 +52,7 @@ public class MyServlet extends HttpServlet {
                     RespondBuilder.makeSuccess(method, resp.getWriter());
                 else
                     RespondBuilder.makeError(method, resp.getWriter(), result);
-                    */
+
                 return;
             }
             if(method == UPDATE_BASE) {
@@ -55,10 +63,10 @@ public class MyServlet extends HttpServlet {
                 // TODO
                 return;
             }
-
+            */
+            // This way when method is unknown or null
+            respondBuilder.makeUnknownMethod();
         }
-        // This way when method is unknown or null
-        RespondBuilder.makeUnknownMethod(method, resp.getWriter());
     }
 
     @Override

@@ -10,7 +10,22 @@ import java.io.PrintWriter;
  */
 public class RespondBuilder {
 
-    protected static void makeError(String method, PrintWriter writer, String message){
+    private String method;
+    private PrintWriter writer;
+
+    public RespondBuilder(String method, PrintWriter writer){
+        this.method = method;
+        this.writer = writer;
+    }
+
+    // json object already has message
+    protected void makeError(JSONObject json){
+        json.put(APIStrings.STATUS, APIStrings.ERROR);
+        json.put(APIStrings.METHOD, method);
+        json.write(writer);
+    }
+
+    protected void makeError(String message){
         JSONObject json = new JSONObject();
         json.put(APIStrings.STATUS, APIStrings.ERROR);
         json.put(APIStrings.METHOD, method);
@@ -18,14 +33,14 @@ public class RespondBuilder {
         json.write(writer);
     }
 
-    protected static void makeSuccess(String method,PrintWriter writer){
+    protected void makeSuccess(){
         JSONObject json = new JSONObject();
         json.put(APIStrings.STATUS, APIStrings.OK);
         json.put(APIStrings.METHOD, method);
         json.write(writer);
     }
 
-    protected static void makeSuccessToken(String method,PrintWriter writer, String token){
+    protected void makeSuccessToken(String token){
         JSONObject json = new JSONObject();
         json.put(APIStrings.STATUS, APIStrings.OK);
         json.put(APIStrings.METHOD, method);
@@ -33,7 +48,7 @@ public class RespondBuilder {
         json.write(writer);
     }
 
-    protected static void makeUnknownMethod(String method, PrintWriter writer){
-        makeError(method, writer, "Unknown method");
+    protected void makeUnknownMethod(){
+        makeError("Unknown method");
     }
 }
