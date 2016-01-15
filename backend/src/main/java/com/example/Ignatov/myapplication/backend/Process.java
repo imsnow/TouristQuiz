@@ -8,6 +8,11 @@ import com.google.appengine.api.datastore.Query;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,12 +24,83 @@ public class Process {
     private HttpServletRequest request;
     private DatastoreService database;
 
+    private static final SimpleDateFormat sessionSDM = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+    private static final SimpleDateFormat regSDM = new SimpleDateFormat("dd MMM YYYY, HH:mm", Locale.getDefault());
+
     public Process(HttpServletRequest request) {
         this.request = request;
         database = DatastoreServiceFactory.getDatastoreService();
     }
 
-    protected boolean processUserQuestion(JSONObject json){
+    protected boolean userRegister(JSONObject json) {
+
+        String imei = request.getParameter(APIStrings.IMEI);
+        if(imei == null) return false;
+        String email = request.getParameter(APIStrings.EMAIL);
+        if(email == null) return false;
+
+        String device = request.getParameter(APIStrings.DEVICE);
+        if(device == null) return false;
+        String api = request.getParameter(APIStrings.ANDROID);
+        if(api == null) return false;
+
+        String date = regSDM.format(new Date());
+
+        Entity entity = searchUser(imei, email);
+        if (entity == null) {
+            // new user
+            String token = UUID.randomUUID().toString();
+
+            entity = new Entity(DBStrings.USERS);
+            entity.setProperty(APIStrings.TOKEN, token);
+            entity.setProperty(APIStrings.IMEI, imei);
+            entity.setProperty(APIStrings.EMAIL, email);
+            entity.setProperty(APIStrings.DEVICE, device);
+            entity.setProperty(APIStrings.ANDROID, api);
+            entity.setProperty(APIStrings.REG_TIME, date);
+            database.put(entity);
+        } else {
+            // update user
+            entity.setProperty(APIStrings.DEVICE, device);
+            entity.setProperty(APIStrings.ANDROID, api);
+            entity.setProperty(APIStrings.REG_TIME, date);
+            database.put(entity);
+        }
+
+        json.put(APIStrings.TOKEN, entity.getProperty(APIStrings.TOKEN));
+        return true;
+    }
+
+    //
+    protected boolean userSession(JSONObject json){
+
+        String token = getParameter(request, APIStrings.TOKEN, json);
+        if(token == null) return false;
+
+        Entity entity = searchUser(token);
+        if(entity == null){
+            json.put(APIStrings.MESSAGE, "User doesn't exits");
+            return false;
+        }
+
+        String session = getParameter(request, APIStrings.SESSION, json);
+        if(session == null) return false;
+
+        long sessionTime = Long.parseLong(session);
+        Date date = new Date(sessionTime);
+        String sSessionTime = sessionSDM.format(date);
+
+        // DBStrings String SESSIONS = "user_sessions";
+        entity = new Entity(DBStrings.SESSIONS);
+        entity.setProperty(APIStrings.TOKEN, token);
+        entity.setProperty(APIStrings.DATE, sSessionTime);
+        entity.setProperty(APIStrings.LONG, sessionTime);
+        database.put(entity);
+
+        return true;
+    }
+
+    protected boolean userQuestion(JSONObject json){
 
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
@@ -56,7 +132,6 @@ public class Process {
     }
 
 
-
     private String getParameter(HttpServletRequest req, String name, JSONObject json){
         String param = req.getParameter(name);
         if(param == null || param.length() == 0){
@@ -84,5 +159,21 @@ public class Process {
         PreparedQuery pq = database.prepare(q);
 
         return pq.asSingleEntity();
+    }
+
+    private Entity searchUser(String imei, String email){
+
+        if(imei == null || imei.length() == 0 ||
+                email == null || email.length() == 0)
+            return null;
+
+        Query query = new Query(DBStrings.USERS);
+        Query.Filter filter1 = new Query.FilterPredicate(APIStrings.IMEI, Query.FilterOperator.EQUAL, imei);
+        Query.Filter filter2 = new Query.FilterPredicate(APIStrings.EMAIL, Query.FilterOperator.EQUAL,email);
+        Query.Filter filter  = Query.CompositeFilterOperator.and(filter1, filter2);
+        query.setFilter(filter);
+        PreparedQuery preparedQuery = database.prepare(query);
+
+        return preparedQuery.asSingleEntity();
     }
 }

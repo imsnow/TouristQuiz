@@ -21,12 +21,14 @@ public class MyServlet extends HttpServlet {
     //private static final String UPDATE_BASE = "db.update";
     //private static final String RATING = "user.rating";
 
+    protected static final String TYPE = "application/json; charset=UTF-8";
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 
         String method = req.getParameter(APIStrings.METHOD);
-        resp.setContentType(TouristQuizServer.TYPE);
+        resp.setContentType(TYPE);
 
         // if method == null that ignore request
         if(method != null){
@@ -36,25 +38,23 @@ public class MyServlet extends HttpServlet {
             JSONObject json = new JSONObject();
 
             if(method.equals(APIStrings.USER_QUESTION)){
-                if(process.processUserQuestion(json))
-                    respondBuilder.makeSuccess();
-                else respondBuilder.makeError(json);
+                boolean status = process.userQuestion(json);
+                respondBuilder.make(json, status);
                 //TouristQuizServer.processUserQuiz(req, database);
                 //RespondBuilder.makeSuccess(method, resp.getWriter());
                 return;
             }
-            /*
-            if(method.equals(APIStrings.USER_REGISTER)) {
-                String token = TouristQuizServer.processUserRegister(req, database);
-                RespondBuilder.makeSuccessToken(method, resp.getWriter(), token);
-                /*String result = TouristQuizServer.processUserRegister(req, database);
-                if (result.equals(APIStrings.OK))
-                    RespondBuilder.makeSuccess(method, resp.getWriter());
-                else
-                    RespondBuilder.makeError(method, resp.getWriter(), result);
 
-                return;
+            if(method.equals(APIStrings.USER_REGISTER)) {
+                boolean status = process.userRegister(json);
+                respondBuilder.make(json, status);
             }
+
+            if(method.equals(APIStrings.USER_SESSION)) {
+                boolean status = process.userSession(json);
+                respondBuilder.make(json, status);
+            }
+            /*
             if(method == UPDATE_BASE) {
                 // TODO
                 return;
@@ -65,7 +65,7 @@ public class MyServlet extends HttpServlet {
             }
             */
             // This way when method is unknown or null
-            respondBuilder.makeUnknownMethod();
+            respondBuilder.make(json, false);
         }
     }
 

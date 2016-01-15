@@ -18,6 +18,13 @@ public class RespondBuilder {
         this.writer = writer;
     }
 
+    // json object already has params
+    protected void make(JSONObject json, boolean isOk){
+        json.put(APIStrings.STATUS, isOk? APIStrings.OK : APIStrings.ERROR);
+        json.put(APIStrings.METHOD, method);
+        json.write(writer);
+    }
+    /*
     // json object already has message
     protected void makeError(JSONObject json){
         json.put(APIStrings.STATUS, APIStrings.ERROR);
@@ -51,4 +58,5 @@ public class RespondBuilder {
     protected void makeUnknownMethod(){
         makeError("Unknown method");
     }
+    */
 }
