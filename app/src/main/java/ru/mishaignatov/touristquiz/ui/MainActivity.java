@@ -13,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
-import ru.mishaignatov.touristquiz.game.User;
+import ru.mishaignatov.touristquiz.game.SessionManager;
 
-public class MainActivity extends AppCompatActivity implements HeaderInterface, TipsInterface {
+public class MainActivity extends AppCompatActivity implements ActivityInterface {
 
     // header views
     private LinearLayout mHeaderLayout;
@@ -33,8 +32,9 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
 
     private Handler mHandler = new Handler();
 
-    private GameManager gameManager;
-    private FragmentManager fragmentManager;
+    private GameManager mGameManager;
+    private SessionManager mSessionManager;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
         setContentView(R.layout.activity_main);
 
         // create GameManager
-        gameManager = GameManager.getInstance(this);
-        gameManager.makeSnapshot();
+        mGameManager = GameManager.getInstance(this);
+        mGameManager.makeSnapshot();
+
+        mSessionManager = new SessionManager(this);
 
         mHeaderLayout = (LinearLayout)findViewById(R.id.header_layout);
         mCountryText = (TextView)findViewById(R.id.header_country);
@@ -61,32 +63,31 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
         mTipsLayout = (LinearLayout)findViewById(R.id.tips_view);
         mTipsText   = (TextView)findViewById(R.id.tips_text);
 
-        fragmentManager = getSupportFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
 
-        User user = gameManager.getUser();
-        if(!user.isRegistered())
-            replaceFragment(new LoadFragment());   // регистрируем полльзователя
-        else
-            replaceFragment(new StartFragment());  // запускаем
+        mGameManager.startGame();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSessionManager.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        gameManager.makeSnapshot();
-    }
-
-    public GameManager getGameManager(){
-        return gameManager;
+        mGameManager.makeSnapshot();
+        mSessionManager.end();
     }
 
     public void replaceFragment(final Fragment frag) {
-        fragmentManager.beginTransaction()
+        mFragmentManager.beginTransaction()
                 .replace(R.id.fragment, frag).commit();
     }
 
     public void addFragment(final Fragment frag, String tag){
-        fragmentManager.beginTransaction().add(R.id.fragment, frag)
+        mFragmentManager.beginTransaction().add(R.id.fragment, frag)
                 .addToBackStack(tag)
                 .commit();
     }
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(fragmentManager.getBackStackEntryCount() == 0)
+        if(mFragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
 
         onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
@@ -109,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
     @Override
     public void onUpdateHeader(String country) {
         mCountryText.setText(country);
-        mScoresText.setText(String.valueOf(gameManager.getUser().getScores()));
-        mMilesText.setText(String.valueOf(gameManager.getUser().getMiles()));
+        mScoresText.setText(String.valueOf(mGameManager.getUser().getScores()));
+        mMilesText.setText(String.valueOf(mGameManager.getUser().getMiles()));
     }
 
     @Override
@@ -147,5 +148,15 @@ public class MainActivity extends AppCompatActivity implements HeaderInterface, 
         anim.setDuration(300L);
         mTipsLayout.startAnimation(anim);
         mTipsLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onLoadFragment() {
+        replaceFragment(new LoadFragment());
+    }
+
+    @Override
+    public void onStartFragment() {
+        replaceFragment(new StartFragment());
     }
 }

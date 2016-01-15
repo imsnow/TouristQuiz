@@ -1,12 +1,14 @@
 package ru.mishaignatov.touristquiz.game;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Ignatov on 09.09.2015.
@@ -16,8 +18,8 @@ public class GameManager {
 
     private static final String TAG = "GameManager";
 
-    protected User user;
-    protected OrmDao ormDao;
+    private User user;
+    private OrmDao ormDao;
 
     public static final int QUESTION_TIME = 10;
     private static final int QUESTION_MILES = 30;
@@ -26,17 +28,31 @@ public class GameManager {
     private int mCurrentCountryId = 0;
 
     private static GameManager instance = null;
-    private Context mContext = null;
+    private Activity mContext = null;
+    private ActivityInterface activityInterface;
 
-    private GameManager(Context context) {
+    private GameManager(Activity context) {
         mContext = context;
         user = User.getUser(context);
         ormDao = OrmDao.getInstance(context);
+        activityInterface = (MainActivity)mContext;
     }
 
-    public static GameManager getInstance(Context context){
+    public static GameManager getInstance(Activity context){
         if(instance == null) instance = new GameManager(context);
         return instance;
+    }
+
+    public void startGame(){
+        if(user.isRegistered() && user.getToken().length() > 0)
+            activityInterface.onStartFragment();
+        else
+            activityInterface.onLoadFragment();
+    }
+
+
+    public void makeSnapshot(){
+        user.saveUser();
     }
 
     public User getUser(){
@@ -45,10 +61,6 @@ public class GameManager {
 
     public OrmDao getOrmDao(){
         return ormDao;
-    }
-
-    public void makeSnapshot(){
-        user.saveUser();
     }
 
     // Сколько всего загадок находится в файле

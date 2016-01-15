@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 
 /**
@@ -17,7 +16,7 @@ import ru.mishaignatov.touristquiz.R;
  */
 public class StartFragment extends Fragment implements View.OnClickListener {
 
-    private HeaderInterface headerInterface;
+    private ActivityInterface headerInterface;
 
     public StartFragment() {}
 

@@ -50,7 +50,6 @@ public class User {
         miles += progressMiles;
     }
 
-
     // Getters
     public String getToken()      { return token;      }
     public String getEmail()      { return email;      }
@@ -72,10 +71,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "androidApi='" + androidApi + '\'' +
+                ", token='" + token + '\'' +
+                ", email='" + email + '\'' +
                 ", imei='" + imei + '\'' +
                 ", deviceName='" + deviceName + '\'' +
-                ", androidApi='" + androidApi + '\'' +
                 ", miles=" + miles +
                 ", scores=" + scores +
                 ", mContext=" + mContext +

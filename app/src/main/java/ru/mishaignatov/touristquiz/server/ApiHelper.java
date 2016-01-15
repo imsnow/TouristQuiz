@@ -13,8 +13,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import ru.mishaignatov.touristquiz.game.User;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
-import ru.mishaignatov.touristquiz.ui.TipsInterface;
 
 /**
  * Created by Leva on 26.12.2015.
@@ -55,6 +55,13 @@ public class ApiHelper implements Response.ErrorListener {
         sendRequest(param, listener);
     }
 
+    public void userSession(User user, long session, Response.Listener<String> listener){
+        String param = APIStrings.USER_SESSION +
+                addParam(APIStrings.TOKEN, encode(user.getToken())) +
+                addParam(APIStrings.SESSION, encode(String.valueOf(session)));
+        sendRequest(param, listener);
+    }
+
 
     private static String addParam(String key, String value){
         return "&" + key + "=" + value;
@@ -71,7 +78,8 @@ public class ApiHelper implements Response.ErrorListener {
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        TipsInterface tipsInterface = (MainActivity)activity;
-        tipsInterface.onShowTip(error.getMessage());
+        ActivityInterface tipsInterface = (MainActivity)activity;
+        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs() + "\n"
+                + " status code = " + error.networkResponse.statusCode );
     }
 }

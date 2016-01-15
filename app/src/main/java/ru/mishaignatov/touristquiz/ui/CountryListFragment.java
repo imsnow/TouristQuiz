@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.game.GameManager;
-import ru.mishaignatov.touristquiz.HeaderInterface;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
@@ -28,7 +27,7 @@ public class CountryListFragment extends ListFragment {
 
     private List<Country> countriesList = new ArrayList<>();
     private CountryAdapter adapter;
-    private HeaderInterface headerInterface;
+    private ActivityInterface headerInterface;
 
     @Override
     public void onAttach(Activity activity) {

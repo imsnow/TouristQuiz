@@ -25,7 +25,7 @@ import ru.mishaignatov.touristquiz.server.ApiHelper;
  */
 public class LoadFragment extends Fragment implements Response.Listener<String> {
 
-    private TipsInterface tipsInterface;
+    private ActivityInterface tipsInterface;
 
     @Override
     public void onAttach(Activity activity) {
@@ -39,7 +39,7 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
         View v = inflater.inflate(R.layout.fragment_load, container, false);
 
         //new ImitationAsyncTask().execute();
-
+        Log.d("TAG", "loadFragment");
         ApiHelper.getHelper(getActivity()).userRegister(
                 GameManager.getInstance(getActivity()).getUser(), this);
 
@@ -69,26 +69,4 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
         // все равно запускаем игру
         ((MainActivity)getActivity()).replaceFragment(new StartFragment());
     }
-
-    /*
-    private class ImitationAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                // Imitation of db loading
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            ((MainActivity)getActivity()).replaceFragment(new StartFragment());
-        }
-    }
-    */
 }
