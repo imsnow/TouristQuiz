@@ -24,6 +24,7 @@ public class APIStrings {
     public static final String TYPE    = "type";
     public static final String REG_TIME = "reg_time";
     public static final String DATE = "date";
+    public static final String TIME = "time";
     public static final String LONG = "timeInMils";
     public static final String SESSION = "session";
 

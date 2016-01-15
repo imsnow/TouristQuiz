@@ -86,6 +86,9 @@ public class Process {
         String session = getParameter(request, APIStrings.SESSION, json);
         if(session == null) return false;
 
+        Date today = new Date();
+        String sToday = regSDM.format(today);
+
         long sessionTime = Long.parseLong(session);
         Date date = new Date(sessionTime);
         String sSessionTime = sessionSDM.format(date);
@@ -93,7 +96,8 @@ public class Process {
         // DBStrings String SESSIONS = "user_sessions";
         entity = new Entity(DBStrings.SESSIONS);
         entity.setProperty(APIStrings.TOKEN, token);
-        entity.setProperty(APIStrings.DATE, sSessionTime);
+        entity.setProperty(APIStrings.DATE, sToday);
+        entity.setProperty(APIStrings.TIME, sSessionTime);
         entity.setProperty(APIStrings.LONG, sessionTime);
         database.put(entity);
 
