@@ -1,11 +1,11 @@
 package ru.mishaignatov.touristquiz.server;
 
-import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -13,38 +13,39 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import ru.mishaignatov.touristquiz.game.User;
-import ru.mishaignatov.touristquiz.ui.ActivityInterface;
-import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Leva on 26.12.2015.
  *
  */
-public class ApiHelper implements Response.ErrorListener {
+public class ApiHelper {
 
-    private Activity activity;
+    private Context context;
 
     private static ApiHelper helper;
+    private RequestQueue queue;
 
-    public static ApiHelper getHelper(Activity activity){
-        if(helper == null) helper = new ApiHelper(activity);
+    public static ApiHelper getHelper(Context context){
+        if(helper == null) helper = new ApiHelper(context);
         return helper;
     }
 
-    private ApiHelper(Activity activity){
-        this.activity = activity;
+    private ApiHelper(Context context){
+        this.context = context;
+        queue = Volley.newRequestQueue(context);
     }
 
-    private void sendRequest(String param, Response.Listener<String> listener){
+    private void sendRequest(String param,
+                             Response.Listener<String> listener,
+                             Response.ErrorListener errorListener){
 
-        RequestQueue queue = Volley.newRequestQueue(activity);
+        Log.d("TAG", "request param = " + param);
 
-        StringRequest request = new StringRequest(Request.Method.GET, APIStrings.URL + param, listener, this);
-
+        StringRequest request = new StringRequest(Request.Method.GET, APIStrings.URL + param, listener, errorListener);
         queue.add(request);
     }
 
-    public void userRegister(User user, Response.Listener<String> listener){
+    public void userRegister(User user, Response.Listener<String> listener, Response.ErrorListener errorListener){
 
         String param = APIStrings.USER_REGISTER +
                         addParam(APIStrings.IMEI, encode(user.getImei())) +
@@ -52,14 +53,14 @@ public class ApiHelper implements Response.ErrorListener {
                         addParam(APIStrings.DEVICE, encode(user.getDevice())) +
                         addParam(APIStrings.ANDROID, encode(user.getAndroidApi()));
 
-        sendRequest(param, listener);
+        sendRequest(param, listener, errorListener);
     }
 
-    public void userSession(User user, long session, Response.Listener<String> listener){
+    public void userSession(User user, long session, Response.Listener<String> listener, Response.ErrorListener errorListener){
         String param = APIStrings.USER_SESSION +
                 addParam(APIStrings.TOKEN, encode(user.getToken())) +
                 addParam(APIStrings.SESSION, encode(String.valueOf(session)));
-        sendRequest(param, listener);
+        sendRequest(param, listener, errorListener);
     }
 
 
@@ -74,12 +75,5 @@ public class ApiHelper implements Response.ErrorListener {
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        ActivityInterface tipsInterface = (MainActivity)activity;
-        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs() + "\n"
-                + " status code = " + error.networkResponse.statusCode );
     }
 }

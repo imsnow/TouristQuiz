@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +24,8 @@ import ru.mishaignatov.touristquiz.server.ApiHelper;
  * Created by Leva on 22.12.2015.
  * This fragment registers user, load bd and another resources
  */
-public class LoadFragment extends Fragment implements Response.Listener<String> {
+public class LoadFragment extends Fragment implements
+        Response.Listener<String>, Response.ErrorListener {
 
     private ActivityInterface tipsInterface;
 
@@ -40,8 +42,8 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
 
         //new ImitationAsyncTask().execute();
         Log.d("TAG", "loadFragment");
-        ApiHelper.getHelper(getActivity()).userRegister(
-                GameManager.getInstance(getActivity()).getUser(), this);
+        ApiHelper.getHelper(getActivity().getApplicationContext()). userRegister(
+                GameManager.getInstance(getActivity()).getUser(), this, this);
 
         return v;
     }
@@ -68,5 +70,10 @@ public class LoadFragment extends Fragment implements Response.Listener<String> 
         }
         // все равно запускаем игру
         ((MainActivity)getActivity()).replaceFragment(new StartFragment());
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs() );
     }
 }

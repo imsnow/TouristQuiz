@@ -6,7 +6,6 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
-import ru.mishaignatov.touristquiz.BuildConfig;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -21,8 +20,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "App onCreate");
-        if(!BuildConfig.DEBUG)
-            Fabric.with(this, new Crashlytics());
+        //if(!BuildConfig.DEBUG)
+        Fabric.with(this, new Crashlytics());
 
         User user = User.getUser(this);
         Log.d(TAG, user.toString());

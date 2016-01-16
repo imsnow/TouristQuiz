@@ -23,6 +23,6 @@ public class SessionManager {
     public void end(){
         long end = System.currentTimeMillis();
         long session = end - start;
-        ApiHelper.getHelper(mActivity).userSession(GameManager.getInstance(mActivity).getUser(), session, null);
+        ApiHelper.getHelper(mActivity).userSession(GameManager.getInstance(mActivity).getUser(), session, null, null);
     }
 }
