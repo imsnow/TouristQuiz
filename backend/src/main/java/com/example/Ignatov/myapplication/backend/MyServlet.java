@@ -36,23 +36,18 @@ public class MyServlet extends HttpServlet {
             RespondBuilder respondBuilder = new RespondBuilder(method, resp.getWriter());
             Process process = new Process(req);
             JSONObject json = new JSONObject();
+            boolean status = false; // success or fail
 
             if(method.equals(APIStrings.USER_QUESTION)){
-                boolean status = process.userQuestion(json);
-                respondBuilder.make(json, status);
-                //TouristQuizServer.processUserQuiz(req, database);
-                //RespondBuilder.makeSuccess(method, resp.getWriter());
-                return;
+                status = process.userQuestion(json);
             }
 
             if(method.equals(APIStrings.USER_REGISTER)) {
-                boolean status = process.userRegister(json);
-                respondBuilder.make(json, status);
+                status = process.userRegister(json);
             }
 
             if(method.equals(APIStrings.USER_SESSION)) {
-                boolean status = process.userSession(json);
-                respondBuilder.make(json, status);
+                status = process.userSession(json);
             }
             /*
             if(method == UPDATE_BASE) {
@@ -65,7 +60,7 @@ public class MyServlet extends HttpServlet {
             }
             */
             // This way when method is unknown or null
-            respondBuilder.make(json, false);
+            respondBuilder.make(json, status);
         }
     }
 
