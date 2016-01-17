@@ -1,29 +1,30 @@
 package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.ui.dialogs.UserQuestionDialog;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class StartFragment extends Fragment implements View.OnClickListener {
+public class StartFragment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
 
-    private ActivityInterface headerInterface;
+    private ActivityInterface activityInterface;
 
     public StartFragment() {}
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        headerInterface = (MainActivity)activity;
+        activityInterface = (MainActivity)activity;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         Log.d("TAG", "update start fragment");
         //stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
         //        + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
-        headerInterface.onUpdateHeader("");
+        activityInterface.onUpdateHeader("");
     }
 
     @Override
@@ -62,12 +63,19 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id){
             case R.id.button_start:
-                ((MainActivity)getActivity()).addFragment(new CountryListFragment(), "Country");
+                activityInterface.onCountryListFragment("Country");
                 break;
             case R.id.button_my_quiz:
-                send();
-                Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
+                UserQuestionDialog dialog = new UserQuestionDialog();
+                activityInterface.showFragmentDialog(dialog, "user_question");
+                //DialogHelper.showUserQuestion(getActivity(), this);
+                //Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        //dialog.
     }
 }

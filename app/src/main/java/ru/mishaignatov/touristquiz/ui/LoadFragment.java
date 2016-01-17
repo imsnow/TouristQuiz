@@ -69,7 +69,7 @@ public class LoadFragment extends Fragment implements
             e.printStackTrace();
         }
         // все равно запускаем игру
-        ((MainActivity)getActivity()).replaceFragment(new StartFragment());
+        tipsInterface.onStartFragment();
     }
 
     @Override

@@ -3,6 +3,9 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import ru.mishaignatov.touristquiz.R;
 
@@ -13,6 +16,25 @@ import ru.mishaignatov.touristquiz.R;
  * All methods is static
  */
 public class DialogHelper {
+
+    public static void showUserQuestion(Activity activity, DialogInterface.OnClickListener listener){
+
+        if(activity != null && listener != null){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(activity)
+                    .setTitle("Мой вопрос")
+                    .setMessage("Загадай свой вопрос всему миру")
+                    .setPositiveButton("Отправить", listener)
+                    .setNegativeButton("Отмена", listener);
+
+            final EditText question = new EditText(dialog.getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            question.setLayoutParams(params);
+            dialog.setView(question);
+            dialog.show();
+        }
+    }
+
 
     public static void showDialogSuccess(Activity activity, int time, int score, int mile, DialogInterface.OnClickListener listener){
 

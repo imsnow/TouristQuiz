@@ -2,6 +2,7 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -158,5 +159,15 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onStartFragment() {
         replaceFragment(new StartFragment());
+    }
+
+    @Override
+    public void onCountryListFragment(String country) {
+        addFragment(new CountryListFragment(), country);
+    }
+
+    @Override
+    public void showFragmentDialog(DialogFragment dialog, String tag) {
+        dialog.show(mFragmentManager, tag);
     }
 }
