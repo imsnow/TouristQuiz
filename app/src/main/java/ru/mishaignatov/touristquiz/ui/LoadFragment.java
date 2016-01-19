@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.server.APIStrings;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
@@ -33,8 +34,8 @@ public class LoadFragment extends Fragment implements
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         tipsInterface = (MainActivity)activity;
-        ApiHelper.getHelper(getActivity().getApplicationContext()). userRegister(
-                GameManager.getInstance(getActivity()).getUser(), this, this);
+        ApiHelper.getHelper(App.getContext()).userRegister(
+                GameManager.getInstance(activity).getUser(), this, this);
     }
     @Nullable
     @Override

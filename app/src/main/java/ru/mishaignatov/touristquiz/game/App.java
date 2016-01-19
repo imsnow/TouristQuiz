@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.game;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -15,7 +16,7 @@ import io.fabric.sdk.android.Fabric;
 public class App extends Application {
 
     private static final String TAG = "Application";
-
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,7 +24,12 @@ public class App extends Application {
         //if(!BuildConfig.DEBUG)
         Fabric.with(this, new Crashlytics());
 
-        User user = User.getUser(this);
-        Log.d(TAG, user.toString());
+        mContext = getApplicationContext();
+        //User user = User.getUser(this);
+        //Log.d(TAG, user.toString());
+    }
+
+    public static Context getContext(){
+        return mContext;
     }
 }

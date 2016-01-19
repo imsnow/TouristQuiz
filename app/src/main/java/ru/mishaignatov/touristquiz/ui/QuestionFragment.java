@@ -36,7 +36,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
     private boolean isCount = true;
 
     // temp
-    private int drawables[] = {R.drawable.lime100, R.drawable.deep_orange, R.drawable.green100, R.drawable.blue100};
+    private int drawables[] = {R.drawable.lime100, R.drawable.bg_kitchen, R.drawable.bg_geo, R.drawable.bg_history};
 
     @Override
     public void onAttach(Activity activity) {
@@ -54,6 +54,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         error.setOnClickListener(this);
 
         layout = (FrameLayout)v.findViewById(R.id.layout);
+        layout.setOnClickListener(null);
 
         mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (TextView)v.findViewById(R.id.quiz_text);
@@ -117,8 +118,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        Log.d("TAG", "onClick");
         int id = v.getId();
+        Log.d("TAG", "onClick v = " + v.getClass());
         if(id == R.id.error_text) { // send error
             DialogHelper.showDialogErrorInQuestion(getActivity(), new DialogInterface.OnClickListener() {
                 @Override
