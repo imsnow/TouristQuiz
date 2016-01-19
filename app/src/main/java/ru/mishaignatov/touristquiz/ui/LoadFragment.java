@@ -33,6 +33,8 @@ public class LoadFragment extends Fragment implements
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         tipsInterface = (MainActivity)activity;
+        ApiHelper.getHelper(getActivity().getApplicationContext()). userRegister(
+                GameManager.getInstance(getActivity()).getUser(), this, this);
     }
     @Nullable
     @Override
@@ -42,8 +44,6 @@ public class LoadFragment extends Fragment implements
 
         //new ImitationAsyncTask().execute();
         Log.d("TAG", "loadFragment");
-        ApiHelper.getHelper(getActivity().getApplicationContext()). userRegister(
-                GameManager.getInstance(getActivity()).getUser(), this, this);
 
         return v;
     }

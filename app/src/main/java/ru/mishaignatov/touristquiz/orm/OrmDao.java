@@ -27,7 +27,7 @@ public class OrmDao {
             "france.txt", "usa.txt", "spain.txt",
             "china.txt", "italy.txt", "turkey.txt",
             "germany.txt", "england.txt", "russia.txt",
-            "mexico.txt"
+            "mexico.txt", "thailand.txt"
     };
 
     private static OrmDao instance = null;

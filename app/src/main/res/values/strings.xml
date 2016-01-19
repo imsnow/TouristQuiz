@@ -29,6 +29,7 @@
     <string name="england">United Kingdom</string>
     <string name="russia">Russia</string>
     <string name="mexico">Mexico</string>
+    <string name="thailand">Thailand</string>
     
     <string-array name="countries">
         <item>@string/france</item>
@@ -41,5 +42,6 @@
         <item>@string/england</item>
         <item>@string/russia</item>
         <item>@string/mexico</item>
+        <item>@string/thailand</item>
     </string-array>
 </resources>
