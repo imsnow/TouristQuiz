@@ -29,6 +29,8 @@ public class CountryListFragment extends ListFragment {
     private CountryAdapter adapter;
     private ActivityInterface headerInterface;
 
+    private Country mCurrentCountry;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -40,7 +42,7 @@ public class CountryListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         countriesList = OrmDao.getInstance(getActivity()).getCountryList();
-        Log.d("TAG", "size " + countriesList.size());
+        //Log.d("TAG", "size " + countriesList.size());
         //String[] array = getResources().getStringArray(R.array.countries);
         //countriesList = Arrays.asList(array);
         adapter = new CountryAdapter();
@@ -53,6 +55,8 @@ public class CountryListFragment extends ListFragment {
         Log.d("TAG", "Resume to CountryList fragment");
         headerInterface.showHeader();
         headerInterface.onUpdateHeader("Список стран");
+        if(mCurrentCountry != null)
+            OrmDao.getInstance(getActivity()).updateCountry(mCurrentCountry);
         adapter.notifyDataSetChanged();
     }
 
@@ -71,8 +75,11 @@ public class CountryListFragment extends ListFragment {
             // Вопросы уже все отгаданы
             DialogHelper.showDialogLevelFinished(getActivity());
         }
-        else
-            ((MainActivity)getActivity()).addFragment(new QuestionFragment(), "Question");
+        else {
+            ((MainActivity) getActivity()).addFragment(new QuestionFragment(), "Question");
+            mCurrentCountry = countriesList.get(position);
+
+        }
 
     }
 

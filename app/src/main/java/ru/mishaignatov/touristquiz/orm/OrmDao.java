@@ -134,6 +134,29 @@ public class OrmDao {
         return mCountryDao.queryForAll();
     }
 
+    //public void updateCountry(int country_id){
+    public void updateCountry(Country country){
+        try {
+            // size of answered question
+            int size = (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_COUNTRY, country.id)
+                    .and()
+                    .eq(Question.COLUMN_IS_ANSWERED, true)
+                    .countOf();
+
+            if (size != 0) {
+                //Country country = mCountryDao.query(country);
+                Log.d("TAG", "size = " + size);
+                country.answered = size;
+                mCountryDao.update(country);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public int createCountryEntries(){
 
         String[] values = context.getResources().getStringArray(R.array.countries);
