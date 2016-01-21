@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         if(mFragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
 

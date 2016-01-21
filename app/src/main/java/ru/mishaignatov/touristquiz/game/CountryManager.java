@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.game;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,10 @@ public class CountryManager {
     private CountryManager(Context context){
         mCountryList = new ArrayList<>();
         mContext = context;
+        fillCountryList();
     }
 
-    public CountryManager getInstance(Context context){
+    public static CountryManager getInstance(Context context){
         if(instance == null) instance = new CountryManager(context);
         return instance;
     }
@@ -32,7 +34,7 @@ public class CountryManager {
         return mCountryList;
     }
 
-    public void fillCountryList(){
+    private void fillCountryList(){
         mCountryList = OrmDao.getInstance(mContext).getCountryList();
     }
 
@@ -41,7 +43,10 @@ public class CountryManager {
     }
 
     public void updateCountry(int position){
+        Log.d("TAG", "pre size = " + mCountryList.size());
         Country item = mCountryList.get(position);
-        OrmDao.getInstance(mContext).updateCountry(item);
+        item = OrmDao.getInstance(mContext).updateCountry(item);
+        mCountryList.add(position,item);
+        Log.d("TAG", "post size = " + mCountryList.size());
     }
 }

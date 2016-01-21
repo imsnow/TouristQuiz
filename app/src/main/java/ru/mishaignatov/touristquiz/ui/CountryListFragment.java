@@ -11,11 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.CountryManager;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 
@@ -25,11 +26,11 @@ import ru.mishaignatov.touristquiz.orm.OrmDao;
  */
 public class CountryListFragment extends ListFragment {
 
-    private List<Country> countriesList = new ArrayList<>();
+    private CountryManager mCountryManager;
     private CountryAdapter adapter;
     private ActivityInterface headerInterface;
 
-    private Country mCurrentCountry;
+    //private Country mCurrentCountry;
 
     @Override
     public void onAttach(Activity activity) {
@@ -41,7 +42,9 @@ public class CountryListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        countriesList = OrmDao.getInstance(getActivity()).getCountryList();
+        mCountryManager = CountryManager.getInstance(App.getContext());
+
+        //countriesList = OrmDao.getInstance(getActivity()).getCountryList();
         //Log.d("TAG", "size " + countriesList.size());
         //String[] array = getResources().getStringArray(R.array.countries);
         //countriesList = Arrays.asList(array);
@@ -55,8 +58,8 @@ public class CountryListFragment extends ListFragment {
         Log.d("TAG", "Resume to CountryList fragment");
         headerInterface.showHeader();
         headerInterface.onUpdateHeader("Список стран");
-        if(mCurrentCountry != null)
-            OrmDao.getInstance(getActivity()).updateCountry(mCurrentCountry);
+        //if(mCurrentCountry != null)
+        //    OrmDao.getInstance(getActivity()).updateCountry(mCurrentCountry);
         adapter.notifyDataSetChanged();
     }
 
@@ -77,17 +80,17 @@ public class CountryListFragment extends ListFragment {
         }
         else {
             ((MainActivity) getActivity()).addFragment(new QuestionFragment(), "Question");
-            mCurrentCountry = countriesList.get(position);
-
+            //mCurrentCountry = countriesList.get(position);
         }
-
     }
-
 
     private class CountryAdapter extends BaseAdapter {
 
+        private List<Country> countriesList;
+
         public CountryAdapter() {
             //super(context);
+            countriesList = mCountryManager.getList();
         }
 
         @Override

@@ -135,7 +135,7 @@ public class OrmDao {
     }
 
     //public void updateCountry(int country_id){
-    public void updateCountry(Country country){
+    public Country updateCountry(Country country){
         try {
             // size of answered question
             int size = (int)mQuestionDao.queryBuilder()
@@ -155,6 +155,7 @@ public class OrmDao {
         catch (SQLException e){
             e.printStackTrace();
         }
+        return country;
     }
 
     public int createCountryEntries(){
