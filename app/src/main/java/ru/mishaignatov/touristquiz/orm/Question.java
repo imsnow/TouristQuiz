@@ -3,6 +3,10 @@ package ru.mishaignatov.touristquiz.orm;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import ru.mishaignatov.touristquiz.Utils;
 
 /**
@@ -30,12 +34,21 @@ public class Question {
 
     Question(){}
 
-    public String[] getRandomListAnswers(){
-        return Utils.shuffleStringArray(getListAnswers());
+    public List<String> getRandomListAnswers(){
+        //return Utils.shuffleStringArray(getListAnswers());
+        return Utils.shuffleList(getListAnswers());
     }
 
-    private String[] getListAnswers(){
-        return answers.split(",");
+    private List<String> getListAnswers(){
+        List<String> result = new ArrayList<>(4);
+        String[] arr = answers.split(",");
+        List<String> pre = Arrays.asList(arr);
+        // делаем ответы с большой буквы, остальные маленькие
+        for(String item : pre){
+            String s = Utils.doAnswerString(item);
+            result.add(s);
+        }
+        return result;
     }
 
     public int getType()                   {
@@ -53,7 +66,8 @@ public class Question {
     }
 
     public static boolean isAnswer(final Question quiz, final String choice){
-        String answer = quiz.getListAnswers()[0].trim();
+        String answer = quiz.getListAnswers().get(0).trim();
         return answer.equals(choice);
     }
+
 }

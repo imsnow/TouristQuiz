@@ -7,14 +7,6 @@
     android:id="@+id/layout">
 
     <TextView
-        android:layout_gravity="top|end"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/timer_view"
-        android:padding="32dp"
-        android:text="10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40dp"

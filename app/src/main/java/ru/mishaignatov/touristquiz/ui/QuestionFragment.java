@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,30 +12,31 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
+import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
 
 /**
  * Created by Leva on 22.12.2015.
  *
  */
-public class QuestionFragment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
+public class QuestionFragment extends Fragment implements
+        View.OnClickListener, DialogInterface.OnClickListener, Stopwatch.Callback, QuestionView {
 
-    private TextView questionText, mTimerText;
+    private TextView questionText;//, mTimerText;
     private AnswerButton button1, button2, button3, button4;
     private FrameLayout layout;
 
     private Question mCurrentQuestion;
+    private Stopwatch mStopwatch;
 
     private ActivityInterface headerInterface;
 
-    private Handler mHandler = new Handler();
-    private int mTimerCnt = GameManager.QUESTION_TIME;
-    private boolean isCount = true;
-
     // temp
-    private int drawables[] = {R.drawable.lime100, R.drawable.bg_kitchen, R.drawable.bg_geo, R.drawable.bg_history};
+    private int drawables[] = {R.drawable.bg_geo_merged, R.drawable.bg_kitchen_merged, R.drawable.bg_geo_merged, R.drawable.bg_history_merged};
 
     @Override
     public void onAttach(Activity activity) {
@@ -56,7 +56,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         layout = (FrameLayout)v.findViewById(R.id.layout);
         layout.setOnClickListener(null);
 
-        mTimerText = (TextView)v.findViewById(R.id.timer_view);
+        //mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (TextView)v.findViewById(R.id.quiz_text);
         button1      = (AnswerButton)v.findViewById(R.id.button1);
         button2      = (AnswerButton)v.findViewById(R.id.button2);
@@ -67,36 +67,20 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
+        mStopwatch = new Stopwatch(this);
+
         update();
 
         return v;
     }
 
-
-    private Runnable showTimerValue = new Runnable() {
-
-        @Override
-        public void run() {
-            if(isCount) {
-                mTimerCnt--;
-                mTimerText.setText(String.valueOf(mTimerCnt));
-                if(mTimerCnt>0)
-                    mHandler.postDelayed(showTimerValue, 1000);
-            }
-        }
-    };
-
     public void update(){
-
-        mTimerCnt = GameManager.QUESTION_TIME;
-        mTimerText.setText(String.valueOf(mTimerCnt));
-        isCount = true;
         updateQuestion();
         headerInterface.onUpdateHeader("");
-        mHandler.postDelayed(showTimerValue, 1000);
     }
 
-    private void updateQuestion(){
+    @Override
+    public void updateQuestion(){
 
         mCurrentQuestion = GameManager.getInstance(getActivity()).getQuestion();
 
@@ -105,15 +89,17 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
             return;
         }
 
-        String[] list = mCurrentQuestion.getRandomListAnswers();
+        List<String> list = mCurrentQuestion.getRandomListAnswers();
 
         questionText.setText(mCurrentQuestion.quiz);
-        button1.setText(list[0].trim());
-        button2.setText(list[1].trim());
-        button3.setText(list[2].trim());
-        button4.setText(list[3].trim());
+        button1.setText(list.get(0).trim());
+        button2.setText(list.get(1).trim());
+        button3.setText(list.get(2).trim());
+        button4.setText(list.get(3).trim());
 
         layout.setBackgroundResource(drawables[mCurrentQuestion.getType()]);
+
+        mStopwatch.start();
     }
 
     @Override
@@ -135,9 +121,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
             });
         }
         else if (v instanceof AnswerButton){ // One of fourth answers buttons
-            isCount = false;
+            mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
-            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, mTimerCnt, this);
+            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 10, this); // TODO
         }
     }
 
@@ -148,6 +134,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
             update();
         if(which == -2) // Next Level Dialog
             getActivity().onBackPressed();
+    }
+
+    @Override
+    public void onFinished() {
+
     }
 
     /*
