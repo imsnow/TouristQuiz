@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui;
 import android.content.Context;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -75,7 +74,6 @@ public class AnswerButton extends TextView {
             else
                 textSize = size;
         }
-        Log.d("TAG", "textSize = " + textSize);
         setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
 
         resetTextSize();

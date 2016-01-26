@@ -2,19 +2,28 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.Utils;
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
@@ -28,15 +37,17 @@ public class QuestionFragment extends Fragment implements
 
     private TextView questionText;//, mTimerText;
     private AnswerButton button1, button2, button3, button4;
+    private Animation shakeAnim;
+
     private FrameLayout layout;
 
     private Question mCurrentQuestion;
-    private Stopwatch mStopwatch;
+    //private Stopwatch mStopwatch;
 
     private ActivityInterface headerInterface;
 
     // temp
-    private int drawables[] = {R.drawable.bg_geo_merged, R.drawable.bg_kitchen_merged, R.drawable.bg_geo_merged, R.drawable.bg_history_merged};
+    private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
 
     @Override
     public void onAttach(Activity activity) {
@@ -67,16 +78,35 @@ public class QuestionFragment extends Fragment implements
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
-        mStopwatch = new Stopwatch(this);
+        //mStopwatch = new Stopwatch(this);
 
-        update();
+        shakeAnim = AnimationUtils.loadAnimation(App.getContext(), R.anim.shake);
+        shakeAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // stop timer
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // update question
+                updateQuestion();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        updateQuestion();
 
         return v;
     }
 
-    public void update(){
-        updateQuestion();
-        headerInterface.onUpdateHeader("");
+    @Override
+    public boolean userAnswered(Question question, String answer) {
+        return Question.isAnswer(question, answer);
     }
 
     @Override
@@ -97,15 +127,31 @@ public class QuestionFragment extends Fragment implements
         button3.setText(list.get(2).trim());
         button4.setText(list.get(3).trim());
 
-        layout.setBackgroundResource(drawables[mCurrentQuestion.getType()]);
+        //layout.setBackgroundResource(bg_resource[mCurrentQuestion.getType()]);
 
-        mStopwatch.start();
+        Utils.setBackground(layout, loadBitmap(mCurrentQuestion.getType()));
+        //layout.setBackground(loadBitmap(mCurrentQuestion.getType()));
+        //mStopwatch.start();
+    }
+
+    private Drawable loadBitmap(int index){
+        AssetManager assetManager = getActivity().getAssets();
+
+        InputStream istr = null;
+        //Bitmap bitmap = null;
+        try {
+            istr = assetManager.open(bg_resource[index]);
+            //bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            // handle exception
+            e.printStackTrace();
+        }
+        return new BitmapDrawable(getResources(), istr);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        Log.d("TAG", "onClick v = " + v.getClass());
         if(id == R.id.error_text) { // send error
             DialogHelper.showDialogErrorInQuestion(getActivity(), new DialogInterface.OnClickListener() {
                 @Override
@@ -121,9 +167,16 @@ public class QuestionFragment extends Fragment implements
             });
         }
         else if (v instanceof AnswerButton){ // One of fourth answers buttons
-            mStopwatch.stop();
+            //mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
-            GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 10, this); // TODO
+            if (userAnswered(mCurrentQuestion, s))
+                // user answered true
+                ;
+            else
+                // user failed
+                v.startAnimation(shakeAnim);
+
+            //GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 10, this); // TODO
         }
     }
 
@@ -131,7 +184,7 @@ public class QuestionFragment extends Fragment implements
     public void onClick(DialogInterface dialog, int which) {
         Log.d("TAG", "DialogInterface = " + which);
         if(which == -1) // Success and failure dialog
-            update();
+            updateQuestion();
         if(which == -2) // Next Level Dialog
             getActivity().onBackPressed();
     }

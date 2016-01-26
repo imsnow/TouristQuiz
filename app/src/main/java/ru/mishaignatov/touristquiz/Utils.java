@@ -1,5 +1,9 @@
 package ru.mishaignatov.touristquiz;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.view.View;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -30,5 +34,12 @@ public class Utils {
     public static String doAnswerString(final String str) {
         String trim = str.trim();
         return trim.substring(0,1).toUpperCase() + trim.substring(1).toLowerCase();
+    }
+
+    public static void setBackground(View view, Drawable drawable){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+            view.setBackgroundDrawable(drawable);
+        else
+            view.setBackground(drawable);
     }
 }
