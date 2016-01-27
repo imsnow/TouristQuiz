@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     public void addFragment(final Fragment frag, String tag){
-        mFragmentManager.beginTransaction().add(R.id.fragment, frag)
+        mFragmentManager.beginTransaction().add(R.id.fragment, frag, tag)
                 .addToBackStack(tag)
                 .commit();
     }
@@ -99,6 +100,13 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
 
         if(mFragmentManager.getBackStackEntryCount() == 0)
             mHomeButton.setVisibility(View.INVISIBLE);
+
+        CountryListFragment frag = (CountryListFragment)mFragmentManager.findFragmentByTag("CountryListFragment");
+        if(frag != null && frag.isVisible()){
+            // update methods
+            Log.d("TAG", "update");
+            frag.update();
+        }
 
         onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
     }
@@ -163,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
-    public void onCountryListFragment(String country) {
-        addFragment(new CountryListFragment(), country);
+    public void onCountryListFragment() {
+        addFragment(new CountryListFragment(), "CountryListFragment");
     }
 
     @Override

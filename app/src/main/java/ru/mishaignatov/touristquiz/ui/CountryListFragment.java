@@ -11,8 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.CountryManager;
@@ -55,11 +53,13 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("TAG", "Resume to CountryList fragment");
         headerInterface.showHeader();
         headerInterface.onUpdateHeader("Список стран");
-        //if(mCurrentCountry != null)
-        //    OrmDao.getInstance(getActivity()).updateCountry(mCurrentCountry);
+    }
+
+    public void update(){
+        Log.d("TAG", "CLF update");
+        mCountryManager.updateCountries();
         adapter.notifyDataSetChanged();
     }
 
@@ -86,16 +86,21 @@ public class CountryListFragment extends ListFragment {
 
     private class CountryAdapter extends BaseAdapter {
 
-        private List<Country> countriesList;
+        //private List<Country> countriesList;
 
         public CountryAdapter() {
             //super(context);
-            countriesList = mCountryManager.getList();
+            //countriesList = mCountryManager.getList();
+        }
+
+        @Override
+        public boolean areAllItemsEnabled() {
+            return super.areAllItemsEnabled();
         }
 
         @Override
         public int getCount() {
-            return countriesList.size();
+            return mCountryManager.getList().size();
         }
 
         @Override
@@ -113,7 +118,7 @@ public class CountryListFragment extends ListFragment {
             if(convertView == null)
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
-            Country item = countriesList.get(position);
+            Country item = mCountryManager.getList().get(position);
 
             TextView name = (TextView)convertView.findViewById(R.id.country_name);
             name.setText(item.value);

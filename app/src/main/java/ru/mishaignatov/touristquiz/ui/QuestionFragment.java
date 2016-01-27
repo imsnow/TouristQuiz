@@ -112,6 +112,8 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void updateQuestion(){
 
+        headerInterface.onUpdateHeader("");
+
         mCurrentQuestion = GameManager.getInstance(getActivity()).getQuestion();
 
         if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
@@ -169,9 +171,10 @@ public class QuestionFragment extends Fragment implements
         else if (v instanceof AnswerButton){ // One of fourth answers buttons
             //mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
-            if (userAnswered(mCurrentQuestion, s))
+            if (userAnswered(mCurrentQuestion, s)) {
                 // user answered true
-                ;
+                GameManager.getInstance(getActivity()).userAnsweredTrue(this, mCurrentQuestion, s, 10, this);
+            }
             else
                 // user failed
                 v.startAnimation(shakeAnim);

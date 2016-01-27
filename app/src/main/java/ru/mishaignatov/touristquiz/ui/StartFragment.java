@@ -63,7 +63,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
         int id = v.getId();
         switch (id){
             case R.id.button_start:
-                activityInterface.onCountryListFragment("Country");
+                activityInterface.onCountryListFragment();
                 break;
             case R.id.button_my_quiz:
                 UserQuestionDialog dialog = new UserQuestionDialog();

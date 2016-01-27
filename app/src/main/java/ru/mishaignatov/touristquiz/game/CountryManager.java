@@ -44,9 +44,15 @@ public class CountryManager {
 
     public void updateCountry(int position){
         Log.d("TAG", "pre size = " + mCountryList.size());
-        Country item = mCountryList.get(position);
+        Country item = mCountryList.remove(position);
         item = OrmDao.getInstance(mContext).updateCountry(item);
-        mCountryList.add(position,item);
-        Log.d("TAG", "post size = " + mCountryList.size());
+        Log.d("TAG", "item = " + item);
+        mCountryList.add(position, item);
+    }
+
+    public void updateCountries(){
+        for(int i = 0; i < mCountryList.size(); i++){
+            updateCountry(i);
+        }
     }
 }

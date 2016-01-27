@@ -72,17 +72,15 @@ public class GameManager {
         return OrmDao.getInstance(mContext).getRandomQuestion(mCurrentCountryId);
     }
 
-    public void userAnswered(Fragment fragment, Question question,
+    public void userAnsweredTrue(Fragment fragment, Question question,
                              String answer, int time, DialogInterface.OnClickListener listener){
 
-        boolean result = Question.isAnswer(question, answer);
-        if (result) {
-            int tempScore = 50 + 50*time/QUESTION_TIME;
-            user.addResult(tempScore, QUESTION_MILES);
-            DialogHelper.showDialogSuccess(fragment.getActivity(), time, tempScore, QUESTION_MILES, listener);
-            OrmDao.getInstance(mContext).setQuestionAnswered(question);
-        } else
-            DialogHelper.showDialogFailure(fragment.getActivity(), listener);
+        int tempScore = 50 + 50*time/QUESTION_TIME;
+        user.addResult(tempScore, QUESTION_MILES);
+        DialogHelper.showDialogSuccess(fragment.getActivity(), time, tempScore, QUESTION_MILES, listener);
+        OrmDao.getInstance(mContext).setQuestionAnswered(question);
+
+            //DialogHelper.showDialogFailure(fragment.getActivity(), listener);
 
     }
 
