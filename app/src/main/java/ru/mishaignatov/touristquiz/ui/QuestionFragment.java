@@ -2,12 +2,8 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +13,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
+import ru.mishaignatov.touristquiz.QuestionPresenter;
+import ru.mishaignatov.touristquiz.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.game.GameManager;
-import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
 
 /**
@@ -33,7 +27,7 @@ import ru.mishaignatov.touristquiz.orm.Question;
  *
  */
 public class QuestionFragment extends Fragment implements
-        View.OnClickListener, DialogInterface.OnClickListener, Stopwatch.Callback, QuestionView {
+        View.OnClickListener, QuestionView {
 
     private TextView questionText;//, mTimerText;
     private AnswerButton button1, button2, button3, button4;
@@ -45,6 +39,8 @@ public class QuestionFragment extends Fragment implements
     //private Stopwatch mStopwatch;
 
     private ActivityInterface headerInterface;
+
+    private QuestionPresenter mPresenter;
 
     // temp
     private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
@@ -90,7 +86,7 @@ public class QuestionFragment extends Fragment implements
             @Override
             public void onAnimationEnd(Animation animation) {
                 // update question
-                updateQuestion();
+                //updateQuestion();
             }
 
             @Override
@@ -99,22 +95,24 @@ public class QuestionFragment extends Fragment implements
             }
         });
 
-        updateQuestion();
+        mPresenter = new QuestionPresenterImpl(this);
+        mPresenter.takeQuestion();
+        //updateQuestion();
 
         return v;
     }
-
+/*
     @Override
     public boolean userAnswered(Question question, String answer) {
         return Question.isAnswer(question, answer);
     }
 
     @Override
-    public void updateQuestion(){
+    public void updateQuestion(Question question){
 
         headerInterface.onUpdateHeader("");
 
-        mCurrentQuestion = GameManager.getInstance(getActivity()).getQuestion();
+        mCurrentQuestion = GameManager.getInstance(getActivity()).takeQuestion();
 
         if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
             DialogHelper.showDialogNextLevel(getActivity(), this);
@@ -135,21 +133,7 @@ public class QuestionFragment extends Fragment implements
         //layout.setBackground(loadBitmap(mCurrentQuestion.getType()));
         //mStopwatch.start();
     }
-
-    private Drawable loadBitmap(int index){
-        AssetManager assetManager = getActivity().getAssets();
-
-        InputStream istr = null;
-        //Bitmap bitmap = null;
-        try {
-            istr = assetManager.open(bg_resource[index]);
-            //bitmap = BitmapFactory.decodeStream(istr);
-        } catch (IOException e) {
-            // handle exception
-            e.printStackTrace();
-        }
-        return new BitmapDrawable(getResources(), istr);
-    }
+*/
 
     @Override
     public void onClick(View v) {
@@ -171,6 +155,9 @@ public class QuestionFragment extends Fragment implements
         else if (v instanceof AnswerButton){ // One of fourth answers buttons
             //mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
+            mPresenter.onAnswerButtonClick(s, (AnswerButton) v);
+
+            /*
             if (userAnswered(mCurrentQuestion, s)) {
                 // user answered true
                 GameManager.getInstance(getActivity()).userAnsweredTrue(this, mCurrentQuestion, s, 10, this);
@@ -178,23 +165,80 @@ public class QuestionFragment extends Fragment implements
             else
                 // user failed
                 v.startAnimation(shakeAnim);
-
+            */
             //GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 10, this); // TODO
         }
     }
 
     @Override
+    public void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
+    }
+    /*
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         Log.d("TAG", "DialogInterface = " + which);
         if(which == -1) // Success and failure dialog
-            updateQuestion();
+            //updateQuestion();
+            ;
         if(which == -2) // Next Level Dialog
             getActivity().onBackPressed();
     }
+    */
 
     @Override
-    public void onFinished() {
+    public void onTrueAnswer() {
+        showSuccessDialog();
+    }
 
+    @Override
+    public void onFailAnswer(AnswerButton button) {
+
+    }
+
+    @Override
+    public void showSuccessDialog() {
+
+    }
+
+    @Override
+    public void showErrorInQuestionDialog() {
+
+    }
+
+    @Override
+    public void showDialogNextLevel() {
+        DialogHelper.showDialogNextLevel(getActivity(), this);
+    }
+
+    @Override
+    public void startDeleteButton(int resource_id) {
+
+    }
+
+    @Override
+    public void setQuestion(Question question) {
+
+        mCurrentQuestion = question;
+
+        if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
+            showDialogNextLevel();
+            return;
+        }
+
+        List<String> list = mCurrentQuestion.getRandomListAnswers();
+
+        questionText.setText(mCurrentQuestion.quiz);
+        button1.setText(list.get(0).trim());
+        button2.setText(list.get(1).trim());
+        button3.setText(list.get(2).trim());
+        button4.setText(list.get(3).trim());
+
+        //layout.setBackgroundResource(bg_resource[mCurrentQuestion.getType()]);
+
+        Utils.setBackground(layout, Utils.loadBitmapFromAssetes(getActivity().getApplicationContext(),
+                bg_resource[mCurrentQuestion.getType()]));
     }
 
     /*

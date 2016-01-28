@@ -1,8 +1,13 @@
 package ru.mishaignatov.touristquiz;
 
-/**
- * Created by Leva on 23.01.2016.
- **/
-public class QuestionPresenter {
+import ru.mishaignatov.touristquiz.ui.AnswerButton;
 
+/**
+ * Created by Leva on 28.01.2016.
+ **/
+public interface QuestionPresenter {
+
+    void takeQuestion();
+    void onAnswerButtonClick(String answer, AnswerButton button);
+    void onDestroy();
 }

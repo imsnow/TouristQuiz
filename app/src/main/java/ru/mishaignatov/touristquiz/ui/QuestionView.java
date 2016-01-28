@@ -7,6 +7,11 @@ import ru.mishaignatov.touristquiz.orm.Question;
  **/
 public interface QuestionView {
 
-    boolean userAnswered(Question question, String answer);
-    void updateQuestion();
+    void onTrueAnswer();
+    void onFailAnswer(AnswerButton button);
+    void showSuccessDialog();
+    void showErrorInQuestionDialog();
+    void showDialogNextLevel();
+    void startDeleteButton(int resource_id);
+    void setQuestion(Question question);
 }

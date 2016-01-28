@@ -1,9 +1,13 @@
 package ru.mishaignatov.touristquiz;
 
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,5 +45,18 @@ public class Utils {
             view.setBackgroundDrawable(drawable);
         else
             view.setBackground(drawable);
+    }
+
+    public static Drawable loadBitmapFromAssetes(Context context, String file) {
+        InputStream is = null;
+        //Bitmap bitmap = null;
+        try {
+            is = context.getAssets().open(file);
+            //bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            // handle exception
+            e.printStackTrace();
+        }
+        return new BitmapDrawable(context.getResources(), is);
     }
 }
