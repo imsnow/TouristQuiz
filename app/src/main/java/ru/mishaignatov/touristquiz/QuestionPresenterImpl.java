@@ -13,22 +13,30 @@ public class QuestionPresenterImpl implements QuestionPresenter {
 
     private QuestionView questionView;
 
+    private Question mCurrentQuestion;
+
     public QuestionPresenterImpl(QuestionView questionView){
         this.questionView = questionView;
     }
 
     @Override
     public void takeQuestion() {
-        Question q = GameManager.getInstance(App.getContext()).getQuestion();
+        mCurrentQuestion = GameManager.getInstance(App.getContext()).getQuestion();
+        questionView.setQuestion(mCurrentQuestion);
     }
 
     @Override
     public void onAnswerButtonClick(String answer, AnswerButton button) {
 
-        if (true)
+        if (Question.isAnswer(mCurrentQuestion, answer))
             questionView.onTrueAnswer();
-        else
-            questionView.onFailAnswer(button);
+        else {
+            if(mCurrentQuestion.minusAttempt())
+                questionView.onFailAnswer(button);
+            else
+                takeQuestion();
+        }
+            //questionView.onFailAnswer(button);
     }
 
     @Override

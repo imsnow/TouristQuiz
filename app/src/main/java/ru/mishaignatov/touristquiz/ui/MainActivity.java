@@ -67,7 +67,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
 
         mFragmentManager = getSupportFragmentManager();
 
-        mGameManager.startGame();
+        //mGameManager.startGame();
+        if( mGameManager.getUser().isRegistered() && mGameManager.getUser().getToken().length() > 0)
+            onStartFragment();
+        else
+            onLoadFragment();
     }
 
     @Override

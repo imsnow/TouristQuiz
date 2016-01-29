@@ -33,9 +33,11 @@ public class QuestionFragment extends Fragment implements
     private AnswerButton button1, button2, button3, button4;
     private Animation shakeAnim;
 
+    private AnswerButton mClickedButton;
+
     private FrameLayout layout;
 
-    private Question mCurrentQuestion;
+    //private Question mCurrentQuestion;
     //private Stopwatch mStopwatch;
 
     private ActivityInterface headerInterface;
@@ -77,23 +79,7 @@ public class QuestionFragment extends Fragment implements
         //mStopwatch = new Stopwatch(this);
 
         shakeAnim = AnimationUtils.loadAnimation(App.getContext(), R.anim.shake);
-        shakeAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                // stop timer
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                // update question
-                //updateQuestion();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
+        shakeAnim.setAnimationListener(this);
 
         mPresenter = new QuestionPresenterImpl(this);
         mPresenter.takeQuestion();
@@ -155,7 +141,8 @@ public class QuestionFragment extends Fragment implements
         else if (v instanceof AnswerButton){ // One of fourth answers buttons
             //mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
-            mPresenter.onAnswerButtonClick(s, (AnswerButton) v);
+            mClickedButton = (AnswerButton) v;
+            mPresenter.onAnswerButtonClick(s, mClickedButton);
 
             /*
             if (userAnswered(mCurrentQuestion, s)) {
@@ -194,12 +181,13 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void onFailAnswer(AnswerButton button) {
-
+        mClickedButton.startAnimation(shakeAnim); // after finishing of animation
     }
 
     @Override
     public void showSuccessDialog() {
-
+        //DialogHelper.showDialogSuccess(getActivity(), );
+        headerInterface.onShowHiddenTip("Success");
     }
 
     @Override
@@ -209,7 +197,7 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void showDialogNextLevel() {
-        DialogHelper.showDialogNextLevel(getActivity(), this);
+        //DialogHelper.showDialogNextLevel(getActivity(), this);
     }
 
     @Override
@@ -220,25 +208,43 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void setQuestion(Question question) {
 
-        mCurrentQuestion = question;
-
-        if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
+        if(question == null) { // Вопросы по этой стране закончились
             showDialogNextLevel();
             return;
         }
+        List<String> list = question.getRandomListAnswers();
 
-        List<String> list = mCurrentQuestion.getRandomListAnswers();
-
-        questionText.setText(mCurrentQuestion.quiz);
+        questionText.setText(question.quiz);
         button1.setText(list.get(0).trim());
         button2.setText(list.get(1).trim());
         button3.setText(list.get(2).trim());
         button4.setText(list.get(3).trim());
 
-        //layout.setBackgroundResource(bg_resource[mCurrentQuestion.getType()]);
-
         Utils.setBackground(layout, Utils.loadBitmapFromAssetes(getActivity().getApplicationContext(),
-                bg_resource[mCurrentQuestion.getType()]));
+                bg_resource[question.getType()]));
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+        // if user click buttons, when anim
+        button1.setClickable(false);
+        button2.setClickable(false);
+        button3.setClickable(false);
+        button4.setClickable(false);
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        button1.setClickable(true);
+        button2.setClickable(true);
+        button3.setClickable(true);
+        button4.setClickable(true);
+        mClickedButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 
     /*

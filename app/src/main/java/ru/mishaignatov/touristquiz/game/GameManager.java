@@ -1,14 +1,12 @@
 package ru.mishaignatov.touristquiz.game;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 
 import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
-import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
-import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Ignatov on 09.09.2015.
@@ -28,26 +26,26 @@ public class GameManager {
     private int mCurrentCountryId = 0;
 
     private static GameManager instance = null;
-    private Activity mContext = null;
-    private ActivityInterface activityInterface;
+    private Context mContext = null;
+    //private ActivityInterface activityInterface;
 
-    private GameManager(Activity context) {
+    private GameManager(Context context) {
         mContext = context;
         user = User.getUser(context);
         ormDao = OrmDao.getInstance(context);
-        activityInterface = (MainActivity)mContext;
+        //activityInterface = (MainActivity)mContext;
     }
 
-    public static GameManager getInstance(Activity context){
+    public static GameManager getInstance(Context context){
         if(instance == null) instance = new GameManager(context);
         return instance;
     }
 
     public void startGame(){
-        if(user.isRegistered() && user.getToken().length() > 0)
-            activityInterface.onStartFragment();
-        else
-            activityInterface.onLoadFragment();
+        //if(user.isRegistered() && user.getToken().length() > 0)
+        //    activityInterface.onStartFragment();
+        //else
+        //    activityInterface.onLoadFragment();
     }
 
 

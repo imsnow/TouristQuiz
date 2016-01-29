@@ -32,6 +32,15 @@ public class Question {
     @DatabaseField(columnName = COLUMN_IS_ANSWERED)
     public boolean is_answered;
 
+    public int attempt = 3;
+
+    // true if user has attempt
+    public boolean minusAttempt(){
+        if(attempt == 1) return false;
+        attempt--;
+        return true;
+    }
+
     Question(){}
 
     public List<String> getRandomListAnswers(){
