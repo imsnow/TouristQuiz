@@ -10,6 +10,7 @@ public class APIStrings {
     public static final String USER_REGISTER = "user.register";
     public static final String USER_QUESTION = "user.question";
     public static final String USER_SESSION = "user.session";
+    public static final String USER_RESULT = "user.result";
     // attributes
     public static final String METHOD = "method";
     public static final String STATUS = "status";
@@ -20,8 +21,8 @@ public class APIStrings {
     public static final String TOKEN    = "token";
     public static final String TEXT    = "text";
     public static final String ANSWERS    = "answers";
-    public static final String COUNTRY    = "country";
-    public static final String TYPE    = "type";
+    public static final String COUNTRY  = "country";
+    public static final String TYPE     = "type";
     public static final String REG_TIME = "reg_time";
     public static final String DATE = "date";
     public static final String TIME = "time";
@@ -31,4 +32,7 @@ public class APIStrings {
     public static final String OK = "ok";
     public static final String ERROR = "error";
     public static final String MESSAGE = "message";
+    public static final String SCORES = "scores";
+    public static final String MILLIS = "millis";
+    public static final String QUESTIONS = "questions";
 }

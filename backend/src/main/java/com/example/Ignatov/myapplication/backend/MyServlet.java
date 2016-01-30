@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MyServlet extends HttpServlet {
 
-    //private static final String USER_QUIZ = "user.quiz";
-    //private static final String UPDATE_BASE = "db.update";
-    //private static final String RATING = "user.rating";
-
     protected static final String TYPE = "application/json; charset=UTF-8";
 
     @Override
@@ -48,6 +44,10 @@ public class MyServlet extends HttpServlet {
 
             if(method.equals(APIStrings.USER_SESSION)) {
                 status = process.userSession(json);
+            }
+
+            if(method.equals(APIStrings.USER_RESULT)){
+                status = process.userResult(json);
             }
             /*
             if(method == UPDATE_BASE) {

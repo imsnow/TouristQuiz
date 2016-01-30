@@ -71,6 +71,28 @@ public class Process {
         return true;
     }
 
+    protected boolean userResult(JSONObject json){
+        String token = getParameter(request, APIStrings.TOKEN, json);
+        if(token == null) return false;
+
+        Entity entity = searchUser(token);
+        if(entity == null){
+            json.put(APIStrings.MESSAGE, "User doesn't exits");
+            return false;
+        }
+
+        entity.setProperty(APIStrings.SCORES,
+                request.getParameter(APIStrings.SCORES));
+        entity.setProperty(APIStrings.MILLIS,
+                request.getParameter(APIStrings.MILLIS));
+        entity.setProperty(APIStrings.QUESTIONS,
+                request.getParameter(APIStrings.QUESTIONS));
+        database.put(entity);
+
+        json.put(APIStrings.TOKEN, entity.getProperty(APIStrings.TOKEN));
+
+        return true;
+    }
     //
     protected boolean userSession(JSONObject json){
 
@@ -134,7 +156,6 @@ public class Process {
         return true;
         //RespondBuilder.makeSuccess(String method, resp.getWriter());
     }
-
 
     private String getParameter(HttpServletRequest req, String name, JSONObject json){
         String param = req.getParameter(name);
