@@ -150,6 +150,8 @@ public class QuestionFragment extends Fragment implements
         //DialogHelper.showDialogSuccess(getActivity(), );
         headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
                 + " time = " + String.format("%s",1f*timeInMills/1000) + "s millis = " + millis);
+
+        mPresenter.sendResult();
         mPresenter.takeQuestion();
     }
 

@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.User;
 
 /**
@@ -23,6 +24,7 @@ public class ApiHelper {
     private Context context;
 
     private static ApiHelper helper;
+
     private RequestQueue queue;
 
     public static ApiHelper getHelper(Context context){
@@ -35,6 +37,7 @@ public class ApiHelper {
         queue = Volley.newRequestQueue(context);
     }
 
+    // MAIN method
     private void sendRequest(String param,
                              Response.Listener<String> listener,
                              Response.ErrorListener errorListener){
@@ -45,6 +48,7 @@ public class ApiHelper {
         queue.add(request);
     }
 
+    //=================================================
     public void userRegister(User user, Response.Listener<String> listener, Response.ErrorListener errorListener){
 
         String param = APIStrings.USER_REGISTER +
@@ -52,6 +56,16 @@ public class ApiHelper {
                         addParam(APIStrings.EMAIL, encode(user.getEmail())) +
                         addParam(APIStrings.DEVICE, encode(user.getDevice())) +
                         addParam(APIStrings.ANDROID, encode(user.getAndroidApi()));
+
+        sendRequest(param, listener, errorListener);
+    }
+
+    public void userResult(User user, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String param = APIStrings.USER_RESULT +
+                        addParam(APIStrings.TOKEN, encode(user.getToken())) +
+                        addParam(APIStrings.SCORES, user.getScores()) +
+                        addParam(APIStrings.MILLIS, user.getMiles()) +
+                        addParam(APIStrings.QUESTIONS, GameManager.getInstance(context).getAnswered());
 
         sendRequest(param, listener, errorListener);
     }
@@ -65,6 +79,10 @@ public class ApiHelper {
 
 
     private static String addParam(String key, String value){
+        return "&" + key + "=" + value;
+    }
+
+    private static String addParam(String key, int value){
         return "&" + key + "=" + value;
     }
 

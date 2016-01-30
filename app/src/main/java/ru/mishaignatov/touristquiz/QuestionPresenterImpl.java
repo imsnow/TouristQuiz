@@ -4,6 +4,7 @@ import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.QuestionView;
 
@@ -27,6 +28,12 @@ public class QuestionPresenterImpl implements QuestionPresenter {
         mCurrentQuestion = GameManager.getInstance(App.getContext()).getQuestion();
         questionView.setQuestion(mCurrentQuestion);
         mStopwatch.start();
+    }
+
+    @Override
+    public void sendResult() {
+        ApiHelper.getHelper(App.getContext()).userResult(GameManager.getInstance(App.getContext()).getUser(),
+                null, null); // TODO Response.Listener<String>
     }
 
     @Override

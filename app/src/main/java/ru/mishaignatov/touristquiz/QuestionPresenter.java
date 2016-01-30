@@ -8,6 +8,7 @@ import ru.mishaignatov.touristquiz.ui.AnswerButton;
 public interface QuestionPresenter {
 
     void takeQuestion();
+    void sendResult();
     void onAnswerButtonClick(String answer, AnswerButton button);
     void onDestroy();
 }

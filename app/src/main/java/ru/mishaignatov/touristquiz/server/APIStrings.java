@@ -12,6 +12,7 @@ public class APIStrings {
     public static final String USER_REGISTER = "user.register";
     public static final String USER_QUESTION = "user.question";
     public static final String USER_SESSION = "user.session";
+    public static final String USER_RESULT = "user.result";
 
     // attributes
     public static final String METHOD = "method";
@@ -33,4 +34,7 @@ public class APIStrings {
     public static final String OK = "ok";
     public static final String ERROR = "error";
     public static final String MESSAGE = "message";
+    public static final String SCORES = "scores";
+    public static final String MILLIS = "millis";
+    public static final String QUESTIONS = "questions";
 }
