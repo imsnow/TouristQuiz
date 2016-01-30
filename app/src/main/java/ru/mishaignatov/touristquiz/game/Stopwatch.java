@@ -20,6 +20,7 @@ public class Stopwatch {
 
     private Callback callback;
 
+    public Stopwatch(){}
     public Stopwatch(Callback callback){
         this.callback = callback;
     }
@@ -30,9 +31,10 @@ public class Stopwatch {
 
             while(!isStop){
                 long currentTime = System.currentTimeMillis();
-                if( (mStopTime = currentTime - mStartTime) > MAX) break;
+                //if( (mStopTime = currentTime - mStartTime) > MAX) break;
+                mStopTime = currentTime - mStartTime;
             }
-            callback.onFinished();
+            //callback.onFinished();
             Log.d("TAG", "onFinished");
         }
     };
@@ -45,8 +47,8 @@ public class Stopwatch {
         thread.start();
     }
 
-    public void stop(){
+    public long stop(){
         isStop = true;
-        Log.d("TAG", "onStop. count = " + mStopTime);
+        return mStopTime;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.QuestionPresenter;
@@ -83,43 +84,9 @@ public class QuestionFragment extends Fragment implements
 
         mPresenter = new QuestionPresenterImpl(this);
         mPresenter.takeQuestion();
-        //updateQuestion();
 
         return v;
     }
-/*
-    @Override
-    public boolean userAnswered(Question question, String answer) {
-        return Question.isAnswer(question, answer);
-    }
-
-    @Override
-    public void updateQuestion(Question question){
-
-        headerInterface.onUpdateHeader("");
-
-        mCurrentQuestion = GameManager.getInstance(getActivity()).takeQuestion();
-
-        if(mCurrentQuestion == null) { // Вопросы по этой стране закончились
-            DialogHelper.showDialogNextLevel(getActivity(), this);
-            return;
-        }
-
-        List<String> list = mCurrentQuestion.getRandomListAnswers();
-
-        questionText.setText(mCurrentQuestion.quiz);
-        button1.setText(list.get(0).trim());
-        button2.setText(list.get(1).trim());
-        button3.setText(list.get(2).trim());
-        button4.setText(list.get(3).trim());
-
-        //layout.setBackgroundResource(bg_resource[mCurrentQuestion.getType()]);
-
-        Utils.setBackground(layout, loadBitmap(mCurrentQuestion.getType()));
-        //layout.setBackground(loadBitmap(mCurrentQuestion.getType()));
-        //mStopwatch.start();
-    }
-*/
 
     @Override
     public void onClick(View v) {
@@ -143,17 +110,6 @@ public class QuestionFragment extends Fragment implements
             String s = ((AnswerButton) v).getText().toString();
             mClickedButton = (AnswerButton) v;
             mPresenter.onAnswerButtonClick(s, mClickedButton);
-
-            /*
-            if (userAnswered(mCurrentQuestion, s)) {
-                // user answered true
-                GameManager.getInstance(getActivity()).userAnsweredTrue(this, mCurrentQuestion, s, 10, this);
-            }
-            else
-                // user failed
-                v.startAnimation(shakeAnim);
-            */
-            //GameManager.getInstance(getActivity()).userAnswered(this, mCurrentQuestion, s, 10, this); // TODO
         }
     }
 
@@ -175,8 +131,8 @@ public class QuestionFragment extends Fragment implements
     */
 
     @Override
-    public void onTrueAnswer() {
-        showSuccessDialog();
+    public void onTrueAnswer(long timeInMills, int score, int millis) {
+        showSuccessDialog(timeInMills, score, millis);
     }
 
     @Override
@@ -185,9 +141,16 @@ public class QuestionFragment extends Fragment implements
     }
 
     @Override
-    public void showSuccessDialog() {
+    public void onTotalFailure() {
+        headerInterface.onShowHiddenTip("Looser!");
+    }
+
+    @Override
+    public void showSuccessDialog(long timeInMills, int score, int millis) {
         //DialogHelper.showDialogSuccess(getActivity(), );
-        headerInterface.onShowHiddenTip("Success");
+        headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
+                + " time = " + String.format("%s",1f*timeInMills/1000) + "s millis = " + millis);
+        mPresenter.takeQuestion();
     }
 
     @Override
@@ -208,6 +171,11 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void setQuestion(Question question) {
 
+        button1.setVisibility(View.VISIBLE);
+        button2.setVisibility(View.VISIBLE);
+        button3.setVisibility(View.VISIBLE);
+        button4.setVisibility(View.VISIBLE);
+
         if(question == null) { // Вопросы по этой стране закончились
             showDialogNextLevel();
             return;
@@ -222,6 +190,8 @@ public class QuestionFragment extends Fragment implements
 
         Utils.setBackground(layout, Utils.loadBitmapFromAssetes(getActivity().getApplicationContext(),
                 bg_resource[question.getType()]));
+
+        headerInterface.onUpdateHeader("");
     }
 
     @Override
@@ -239,12 +209,12 @@ public class QuestionFragment extends Fragment implements
         button2.setClickable(true);
         button3.setClickable(true);
         button4.setClickable(true);
-        mClickedButton.setVisibility(View.GONE);
+        mClickedButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onAnimationRepeat(Animation animation) {
-
+        // unused
     }
 
     /*

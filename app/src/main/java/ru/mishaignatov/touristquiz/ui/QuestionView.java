@@ -9,9 +9,10 @@ import ru.mishaignatov.touristquiz.orm.Question;
  **/
 public interface QuestionView extends Animation.AnimationListener {
 
-    void onTrueAnswer();
+    void onTrueAnswer(long timeInMills, int score, int millis);
     void onFailAnswer(AnswerButton button);
-    void showSuccessDialog();
+    void onTotalFailure();
+    void showSuccessDialog(long timeInMills, int score, int millis);
     void showErrorInQuestionDialog();
     void showDialogNextLevel();
     void startDeleteButton(int resource_id);

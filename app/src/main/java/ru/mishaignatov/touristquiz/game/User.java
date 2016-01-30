@@ -45,7 +45,7 @@ public class User {
         PreferenceStorage.getInstance(mContext).saveUser(this);
     }
 
-    protected void addResult(int progressScore, int progressMiles) {
+    public void addResult(int progressScore, int progressMiles) {
         scores += progressScore;
         miles += progressMiles;
     }

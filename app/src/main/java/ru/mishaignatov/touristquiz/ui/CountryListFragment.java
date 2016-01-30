@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,12 +52,12 @@ public class CountryListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        update();
         headerInterface.showHeader();
         headerInterface.onUpdateHeader("Список стран");
     }
 
     public void update(){
-        Log.d("TAG", "CLF update");
         mCountryManager.updateCountries();
         adapter.notifyDataSetChanged();
     }

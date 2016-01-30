@@ -76,7 +76,7 @@ public class GameManager {
         int tempScore = 50 + 50*time/QUESTION_TIME;
         user.addResult(tempScore, QUESTION_MILES);
         DialogHelper.showDialogSuccess(fragment.getActivity(), time, tempScore, QUESTION_MILES, listener);
-        OrmDao.getInstance(mContext).setQuestionAnswered(question);
+        //OrmDao.getInstance(mContext).setQuestionAnswered(question);
 
             //DialogHelper.showDialogFailure(fragment.getActivity(), listener);
 

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.Utils;
+import ru.mishaignatov.touristquiz.game.App;
 
 /**
  * Created by Mike on 05.12.15.
@@ -15,6 +16,8 @@ import ru.mishaignatov.touristquiz.Utils;
  */
 @DatabaseTable(tableName = "questions")
 public class Question {
+
+    public static final int MILLIS = 30;
 
     public static final String COLUMN_COUNTRY     = "country_id";
     public static final String COLUMN_IS_ANSWERED = "is_answered";
@@ -79,4 +82,17 @@ public class Question {
         return answer.equals(choice);
     }
 
+    public void setAnswered(){
+        OrmDao.getInstance(App.getContext()).setQuestionAnswered(this);
+    }
+
+    public int calcScore(long timeInMils){
+        float k = 1f;
+        switch (attempt){
+            case 3: k = 1f; break;
+            case 2: k = 0.7f; break;
+            case 1: k = 0.3f; break;
+        }
+        return (int)(k * (100 + 100*1000/timeInMils));
+    }
 }
