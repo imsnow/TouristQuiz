@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:background="@color/primary_material_light">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
     <ListView
         android:id="@id/android:list"
         android:layout_width="match_parent"

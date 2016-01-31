@@ -39,7 +39,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     @Override
     public void onAnswerButtonClick(String answer, AnswerButton button) {
 
-        if (Question.isAnswer(mCurrentQuestion, answer)) {
+        if (mCurrentQuestion.isAnswer(answer)) {
             // SUCCESS !!
             mCurrentQuestion.setAnswered();
             long time = mStopwatch.stop();

@@ -63,7 +63,7 @@ public class Question {
         return result;
     }
 
-    public int getType()                   {
+    public int getType() {
         switch (type) {
             case "lions":
                 return 0;
@@ -77,8 +77,8 @@ public class Question {
         return 0;
     }
 
-    public static boolean isAnswer(final Question quiz, final String choice){
-        String answer = quiz.getListAnswers().get(0).trim();
+    public boolean isAnswer(final String choice){
+        String answer = getListAnswers().get(0).trim();
         return answer.equals(choice);
     }
 

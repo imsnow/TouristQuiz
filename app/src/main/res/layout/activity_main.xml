@@ -3,74 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:padding="8dp"
-            android:id="@+id/header_layout"
-            android:visibility="gone"
-            android:layout_gravity="start|top"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="48dp">
+    <LinearLayout
+        android:padding="8dp"
+        android:id="@+id/header_layout"
+        android:visibility="gone"
+        android:layout_gravity="start|top"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="48dp">
 
-            <ImageView
-                android:id="@+id/button_back"
-                android:src="@drawable/back"
-                android:clickable="true"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/button_back"
+            android:src="@drawable/back"
+            android:clickable="true"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:text="Россия"
-                android:gravity="center"
-                android:id="@+id/header_country"
-                android:layout_width="0dp"
-                android:layout_weight="0.4"
-                android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:id="@+id/header_country"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/header_scores"
-                android:text="0"
-                android:paddingRight="4dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_gravity="center"
-                android:gravity="center_vertical|right"
-                android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/header_scores"
+            android:paddingRight="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|right"
+            android:layout_height="match_parent" />
 
-            <ImageView
-                android:src="@drawable/scores"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent" />
+        <ImageView
+            android:src="@drawable/scores"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:text="0"
-                android:id="@+id/header_miles"
-                android:layout_width="0dp"
-                android:paddingRight="4dp"
-                android:gravity="center_vertical|right"
-                android:layout_weight="0.2"
-                android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/header_miles"
+            android:layout_width="0dp"
+            android:paddingRight="4dp"
+            android:gravity="center_vertical|right"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent" />
 
-            <ImageView
-                android:src="@drawable/airplane"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent" />
+        <ImageView
+            android:src="@drawable/airplane"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent" />
 
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/fragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +74,6 @@
         android:layout_height="64dp">
 
         <TextView
-            android:text="здесь идет подсказка"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/tips_text"
