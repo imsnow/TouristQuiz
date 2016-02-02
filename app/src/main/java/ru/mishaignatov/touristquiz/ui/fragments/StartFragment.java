@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.ui;
+package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.UserQuestionDialog;
 
 /**

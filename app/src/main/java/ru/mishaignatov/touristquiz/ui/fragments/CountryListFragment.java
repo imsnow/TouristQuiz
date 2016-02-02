@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.ui;
+package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import ru.mishaignatov.touristquiz.game.CountryManager;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
+import ru.mishaignatov.touristquiz.ui.DialogHelper;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Ignatov on 13.08.2015.

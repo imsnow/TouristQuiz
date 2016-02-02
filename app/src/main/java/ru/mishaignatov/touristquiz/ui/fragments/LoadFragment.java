@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.ui;
+package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,6 +20,8 @@ import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.server.APIStrings;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Leva on 22.12.2015.

@@ -6,12 +6,12 @@
     android:background="@android:color/transparent"
     android:id="@+id/layout">
 
-    <TextView
+    <ru.mishaignatov.touristquiz.ui.views.CircleTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="88dp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/quiz_text"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">
 
-            <ru.mishaignatov.touristquiz.ui.AnswerButton
+            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button1"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button1"
@@ -37,7 +37,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="40dp" />
 
-            <ru.mishaignatov.touristquiz.ui.AnswerButton
+            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button2"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button2"
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ru.mishaignatov.touristquiz.ui.AnswerButton
+            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button4"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button4"
@@ -59,7 +59,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="40dp" />
 
-            <ru.mishaignatov.touristquiz.ui.AnswerButton
+            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button3"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button3"

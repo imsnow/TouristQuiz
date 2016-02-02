@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.ui;
+package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -22,6 +22,12 @@ import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
+import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
+import ru.mishaignatov.touristquiz.ui.DialogHelper;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.QuestionView;
+import ru.mishaignatov.touristquiz.ui.views.CircleTextView;
 
 /**
  * Created by Leva on 22.12.2015.
@@ -30,7 +36,7 @@ import ru.mishaignatov.touristquiz.orm.Question;
 public class QuestionFragment extends Fragment implements
         View.OnClickListener, QuestionView {
 
-    private TextView questionText;//, mTimerText;
+    private CircleTextView questionText;//, mTimerText;
     private AnswerButton button1, button2, button3, button4;
     private Animation shakeAnim;
 
@@ -67,7 +73,7 @@ public class QuestionFragment extends Fragment implements
         layout.setOnClickListener(null);
 
         //mTimerText = (TextView)v.findViewById(R.id.timer_view);
-        questionText = (TextView)v.findViewById(R.id.quiz_text);
+        questionText = (CircleTextView)v.findViewById(R.id.quiz_text);
         button1      = (AnswerButton)v.findViewById(R.id.button1);
         button2      = (AnswerButton)v.findViewById(R.id.button2);
         button3      = (AnswerButton)v.findViewById(R.id.button3);
@@ -95,11 +101,11 @@ public class QuestionFragment extends Fragment implements
             DialogHelper.showDialogErrorInQuestion(getActivity(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(which == -1) {// Send
+                    if (which == -1) {// Send
                         //sendErrorEmail(currentQuiz);
                         Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
                     }
-                    if(which == -2) { // cancel
+                    if (which == -2) { // cancel
                         dialog.dismiss();
                     }
                 }

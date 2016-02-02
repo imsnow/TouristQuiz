@@ -5,7 +5,7 @@ import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
-import ru.mishaignatov.touristquiz.ui.AnswerButton;
+import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.QuestionView;
 
 /**

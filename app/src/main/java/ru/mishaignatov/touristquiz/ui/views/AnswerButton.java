@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.ui;
+package ru.mishaignatov.touristquiz.ui.views;
 
 import android.content.Context;
 import android.text.TextPaint;

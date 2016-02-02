@@ -1,6 +1,6 @@
 package ru.mishaignatov.touristquiz;
 
-import ru.mishaignatov.touristquiz.ui.AnswerButton;
+import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 
 /**
  * Created by Leva on 28.01.2016.
