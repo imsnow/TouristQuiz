@@ -49,6 +49,9 @@ public class MyServlet extends HttpServlet {
             if(method.equals(APIStrings.USER_RESULT)){
                 status = process.userResult(json);
             }
+            if(method.equals(APIStrings.LEADERBOARD)){
+                status = process.leaderBoard(json);
+            }
             /*
             if(method == UPDATE_BASE) {
                 // TODO

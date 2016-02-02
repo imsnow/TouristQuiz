@@ -35,4 +35,8 @@ public class APIStrings {
     public static final String SCORES = "scores";
     public static final String MILLIS = "millis";
     public static final String QUESTIONS = "questions";
+    public static final String PLACE = "place";
+    public static final String NAME = "name";
+    public static final String ITEMS = "items";
+    public static final String LEADERBOARD = "leaderboard.scores";
 }

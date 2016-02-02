@@ -3,13 +3,16 @@ package com.example.Ignatov.myapplication.backend;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -152,9 +155,46 @@ public class Process {
         entity.setProperty(APIStrings.TYPE, type);
         database.put(entity);
 
-        // all ok
         return true;
-        //RespondBuilder.makeSuccess(String method, resp.getWriter());
+    }
+
+    protected boolean leaderBoard(JSONObject json){
+
+        String token = getParameter(request, APIStrings.TOKEN, json);
+        if(token == null) return false;
+
+        Entity entity = searchUser(token);
+        if(entity == null){
+            json.put(APIStrings.MESSAGE, "User doesn't exits");
+            return false;
+        }
+
+        //
+        // get 20 the best items and user place
+        int place = -1;
+        Query query = new Query(DBStrings.USERS).addSort(APIStrings.SCORES, Query.SortDirection.DESCENDING);
+        //List<Entity> list = database.prepare(query).asList(FetchOptions.Builder.withLimit(20));
+        List<Entity> list = database.prepare(query).asList(FetchOptions.Builder.withDefaults());
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getProperty(APIStrings.TOKEN).equals(token))
+                place = i;
+        }
+
+        JSONArray items = new JSONArray();
+        int size = list.size() >= 20 ? 20 : list.size();
+        for(int i=0; i<size; i++){
+            JSONObject item = new JSONObject();
+            Entity en = list.get(i);
+            item.put(APIStrings.PLACE, i);
+            item.put(APIStrings.NAME, en.getProperty(APIStrings.EMAIL));
+            item.put(APIStrings.SCORES, en.getProperty(APIStrings.SCORES));
+            items.put(item);
+        }
+
+        json.put(APIStrings.ITEMS, items);
+        json.put(APIStrings.PLACE, place);
+
+        return true;
     }
 
     private String getParameter(HttpServletRequest req, String name, JSONObject json){
