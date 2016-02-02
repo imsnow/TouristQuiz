@@ -22,7 +22,7 @@ public class App extends Application {
         super.onCreate();
         Log.d(TAG, "App onCreate");
         //if(!BuildConfig.DEBUG)
-        Fabric.with(this, new Crashlytics());
+        //Fabric.with(this, new Crashlytics());
 
         mContext = getApplicationContext();
         //User user = User.getUser(this);

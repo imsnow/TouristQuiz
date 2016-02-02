@@ -19,6 +19,7 @@ import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
 import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 
@@ -180,6 +181,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onCountryListFragment() {
         addFragment(new CountryListFragment(), "CountryListFragment");
+    }
+
+    @Override
+    public void onLeaderBoardFragment() {
+        addFragment(new LeaderBoardFragment(), "LeaderBoard");
     }
 
     @Override

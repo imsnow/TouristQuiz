@@ -68,8 +68,9 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
                 activityInterface.onCountryListFragment();
                 break;
             case R.id.button_my_quiz:
-                UserQuestionDialog dialog = new UserQuestionDialog();
-                activityInterface.showFragmentDialog(dialog, "user_question");
+                activityInterface.onLeaderBoardFragment();
+                //UserQuestionDialog dialog = new UserQuestionDialog();
+                //activityInterface.showFragmentDialog(dialog, "user_question");
                 //DialogHelper.showUserQuestion(getActivity(), this);
                 //Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
                 break;
