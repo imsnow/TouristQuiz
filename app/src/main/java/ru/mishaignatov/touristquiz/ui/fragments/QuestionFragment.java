@@ -16,18 +16,17 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
-import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
+import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
-import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.QuestionView;
-import ru.mishaignatov.touristquiz.ui.views.CircleTextView;
+import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 
 /**
  * Created by Leva on 22.12.2015.
@@ -36,7 +35,7 @@ import ru.mishaignatov.touristquiz.ui.views.CircleTextView;
 public class QuestionFragment extends Fragment implements
         View.OnClickListener, QuestionView {
 
-    private CircleTextView questionText;//, mTimerText;
+    private TextView questionText;//, mTimerText;
     private AnswerButton button1, button2, button3, button4;
     private Animation shakeAnim;
 
@@ -73,7 +72,7 @@ public class QuestionFragment extends Fragment implements
         layout.setOnClickListener(null);
 
         //mTimerText = (TextView)v.findViewById(R.id.timer_view);
-        questionText = (CircleTextView)v.findViewById(R.id.quiz_text);
+        questionText = (TextView)v.findViewById(R.id.quiz_text);
         button1      = (AnswerButton)v.findViewById(R.id.button1);
         button2      = (AnswerButton)v.findViewById(R.id.button2);
         button3      = (AnswerButton)v.findViewById(R.id.button3);

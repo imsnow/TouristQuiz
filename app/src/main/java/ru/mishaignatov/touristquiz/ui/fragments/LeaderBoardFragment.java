@@ -52,8 +52,8 @@ public class LeaderBoardFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_leaderboard, null);
         ListView listView = (ListView) rootView.findViewById(R.id.leader_board_listview);
-        listView.setAdapter(mAdapter);
         listView.addHeaderView(createHeader());
+        listView.setAdapter(mAdapter);
 
         return rootView;
     }

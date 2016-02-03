@@ -56,7 +56,7 @@ public class CircleTextView extends TextView {
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         Log.d("TAG", "text = " + text);
-        mText = text.toString();
+        mText = text.toString().trim();
         invalidate();
         //super.onTextChanged(text, start, lengthBefore, lengthAfter);
     }
@@ -83,7 +83,7 @@ public class CircleTextView extends TextView {
         float widthText = mTextPaint.measureText(mText);
         if(widthText <= mRadius*2) {
             // всего одна строка помещается - рисуем ее и выходим
-            canvas.drawText(mText, mRadius, mRadius, mTextPaint);
+            canvas.drawText(mText, mWidth/2, mWidth/2, mTextPaint);
             return;
         }
         // 1 Делим строку на два, сдвигаем к ближайшему пробелу. получаем индекс пробела, близкого к середине текста
@@ -110,11 +110,11 @@ public class CircleTextView extends TextView {
                 // создаем новую аккуратную строку
                 s = s.substring(fixed + 1);
                 // рисуем ее на высоте соответствующую данной строке
-                canvas.drawText(s, mRadius, mRadius - textHeight * cnt + textHeight, mTextPaint);
+                canvas.drawText(s, mWidth/2, mWidth/2 - textHeight * cnt + textHeight, mTextPaint);
                 // сокращаем левый кусок текста на длинну отрисованной строки
                 leftString = leftString.substring(0, leftString.length() - s.length());
                 } else { // последняя строка
-                    canvas.drawText(leftString, mRadius, mRadius - textHeight * cnt + textHeight, mTextPaint);
+                    canvas.drawText(leftString, mWidth/2, mWidth/2 - textHeight * cnt + textHeight, mTextPaint);
                     break;
                 }
             }
@@ -131,11 +131,11 @@ public class CircleTextView extends TextView {
                 String s = rightString.substring(0, n);
                 int fixed = s.lastIndexOf(' ');
                 s = s.substring(0, fixed);
-                canvas.drawText(s, mRadius, mRadius + textHeight * cnt, mTextPaint);
+                canvas.drawText(s, mWidth/2, mWidth/2 + textHeight * cnt, mTextPaint);
                 rightString = rightString.substring(s.length(), rightString.length());
             }
             else {
-                canvas.drawText(rightString, mRadius, mRadius + textHeight * cnt, mTextPaint);
+                canvas.drawText(rightString, mWidth/2, mWidth/2 + textHeight * cnt, mTextPaint);
                 break;
             }
         }
