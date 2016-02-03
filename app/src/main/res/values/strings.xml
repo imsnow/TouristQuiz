@@ -30,7 +30,12 @@
     <string name="russia">Russia</string>
     <string name="mexico">Mexico</string>
     <string name="thailand">Thailand</string>
+
     <string name="button_leaderboard">Leader Board</string>
+
+    <string name="leaderboard_place">#</string>
+    <string name="leaderboard_name">Name</string>
+    <string name="leaderboard_scores">Scores</string>
 
     <string-array name="countries">
         <item>@string/france</item>

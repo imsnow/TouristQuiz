@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,54 +16,88 @@ import java.util.List;
 import java.util.Random;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.LeaderBoardItem;
+import ru.mishaignatov.touristquiz.presenters.LeaderBoardPresenterImpl;
+import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
 
 /**
  * Created by Mike on 01.02.2016.
  **/
-public class LeaderBoardFragment extends Fragment {
+public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
 
+    private LeaderBoardPresenterImpl mPresenter;
+
+    private ListView mListView;
     private LeaderBoardAdapter mAdapter;
+    private ProgressBar mProgressBar;
 
-    public interface Callback {
-        void updateBoard();
-    }
+    private List<LeaderBoardItem> mListParent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    private View createHeader(){
+    private View createTableHeader(){
         View header = getLayoutInflater(Bundle.EMPTY).inflate(R.layout.item_leaderboard, null);
-        ((TextView)header.findViewById(R.id.leader_board_place)).setText("#");
-        ((TextView)header.findViewById(R.id.leader_board_name)).setText("Name");
-        ((TextView)header.findViewById(R.id.leader_board_scores)).setText("Scores");
+        ((TextView)header.findViewById(R.id.leader_board_place)).setText(R.string.leaderboard_place);
+        ((TextView)header.findViewById(R.id.leader_board_name)).setText(R.string.leaderboard_name);
+        ((TextView)header.findViewById(R.id.leader_board_scores)).setText(R.string.leaderboard_scores);
         return header;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        List<String> list = new ArrayList<>();
-        list.add("dvaseka");
-        list.add("miha_mai");
-        list.add("anton");
-
-        mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, list);
-
         View rootView = inflater.inflate(R.layout.fragment_leaderboard, null);
-        ListView listView = (ListView) rootView.findViewById(R.id.leader_board_listview);
-        listView.addHeaderView(createHeader());
-        listView.setAdapter(mAdapter);
+
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.leader_board_progressbar);
+
+        mListParent = new ArrayList<>();
+
+        mListView = (ListView) rootView.findViewById(R.id.leader_board_listview);
+        mListView.addHeaderView(createTableHeader());
+
+        mPresenter = new LeaderBoardPresenterImpl(this);
+        mPresenter.sendRequestTable();
 
         return rootView;
     }
 
-    private class LeaderBoardAdapter extends ArrayAdapter<String> {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
 
-        List<String> mList;
+    @Override
+    public void showProgressBar() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
 
-        public LeaderBoardAdapter(Context context, int res, List<String> objects) {
+    @Override
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onUpdateTable(List<LeaderBoardItem> list) {
+        mListParent = list;
+        mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, mListParent);
+        mListView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError() {
+        // TODO
+    }
+
+    private class LeaderBoardAdapter extends ArrayAdapter<LeaderBoardItem> {
+
+        List<LeaderBoardItem> mList;
+
+        public LeaderBoardAdapter(Context context, int res, List<LeaderBoardItem> objects) {
             super(context, res, objects);
             mList = objects;
         }
@@ -79,9 +114,11 @@ public class LeaderBoardFragment extends Fragment {
             TextView name = (TextView)v.findViewById(R.id.leader_board_name);
             TextView scores = (TextView)v.findViewById(R.id.leader_board_scores);
 
-            place.setText("" + (position+1));
-            name.setText(mList.get(position));
-            scores.setText(String.valueOf(new Random().nextInt(10000)));
+            LeaderBoardItem item = mList.get(position);
+            place.setText("" + (item.getPlace()+1));
+            name.setText(item.getName());
+            scores.setText(String.valueOf(item.getScores()));
+
             return v;
         }
     }

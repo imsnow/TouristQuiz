@@ -77,6 +77,12 @@ public class ApiHelper {
         sendRequest(param, listener, errorListener);
     }
 
+    public void leaderBoard(User user, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String param = APIStrings.LEADER_BOARD +
+                addParam(APIStrings.TOKEN, encode(user.getToken()));
+        sendRequest(param, listener, errorListener);
+    }
+
 
     private static String addParam(String key, String value){
         return "&" + key + "=" + value;

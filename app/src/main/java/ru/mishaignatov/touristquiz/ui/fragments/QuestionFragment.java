@@ -25,7 +25,7 @@ import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
-import ru.mishaignatov.touristquiz.ui.QuestionView;
+import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 
 /**

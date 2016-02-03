@@ -4,4 +4,6 @@
     <color name="deep_orange100">#FFFFCCBC</color>
     <color name="green100">#FFC8E6C9</color>
     <color name="light_blue100">#FFB3E5FC</color> -->
+
+  <color name="main_background">#416770</color>
 </resources>

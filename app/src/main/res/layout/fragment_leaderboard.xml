@@ -3,15 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_background">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
 
-    <ListView
-        android:id="@+id/leader_board_listview"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+
+        <ListView
+            android:id="@+id/leader_board_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/leader_board_progressbar"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 </LinearLayout>

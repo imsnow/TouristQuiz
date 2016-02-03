@@ -4,10 +4,9 @@ import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.Question;
-import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
-import ru.mishaignatov.touristquiz.ui.QuestionView;
+import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
 /**
  * Created by Leva on 28.01.2016.

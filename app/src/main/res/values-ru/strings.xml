@@ -20,7 +20,6 @@
 
     <string name="button_my_quiz">Мой вопрос</string>
 
-
     <string name="france">Франция</string>
     <string name="usa">США</string>
     <string name="spain">Испания</string>
@@ -32,6 +31,10 @@
     <string name="russia">Россия</string>
     <string name="mexico">Мексика</string>
     <string name="thailand">Тайланд</string>
+
+    <string name="button_leaderboard">Таблица лидеров</string>
+    <string name="leaderboard_name">Имя</string>
+    <string name="leaderboard_scores">Очки</string>
 
     <string-array name="countries">
         <item>@string/france</item>
