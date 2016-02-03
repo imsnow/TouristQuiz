@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz;
+package ru.mishaignatov.touristquiz.presenters;
 
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 

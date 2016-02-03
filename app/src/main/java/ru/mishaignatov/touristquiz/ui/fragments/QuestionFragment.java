@@ -16,8 +16,8 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import ru.mishaignatov.touristquiz.QuestionPresenter;
-import ru.mishaignatov.touristquiz.QuestionPresenterImpl;
+import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
+import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
