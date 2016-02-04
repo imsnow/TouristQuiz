@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,9 +59,15 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
 
     private View createTableHeader(){
         View header = getLayoutInflater(Bundle.EMPTY).inflate(R.layout.item_leaderboard, null);
-        ((TextView)header.findViewById(R.id.leader_board_place)).setText(R.string.leaderboard_place);
-        ((TextView)header.findViewById(R.id.leader_board_name)).setText(R.string.leaderboard_name);
-        ((TextView)header.findViewById(R.id.leader_board_scores)).setText(R.string.leaderboard_scores);
+        TextView place = (TextView)header.findViewById(R.id.leader_board_place);
+        place.setText(R.string.leaderboard_place);
+        place.setGravity(Gravity.CENTER);
+        TextView name = (TextView)header.findViewById(R.id.leader_board_name);
+        name.setText(R.string.leaderboard_name);
+        name.setGravity(Gravity.CENTER);
+        TextView scores = (TextView)header.findViewById(R.id.leader_board_scores);
+        scores.setText(R.string.leaderboard_scores);
+        scores.setGravity(Gravity.CENTER);
         return header;
     }
 

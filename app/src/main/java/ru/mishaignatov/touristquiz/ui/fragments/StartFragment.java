@@ -49,9 +49,6 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
     }
 
     private void updateFragment(){
-        Log.d("TAG", "update start fragment");
-        //stat.setText("Total = " + GameManager.getInstance(getActivity()).getTotal()
-        //        + ", answered = " + GameManager.getInstance(getActivity()).getAnswered());
         activityInterface.onUpdateHeader("");
     }
 
