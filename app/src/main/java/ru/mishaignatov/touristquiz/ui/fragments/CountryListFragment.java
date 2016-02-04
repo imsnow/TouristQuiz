@@ -44,10 +44,6 @@ public class CountryListFragment extends ListFragment {
 
         mCountryManager = CountryManager.getInstance(App.getContext());
 
-        //countriesList = OrmDao.getInstance(getActivity()).getCountryList();
-        //Log.d("TAG", "size " + countriesList.size());
-        //String[] array = getResources().getStringArray(R.array.countries);
-        //countriesList = Arrays.asList(array);
         adapter = new CountryAdapter();
         setListAdapter(adapter);
     }

@@ -1,5 +1,6 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import java.util.Random;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.LeaderBoardItem;
 import ru.mishaignatov.touristquiz.presenters.LeaderBoardPresenterImpl;
+import ru.mishaignatov.touristquiz.ui.ActivityInterface;
+import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
 
 /**
@@ -25,6 +28,7 @@ import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
  **/
 public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
 
+    private ActivityInterface headerInterface;
     private LeaderBoardPresenterImpl mPresenter;
 
     private ListView mListView;
@@ -32,6 +36,20 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     private ProgressBar mProgressBar;
 
     private List<LeaderBoardItem> mListParent;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        headerInterface = (MainActivity)activity;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        headerInterface.showHeader();
+        headerInterface.onUpdateHeader("Таблица лидеров");
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

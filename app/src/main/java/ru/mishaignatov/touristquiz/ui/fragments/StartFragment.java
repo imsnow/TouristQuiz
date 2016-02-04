@@ -37,6 +37,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
 
         v.findViewById(R.id.button_start).setOnClickListener(this);
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
+        v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
 
         updateFragment();
 
@@ -68,11 +69,13 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
                 activityInterface.onCountryListFragment();
                 break;
             case R.id.button_my_quiz:
-                activityInterface.onLeaderBoardFragment();
-                //UserQuestionDialog dialog = new UserQuestionDialog();
-                //activityInterface.showFragmentDialog(dialog, "user_question");
+                UserQuestionDialog dialog = new UserQuestionDialog();
+                activityInterface.showFragmentDialog(dialog, "user_question");
                 //DialogHelper.showUserQuestion(getActivity(), this);
                 //Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_leaderboard:
+                activityInterface.onLeaderBoardFragment();
                 break;
         }
     }
