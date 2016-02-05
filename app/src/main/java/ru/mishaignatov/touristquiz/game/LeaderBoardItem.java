@@ -3,7 +3,7 @@ package ru.mishaignatov.touristquiz.game;
 /**
  * Created by Mike on 03.02.2016.
  **/
-public class LeaderBoardItem {
+public class LeaderBoardItem implements Comparable<LeaderBoardItem> {
 
     private int place;
     private String name;
@@ -28,4 +28,11 @@ public class LeaderBoardItem {
     }
 
 
+    @Override
+    public int compareTo(LeaderBoardItem another) {
+        if (scores >= another.getScores())
+            return -1;
+        else
+            return 1;
+    }
 }

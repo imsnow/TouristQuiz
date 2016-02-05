@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     // header views
     private LinearLayout mHeaderLayout;
     private ImageView mHomeButton;
-    private TextView mCountryText;
+    private TextView mHeaderTitle;
     private TextView mScoresText;
     private TextView mMilesText;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mSessionManager = new SessionManager(this);
 
         mHeaderLayout = (LinearLayout)findViewById(R.id.header_layout);
-        mCountryText = (TextView)findViewById(R.id.header_country);
+        mHeaderTitle = (TextView)findViewById(R.id.header_title);
         mScoresText  = (TextView)findViewById(R.id.header_scores);
         mMilesText  = (TextView)findViewById(R.id.header_miles);
 
@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void onBackPressed() {
         super.onBackPressed();
 
-        if(mFragmentManager.getBackStackEntryCount() == 0)
-            mHomeButton.setVisibility(View.INVISIBLE);
+        if(mFragmentManager.getBackStackEntryCount() == 0) // Start Frgament
+            mHeaderLayout.setVisibility(View.GONE);
 
-        CountryListFragment frag = (CountryListFragment)mFragmentManager.findFragmentByTag("CountryListFragment");
-        if(frag != null && frag.isVisible()){
+        Fragment frag = mFragmentManager.findFragmentByTag("CountryListFragment");
+        if(frag instanceof CountryListFragment && frag.isVisible()) {
             // update methods
             Log.d("TAG", "update");
-            frag.update();
+            ((CountryListFragment)frag).update();
         }
 
         onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
 
     @Override
     public void onUpdateHeader(String country) {
-        mCountryText.setText(country);
+        mHeaderTitle.setText(country);
         mScoresText.setText(String.valueOf(mGameManager.getUser().getScores()));
         mMilesText.setText(String.valueOf(mGameManager.getUser().getMiles()));
     }
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onShowHiddenTip(String s) {
         onShowTip(s);
-        mHandler.postDelayed(mHideTipRunnable, 4000);
+        mHandler.postDelayed(mHideTipRunnable, 3000);
     }
 
     @Override

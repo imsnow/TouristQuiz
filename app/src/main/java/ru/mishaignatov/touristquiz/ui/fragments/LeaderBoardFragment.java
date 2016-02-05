@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -110,7 +112,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
         mListParent = list;
         mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, mListParent);
         mListView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+        //mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -124,6 +126,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
 
         public LeaderBoardAdapter(Context context, int res, List<LeaderBoardItem> objects) {
             super(context, res, objects);
+            Collections.sort(objects);
             mList = objects;
         }
 
@@ -140,7 +143,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
             TextView scores = (TextView)v.findViewById(R.id.leader_board_scores);
 
             LeaderBoardItem item = mList.get(position);
-            place.setText("" + (item.getPlace()+1));
+            place.setText("" + (position+1));
             name.setText(item.getName());
             scores.setText(String.valueOf(item.getScores()));
 

@@ -27,7 +27,7 @@
 
         <TextView
             android:gravity="center"
-            android:id="@+id/header_country"
+            android:id="@+id/header_title"
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="match_parent" />

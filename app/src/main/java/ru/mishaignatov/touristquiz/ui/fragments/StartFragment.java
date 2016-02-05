@@ -39,7 +39,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
         v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
 
-        updateFragment();
+        //updateFragment();
 
         return v;
     }
@@ -55,7 +55,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
     @Override
     public void onResume() {
         super.onResume();
-        updateFragment();
+        //updateFragment();
     }
 
     @Override
