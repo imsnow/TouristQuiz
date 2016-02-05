@@ -37,6 +37,13 @@
     <string name="leaderboard_name">Name</string>
     <string name="leaderboard_scores">Scores</string>
 
+    <string name="dialog_question_title">Make a question to the World</string>
+    <string name="dialog_question_text">Think of a question:</string>
+    <string name="dialog_question_answer">Correct answer:</string>
+    <string name="country">Country</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+
     <string-array name="countries">
         <item>@string/france</item>
         <item>@string/usa</item>

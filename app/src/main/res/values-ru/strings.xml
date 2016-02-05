@@ -35,6 +35,12 @@
     <string name="button_leaderboard">Таблица лидеров</string>
     <string name="leaderboard_name">Имя</string>
     <string name="leaderboard_scores">Очки</string>
+    <string name="dialog_question_title">Загадай вопрос всему миру</string>
+    <string name="dialog_question_text">Придумай вопрос:</string>
+    <string name="dialog_question_answer">Правильный ответ:</string>
+    <string name="country">Страна:</string>
+    <string name="send">Отправить</string>
+    <string name="cancel">Отмена</string>
 
     <string-array name="countries">
         <item>@string/france</item>

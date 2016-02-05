@@ -6,14 +6,15 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Загадай вопрос всему миру"
+        android:text="@string/dialog_question_title"
         android:textSize="20sp"
         android:padding="8dp"
+        android:background="@color/highlighted_text_material_dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="Введите текст вопроса:"
+        android:text="@string/dialog_question_text"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -21,12 +22,18 @@
     <EditText
         android:id="@+id/user_question_text"
         android:singleLine="false"
+        android:lines="6"
+        android:layout_margin="4dp"
+        android:cursorVisible="true"
+        android:background="@android:color/white"
+        android:inputType="text|textAutoComplete|textMultiLine"
+        android:gravity="top|start"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <TextView
-        android:text="Введите правильный ответ"
+        android:text="@string/dialog_question_answer"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -34,11 +41,14 @@
     <EditText
         android:id="@+id/user_question_answers"
         android:singleLine="true"
+        android:maxLength="20"
+        android:layout_margin="4dp"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="Страна"
+        android:text="@string/country"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -46,6 +56,9 @@
     <EditText
         android:id="@+id/user_question_country"
         android:singleLine="true"
+        android:maxLength="20"
+        android:layout_margin="4dp"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -55,13 +68,15 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Отправить"
+            android:id="@+id/button_send"
+            android:text="@string/send"
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent" />
 
         <Button
-            android:text="Отмена"
+            android:id="@+id/button_cancel"
+            android:text="@string/cancel"
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent" />

@@ -83,6 +83,13 @@ public class ApiHelper {
         sendRequest(param, listener, errorListener);
     }
 
+    public void userQuestion(User user, String text, String answer, String country, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String param = APIStrings.USER_QUESTION +
+                addParam(APIStrings.TEXT, text) + addParam(APIStrings.ANSWERS, answer) + addParam(APIStrings.COUNTRY, country);
+
+        sendRequest(param, listener, errorListener);
+    }
+
 
     private static String addParam(String key, String value){
         return "&" + key + "=" + value;
