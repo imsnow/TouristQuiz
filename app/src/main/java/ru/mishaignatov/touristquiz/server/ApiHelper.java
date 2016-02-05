@@ -84,8 +84,8 @@ public class ApiHelper {
     }
 
     public void userQuestion(User user, String text, String answer, String country, Response.Listener<String> listener, Response.ErrorListener errorListener){
-        String param = APIStrings.USER_QUESTION +
-                addParam(APIStrings.TEXT, text) + addParam(APIStrings.ANSWERS, answer) + addParam(APIStrings.COUNTRY, country);
+        String param = APIStrings.USER_QUESTION + addParam(APIStrings.TOKEN, encode(user.getToken())) +
+                addParam(APIStrings.TEXT, encode(text)) + addParam(APIStrings.ANSWERS, encode(answer)) + addParam(APIStrings.COUNTRY, encode(country));
 
         sendRequest(param, listener, errorListener);
     }

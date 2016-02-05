@@ -2,6 +2,7 @@ package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class UserQuestionDialog extends DialogFragment implements View.OnClickLi
 
     @Override
     public void onResponse(String response) {
+        Log.d("TAG", response);
         Toast.makeText(getActivity(), "Спасибо. Твой вопрос появится в ближайших версиях", Toast.LENGTH_LONG).show();
         dismiss();
     }
@@ -73,5 +75,6 @@ public class UserQuestionDialog extends DialogFragment implements View.OnClickLi
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getActivity(), "Ошибка. проверьте подключение к интернету", Toast.LENGTH_LONG).show();
+        Log.d("TAG", "error = " + error.getMessage());
     }
 }
