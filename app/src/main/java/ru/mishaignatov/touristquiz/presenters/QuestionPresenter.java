@@ -11,4 +11,5 @@ public interface QuestionPresenter {
     void sendResult();
     void onAnswerButtonClick(String answer, AnswerButton button);
     void onDestroy();
+    String getCurrentCountry();
 }

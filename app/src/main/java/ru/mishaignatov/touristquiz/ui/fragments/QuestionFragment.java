@@ -198,7 +198,7 @@ public class QuestionFragment extends Fragment implements
         Utils.setBackground(layout, Utils.loadBitmapFromAssetes(getActivity().getApplicationContext(),
                 bg_resource[question.getType()]));
 
-        headerInterface.onUpdateHeader("");
+        headerInterface.onUpdateHeader(mPresenter.getCurrentCountry());
     }
 
     @Override

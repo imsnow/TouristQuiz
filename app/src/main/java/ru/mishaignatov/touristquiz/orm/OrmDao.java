@@ -158,6 +158,17 @@ public class OrmDao {
         return country;
     }
 
+    public String getCountryName(int id){
+        try {
+            return mCountryDao.queryBuilder().where().
+                    eq("id", id).queryForFirst().value;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public int createCountryEntries(){
 
         String[] values = context.getResources().getStringArray(R.array.countries);

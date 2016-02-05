@@ -3,6 +3,7 @@ package ru.mishaignatov.touristquiz.presenters;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.orm.Question;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
@@ -61,5 +62,10 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     @Override
     public void onDestroy() {
         questionView = null;
+    }
+
+    @Override
+    public String getCurrentCountry() {
+        return OrmDao.getInstance(App.getContext()).getCountryName(mCurrentQuestion.country_id);
     }
 }

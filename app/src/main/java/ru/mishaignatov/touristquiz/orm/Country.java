@@ -10,6 +10,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "countries")
 public class Country {
 
+    public static final String COLUMN_COUNTRY_NAME = "value";
+
     @DatabaseField(id = true, index = true)
     public int id;
     @DatabaseField
