@@ -168,6 +168,7 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void showDialogNextLevel() {
         //DialogHelper.showDialogNextLevel(getActivity(), this);
+        getActivity().onBackPressed();
     }
 
     @Override

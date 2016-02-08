@@ -1,5 +1,7 @@
 package ru.mishaignatov.touristquiz.presenters;
 
+import android.util.Log;
+
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
@@ -27,6 +29,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     @Override
     public void takeQuestion() {
         mCurrentQuestion = GameManager.getInstance(App.getContext()).getQuestion();
+        Log.d("TAG", "question = " + mCurrentQuestion);
         questionView.setQuestion(mCurrentQuestion);
         mStopwatch.start();
     }
