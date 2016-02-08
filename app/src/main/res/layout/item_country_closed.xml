@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_country_flag"
+        android:src="@drawable/scores"
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/item_country_name"
+        android:text="Russia"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_weight="0.6"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/item_country_cost"
+            android:drawableLeft="@drawable/airplane"
+            android:text="450"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:text="Ticket"
+            android:id="@+id/item_country_buy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
+
+</LinearLayout>

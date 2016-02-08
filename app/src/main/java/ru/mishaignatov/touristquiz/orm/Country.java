@@ -29,6 +29,8 @@ public class Country {
 
     // purchase field
     @DatabaseField
+    public boolean ended;
+    @DatabaseField
     public boolean opened;
     @DatabaseField
     public int cost;
@@ -44,6 +46,8 @@ public class Country {
                 ", value='" + value + '\'' +
                 ", total=" + total +
                 ", shown=" + shown +
+                ", ended=" + ended +
+                ", opened=" + opened +
                 ", cost=" + cost +
                 '}';
     }
