@@ -6,6 +6,7 @@ import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.orm.OrmHelper;
 import ru.mishaignatov.touristquiz.orm.Question;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
@@ -29,9 +30,11 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     @Override
     public void takeQuestion() {
         mCurrentQuestion = GameManager.getInstance(App.getContext()).getQuestion();
-        Log.d("TAG", "question = " + mCurrentQuestion);
         questionView.setQuestion(mCurrentQuestion);
-        mStopwatch.start();
+        if (mCurrentQuestion != null) {
+            OrmDao.getInstance(App.getContext()).setQuestionShown(mCurrentQuestion);
+            mStopwatch.start();
+        }
     }
 
     @Override

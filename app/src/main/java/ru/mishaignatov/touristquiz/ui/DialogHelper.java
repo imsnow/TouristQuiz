@@ -58,12 +58,17 @@ public class DialogHelper {
                     .show();
     }
 
-    public static void showDialogNextLevel(Activity activity, DialogInterface.OnClickListener listener){
-        if(activity != null && listener != null)
+    public static void showDialogNextLevel(Activity activity){
+        if(activity != null)
             new AlertDialog.Builder(activity)
                     .setCancelable(false)
                     .setMessage("Обалдеть! Вы прошли весь уровень! Попробуй свои силы в других странах!")
-                    .setNegativeButton("Попробовать", listener)
+                    .setNegativeButton("Попробовать", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
                     .show();
     }
 

@@ -21,6 +21,7 @@ public class Question {
 
     public static final String COLUMN_COUNTRY     = "country_id";
     public static final String COLUMN_IS_ANSWERED = "is_answered";
+    public static final String COLUMN_IS_SHOWN    = "is_shown";
 
     @DatabaseField(generatedId = true)
     public int id;
@@ -34,6 +35,8 @@ public class Question {
     public String type;
     @DatabaseField(columnName = COLUMN_IS_ANSWERED)
     public boolean is_answered;
+    @DatabaseField(columnName = COLUMN_IS_SHOWN)
+    public boolean is_shown;
 
     public int attempt = 3;
 

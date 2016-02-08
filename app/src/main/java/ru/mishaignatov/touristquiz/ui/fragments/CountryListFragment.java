@@ -72,8 +72,8 @@ public class CountryListFragment extends ListFragment {
 
         GameManager.getInstance(getActivity()).setCurrentCountryId(position);
 
-        if(OrmDao.getInstance(getActivity()).isAnsweredCountry(position)){
-            // Вопросы уже все отгаданы
+        if(OrmDao.getInstance(getActivity()).isCountryShown(position)){
+            // Пользователь уже попытался ответить на все вопросы
             DialogHelper.showDialogLevelFinished(getActivity());
         }
         else {

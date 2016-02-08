@@ -58,7 +58,7 @@ public class OrmDao {
                     .where()
                     .eq(Question.COLUMN_COUNTRY, country_id)
                     .and()
-                    .eq(Question.COLUMN_IS_ANSWERED, false)
+                    .eq(Question.COLUMN_IS_SHOWN, false)
                     .prepare();
 
             List<Question> list = mQuestionDao.query(preparedQuery);
@@ -73,14 +73,14 @@ public class OrmDao {
         return null;
     }
 
-    public boolean isAnsweredCountry(int country_id){
+    public boolean isCountryShown(int country_id){
 
         try {
             int size = (int)mQuestionDao.queryBuilder()
                     .where()
                     .eq(Question.COLUMN_COUNTRY, country_id)
                     .and()
-                    .eq(Question.COLUMN_IS_ANSWERED, false)
+                    .eq(Question.COLUMN_IS_SHOWN, false)
                     .countOf();
             return (size == 0);
         }
@@ -88,6 +88,11 @@ public class OrmDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void setQuestionShown(Question question){
+        question.is_shown = true;
+        mQuestionDao.update(question);
     }
 
     // When user answered right
@@ -145,12 +150,18 @@ public class OrmDao {
                     .eq(Question.COLUMN_IS_ANSWERED, true)
                     .countOf();
 
-            if (size != 0) {
-                //Country country = mCountryDao.query(country);
-                Log.d("TAG", "size = " + size);
-                country.answered = size;
-                mCountryDao.update(country);
-            }
+            int size_shown = (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_COUNTRY, country.id)
+                    .and()
+                    .eq(Question.COLUMN_IS_SHOWN, true)
+                    .countOf();
+
+            Log.d("TAG", "size answered = " + size + " size shown = " + size_shown);
+            country.answered = size;
+            country.shown    = size_shown;
+            mCountryDao.update(country);
+
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -180,6 +191,7 @@ public class OrmDao {
             country.value = values[i];
             country.total = 0;
             country.answered = 0;
+            country.shown = 0;
             country.cost = 0;
             mCountryDao.create(country);
             count++;
@@ -211,6 +223,7 @@ public class OrmDao {
                         q.type = arr[2].trim();
                         q.country_id = item.id;
                         q.is_answered = false; // 0 - false, 1 - true
+                        q.is_shown = false;
                         mQuestionDao.create(q);
                         all_questions_cnt++;
                         cnt++;

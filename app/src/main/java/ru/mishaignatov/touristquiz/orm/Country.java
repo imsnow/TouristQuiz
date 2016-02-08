@@ -18,10 +18,18 @@ public class Country {
     public String filename;
     @DatabaseField
     public String value;
+
+    // Questions fields
     @DatabaseField
     public int total;
     @DatabaseField
     public int answered;
+    @DatabaseField
+    public int shown;
+
+    // purchase field
+    @DatabaseField
+    public boolean opened;
     @DatabaseField
     public int cost;
 
@@ -29,6 +37,14 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country = " + value + " answered = " + answered + " total = " + total + " id = " + id;
+        return "Country{" +
+                "answered=" + answered +
+                ", id=" + id +
+                ", filename='" + filename + '\'' +
+                ", value='" + value + '\'' +
+                ", total=" + total +
+                ", shown=" + shown +
+                ", cost=" + cost +
+                '}';
     }
 }
