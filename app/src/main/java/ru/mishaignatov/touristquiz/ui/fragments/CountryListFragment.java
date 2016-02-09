@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -22,15 +23,13 @@ import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /**
  * Created by Ignatov on 13.08.2015.
- * Display all counties
+ * Display all counties - levels
  */
 public class CountryListFragment extends ListFragment {
 
     private CountryManager mCountryManager;
     private CountryAdapter adapter;
     private ActivityInterface headerInterface;
-
-    //private Country mCurrentCountry;
 
     @Override
     public void onAttach(Activity activity) {
@@ -113,25 +112,32 @@ public class CountryListFragment extends ListFragment {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            if(convertView == null)
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.item_country, null);
 
+            LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view;
             Country item = mCountryManager.getList().get(position);
 
-            TextView name = (TextView)convertView.findViewById(R.id.country_name);
-            name.setText(item.value);
-            /*
-            String countryName = countriesList.get(position);
-            Country country = Queries.loadCountry(App.getDataBase(), countryName);
+            //if(view == null)
+            if (item.opened) {
+                view = inflater.inflate(R.layout.item_country, null);
 
-            TextView name = (TextView)convertView.findViewById(R.id.country_name);
-            String rusValue = CountryTranslator.getRusValue(position);
-            name.setText(rusValue);
-            */
-            TextView result = (TextView)convertView.findViewById(R.id.country_result);
-            result.setText("" + item.answered + "/" + item.total);
+                TextView name = (TextView)view.findViewById(R.id.country_name);
+                name.setText(item.value);
 
-            return convertView;
+                TextView result = (TextView)view.findViewById(R.id.country_result);
+                result.setText("" + item.answered + "/" + item.total);
+            }
+            else {
+                view = inflater.inflate(R.layout.item_country_closed, null);
+
+                TextView name = (TextView)view.findViewById(R.id.item_country_name);
+                name.setText(item.value);
+
+                TextView cost = (TextView)view.findViewById(R.id.item_country_cost);
+                cost.setText(String.valueOf(item.cost));
+            }
+
+            return view;
         }
     }
 }

@@ -183,6 +183,7 @@ public class OrmDao {
     public int createCountryEntries(){
 
         String[] values = context.getResources().getStringArray(R.array.countries);
+        String[] costs = context.getResources().getStringArray(R.array.cost_array);
         int count = 0;
         for(int i=0; i<filesArr.length; i++) {
             Country country = new Country();
@@ -192,7 +193,12 @@ public class OrmDao {
             country.total = 0;
             country.answered = 0;
             country.shown = 0;
-            country.cost = 0;
+            country.cost = Integer.parseInt(costs[i]);
+            if(country.cost != 0)
+                country.opened = false;
+            else
+                country.opened = true;
+            country.ended = false;
             mCountryDao.create(country);
             count++;
         }

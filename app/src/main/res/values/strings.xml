@@ -57,4 +57,18 @@
         <item>@string/mexico</item>
         <item>@string/thailand</item>
     </string-array>
+
+    <string-array name="cost_array">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+    </string-array>
 </resources>
