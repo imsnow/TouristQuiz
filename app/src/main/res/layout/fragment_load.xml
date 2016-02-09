@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <ProgressBar
+            android:id="@+id/load_progress_bar"
             android:indeterminate="true"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -20,6 +21,13 @@
             android:text="Загрузка данных..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/load_retry_button"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

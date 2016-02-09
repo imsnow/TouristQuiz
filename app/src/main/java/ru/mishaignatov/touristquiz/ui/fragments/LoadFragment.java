@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,22 +34,29 @@ public class LoadFragment extends Fragment implements
 
     private ActivityInterface tipsInterface;
 
+    private ProgressBar mProgressBar;
+    private Button mRetryButton;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         tipsInterface = (MainActivity)activity;
-        ApiHelper.getHelper(App.getContext()).userRegister(
-                GameManager.getInstance(activity).getUser(), this, this);
+        tryRegistration();
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_load, container, false);
-
-        //new ImitationAsyncTask().execute();
-        Log.d("TAG", "loadFragment");
-
+        mProgressBar = (ProgressBar) v.findViewById(R.id.load_progress_bar);
+        mRetryButton = (Button) v.findViewById(R.id.load_retry_button);
+        mRetryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tryRegistration();
+            }
+        });
         return v;
     }
 
@@ -55,7 +64,6 @@ public class LoadFragment extends Fragment implements
     public void onResponse(String response) {
 
         Log.d("TAG", "response = " + response);
-
         try {
             JSONObject json = new JSONObject(response);
             String status = json.optString(APIStrings.STATUS);
@@ -77,6 +85,19 @@ public class LoadFragment extends Fragment implements
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs() );
+        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs());
+        showButtonRetry();
+    }
+
+    private void showButtonRetry(){
+        mProgressBar.setVisibility(View.GONE);
+        mRetryButton.setVisibility(View.VISIBLE);
+    }
+
+    private void tryRegistration(){
+        mProgressBar.setVisibility(View.VISIBLE);
+        mRetryButton.setVisibility(View.GONE);
+        ApiHelper.getHelper(App.getContext()).userRegister(
+                GameManager.getInstance(App.getContext()).getUser(), this, this);
     }
 }
