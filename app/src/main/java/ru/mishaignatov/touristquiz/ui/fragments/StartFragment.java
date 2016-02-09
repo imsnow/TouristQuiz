@@ -17,7 +17,7 @@ import ru.mishaignatov.touristquiz.ui.dialogs.UserQuestionDialog;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class StartFragment extends Fragment implements View.OnClickListener, DialogInterface.OnClickListener {
+public class StartFragment extends Fragment implements View.OnClickListener {
 
     private ActivityInterface activityInterface;
 
@@ -44,9 +44,6 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
         return v;
     }
 
-    private void send(){
-    //    Requests.sendUsersQuiz(getActivity(), new Quiz("My question", "My answers", "lions"), "Russia", this);
-    }
 
     private void updateFragment(){
         activityInterface.onUpdateHeader("");
@@ -77,8 +74,4 @@ public class StartFragment extends Fragment implements View.OnClickListener, Dia
         }
     }
 
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        //dialog.
-    }
 }

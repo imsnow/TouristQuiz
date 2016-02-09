@@ -1,12 +1,9 @@
 package ru.mishaignatov.touristquiz.presenters;
 
-import android.util.Log;
-
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.orm.OrmHelper;
 import ru.mishaignatov.touristquiz.orm.Question;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
