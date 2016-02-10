@@ -25,6 +25,7 @@
         android:lines="6"
         android:layout_margin="4dp"
         android:cursorVisible="true"
+        android:maxLength="130"
         android:background="@android:color/white"
         android:inputType="text|textAutoComplete|textMultiLine"
         android:gravity="top|start"
