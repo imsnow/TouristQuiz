@@ -61,12 +61,18 @@ public class Process {
             entity.setProperty(APIStrings.DEVICE, device);
             entity.setProperty(APIStrings.ANDROID, api);
             entity.setProperty(APIStrings.REG_TIME, date);
+            entity.setProperty(APIStrings.SCORES, 0);
+            entity.setProperty(APIStrings.MILLIS, 0);
+            entity.setProperty(APIStrings.QUESTIONS, 0);
             database.put(entity);
         } else {
             // update user
             entity.setProperty(APIStrings.DEVICE, device);
             entity.setProperty(APIStrings.ANDROID, api);
             entity.setProperty(APIStrings.REG_TIME, date);
+            entity.setProperty(APIStrings.SCORES, 0);
+            entity.setProperty(APIStrings.MILLIS, 0);
+            entity.setProperty(APIStrings.QUESTIONS, 0);
             database.put(entity);
         }
 
