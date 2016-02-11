@@ -25,6 +25,7 @@ import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 
@@ -154,10 +155,18 @@ public class QuestionFragment extends Fragment implements
     public void showSuccessDialog(long timeInMills, int score, int millis) {
         //DialogHelper.showDialogSuccess(getActivity(), );
         headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
-                + " time = " + String.format("%s",1f*timeInMills/1000) + "s millis = " + millis);
+                + " time = " + String.format("%s", 1f * timeInMills / 1000) + "s millis = " + millis);
 
-        mPresenter.sendResult();
-        mPresenter.takeQuestion();
+        Bundle args = new Bundle();
+        args.putString("KEY_TIME", String.format("%s", 1f * timeInMills / 1000));
+        args.putString("KEY_SCORES", new DecimalFormat("#.##").format(score));
+        args.putString("KEY_MILLIS", String.valueOf(millis));
+        SuccessDialog successDialog = new SuccessDialog();
+        successDialog.setArguments(args);
+        successDialog.show(getFragmentManager(), "success");
+
+        //mPresenter.sendResult();
+        //mPresenter.takeQuestion();
     }
 
     @Override
