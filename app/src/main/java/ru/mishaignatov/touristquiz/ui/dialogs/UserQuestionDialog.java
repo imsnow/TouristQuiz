@@ -31,7 +31,7 @@ public class UserQuestionDialog extends DialogFragment implements View.OnClickLi
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        View v = inflater.inflate(R.layout.fragment_dialog_user_question, null);
+        View v = inflater.inflate(R.layout.dialog_user_question, null);
         v.findViewById(R.id.button_send).setOnClickListener(this);
         v.findViewById(R.id.button_cancel).setOnClickListener(this);
 

@@ -47,6 +47,9 @@
     <string name="country">Country</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
+    <string name="dialog_question_hint_text">Questions should not exceed 130 characters</string>
+    <string name="dialog_question_hint_20">Max of 20 characters</string>
+    <string name="button_partner_quiz">Partner Quiz</string>
 
     <string-array name="countries">
         <item>@string/france</item>

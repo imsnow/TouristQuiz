@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:text="Partner Quiz"
+        android:text="@string/button_partner_quiz"
         android:id="@+id/button_partner" />
 
     <Button

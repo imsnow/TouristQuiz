@@ -45,6 +45,9 @@
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>
+    <string name="dialog_question_hint_text">Вопрос не должен превышать 130 символов</string>
+    <string name="dialog_question_hint_20">Максимум 20 символов</string>
+    <string name="button_partner_quiz">Викторина от партнера</string>
 
     <string-array name="countries">
         <item>@string/france</item>
