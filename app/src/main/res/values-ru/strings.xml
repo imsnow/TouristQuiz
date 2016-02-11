@@ -38,6 +38,10 @@
     <string name="dialog_question_title">Загадай вопрос всему миру</string>
     <string name="dialog_question_text">Придумай вопрос:</string>
     <string name="dialog_question_answer">Правильный ответ:</string>
+
+    <string name="dialog_success_title">Правильно!</string>
+    <string name="dialog_success_next">Продолжить</string>
+
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>
