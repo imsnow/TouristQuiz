@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 
 /**
  * Created by Mike on 11.02.2016.
@@ -20,24 +22,6 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
     private String scores;
     private String millis;
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        if(savedInstanceState != null) {
-            time = savedInstanceState.getString("KEY_TIME");
-            scores = savedInstanceState.getString("KEY_SCORES");
-            millis = savedInstanceState.getString("KEY_MILLIS");
-        }
-        super.onCreate(savedInstanceState);
-    }
-    /*
-    public SuccessDialog(int millis, int scores, float time) {
-        super();
-        this.millis = millis;
-        this.scores = scores;
-        this.time = time;
-    }
-    */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -45,6 +29,12 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
 
         View v = inflater.inflate(R.layout.dialog_success, null);
         v.findViewById(R.id.dialog_success_next).setOnClickListener(this);
+
+        if(savedInstanceState != null) {
+            time = savedInstanceState.getString("KEY_TIME");
+            scores = savedInstanceState.getString("KEY_SCORES");
+            millis = savedInstanceState.getString("KEY_MILLIS");
+        }
 
         ((TextView) v.findViewById(R.id.dialog_success_time)).setText(time);
         ((TextView) v.findViewById(R.id.dialog_success_scores)).setText(scores);
@@ -54,7 +44,19 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
     }
 
     @Override
-    public void onClick(View v) {
+    public void onCancel(DialogInterface dialog) {
+        result();
+        super.onCancel(dialog);
+    }
 
+    @Override
+    public void onClick(View v) {
+        result();
+        dismiss();
+    }
+
+    public void result(){
+        QuestionFragment frag = (QuestionFragment)getParentFragment();
+        frag.onResultDialog();
     }
 }

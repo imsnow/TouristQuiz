@@ -124,17 +124,6 @@ public class QuestionFragment extends Fragment implements
         mPresenter.onDestroy();
         super.onDestroy();
     }
-    /*
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        Log.d("TAG", "DialogInterface = " + which);
-        if(which == -1) // Success and failure dialog
-            //updateQuestion();
-            ;
-        if(which == -2) // Next Level Dialog
-            getActivity().onBackPressed();
-    }
-    */
 
     @Override
     public void onTrueAnswer(long timeInMills, int score, int millis) {
@@ -164,9 +153,12 @@ public class QuestionFragment extends Fragment implements
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
         successDialog.show(getFragmentManager(), "success");
+    }
 
-        //mPresenter.sendResult();
-        //mPresenter.takeQuestion();
+    @Override
+    public void onResultDialog() {
+        mPresenter.sendResult();
+        mPresenter.takeQuestion();
     }
 
     @Override

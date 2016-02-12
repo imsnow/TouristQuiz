@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui.views;
 import android.view.animation.Animation;
 
 import ru.mishaignatov.touristquiz.orm.Question;
-import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 
 /**
  * Created by Leva on 23.01.2016.
@@ -18,4 +17,6 @@ public interface QuestionView extends Animation.AnimationListener {
     void showDialogNextLevel();
     void startDeleteButton(int resource_id);
     void setQuestion(Question question);
+
+    void onResultDialog();
 }
