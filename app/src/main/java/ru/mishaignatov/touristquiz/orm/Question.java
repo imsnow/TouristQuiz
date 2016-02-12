@@ -17,7 +17,8 @@ import ru.mishaignatov.touristquiz.game.App;
 @DatabaseTable(tableName = "questions")
 public class Question {
 
-    public static final int MILLIS = 30;
+    public static final int PLUS_MILLIS = 30;
+    public static final int MINUS_MILLIS = 10;
 
     public static final String COLUMN_COUNTRY     = "country_id";
     public static final String COLUMN_IS_ANSWERED = "is_answered";

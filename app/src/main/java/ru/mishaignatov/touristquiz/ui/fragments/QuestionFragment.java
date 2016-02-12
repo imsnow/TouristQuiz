@@ -25,6 +25,7 @@ import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.dialogs.FailDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
@@ -137,7 +138,10 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void onTotalFailure() {
-        headerInterface.onShowHiddenTip("Looser!");
+        //headerInterface.onShowHiddenTip("Looser!");
+        FailDialog failDialog = new FailDialog();
+        failDialog.setTargetFragment(this, 0x22);
+        failDialog.show(getFragmentManager(), "fail");
     }
 
     @Override
@@ -150,6 +154,7 @@ public class QuestionFragment extends Fragment implements
         args.putString("KEY_TIME", String.format("%s", 1f * timeInMills / 1000));
         args.putString("KEY_SCORES", new DecimalFormat("#.##").format(score));
         args.putString("KEY_MILLIS", String.valueOf(millis));
+
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
         successDialog.setTargetFragment(this, 0x22);

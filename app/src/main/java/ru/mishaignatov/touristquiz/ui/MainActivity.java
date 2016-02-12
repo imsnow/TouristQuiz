@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void onUpdateHeader(String title) {
         mHeaderTitle.setText(title);
         mScoresText.setText(String.valueOf(mGameManager.getUser().getScores()));
-        mMilesText.setText(String.valueOf(mGameManager.getUser().getMiles()));
+        mMilesText.setText(String.valueOf(mGameManager.getUser().getMillis()));
     }
 
     @Override

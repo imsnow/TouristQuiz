@@ -33,7 +33,7 @@ public class PreferenceStorage {
     public void saveUser(User user){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(KEY_REGISTER, user.isRegistered());
-        editor.putInt(KEY_MILES, user.getMiles());
+        editor.putInt(KEY_MILES, user.getMillis());
         editor.putInt(KEY_SCORE, user.getScores());
         editor.putString(KEY_TOKEN, user.getToken());
         editor.apply();
@@ -41,7 +41,7 @@ public class PreferenceStorage {
 
     public void loadUser(User user){
         user.setIsRegistration(preferences.getBoolean(KEY_REGISTER, false));
-        user.setMiles(preferences.getInt(KEY_MILES, 0));
+        user.setMillis(preferences.getInt(KEY_MILES, 100));
         user.setScores(preferences.getInt(KEY_SCORE, 0));
         user.setToken(preferences.getString(KEY_TOKEN, ""));
     }

@@ -14,6 +14,8 @@ import ru.mishaignatov.touristquiz.ui.views.QuestionView;
  **/
 public class QuestionPresenterImpl implements QuestionPresenter {
 
+    private GameManager mGameManager;
+
     private QuestionView questionView;
 
     private Question mCurrentQuestion;
@@ -22,11 +24,12 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     public QuestionPresenterImpl(QuestionView questionView){
         mStopwatch = new Stopwatch();
         this.questionView = questionView;
+        mGameManager = GameManager.getInstance(App.getContext());
     }
 
     @Override
     public void takeQuestion() {
-        mCurrentQuestion = GameManager.getInstance(App.getContext()).getQuestion();
+        mCurrentQuestion = mGameManager.getQuestion();
         questionView.setQuestion(mCurrentQuestion);
         if (mCurrentQuestion != null) {
             OrmDao.getInstance(App.getContext()).setQuestionShown(mCurrentQuestion);
@@ -36,7 +39,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
 
     @Override
     public void sendResult() {
-        ApiHelper.getHelper(App.getContext()).userResult(GameManager.getInstance(App.getContext()).getUser(),
+        ApiHelper.getHelper(App.getContext()).userResult(mGameManager.getUser(),
                 null, null); // TODO Response.Listener<String>
     }
 
@@ -48,18 +51,17 @@ public class QuestionPresenterImpl implements QuestionPresenter {
             mCurrentQuestion.setAnswered();
             long time = mStopwatch.stop();
             int score = mCurrentQuestion.calcScore(time);
-            GameManager.getInstance(App.getContext()).getUser().addResult(score, Question.MILLIS);
-            questionView.onTrueAnswer(time, score, Question.MILLIS);
+            mGameManager.getUser().addResult(score, Question.PLUS_MILLIS);
+            questionView.onTrueAnswer(time, score, Question.PLUS_MILLIS);
         }
         else { // Try again, buddy
             if(mCurrentQuestion.minusAttempt())
                 questionView.onFailAnswer(button);
             else { // You are LOOSER!
-                takeQuestion();
+                mGameManager.getUser().removeMillis(Question.MINUS_MILLIS);
                 questionView.onTotalFailure();
             }
         }
-            //questionView.onFailAnswer(button);
     }
 
     @Override

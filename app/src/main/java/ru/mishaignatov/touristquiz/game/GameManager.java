@@ -88,6 +88,6 @@ public class GameManager {
 
     public String getStatusTip(){
         return "Вопосы: отвеченные = " + getAnswered() + ", всего = " + getTotal()
-                + "\nочки = " + user.getScores() + " мили = " +  user.getMiles();
+                + "\nочки = " + user.getScores() + " мили = " +  user.getMillis();
     }
 }

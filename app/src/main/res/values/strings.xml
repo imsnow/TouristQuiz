@@ -44,6 +44,8 @@
     <string name="dialog_success_title">Success</string>
     <string name="dialog_success_next">Next</string>
 
+    <string name="dialog_fail_title">Failure</string>
+
     <string name="country">Country</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
@@ -52,6 +54,7 @@
     <string name="button_partner_quiz">Partner Quiz</string>
     <string name="show_time_result">  %1$s sec</string>
     <string name="show_plus_and_result">+ %s</string>
+    <string name="minus_millis">- 10</string>
 
     <string-array name="countries">
         <item>@string/france</item>

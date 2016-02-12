@@ -15,7 +15,7 @@ public class User {
     private String deviceName;
     private String androidApi;
 
-    private int miles;               // Зработанные мили пользователя
+    private int millis;               // Зработанные мили пользователя
     private int scores;               // Заработанные очки пользователя
 
     private Context mContext;
@@ -47,7 +47,11 @@ public class User {
 
     public void addResult(int progressScore, int progressMiles) {
         scores += progressScore;
-        miles += progressMiles;
+        millis += progressMiles;
+    }
+
+    public void removeMillis(int progressMillis){
+        if(millis != 0) millis -= progressMillis;
     }
 
     // Getters
@@ -57,11 +61,11 @@ public class User {
     public String getDevice()     { return deviceName; }
     public String getAndroidApi() { return androidApi; }
 
-    public int getMiles()           {  return miles; }
+    public int getMillis()           {  return millis; }
     public int getScores()           {  return scores; }
 
     public void setToken(String token){ this.token = token; }
-    public void setMiles(int miles)   { this.miles = miles; }
+    public void setMillis(int millis)   { this.millis = millis; }
     public void setScores(int scores) { this.scores = scores; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
@@ -76,7 +80,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", imei='" + imei + '\'' +
                 ", deviceName='" + deviceName + '\'' +
-                ", miles=" + miles +
+                ", millis=" + millis +
                 ", scores=" + scores +
                 ", mContext=" + mContext +
                 ", isRegistered=" + isRegistered +

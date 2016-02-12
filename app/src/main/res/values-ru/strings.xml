@@ -42,6 +42,8 @@
     <string name="dialog_success_title">Правильно!</string>
     <string name="dialog_success_next">Продолжить</string>
 
+    <string name="dialog_fail_title">Неудача</string>
+
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>

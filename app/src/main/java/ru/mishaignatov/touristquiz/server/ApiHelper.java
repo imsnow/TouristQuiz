@@ -64,7 +64,7 @@ public class ApiHelper {
         String param = APIStrings.USER_RESULT +
                         addParam(APIStrings.TOKEN, encode(user.getToken())) +
                         addParam(APIStrings.SCORES, user.getScores()) +
-                        addParam(APIStrings.MILLIS, user.getMiles()) +
+                        addParam(APIStrings.MILLIS, user.getMillis()) +
                         addParam(APIStrings.QUESTIONS, GameManager.getInstance(context).getAnswered());
 
         sendRequest(param, listener, errorListener);
