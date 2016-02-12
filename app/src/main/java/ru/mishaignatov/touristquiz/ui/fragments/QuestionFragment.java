@@ -143,8 +143,8 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void showSuccessDialog(long timeInMills, int score, int millis) {
         //DialogHelper.showDialogSuccess(getActivity(), );
-        headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
-                + " time = " + String.format("%s", 1f * timeInMills / 1000) + "s millis = " + millis);
+        //headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
+         //       + " time = " + String.format("%s", 1f * timeInMills / 1000) + "s millis = " + millis);
 
         Bundle args = new Bundle();
         args.putString("KEY_TIME", String.format("%s", 1f * timeInMills / 1000));
@@ -152,6 +152,7 @@ public class QuestionFragment extends Fragment implements
         args.putString("KEY_MILLIS", String.valueOf(millis));
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
+        successDialog.setTargetFragment(this, 0x22);
         successDialog.show(getFragmentManager(), "success");
     }
 

@@ -6,4 +6,7 @@
     <color name="light_blue100">#FFB3E5FC</color> -->
 
   <color name="main_background">#416770</color>
+
+  <color name="success_title">#81C784</color> <!-- green 300 -->
+  <color name="fail_title">#E57373</color>   <!-- red 300 -->
 </resources>

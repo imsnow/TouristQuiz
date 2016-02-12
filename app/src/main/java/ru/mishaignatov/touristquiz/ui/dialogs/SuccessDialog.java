@@ -30,15 +30,16 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
         View v = inflater.inflate(R.layout.dialog_success, null);
         v.findViewById(R.id.dialog_success_next).setOnClickListener(this);
 
-        if(savedInstanceState != null) {
-            time = savedInstanceState.getString("KEY_TIME");
-            scores = savedInstanceState.getString("KEY_SCORES");
-            millis = savedInstanceState.getString("KEY_MILLIS");
+        Bundle args = getArguments();
+        if (args != null) {
+            time = args.getString("KEY_TIME");
+            scores = args.getString("KEY_SCORES");
+            millis = args.getString("KEY_MILLIS");
         }
 
-        ((TextView) v.findViewById(R.id.dialog_success_time)).setText(time);
-        ((TextView) v.findViewById(R.id.dialog_success_scores)).setText(scores);
-        ((TextView) v.findViewById(R.id.dialog_success_millis)).setText(millis);
+        ((TextView) v.findViewById(R.id.dialog_success_time)).setText(getString(R.string.show_time_result, time));
+        ((TextView) v.findViewById(R.id.dialog_success_scores)).setText(getString(R.string.show_plus_and_result, scores));
+        ((TextView) v.findViewById(R.id.dialog_success_millis)).setText(getString(R.string.show_plus_and_result, millis));
 
         return v;
     }
@@ -56,7 +57,7 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
     }
 
     public void result(){
-        QuestionFragment frag = (QuestionFragment)getParentFragment();
+        QuestionFragment frag = (QuestionFragment)getTargetFragment();
         frag.onResultDialog();
     }
 }

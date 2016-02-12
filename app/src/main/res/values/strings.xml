@@ -50,6 +50,8 @@
     <string name="dialog_question_hint_text">Questions should not exceed 130 characters</string>
     <string name="dialog_question_hint_20">Max of 20 characters</string>
     <string name="button_partner_quiz">Partner Quiz</string>
+    <string name="show_time_result">  %1$s sec</string>
+    <string name="show_plus_and_result">+ %s</string>
 
     <string-array name="countries">
         <item>@string/france</item>
