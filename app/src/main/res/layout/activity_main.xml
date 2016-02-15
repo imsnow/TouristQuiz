@@ -63,7 +63,7 @@
 
         <ImageButton
             android:id="@+id/button_plus"
-            android:background="@drawable/plus"
+            android:src="@drawable/ic_action_plus"
             android:layout_width="0dp"
             android:layout_marginLeft="4dp"
             android:layout_weight="0.1"
