@@ -17,6 +17,14 @@
         android:layout_weight="0.6"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/country_thumb"
+        android:visibility="invisible"
+        android:src="@drawable/thumb"
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:layout_height="match_parent" />
+
     <TextView
         android:layout_width="0dp"
         android:layout_weight="0.1"

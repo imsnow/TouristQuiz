@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ import ru.mishaignatov.touristquiz.ui.views.CountryListView;
  * Created by Ignatov on 13.08.2015.
  * Display all counties - levels
  */
-public class CountryListFragment extends ListFragment implements CountryListView{
+public class CountryListFragment extends ListFragment implements CountryListView {
 
     private CountryAdapter adapter;
     private ActivityInterface headerInterface;
@@ -65,14 +66,24 @@ public class CountryListFragment extends ListFragment implements CountryListView
     }
 
     @Override
+    public void showNotEnoughMillis() {
+        headerInterface.onShowHiddenTip("Недостаточно милей для покупки билета");
+    }
+
+    @Override
     public void showDialogLevelFinished() {
         // Пользователь уже попытался ответить на все вопросы
         DialogHelper.showDialogLevelFinished(getActivity());
     }
 
     @Override
-    public void startLevel() {
-        ((MainActivity) getActivity()).addFragment(new QuestionFragment(), "Question");
+    public void startLevel(int position) {
+        Bundle args = new Bundle();
+        args.putInt("COUNTRY_ID", position);
+        QuestionFragment fragment = new QuestionFragment();
+        fragment.setArguments(args);
+
+        ((MainActivity) getActivity()).addFragment(fragment, "Question");
     }
 
     @Override
@@ -93,7 +104,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        GameManager.getInstance(getActivity()).setCurrentCountryId(position);
+        //GameManager.getInstance(getActivity()).setCurrentCountryId(position);
         mPresenter.onListItemClick(position);
     }
 
@@ -122,6 +133,10 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
                 TextView result = (TextView)view.findViewById(R.id.country_result);
                 result.setText("" + item.answered + "/" + item.total);
+
+                if (item.ended){
+                    view.findViewById(R.id.country_thumb).setVisibility(View.VISIBLE);
+                }
             }
             else {
                 view = inflater.inflate(R.layout.item_country_closed, null);
@@ -131,6 +146,14 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
                 TextView cost = (TextView)view.findViewById(R.id.item_country_cost);
                 cost.setText(String.valueOf(item.cost));
+
+                ImageView buy = (ImageView)view.findViewById(R.id.item_country_buy);
+                buy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.onBuyCountry(position);
+                    }
+                });
             }
 
             return view;

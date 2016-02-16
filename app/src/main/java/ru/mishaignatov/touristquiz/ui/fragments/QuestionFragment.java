@@ -37,16 +37,13 @@ import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 public class QuestionFragment extends Fragment implements
         View.OnClickListener, QuestionView {
 
-    private TextView questionText;//, mTimerText;
+    private TextView questionText;
     private AnswerButton button1, button2, button3, button4;
     private Animation shakeAnim;
 
     private AnswerButton mClickedButton;
 
     private FrameLayout layout;
-
-    //private Question mCurrentQuestion;
-    //private Stopwatch mStopwatch;
 
     private ActivityInterface headerInterface;
 
@@ -89,7 +86,10 @@ public class QuestionFragment extends Fragment implements
         shakeAnim = AnimationUtils.loadAnimation(App.getContext(), R.anim.shake);
         shakeAnim.setAnimationListener(this);
 
-        mPresenter = new QuestionPresenterImpl(this);
+        Bundle args = getArguments();
+        int countryID = args.getInt("COUNTRY_ID");
+
+        mPresenter = new QuestionPresenterImpl(this, countryID);
         mPresenter.takeQuestion();
 
         return v;
@@ -138,7 +138,6 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void onTotalFailure() {
-        //headerInterface.onShowHiddenTip("Looser!");
         FailDialog failDialog = new FailDialog();
         failDialog.setTargetFragment(this, 0x22);
         failDialog.show(getFragmentManager(), "fail");
@@ -146,9 +145,6 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void showSuccessDialog(long timeInMills, int score, int millis) {
-        //DialogHelper.showDialogSuccess(getActivity(), );
-        //headerInterface.onShowHiddenTip("Success! scores = " + new DecimalFormat("#.##").format(score)
-         //       + " time = " + String.format("%s", 1f * timeInMills / 1000) + "s millis = " + millis);
 
         Bundle args = new Bundle();
         args.putString("KEY_TIME", String.format("%s", 1f * timeInMills / 1000));

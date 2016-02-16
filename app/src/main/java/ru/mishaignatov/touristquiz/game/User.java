@@ -54,6 +54,10 @@ public class User {
         if(millis != 0) millis -= progressMillis;
     }
 
+    public void buyCountry(int cost){
+        millis -= cost;
+    }
+
     // Getters
     public String getToken()      { return token;      }
     public String getEmail()      { return email;      }

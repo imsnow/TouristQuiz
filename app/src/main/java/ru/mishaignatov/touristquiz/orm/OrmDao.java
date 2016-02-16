@@ -101,7 +101,6 @@ public class OrmDao {
     public void setQuestionAnswered(Question question) {
         question.is_answered = true;
         mQuestionDao.update(question);
-        // TODO
     }
 
     // calculate all rows
@@ -152,6 +151,7 @@ public class OrmDao {
                     .eq(Question.COLUMN_IS_ANSWERED, true)
                     .countOf();
 
+            // size of shown question
             int size_shown = (int)mQuestionDao.queryBuilder()
                     .where()
                     .eq(Question.COLUMN_COUNTRY, country.id)
@@ -159,9 +159,18 @@ public class OrmDao {
                     .eq(Question.COLUMN_IS_SHOWN, true)
                     .countOf();
 
+            // all size question
+            int total = (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_COUNTRY, country.id)
+                    .countOf();
+
             Log.d("TAG", "size answered = " + size + " size shown = " + size_shown);
             country.answered = size;
             country.shown    = size_shown;
+
+            if (country.shown == total)
+                country.ended = true;
             mCountryDao.update(country);
 
         }
@@ -169,6 +178,11 @@ public class OrmDao {
             e.printStackTrace();
         }
         return country;
+    }
+
+    public void openCountry(Country country){
+        country.opened = true;
+        mCountryDao.update(country);
     }
 
     public String getCountryName(int id){
@@ -196,10 +210,7 @@ public class OrmDao {
             country.answered = 0;
             country.shown = 0;
             country.cost = Integer.parseInt(costs[i]);
-            if(country.cost != 0)
-                country.opened = false;
-            else
-                country.opened = true;
+            country.opened = country.cost == 0;
             country.ended = false;
             mCountryDao.create(country);
             count++;

@@ -12,5 +12,6 @@ public interface CountryListPresenter extends BasePresenter {
     List<Country> getCountryList();
     Country getCountry(int position);
     void onListItemClick(int position);
+    void onBuyCountry(int position);
     void updateCountries();
 }

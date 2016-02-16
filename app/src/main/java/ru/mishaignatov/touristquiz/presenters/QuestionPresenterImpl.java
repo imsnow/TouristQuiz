@@ -21,15 +21,18 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     private Question mCurrentQuestion;
     private Stopwatch mStopwatch;
 
-    public QuestionPresenterImpl(QuestionView questionView){
+    private int mCountryId = 0;
+
+    public QuestionPresenterImpl(QuestionView questionView, int country_id){
         mStopwatch = new Stopwatch();
         this.questionView = questionView;
         mGameManager = GameManager.getInstance(App.getContext());
+        mCountryId = country_id;
     }
 
     @Override
     public void takeQuestion() {
-        mCurrentQuestion = mGameManager.getQuestion();
+        mCurrentQuestion = mGameManager.getQuestion(mCountryId);
         questionView.setQuestion(mCurrentQuestion);
         if (mCurrentQuestion != null) {
             OrmDao.getInstance(App.getContext()).setQuestionShown(mCurrentQuestion);

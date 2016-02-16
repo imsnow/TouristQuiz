@@ -5,11 +5,9 @@ import android.content.Context;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.game.CountryManager;
+import ru.mishaignatov.touristquiz.game.GameManager;
+import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.orm.Country;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.ui.DialogHelper;
-import ru.mishaignatov.touristquiz.ui.MainActivity;
-import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 import ru.mishaignatov.touristquiz.ui.views.CountryListView;
 
 /***
@@ -39,15 +37,34 @@ public class CountryListPresenterImpl implements CountryListPresenter {
 
     @Override
     public void onListItemClick(int position) {
+
         Country country = mCountryManager.getCountry(position);
 
         if (country.opened) {
-            if (OrmDao.getInstance(mContext).isCountryShown(position))
+            //if (OrmDao.getInstance(mContext).isCountryShown(position))
+            if (country.ended)
                 view.showDialogLevelFinished();
             else
-                view.startLevel();
+                view.startLevel(position);
         }
         else view.showClosedCountry();
+    }
+
+    @Override
+    public void onBuyCountry(int position) {
+
+        User user = GameManager.getInstance(mContext).getUser();
+        Country country = mCountryManager.getCountry(position);
+
+        if (user.getMillis() < country.cost)
+            // show message
+            view.showNotEnoughMillis();
+        else {
+            // buy ticket
+            user.buyCountry(country.cost);
+            mCountryManager.openCountry(country);
+            view.startLevel(position);
+        }
     }
 
     @Override
