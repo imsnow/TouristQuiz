@@ -34,6 +34,7 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
         try{
             TableUtils.createTable(connectionSource, Country.class);
             TableUtils.createTable(connectionSource, Question.class);
+            TableUtils.createTable(connectionSource, Tip.class);
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -41,6 +42,7 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
         OrmDao.getInstance(context).createCountryEntries();
         OrmDao.getInstance(context).createQuestionEntries();
+        OrmDao.getInstance(context).createTipsEntries();
 
         Log.d(TAG, "onCreate");
     }
@@ -63,5 +65,9 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
     public RuntimeExceptionDao<Question, Integer> getQuestionDao(){
         return getRuntimeExceptionDao(Question.class);
+    }
+
+    public RuntimeExceptionDao<Tip, Integer> getTipsDao(){
+        return getRuntimeExceptionDao(Tip.class);
     }
 }

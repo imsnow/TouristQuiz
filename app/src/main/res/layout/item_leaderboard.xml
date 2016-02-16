@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/leader_board_place"
-        style="@style/LeaderBoardTextView"
+        style="@style/ItemListTextView"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_weight="0.1"
@@ -18,14 +18,14 @@
         android:id="@+id/leader_board_name"
         android:layout_width="0dp"
         android:gravity="center|start"
-        style="@style/LeaderBoardTextView"
+        style="@style/ItemListTextView"
         android:layout_weight="0.6"
         android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/leader_board_scores"
         android:layout_width="0dp"
-        style="@style/LeaderBoardTextView"
+        style="@style/ItemListTextView"
         android:gravity="center|end"
         android:layout_weight="0.3"
         android:layout_height="match_parent" />

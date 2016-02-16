@@ -50,7 +50,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     public void onResume() {
         super.onResume();
         headerInterface.showHeader();
-        headerInterface.onUpdateHeader("Таблица лидеров");
+        headerInterface.onUpdateHeader(getActivity().getString(R.string.header_leaderboard));
     }
 
 

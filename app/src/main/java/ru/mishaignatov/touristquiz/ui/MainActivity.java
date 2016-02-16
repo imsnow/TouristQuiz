@@ -24,6 +24,7 @@ import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 
 public class MainActivity extends AppCompatActivity implements ActivityInterface {
 
@@ -196,6 +197,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onLeaderBoardFragment() {
         addFragment(new LeaderBoardFragment(), "LeaderBoard");
+    }
+
+    @Override
+    public void onTipsFragment() {
+        addFragment(new TipsFragment(), "Tips");
     }
 
     @Override

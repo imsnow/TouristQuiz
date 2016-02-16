@@ -45,6 +45,7 @@ public class OrmDao {
         helper = new OrmHelper(context);
         mCountryDao = helper.getCountryDao();
         mQuestionDao = helper.getQuestionDao();
+        mTipDao      = helper.getTipsDao();
     }
 
     public static OrmDao getInstance(Context context) {

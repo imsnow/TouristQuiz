@@ -3,6 +3,8 @@
     <string name="start_button">Start</string>
     <string name="action_settings">Settings</string>
 
+    <string name="facebook_app_id">1728268640725307</string>
+
     <string name="quiz_point">157</string>
 
     <string name="quiz_text">В Какой стране находятся Великие Пирамиды Гизы?</string>
@@ -55,6 +57,9 @@
     <string name="show_time_result">  %1$s sec</string>
     <string name="show_plus_and_result">+ %s</string>
     <string name="minus_millis">- 10</string>
+
+    <string name="header_tips">Tips</string>
+    <string name="header_leaderboard">Leader Board</string>
 
     <string-array name="countries">
         <item>@string/france</item>

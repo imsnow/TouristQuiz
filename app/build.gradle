@@ -41,6 +41,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
         transitive = true;
     }
-    //compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.facebook.android:facebook-android-sdk:4.5.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
 }

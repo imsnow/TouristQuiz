@@ -38,21 +38,9 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_start).setOnClickListener(this);
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
         v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
-
-        //updateFragment();
+        v.findViewById(R.id.button_tips).setOnClickListener(this);
 
         return v;
-    }
-
-
-    private void updateFragment(){
-        activityInterface.onUpdateHeader("");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //updateFragment();
     }
 
     @Override
@@ -65,11 +53,12 @@ public class StartFragment extends Fragment implements View.OnClickListener {
             case R.id.button_my_quiz:
                 UserQuestionDialog dialog = new UserQuestionDialog();
                 activityInterface.showFragmentDialog(dialog, "user_question");
-                //DialogHelper.showUserQuestion(getActivity(), this);
-                //Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
                 break;
             case R.id.button_leaderboard:
                 activityInterface.onLeaderBoardFragment();
+                break;
+            case R.id.button_tips:
+                activityInterface.onTipsFragment();
                 break;
         }
     }
