@@ -36,6 +36,7 @@ public class OrmDao {
     private OrmHelper helper = null;
     private RuntimeExceptionDao<Country, Integer> mCountryDao;
     private RuntimeExceptionDao<Question, Integer> mQuestionDao;
+    private RuntimeExceptionDao<Tip, Integer> mTipDao;
 
     private Random random = new Random();
 
@@ -244,5 +245,25 @@ public class OrmDao {
             mCountryDao.update(item);
         }
         return all_questions_cnt;
+    }
+    //===========================================================================
+    // TIPS
+    public int createTipsEntries(){
+        int count = 0;
+
+        String[] tipsArr = context.getResources().getStringArray(R.array.tips);
+
+        for(int i = 0; i<tipsArr.length; i++){
+            Tip tip = new Tip();
+            tip.id   = i;
+            tip.text = tipsArr[i];
+            mTipDao.create(tip);
+            count++;
+        }
+        return count;
+    }
+
+    public List<Tip> getTipsList(){
+        return mTipDao.queryForAll();
     }
 }
