@@ -36,8 +36,6 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
         iView.showProgressBar();
 
         ApiHelper.getHelper(App.getContext()).userResult(GameManager.getInstance(App.getContext()).getUser(), this, this);
-
-        ApiHelper.getHelper(App.getContext()).leaderBoard(GameManager.getInstance(App.getContext()).getUser(), this, this);
     }
 
     @Override
@@ -55,6 +53,11 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
             if(status.equals(APIStrings.OK)){
 
                 String method = json.getString(APIStrings.METHOD);
+
+
+                if (method.equals(APIStrings.USER_RESULT)){
+                    ApiHelper.getHelper(App.getContext()).leaderBoard(GameManager.getInstance(App.getContext()).getUser(), this, this);
+                }
 
                 if (method.equals(APIStrings.LEADER_BOARD)) {
 

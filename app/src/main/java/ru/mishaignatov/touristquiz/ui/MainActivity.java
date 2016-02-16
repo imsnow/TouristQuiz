@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
             }
         });
 
-        ImageButton plusMillisButton = (ImageButton)findViewById(R.id.button_plus);
+        ImageView plusMillisButton = (ImageView)findViewById(R.id.button_plus);
         plusMillisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

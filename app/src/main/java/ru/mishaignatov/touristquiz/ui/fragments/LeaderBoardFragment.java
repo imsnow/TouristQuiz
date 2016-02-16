@@ -69,7 +69,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
         name.setGravity(Gravity.CENTER);
         TextView scores = (TextView)header.findViewById(R.id.leader_board_scores);
         scores.setText(R.string.leaderboard_scores);
-        scores.setGravity(Gravity.CENTER);
+        scores.setGravity(Gravity.RIGHT);
         return header;
     }
 

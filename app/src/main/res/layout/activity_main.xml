@@ -64,7 +64,7 @@
             android:layout_weight="0.1"
             android:layout_height="match_parent" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/button_plus"
             android:src="@drawable/ic_action_plus"
             android:layout_width="0dp"

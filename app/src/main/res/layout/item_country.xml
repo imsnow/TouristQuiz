@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:background="@drawable/item"
+    android:padding="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,6 +10,7 @@
         android:id="@+id/country_name"
         android:text="Египет"
         android:layout_width="0dp"
+        android:textColor="@android:color/white"
         android:gravity="center|left"
         android:textSize="18sp"
         android:padding="8dp"
@@ -16,11 +19,10 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.1"
         android:gravity="center"
-        android:padding="8dp"
+        android:textColor="@android:color/white"
         android:id="@+id/country_result"
-        android:text="0/0"
         android:layout_height="match_parent" />
 
 </LinearLayout>
