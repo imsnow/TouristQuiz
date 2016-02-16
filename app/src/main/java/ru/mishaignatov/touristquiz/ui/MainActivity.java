@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
             ((CountryListFragment)frag).update();
         }
 
-        onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
+        //onShowHiddenTip(GameManager.getInstance(this).getStatusTip());
     }
 
     @Override
