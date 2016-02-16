@@ -35,6 +35,8 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
 
         iView.showProgressBar();
 
+        ApiHelper.getHelper(App.getContext()).userResult(GameManager.getInstance(App.getContext()).getUser(), this, this);
+
         ApiHelper.getHelper(App.getContext()).leaderBoard(GameManager.getInstance(App.getContext()).getUser(), this, this);
     }
 
@@ -45,19 +47,25 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
 
     @Override
     public void onResponse(String response) {
-
+        Log.d("tag", response);
         List<LeaderBoardItem> list = new ArrayList<>();
         try {
             JSONObject json = new JSONObject(response);
             String status = json.getString(APIStrings.STATUS);
             if(status.equals(APIStrings.OK)){
-                JSONArray arr = json.getJSONArray(APIStrings.ITEMS);
-                for(int i=0; i<arr.length(); i++){
-                    JSONObject jsonItem = arr.getJSONObject(i);
-                    LeaderBoardItem item = new LeaderBoardItem(jsonItem.getString(APIStrings.NAME),
-                                    Integer.parseInt(jsonItem.getString(APIStrings.PLACE)),
-                                    Integer.parseInt(jsonItem.getString(APIStrings.SCORES)));
-                    list.add(item);
+
+                String method = json.getString(APIStrings.METHOD);
+
+                if (method.equals(APIStrings.LEADER_BOARD)) {
+
+                    JSONArray arr = json.getJSONArray(APIStrings.ITEMS);
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject jsonItem = arr.getJSONObject(i);
+                        LeaderBoardItem item = new LeaderBoardItem(jsonItem.getString(APIStrings.NAME),
+                                Integer.parseInt(jsonItem.getString(APIStrings.PLACE)),
+                                Integer.parseInt(jsonItem.getString(APIStrings.SCORES)));
+                        list.add(item);
+                    }
                 }
             }
             else iView.showError();
