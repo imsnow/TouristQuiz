@@ -7,9 +7,12 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
@@ -17,19 +20,23 @@ import ru.mishaignatov.touristquiz.game.CountryManager;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.presenters.CountryListPresenter;
+import ru.mishaignatov.touristquiz.presenters.CountryListPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.views.CountryListView;
 
 /**
  * Created by Ignatov on 13.08.2015.
  * Display all counties - levels
  */
-public class CountryListFragment extends ListFragment {
+public class CountryListFragment extends ListFragment implements CountryListView{
 
-    private CountryManager mCountryManager;
     private CountryAdapter adapter;
     private ActivityInterface headerInterface;
+
+    private CountryListPresenter mPresenter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -38,12 +45,9 @@ public class CountryListFragment extends ListFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mCountryManager = CountryManager.getInstance(App.getContext());
-
-        adapter = new CountryAdapter();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        adapter = new CountryAdapter(getActivity(), mPresenter.getCountryList());
         setListAdapter(adapter);
     }
 
@@ -52,17 +56,37 @@ public class CountryListFragment extends ListFragment {
         super.onResume();
         update();
         headerInterface.showHeader();
-        headerInterface.onUpdateHeader("Список стран");
+        headerInterface.onUpdateHeader("Куда отправимся?");
     }
 
+    @Override
+    public void showClosedCountry() {
+        headerInterface.onShowHiddenTip("Для полета необходимо купить билет");
+    }
+
+    @Override
+    public void showDialogLevelFinished() {
+        // Пользователь уже попытался ответить на все вопросы
+        DialogHelper.showDialogLevelFinished(getActivity());
+    }
+
+    @Override
+    public void startLevel() {
+        ((MainActivity) getActivity()).addFragment(new QuestionFragment(), "Question");
+    }
+
+    @Override
     public void update(){
-        mCountryManager.updateCountries();
+        mPresenter.updateCountries();
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mPresenter = new CountryListPresenterImpl(App.getContext(), this);
+
         return inflater.inflate(R.layout.fragment_country_list, null);
     }
 
@@ -70,44 +94,16 @@ public class CountryListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         GameManager.getInstance(getActivity()).setCurrentCountryId(position);
-
-        if(OrmDao.getInstance(getActivity()).isCountryShown(position)){
-            // Пользователь уже попытался ответить на все вопросы
-            DialogHelper.showDialogLevelFinished(getActivity());
-        }
-        else {
-            ((MainActivity) getActivity()).addFragment(new QuestionFragment(), "Question");
-            //mCurrentCountry = countriesList.get(position);
-        }
+        mPresenter.onListItemClick(position);
     }
 
-    private class CountryAdapter extends BaseAdapter {
+    private class CountryAdapter extends ArrayAdapter<Country> {
 
-        //private List<Country> countriesList;
+        private List<Country> mList;
 
-        public CountryAdapter() {
-            //super(context);
-            //countriesList = mCountryManager.getList();
-        }
-
-        @Override
-        public boolean areAllItemsEnabled() {
-            return super.areAllItemsEnabled();
-        }
-
-        @Override
-        public int getCount() {
-            return mCountryManager.getList().size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
+        public CountryAdapter(Context context, List<Country> objects) {
+            super(context, 0, objects);
+            mList = objects;
         }
 
         @Override
@@ -115,7 +111,7 @@ public class CountryListFragment extends ListFragment {
 
             LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view;
-            Country item = mCountryManager.getList().get(position);
+            Country item = mList.get(position);
 
             //if(view == null)
             if (item.opened) {
