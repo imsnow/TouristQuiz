@@ -44,32 +44,32 @@
         android:layout_marginRight="32dp"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:text="L"
+            android:src="@drawable/ic_leaderboard"
             android:id="@+id/button_leaderboard" />
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:text="A"
+            android:src="@drawable/ic_achievement"
             android:id="@+id/button_achievements" />
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:text="T"
+            android:src="@drawable/ic_tip"
             android:id="@+id/button_tips" />
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:text="S"
+            android:src="@drawable/ic_setting"
             android:id="@+id/button_settings" />
 
     </LinearLayout>

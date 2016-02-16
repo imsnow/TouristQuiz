@@ -17,47 +17,6 @@ import ru.mishaignatov.touristquiz.R;
  */
 public class DialogHelper {
 
-    public static void showUserQuestion(Activity activity, DialogInterface.OnClickListener listener){
-
-        if(activity != null && listener != null){
-            AlertDialog.Builder dialog = new AlertDialog.Builder(activity)
-                    .setTitle("Мой вопрос")
-                    .setMessage("Загадай свой вопрос всему миру")
-                    .setPositiveButton("Отправить", listener)
-                    .setNegativeButton("Отмена", listener);
-
-            final EditText question = new EditText(dialog.getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            question.setLayoutParams(params);
-            dialog.setView(question);
-            dialog.show();
-        }
-    }
-
-
-    public static void showDialogSuccess(Activity activity, int time, int score, int mile, DialogInterface.OnClickListener listener){
-
-        if(activity != null && listener != null)
-            new AlertDialog.Builder(activity)
-                    //.setTitle("Поздравляю!")
-                    .setCancelable(false)
-                    .setMessage("Поздравляю! Вы ответили правильно за " + time
-                            + " сек! Вы получаете " + score + " очков и " + mile + " миль")
-                    .setPositiveButton("Отлично", listener)
-                    .show();
-    }
-
-    public static void showDialogFailure(Activity activity, DialogInterface.OnClickListener listener){
-        if(activity != null && listener != null)
-            new AlertDialog.Builder(activity)
-                    //.setTitle("Жаль")
-                    .setCancelable(false)
-                    .setMessage("Жаль, но это не верный ответ. Попробуй еще раз!")
-                    .setPositiveButton("Продолжить", listener)
-                    .show();
-    }
-
     public static void showDialogNextLevel(Activity activity){
         if(activity != null)
             new AlertDialog.Builder(activity)

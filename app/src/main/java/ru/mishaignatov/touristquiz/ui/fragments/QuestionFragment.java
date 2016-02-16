@@ -66,6 +66,8 @@ public class QuestionFragment extends Fragment implements
 
         TextView error = (TextView)v.findViewById(R.id.error_text);
         error.setOnClickListener(this);
+        // temp
+        error.setVisibility(View.GONE);
 
         layout = (FrameLayout)v.findViewById(R.id.layout);
         layout.setOnClickListener(null);
