@@ -2,6 +2,7 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -24,6 +25,7 @@ import ru.mishaignatov.touristquiz.game.LeaderBoardItem;
 import ru.mishaignatov.touristquiz.presenters.LeaderBoardPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.dialogs.EnterNameDialog;
 import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
 
 /**
@@ -86,9 +88,15 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
         mListView.addHeaderView(createTableHeader());
 
         mPresenter = new LeaderBoardPresenterImpl(this);
-        mPresenter.sendRequestTable();
+        mPresenter.checkName();
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("TAG", "result");
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -113,6 +121,12 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
         mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, mListParent);
         mListView.setAdapter(mAdapter);
         //mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showEnterNameDialog() {
+        EnterNameDialog enterNameDialog = new EnterNameDialog();
+        enterNameDialog.show(getFragmentManager(), "enter_name");
     }
 
     @Override

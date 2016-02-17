@@ -31,6 +31,14 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
     }
 
     @Override
+    public void checkName() {
+        if (GameManager.getInstance(App.getContext()).getUser().isEnterName())
+            sendRequestTable();
+        else
+            iView.showEnterNameDialog();
+    }
+
+    @Override
     public void sendRequestTable() {
 
         iView.showProgressBar();

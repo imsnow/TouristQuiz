@@ -10,6 +10,7 @@ public class User {
 
     private String token;
 
+    private String displayName;
     private String email;
     private String imei;   // _id
     private String deviceName;
@@ -60,6 +61,7 @@ public class User {
 
     // Getters
     public String getToken()      { return token;      }
+    public String getDisplayName(){ return displayName;}
     public String getEmail()      { return email;      }
     public String getImei()       { return imei;       }
     public String getDevice()     { return deviceName; }
@@ -68,12 +70,14 @@ public class User {
     public int getMillis()           {  return millis; }
     public int getScores()           {  return scores; }
 
+    public void setDisplayName(String name) { displayName = name; }
     public void setToken(String token){ this.token = token; }
     public void setMillis(int millis)   { this.millis = millis; }
     public void setScores(int scores) { this.scores = scores; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }
+    public boolean isEnterName()  { return (displayName.length() != 0); }
     public void confirmRegistration()   { isRegistered = true;}
 
     @Override

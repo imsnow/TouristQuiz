@@ -44,6 +44,9 @@
 
     <string name="dialog_fail_title">Неудача</string>
 
+    <string name="dialog_enter_name_title">Ваше имя</string>
+    <string name="dialog_enter_name_hint">Для сравнения результат с другими игроками вам необходимо представиться. Вы можете войти через Facebook, либо ввести свое имя (ник)</string>
+
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>

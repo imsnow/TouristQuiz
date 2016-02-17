@@ -5,5 +5,6 @@ package ru.mishaignatov.touristquiz.presenters;
  **/
 public interface LeaderBoardPresenter extends BasePresenter {
 
+    void checkName();
     void sendRequestTable();
 }
