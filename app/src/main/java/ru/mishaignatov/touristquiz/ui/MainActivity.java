@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.appevents.AppEventsLogger;
+
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
@@ -93,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     protected void onResume() {
         super.onResume();
         mSessionManager.start();
+        // facebook event logger
+        AppEventsLogger.activateApp(this);
     }
 
     @Override
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         super.onPause();
         mGameManager.makeSnapshot();
         mSessionManager.end();
+        AppEventsLogger.deactivateApp(this);
     }
 
     public void replaceFragment(final Fragment frag) {

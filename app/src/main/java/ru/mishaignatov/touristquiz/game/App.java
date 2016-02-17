@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.FacebookSdk;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -25,6 +26,7 @@ public class App extends Application {
         //Fabric.with(this, new Crashlytics());
 
         mContext = getApplicationContext();
+        FacebookSdk.sdkInitialize(mContext);
         //User user = User.getUser(this);
         //Log.d(TAG, user.toString());
     }
