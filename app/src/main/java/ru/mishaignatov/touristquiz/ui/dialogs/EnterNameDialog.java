@@ -45,7 +45,8 @@ public class EnterNameDialog extends DialogFragment {
             @Override
             public void onError(FacebookException error) {
                 Log.d("TAG", "error");
-        }});
+            }
+        });
 
         return v;
     }

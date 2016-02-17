@@ -94,12 +94,6 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("TAG", "result");
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
