@@ -22,6 +22,7 @@ import com.facebook.appevents.AppEventsLogger;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
+import ru.mishaignatov.touristquiz.ui.dialogs.AddMillisDialog;
 import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
@@ -75,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         plusMillisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowHiddenTip("Soon!");
+                AddMillisDialog dialog = new AddMillisDialog();
+                dialog.show(mFragmentManager, "add_millis");
             }
         });
 

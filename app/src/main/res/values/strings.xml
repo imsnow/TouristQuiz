@@ -3,6 +3,8 @@
     <string name="start_button">Start</string>
     <string name="action_settings">Settings</string>
 
+    <string name="banner_ad_unit_id">ca-app-pub-4064765395481471/5917751346</string>
+    <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="facebook_app_id">1728268640725307</string>
 
     <string name="quiz_point">157</string>
@@ -50,6 +52,9 @@
 
     <string name="dialog_enter_name_title">Your name</string>
     <string name="dialog_enter_name_hint">To compare your result with other players you need to introduce yourself. You can login via Facebook or enter you own name (mick)</string>
+
+    <string name="dialog_add_millis_title">Add millis</string>
+    <string name="dialog_add_millis_ad">Watch promo video</string>
 
     <string name="country">Country</string>
     <string name="send">Send</string>
