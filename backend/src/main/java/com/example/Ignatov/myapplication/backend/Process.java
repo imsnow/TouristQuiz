@@ -203,6 +203,34 @@ public class Process {
         return true;
     }
 
+    protected boolean userName(JSONObject json){
+
+        String token = getParameter(request, APIStrings.TOKEN, json);
+        if(token == null) return false;
+
+        Entity entity = searchUser(token);
+        if(entity == null){
+            json.put(APIStrings.MESSAGE, "User doesn't exits");
+            return false;
+        }
+
+        String inputName = getParameter(request, APIStrings.NAME, json);
+
+        Query.Filter filter = new Query.FilterPredicate(APIStrings.NAME,
+                Query.FilterOperator.EQUAL,
+                inputName);
+
+        Query q = new Query(DBStrings.USERS);
+        q.setFilter(filter);
+        int count = database.prepare(q).countEntities(FetchOptions.Builder.withDefaults());
+        if (count != 0) return false;
+
+        entity.setProperty(APIStrings.NAME, inputName);
+        database.put(entity);
+
+        return true;
+    }
+
     private String getParameter(HttpServletRequest req, String name, JSONObject json){
         String param = req.getParameter(name);
         if(param == null || param.length() == 0){
