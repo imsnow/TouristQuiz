@@ -48,6 +48,7 @@ public class Process {
         if(api == null) return false;
 
         String date = regSDM.format(new Date());
+        String version = request.getParameter(APIStrings.VERSION);
 
         Entity entity = searchUser(imei, email);
         if (entity == null) {
@@ -64,6 +65,7 @@ public class Process {
             entity.setProperty(APIStrings.SCORES, 0);
             entity.setProperty(APIStrings.MILLIS, 0);
             entity.setProperty(APIStrings.QUESTIONS, 0);
+            entity.setProperty(APIStrings.VERSION, version);
             database.put(entity);
         } else {
             // update user
@@ -73,6 +75,7 @@ public class Process {
             entity.setProperty(APIStrings.SCORES, 0);
             entity.setProperty(APIStrings.MILLIS, 0);
             entity.setProperty(APIStrings.QUESTIONS, 0);
+            entity.setProperty(APIStrings.VERSION, version);
             database.put(entity);
         }
 
