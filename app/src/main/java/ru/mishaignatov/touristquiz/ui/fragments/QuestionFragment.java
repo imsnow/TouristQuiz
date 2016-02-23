@@ -204,7 +204,7 @@ public class QuestionFragment extends Fragment implements
         button3.setText(list.get(2).trim());
         button4.setText(list.get(3).trim());
 
-        Utils.setBackground(layout, Utils.loadBitmapFromAssetes(getActivity().getApplicationContext(),
+        Utils.setBackground(layout, Utils.loadBitmapFromAssets(getActivity().getApplicationContext(),
                 bg_resource[question.getType()]));
 
         headerInterface.onUpdateHeader(mPresenter.getCurrentCountry());

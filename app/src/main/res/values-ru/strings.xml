@@ -61,6 +61,8 @@
 
     <string name="header_tips">Подсказки</string>
     <string name="header_leaderboard">Таблица лидеров</string>
+    <string name="toast_plus_millis">+10 миль</string>
+    <string name="load_ad">Загрузка...</string>
 
     <string-array name="countries">
         <item>@string/france</item>

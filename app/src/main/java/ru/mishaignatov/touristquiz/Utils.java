@@ -47,7 +47,7 @@ public class Utils {
             view.setBackground(drawable);
     }
 
-    public static Drawable loadBitmapFromAssetes(Context context, String file) {
+    public static Drawable loadBitmapFromAssets(Context context, String file) {
         InputStream is = null;
         //Bitmap bitmap = null;
         try {

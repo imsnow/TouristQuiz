@@ -69,6 +69,8 @@
 
     <string name="header_tips">Tips</string>
     <string name="header_leaderboard">Leader Board</string>
+    <string name="toast_plus_millis">+10 millis</string>
+    <string name="load_ad">Loading...</string>
 
     <string-array name="countries">
         <item>@string/france</item>
