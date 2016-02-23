@@ -61,7 +61,6 @@
             <ImageView
                 android:id="@+id/image_accept"
                 android:layout_width="match_parent"
-                android:src="@drawable/ic_accept"
                 android:visibility="gone"
                 android:layout_height="match_parent" />
 

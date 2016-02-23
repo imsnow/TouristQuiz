@@ -108,13 +108,17 @@ public class EnterNameDialog extends DialogFragment implements View.OnClickListe
     @Override
     public void onBusyName() {
         Toast.makeText(getActivity(), "Это имя занято", Toast.LENGTH_LONG).show();
-        onWaitingUser();
+        mAcceptView.setVisibility(View.VISIBLE);
+        mAcceptView.setImageResource(R.drawable.ic_close);
+        mProgressBar.setVisibility(View.GONE);
+        mSendButton.setEnabled(false);
     }
 
     @Override
     public void onAcceptingName() {
         mAcceptView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
+        mAcceptView.setImageResource(R.drawable.ic_accept);
         mSendButton.setEnabled(true);
     }
 
