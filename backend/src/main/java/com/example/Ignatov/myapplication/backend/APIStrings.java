@@ -7,11 +7,13 @@ package com.example.Ignatov.myapplication.backend;
 public class APIStrings {
 
     // methods
-    public static final String USER_REGISTER = "user.register";
-    public static final String USER_QUESTION = "user.question";
-    public static final String USER_SESSION = "user.session";
-    public static final String USER_RESULT = "user.result";
-    public static final String USER_NAME   = "user.name";
+    public static final String USER_REGISTER   = "user.register";
+    public static final String USER_QUESTION   = "user.question";
+    public static final String USER_SESSION    = "user.session";
+    public static final String USER_RESULT     = "user.result";
+    public static final String USER_NAME_CHECK = "user.name.check";
+    public static final String USER_NAME_SET = "user.name.set";
+
     // attributes
     public static final String METHOD = "method";
     public static final String STATUS = "status";

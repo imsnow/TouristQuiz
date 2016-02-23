@@ -52,8 +52,11 @@ public class MyServlet extends HttpServlet {
             if(method.equals(APIStrings.LEADERBOARD)){
                 status = process.leaderBoard(json);
             }
-            if(method.equals(APIStrings.USER_NAME)){
-                status = process.userName(json);
+            if(method.equals(APIStrings.USER_NAME_CHECK)){
+                status = process.userNameCheck(json);
+            }
+            if(method.equals(APIStrings.USER_NAME_SET)){
+                status = process.userNameSet(json);
             }
             /*
             if(method == UPDATE_BASE) {

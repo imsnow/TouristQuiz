@@ -203,7 +203,7 @@ public class Process {
         return true;
     }
 
-    protected boolean userName(JSONObject json){
+    protected boolean userNameCheck(JSONObject json){
 
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
@@ -219,11 +219,24 @@ public class Process {
         Query.Filter filter = new Query.FilterPredicate(APIStrings.NAME,
                 Query.FilterOperator.EQUAL,
                 inputName);
-
         Query q = new Query(DBStrings.USERS);
         q.setFilter(filter);
         int count = database.prepare(q).countEntities(FetchOptions.Builder.withDefaults());
-        if (count != 0) return false;
+        return count == 0;
+    }
+
+    protected boolean userNameSet(JSONObject json){
+
+        String token = getParameter(request, APIStrings.TOKEN, json);
+        if(token == null) return false;
+
+        Entity entity = searchUser(token);
+        if(entity == null){
+            json.put(APIStrings.MESSAGE, "User doesn't exits");
+            return false;
+        }
+
+        String inputName = getParameter(request, APIStrings.NAME, json);
 
         entity.setProperty(APIStrings.NAME, inputName);
         database.put(entity);
