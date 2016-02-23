@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void onBackPressed() {
         super.onBackPressed();
 
-        if(mFragmentManager.getBackStackEntryCount() == 0) // Start Frgament
+        if(mFragmentManager.getBackStackEntryCount() == 0) // Start Fragment
             mHeaderLayout.setVisibility(View.GONE);
 
         Fragment frag = mFragmentManager.findFragmentByTag("CountryListFragment");

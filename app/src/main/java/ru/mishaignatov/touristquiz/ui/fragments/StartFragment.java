@@ -1,15 +1,16 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.UserQuestionDialog;
@@ -24,9 +25,11 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     public StartFragment() {}
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        activityInterface = (MainActivity)activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity)
+            activityInterface = (MainActivity)context;
     }
 
     @Override
@@ -39,6 +42,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
         v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
         v.findViewById(R.id.button_tips).setOnClickListener(this);
+        TextView ver = (TextView) v.findViewById(R.id.version_text);
+        ver.setText(App.getVersion());
 
         return v;
     }

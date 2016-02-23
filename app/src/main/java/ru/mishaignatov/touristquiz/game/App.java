@@ -4,10 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 
-import io.fabric.sdk.android.Fabric;
+import ru.mishaignatov.touristquiz.R;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -15,6 +14,9 @@ import io.fabric.sdk.android.Fabric;
  * Initialize DB
  */
 public class App extends Application {
+
+    private static final String version = "0.8";
+    private static String mVersion;
 
     private static final String TAG = "Application";
     private static Context mContext;
@@ -27,11 +29,12 @@ public class App extends Application {
 
         mContext = getApplicationContext();
         FacebookSdk.sdkInitialize(mContext);
-        //User user = User.getUser(this);
-        //Log.d(TAG, user.toString());
+
+        mVersion = getString(R.string.version, version);
     }
 
     public static Context getContext(){
         return mContext;
     }
+    public static String getVersion()  { return mVersion; }
 }

@@ -6,6 +6,7 @@
     android:background="@color/main_background">
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:src="@drawable/selfie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,11 +19,13 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.2"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/button_partner_quiz"
@@ -30,7 +33,8 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/button_my_quiz"
@@ -42,7 +46,8 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.2">
 
         <ImageButton
             android:layout_width="0dp"
@@ -75,9 +80,11 @@
     </LinearLayout>
 
     <TextView
-        android:text="About"
+        android:id="@+id/version_text"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="0.1" />
 
 </LinearLayout>
