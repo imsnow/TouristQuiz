@@ -33,6 +33,7 @@ public class APIStrings {
     public static final String DATE = "date";
     public static final String LONG = "timeInMils";
     public static final String SESSION = "session";
+    public static final String VERSION = "version";
 
     public static final String OK = "ok";
     public static final String ERROR = "error";

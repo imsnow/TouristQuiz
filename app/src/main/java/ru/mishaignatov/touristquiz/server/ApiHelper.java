@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.User;
 
@@ -55,7 +56,8 @@ public class ApiHelper {
                         addParam(APIStrings.IMEI, encode(user.getImei())) +
                         addParam(APIStrings.EMAIL, encode(user.getEmail())) +
                         addParam(APIStrings.DEVICE, encode(user.getDevice())) +
-                        addParam(APIStrings.ANDROID, encode(user.getAndroidApi()));
+                        addParam(APIStrings.ANDROID, encode(user.getAndroidApi())) +
+                        addParam(APIStrings.VERSION, encode(App.getVersion()));
 
         sendRequest(param, listener, errorListener);
     }
