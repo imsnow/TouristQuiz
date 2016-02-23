@@ -37,7 +37,7 @@ public class Utils {
 
     public static String doAnswerString(final String str) {
         String trim = str.trim();
-        return trim.substring(0,1).toUpperCase() + trim.substring(1).toLowerCase();
+        return trim.substring(0,1).toUpperCase() + trim.substring(1);
     }
 
     public static void setBackground(View view, Drawable drawable){
