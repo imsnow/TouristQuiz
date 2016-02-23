@@ -11,8 +11,9 @@ public class APIStrings {
     public static final String USER_QUESTION   = "user.question";
     public static final String USER_SESSION    = "user.session";
     public static final String USER_RESULT     = "user.result";
+    public static final String LEADERBOARD     = "leaderboard.scores";
     public static final String USER_NAME_CHECK = "user.name.check";
-    public static final String USER_NAME_SET = "user.name.set";
+    public static final String USER_NAME_SET   = "user.name.set";
 
     // attributes
     public static final String METHOD = "method";
@@ -41,5 +42,4 @@ public class APIStrings {
     public static final String PLACE = "place";
     public static final String NAME = "name";
     public static final String ITEMS = "items";
-    public static final String LEADERBOARD = "leaderboard.scores";
 }
