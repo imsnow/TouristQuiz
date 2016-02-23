@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.UserQuestionDialog;
@@ -44,6 +46,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_tips).setOnClickListener(this);
         TextView ver = (TextView) v.findViewById(R.id.version_text);
         ver.setText(App.getVersion());
+        ver.setOnClickListener(this);
 
         return v;
     }
@@ -64,6 +67,9 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_tips:
                 activityInterface.onTipsFragment();
+                break;
+            case R.id.version_text:
+                Toast.makeText(getActivity(), GameManager.getInstance(getContext()).getUser().toString(), Toast.LENGTH_LONG).show();
                 break;
         }
     }

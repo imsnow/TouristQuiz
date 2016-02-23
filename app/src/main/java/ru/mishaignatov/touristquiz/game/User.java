@@ -25,6 +25,8 @@ public class User {
 
     private static User instance;
 
+    public enum TypeName { ENTERED, FACEBOOK }
+
     protected static User getUser(Context context){
         if(instance == null) instance = new User(context);
         return instance;
@@ -85,6 +87,7 @@ public class User {
         return "User{" +
                 "androidApi='" + androidApi + '\'' +
                 ", token='" + token + '\'' +
+                ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", imei='" + imei + '\'' +
                 ", deviceName='" + deviceName + '\'' +

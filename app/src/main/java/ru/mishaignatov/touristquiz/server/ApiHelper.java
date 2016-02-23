@@ -90,6 +90,20 @@ public class ApiHelper {
         sendRequest(param, listener, errorListener);
     }
 
+    public void userNameCheck(User user, String name, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String param = APIStrings.USER_NAME_CHECK + addParam(APIStrings.TOKEN, encode(user.getToken())) +
+                addParam(APIStrings.NAME, encode(name));
+
+        sendRequest(param, listener, errorListener);
+    }
+
+    public void userNameSet(User user, String name, User.TypeName type, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String param = APIStrings.USER_NAME_SET + addParam(APIStrings.TOKEN, encode(user.getToken())) +
+                addParam(APIStrings.NAME, encode(name)) + addParam(APIStrings.TYPE, type);
+
+        sendRequest(param, listener, errorListener);
+    }
+
 
     private static String addParam(String key, String value){
         return "&" + key + "=" + value;
@@ -97,6 +111,10 @@ public class ApiHelper {
 
     private static String addParam(String key, int value){
         return "&" + key + "=" + value;
+    }
+
+    private static String addParam(String key, User.TypeName value){
+        return "&" + key + "=" + value.toString().toLowerCase();
     }
 
     private static String encode(String str){

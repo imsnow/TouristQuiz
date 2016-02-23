@@ -14,6 +14,8 @@ public class APIStrings {
     public static final String USER_SESSION = "user.session";
     public static final String USER_RESULT = "user.result";
     public static final String LEADER_BOARD = "leaderboard.scores";
+    public static final String USER_NAME_CHECK = "user.name.check";
+    public static final String USER_NAME_SET = "user.name.set";
 
     // attributes
     public static final String METHOD = "method";

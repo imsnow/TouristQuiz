@@ -45,18 +45,27 @@
             android:layout_weight="0.6"
             android:layout_height="match_parent" />
 
-        <ImageView
+        <FrameLayout
             android:layout_width="0dp"
-            android:src="@drawable/ic_accept"
             android:layout_weight="0.1"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button_check"
-            android:text="check"
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
-            android:layout_height="match_parent" />
+            <ProgressBar
+                android:id="@+id/enter_name_progress_bar"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/image_accept"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_accept"
+                android:visibility="gone"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
