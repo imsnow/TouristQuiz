@@ -19,7 +19,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"  />
-
+    <!--
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebook_login_button"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+    -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_margin="8dp"
@@ -39,15 +39,23 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/name_edit_text"
             android:hint="your nick name"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.6"
             android:layout_height="match_parent" />
 
         <ImageView
             android:layout_width="0dp"
             android:src="@drawable/ic_accept"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/button_check"
+            android:text="check"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
             android:layout_height="match_parent" />
 
     </LinearLayout>

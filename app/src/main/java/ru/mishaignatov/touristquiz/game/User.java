@@ -36,7 +36,7 @@ public class User {
 
         email      = UserUtils.getGoogleEmail(context);
         imei       = UserUtils.getIMEI(context);
-        deviceName = UserUtils.getDeviceName();
+        deviceName = UserUtils.getDeviceName() != null ? UserUtils.getDeviceName() : "null";
         androidApi = UserUtils.getAndroidAPI();
         // load from preference
         PreferenceStorage.getInstance(context).loadUser(this);
