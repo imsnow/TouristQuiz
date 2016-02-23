@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,10 +16,7 @@ import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.game.CountryManager;
-import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.orm.Country;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.presenters.CountryListPresenter;
 import ru.mishaignatov.touristquiz.presenters.CountryListPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
@@ -40,9 +36,11 @@ public class CountryListFragment extends ListFragment implements CountryListView
     private CountryListPresenter mPresenter;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        headerInterface = (MainActivity)activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity)
+            headerInterface = (MainActivity)context;
     }
 
     @Override
@@ -56,8 +54,6 @@ public class CountryListFragment extends ListFragment implements CountryListView
     public void onResume() {
         super.onResume();
         update();
-        headerInterface.showHeader();
-        headerInterface.onUpdateHeader("Куда отправимся?");
     }
 
     @Override
@@ -90,6 +86,9 @@ public class CountryListFragment extends ListFragment implements CountryListView
     public void update(){
         mPresenter.updateCountries();
         adapter.notifyDataSetChanged();
+
+        headerInterface.showHeader();
+        headerInterface.onUpdateHeader("Куда отправимся?");
     }
 
     @Override
@@ -98,7 +97,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
         mPresenter = new CountryListPresenterImpl(App.getContext(), this);
 
-        return inflater.inflate(R.layout.fragment_country_list, null);
+        return inflater.inflate(R.layout.fragment_country_list, container, false);
     }
 
     @Override
@@ -126,7 +125,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
             //if(view == null)
             if (item.opened) {
-                view = inflater.inflate(R.layout.item_country, null);
+                view = inflater.inflate(R.layout.item_country, parent, false);
 
                 TextView name = (TextView)view.findViewById(R.id.country_name);
                 name.setText(item.value);
@@ -139,7 +138,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
                 }
             }
             else {
-                view = inflater.inflate(R.layout.item_country_closed, null);
+                view = inflater.inflate(R.layout.item_country_closed, parent, false);
 
                 TextView name = (TextView)view.findViewById(R.id.item_country_name);
                 name.setText(item.value);

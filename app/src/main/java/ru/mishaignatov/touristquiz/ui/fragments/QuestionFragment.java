@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,8 +28,8 @@ import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.FailDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
-import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
+import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
 /**
  * Created by Leva on 22.12.2015.
@@ -53,9 +54,11 @@ public class QuestionFragment extends Fragment implements
     private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        headerInterface = (MainActivity)activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity)
+            headerInterface = (MainActivity)context;
     }
 
     @Override
