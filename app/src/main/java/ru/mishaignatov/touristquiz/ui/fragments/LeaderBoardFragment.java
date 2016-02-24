@@ -2,10 +2,8 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.LeaderBoardItem;
@@ -37,15 +34,16 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     private LeaderBoardPresenterImpl mPresenter;
 
     private ListView mListView;
-    private LeaderBoardAdapter mAdapter;
     private ProgressBar mProgressBar;
 
     private List<LeaderBoardItem> mListParent;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        headerInterface = (MainActivity)activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity)
+            headerInterface = (MainActivity)context;
     }
 
     @Override
@@ -78,7 +76,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_leaderboard, null);
+        View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
 
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.leader_board_progressbar);
 
@@ -112,7 +110,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     @Override
     public void onUpdateTable(List<LeaderBoardItem> list) {
         mListParent = list;
-        mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, mListParent);
+        LeaderBoardAdapter mAdapter = new LeaderBoardAdapter(getActivity(), R.layout.item_leaderboard, mListParent);
         mListView.setAdapter(mAdapter);
         //mAdapter.notifyDataSetChanged();
     }
@@ -120,7 +118,13 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     @Override
     public void showEnterNameDialog() {
         EnterNameDialog enterNameDialog = new EnterNameDialog();
+        enterNameDialog.setTargetFragment(this, 0x23);
         enterNameDialog.show(getFragmentManager(), "enter_name");
+    }
+
+    @Override
+    public void onResultDialog() {
+        mPresenter.sendRequestTable();
     }
 
     @Override
@@ -143,7 +147,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
             View v = convertView;
             if(v == null){
                 LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = inflater.inflate(R.layout.item_leaderboard, null);
+                v = inflater.inflate(R.layout.item_leaderboard, parent, false);
             }
 
             TextView place = (TextView)v.findViewById(R.id.leader_board_place);

@@ -5,7 +5,7 @@ package ru.mishaignatov.touristquiz.game;
  **/
 public class LeaderBoardItem implements Comparable<LeaderBoardItem> {
 
-    private int place;
+    //private int place;
     private String name;
     private int scores;
 
@@ -13,17 +13,17 @@ public class LeaderBoardItem implements Comparable<LeaderBoardItem> {
         return name;
     }
 
-    public int getPlace() {
-        return place;
-    }
+    //public int getPlace() {
+    //    return place;
+    //}
 
     public int getScores() {
         return scores;
     }
 
-    public LeaderBoardItem(String name, int place, int scores) {
+    public LeaderBoardItem(String name, /*int place,*/ int scores) {
         this.name = name;
-        this.place = place;
+        //this.place = place;
         this.scores = scores;
     }
 

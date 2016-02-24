@@ -13,5 +13,6 @@ public interface LeaderBoardView {
     void hideProgressBar();
     void onUpdateTable(List<LeaderBoardItem> list);
     void showEnterNameDialog();
+    void onResultDialog();
     void showError();
 }

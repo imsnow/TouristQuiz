@@ -73,7 +73,7 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject jsonItem = arr.getJSONObject(i);
                         LeaderBoardItem item = new LeaderBoardItem(jsonItem.getString(APIStrings.NAME),
-                                Integer.parseInt(jsonItem.getString(APIStrings.PLACE)),
+                                /*Integer.parseInt(jsonItem.getString(APIStrings.PLACE)),*/
                                 Integer.parseInt(jsonItem.getString(APIStrings.SCORES)));
                         list.add(item);
                     }

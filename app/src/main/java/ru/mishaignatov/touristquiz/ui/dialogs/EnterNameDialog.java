@@ -1,5 +1,6 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.presenters.EnterNamePresenter;
 import ru.mishaignatov.touristquiz.presenters.EnterNamePresenterImpl;
+import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.views.EnterNameView;
 
 /***
@@ -83,7 +85,7 @@ public class EnterNameDialog extends DialogFragment implements View.OnClickListe
         int id = v.getId();
         switch (id){
             case R.id.button_cancel:
-                dismiss();
+                result();
                 break;
             case R.id.button_send:
                 mPresenter.sendName();
@@ -122,8 +124,20 @@ public class EnterNameDialog extends DialogFragment implements View.OnClickListe
         mSendButton.setEnabled(true);
     }
 
+    private void result(){
+        LeaderBoardFragment frag = (LeaderBoardFragment) getTargetFragment();
+        frag.onResultDialog();
+        dismiss();
+    }
+
     @Override
     public void onNameOk() {
-        dismiss();
+        result();
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        result();
+        super.onCancel(dialog);
     }
 }
