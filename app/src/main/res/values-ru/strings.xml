@@ -51,9 +51,12 @@
     <string name="dialog_add_millis_title">Добавить мили</string>
     <string name="dialog_add_millis_ad">Посмотреть рекламный ролик</string>
 
+    <string name="dialog_buy_ticket_text">Для путешествия по выбранной стране необходимо купить билет. Купить за %1$d миль?</string>
+
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>
+    <string name="buy">Купить</string>
     <string name="dialog_question_hint_text">Вопрос не должен превышать 130 символов</string>
     <string name="dialog_question_hint_20">Максимум 20 символов</string>
     <string name="button_partner_quiz">Викторина от партнера</string>

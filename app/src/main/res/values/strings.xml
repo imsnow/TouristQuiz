@@ -54,12 +54,15 @@
     <string name="dialog_enter_name_title">Your name</string>
     <string name="dialog_enter_name_hint">To compare your result with other players you need to introduce yourself. You can login via Facebook or enter you own name (mick)</string>
 
-    <string name="dialog_add_millis_title">Add millis</string>
+    <string name="dialog_add_millis_title">Add miles</string>
     <string name="dialog_add_millis_ad">Watch promo video</string>
+
+    <string name="dialog_buy_ticket_text">To travel to the chosen country you need to buy a ticket. To buy for %1$d miles?</string>
 
     <string name="country">Country</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
+    <string name="buy">Buy</string>
     <string name="dialog_question_hint_text">Questions should not exceed 130 characters</string>
     <string name="dialog_question_hint_20">Max of 20 characters</string>
     <string name="button_partner_quiz">Partner Quiz</string>
@@ -69,7 +72,7 @@
 
     <string name="header_tips">Tips</string>
     <string name="header_leaderboard">Leader Board</string>
-    <string name="toast_plus_millis">+10 millis</string>
+    <string name="toast_plus_millis">+10 miles</string>
     <string name="load_ad">Loading...</string>
 
     <string-array name="countries">
