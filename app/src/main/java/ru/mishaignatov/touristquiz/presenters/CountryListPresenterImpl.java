@@ -47,7 +47,7 @@ public class CountryListPresenterImpl implements CountryListPresenter {
             else
                 view.startLevel(position);
         }
-        else view.showClosedCountry();
+        else view.showClosedCountry(position);
     }
 
     @Override

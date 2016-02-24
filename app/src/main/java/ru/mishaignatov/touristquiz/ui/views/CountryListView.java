@@ -5,7 +5,7 @@ package ru.mishaignatov.touristquiz.ui.views;
  */
 public interface CountryListView {
 
-    void showClosedCountry();
+    void showClosedCountry(int position);
     void showNotEnoughMillis();
     void showDialogLevelFinished();
     void startLevel(int position);

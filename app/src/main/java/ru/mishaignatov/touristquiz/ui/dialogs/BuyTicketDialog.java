@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.orm.Country;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
+import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
 
 /***
  * Created by Mike on 24.02.2016.
@@ -51,23 +52,14 @@ public class BuyTicketDialog extends DialogFragment implements View.OnClickListe
                 dismiss();
                 break;
             case R.id.button_send:
-                //buyCountry();
+                sendBuyResult();
                 break;
         }
     }
-    /*
-    private void buyCountry(){
-        User user = GameManager.getInstance(getContext()).getUser();
 
-        if (user.getMillis() < country.cost)
-            // show message
-            view.showNotEnoughMillis();
-        else {
-            // buy ticket
-            user.buyCountry(country.cost);
-            mCountryManager.openCountry(country);
-            view.startLevel(position);
-        }
+    private void sendBuyResult(){
+        CountryListFragment frag = (CountryListFragment)getTargetFragment();
+        frag.buyCountry(mCountry.id);
+        dismiss();
     }
-    */
 }

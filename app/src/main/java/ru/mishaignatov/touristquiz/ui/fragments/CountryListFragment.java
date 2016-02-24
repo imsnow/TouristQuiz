@@ -22,6 +22,7 @@ import ru.mishaignatov.touristquiz.presenters.CountryListPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.ui.dialogs.BuyTicketDialog;
 import ru.mishaignatov.touristquiz.ui.views.CountryListView;
 
 /**
@@ -57,8 +58,14 @@ public class CountryListFragment extends ListFragment implements CountryListView
     }
 
     @Override
-    public void showClosedCountry() {
-        headerInterface.onShowHiddenTip("Для полета необходимо купить билет");
+    public void showClosedCountry(int position) {
+        //headerInterface.onShowHiddenTip("Для полета необходимо купить билет");
+        BuyTicketDialog dialog = new BuyTicketDialog();
+        Bundle args = new Bundle();
+        args.putInt("KEY_ID", position);
+        dialog.setArguments(args);
+        dialog.setTargetFragment(this, 0x24);
+        dialog.show(getFragmentManager(), "buy_dialog");
     }
 
     @Override
@@ -150,12 +157,16 @@ public class CountryListFragment extends ListFragment implements CountryListView
                 buy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPresenter.onBuyCountry(position);
+                        buyCountry(position);
                     }
                 });
             }
 
             return view;
         }
+    }
+
+    public void buyCountry(int position){
+        mPresenter.onBuyCountry(position);
     }
 }
