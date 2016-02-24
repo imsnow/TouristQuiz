@@ -194,10 +194,13 @@ public class Process {
         for(int i=0; i<size; i++){
             JSONObject item = new JSONObject();
             Entity en = list.get(i);
-            item.put(APIStrings.PLACE, i);
-            item.put(APIStrings.NAME, en.getProperty(APIStrings.EMAIL));
-            item.put(APIStrings.SCORES, en.getProperty(APIStrings.SCORES));
-            items.put(item);
+            //item.put(APIStrings.PLACE, i);
+            Object name = en.getProperty(APIStrings.NAME);
+            if (name != null) {
+                item.put(APIStrings.NAME, en.getProperty(APIStrings.NAME));
+                item.put(APIStrings.SCORES, en.getProperty(APIStrings.SCORES));
+                items.put(item);
+            }
         }
 
         json.put(APIStrings.ITEMS, items);
