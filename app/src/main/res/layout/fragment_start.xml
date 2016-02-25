@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"/>
-
+    <!--
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,7 +30,7 @@
         android:background="@drawable/sel_button_start"
         android:text="@string/button_partner_quiz"
         android:id="@+id/button_partner" />
-
+    -->
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -85,7 +85,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"/>
+        android:layout_weight="0.4"/>
 
     <TextView
         android:id="@+id/version_text"

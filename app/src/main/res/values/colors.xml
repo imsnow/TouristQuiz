@@ -10,7 +10,7 @@
   -->
 
   <!-- new theme -->
-  <color name="main_background">#FFF4CA</color>
+  <color name="main_background">#FFF4CA</color> <!-- previous #FFF4CA -->
   <color name="start_bg">#6C787B</color>
   <color name="toolbar_alpha">#10000000</color>
 
@@ -26,6 +26,13 @@
   <color name="text_secondary">#8A000000</color>
   <color name="text_hint">#61000000</color>
 
-  <color name="button_start_active">@color/list_item_bg</color>  <!-- #F7D55F -->
+  <!-- yellow style
+  <color name="button_start_active">@color/list_item_bg</color>
   <color name="button_start_pressed">#DCAB47</color>
+  -->
+  <color name="button_start_active">#fff</color>
+  <color name="button_start_pressed">#e0e0e0</color>
+  <color name="button_start_border">@color/sky</color>  <!-- sky color -->
+
+  <color name="sky">#8db6bd</color>
 </resources>
