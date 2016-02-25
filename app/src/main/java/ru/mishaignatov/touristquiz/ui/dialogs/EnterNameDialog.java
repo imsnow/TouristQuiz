@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.facebook.login.widget.LoginButton;
+
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.presenters.EnterNamePresenter;
@@ -46,6 +48,8 @@ public class EnterNameDialog extends DialogFragment implements View.OnClickListe
         View v = inflater.inflate(R.layout.dialog_enter_name, container, false);
 
         v.findViewById(R.id.button_cancel).setOnClickListener(this);
+
+        LoginButton loginButton = (LoginButton)v.findViewById(R.id.facebook_login_button);
 
         mSendButton = (Button)v.findViewById(R.id.button_send);
         mSendButton.setOnClickListener(this);

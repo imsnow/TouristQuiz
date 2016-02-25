@@ -74,6 +74,7 @@
     <string name="header_leaderboard">Leader Board</string>
     <string name="toast_plus_millis">+10 miles</string>
     <string name="load_ad">Loading...</string>
+    <string name="or">OR</string>
 
     <string-array name="countries">
         <item>@string/france</item>
