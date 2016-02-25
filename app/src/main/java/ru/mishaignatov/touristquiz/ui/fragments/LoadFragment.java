@@ -41,6 +41,11 @@ public class LoadFragment extends Fragment implements
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         tipsInterface = (MainActivity)activity;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ApiHelper.getHelper(App.getContext()).userRegister(
                 GameManager.getInstance(App.getContext()).getUser(), this, this);
     }

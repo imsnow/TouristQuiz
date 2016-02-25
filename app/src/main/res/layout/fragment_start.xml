@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background">
+    android:background="@color/start_bg">
 
     <ImageView
         android:contentDescription="@string/app_name"
@@ -16,8 +16,8 @@
         android:layout_marginTop="40dp"
         android:id="@+id/button_start"
         android:text="@string/start_button"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:background="@drawable/sel_button_start"
+        style="@style/StartButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"/>
@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        style="@style/StartButtonStyle"
+        android:background="@drawable/sel_button_start"
         android:text="@string/button_partner_quiz"
         android:id="@+id/button_partner" />
 
@@ -35,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        style="@style/StartButtonStyle"
+        android:background="@drawable/sel_button_start"
         android:text="@string/button_my_quiz"
         android:id="@+id/button_my_quiz" />
 
@@ -44,40 +44,48 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        style="@style/StartButtonStyle"
         android:layout_height="0dp"
         android:layout_weight="0.2">
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:layout_height="wrap_content"
+            android:background="@drawable/sel_button_start"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_leaderboard"
             android:id="@+id/button_leaderboard" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:layout_height="wrap_content"
+            android:background="@drawable/sel_button_start"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_achievement"
             android:id="@+id/button_achievements" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:layout_height="wrap_content"
+            android:background="@drawable/sel_button_start"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_tip"
             android:id="@+id/button_tips" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:layout_height="wrap_content"
+            android:background="@drawable/sel_button_start"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_setting"
             android:id="@+id/button_settings" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"/>
 
     <TextView
         android:id="@+id/version_text"

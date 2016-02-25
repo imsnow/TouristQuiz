@@ -16,6 +16,8 @@
 
         <ListView
             android:id="@+id/leader_board_listview"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>

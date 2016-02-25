@@ -10,7 +10,7 @@
         android:id="@+id/country_name"
         android:text="Египет"
         android:layout_width="0dp"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_primary"
         android:gravity="center|left"
         android:textSize="18sp"
         android:padding="8dp"
@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_primary"
         android:id="@+id/country_result"
         android:layout_height="match_parent" />
 
