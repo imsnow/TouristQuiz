@@ -1,6 +1,8 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.support.v4.app.DialogFragment;
+import android.view.Gravity;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /***
@@ -22,6 +24,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private void setupTitle(){
         TextView title = (TextView)getDialog().findViewById(android.R.id.title);
         title.setBackgroundResource(getTitleColor());
+        title.setGravity(Gravity.CENTER);
         title.setText(getString(getTitleString()));
     }
 }

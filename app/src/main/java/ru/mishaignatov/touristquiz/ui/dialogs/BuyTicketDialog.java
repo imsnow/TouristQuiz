@@ -1,11 +1,9 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -68,6 +66,6 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public int getTitleString() {
-        return 0;
+        return R.string.open_level;
     }
 }

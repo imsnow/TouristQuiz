@@ -5,6 +5,8 @@
     <string name="action_settings">Настройки</string>
     <string name="version">Версия %1$s</string>
 
+    <string name="open_level">Открыть уровень</string>
+
     <string name="quiz_point">157</string>
 
     <string name="quiz_text">В Какой стране находятся Великие Пирамиды Гизы?</string>
@@ -69,6 +71,7 @@
     <string name="toast_plus_millis">+10 миль</string>
     <string name="load_ad">Загрузка...</string>
     <string name="or">или</string>
+    <string name="level_text">Великолепно!</string>
 
     <string-array name="countries">
         <item>@string/france</item>

@@ -60,7 +60,7 @@
             android:id="@+id/header_miles"
             android:layout_width="wrap_content"
             android:paddingRight="8dp"
-            android:maxLength="3"
+            android:maxLength="5"
             android:gravity="center_vertical|left"
             android:textColor="@color/text_primary"
             android:layout_height="match_parent" />

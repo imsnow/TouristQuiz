@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
 
@@ -15,13 +16,20 @@ public class LevelDoneDialog extends BaseDialogFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_level_done, container, false);
-        //v.findViewById(R.id.dialog_fail_next).setOnClickListener(this);
+        v.findViewById(R.id.button_next).setOnClickListener(this);
+
+        ((TextView) v.findViewById(R.id.dialog_level_miles)).setText(getString(R.string.show_plus_and_result, "30"));
+
         return v;
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.button_next:
+                dismiss();
+                break;
+        }
     }
 
     @Override
