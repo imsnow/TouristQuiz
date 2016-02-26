@@ -1,12 +1,10 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,22 +18,20 @@ import ru.mishaignatov.touristquiz.server.ApiHelper;
 /**
  * Created by Leva on 16.01.2016.
  **/
-public class UserQuestionDialog extends DialogFragment implements View.OnClickListener, Response.Listener<String>, Response.ErrorListener {
+public class UserQuestionDialog extends BaseDialogFragment implements View.OnClickListener, Response.Listener<String>, Response.ErrorListener {
 
-    private EditText mQusetionText;
+    private EditText mQuestionText;
     private EditText mAnswerText;
     private EditText mCountryText;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
-        View v = inflater.inflate(R.layout.dialog_user_question, null);
+        View v = inflater.inflate(R.layout.dialog_user_question, container, false);
         v.findViewById(R.id.button_send).setOnClickListener(this);
         v.findViewById(R.id.button_cancel).setOnClickListener(this);
 
-        mQusetionText = (EditText) v.findViewById(R.id.user_question_text);
+        mQuestionText = (EditText) v.findViewById(R.id.user_question_text);
         mAnswerText = (EditText) v.findViewById(R.id.user_question_answers);
         mCountryText = (EditText) v.findViewById(R.id.user_question_country);
         //v.findViewById(R.id.btnMaybe).setOnClickListener(this);
@@ -56,13 +52,13 @@ public class UserQuestionDialog extends DialogFragment implements View.OnClickLi
     }
 
     private void sendQuestion(){
-        if (mQusetionText.length() == 0 || mAnswerText.length() == 0 || mCountryText.length() == 0){
+        if (mQuestionText.length() == 0 || mAnswerText.length() == 0 || mCountryText.length() == 0){
             Toast.makeText(getActivity(), "Заполните все поля", Toast.LENGTH_LONG).show();
             return;
         }
 
         ApiHelper.getHelper(getActivity()).userQuestion(GameManager.getInstance(getActivity()).getUser(),
-                mQusetionText.getText().toString(), mAnswerText.getText().toString(), mCountryText.getText().toString(), this, this);
+                mQuestionText.getText().toString(), mAnswerText.getText().toString(), mCountryText.getText().toString(), this, this);
     }
 
     @Override
@@ -76,5 +72,15 @@ public class UserQuestionDialog extends DialogFragment implements View.OnClickLi
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getActivity(), "Ошибка. проверьте подключение к интернету", Toast.LENGTH_LONG).show();
         Log.d("TAG", "error = " + error.getMessage());
+    }
+
+    @Override
+    public int getTitleColor() {
+        return R.color.success_title;
+    }
+
+    @Override
+    public int getTitleString() {
+        return R.string.dialog_question_title;
     }
 }

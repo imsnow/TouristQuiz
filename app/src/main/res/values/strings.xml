@@ -51,6 +51,8 @@
 
     <string name="dialog_fail_title">Failure</string>
 
+    <string name="dialog_level_done_title">Level is passed</string>
+
     <string name="dialog_enter_name_title">Your name</string>
     <string name="dialog_enter_name_hint">To compare your result with other players you need to introduce yourself. You can login via Facebook or enter you own name (mick)</string>
 

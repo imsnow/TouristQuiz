@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <color name="start_bg">#6C787B</color>
+  <color name="toolbar_alpha">#10000000</color>
+
+  <color name="success_title">#81C784</color> <!-- green 300 -->
+  <color name="fail_title">#E57373</color>    <!-- red 300   -->
+
+  <color name="text_primary">#DE000000</color>
+  <color name="text_secondary">#8A000000</color>
+  <color name="text_hint">#61000000</color>
+
   <!--  <color name="lime100">#FFF0F4C3</color>
     <color name="deep_orange100">#FFFFCCBC</color>
     <color name="green100">#FFC8E6C9</color>
@@ -11,28 +21,24 @@
 
   <!-- new theme -->
   <color name="main_background">#FFF4CA</color> <!-- previous #FFF4CA -->
-  <color name="start_bg">#6C787B</color>
-  <color name="toolbar_alpha">#10000000</color>
-
 
   <color name="list_item_border">#EB9F78</color>
   <color name="list_item_bg">#FDDA9D</color>
   <color name="list_item_active_bg">#B5D197</color>
 
-  <color name="success_title">#81C784</color> <!-- green 300 -->
-  <color name="fail_title">#E57373</color>    <!-- red 300 -->
-
-  <color name="text_primary">#DE000000</color>
-  <color name="text_secondary">#8A000000</color>
-  <color name="text_hint">#61000000</color>
-
   <!-- yellow style
   <color name="button_start_active">@color/list_item_bg</color>
   <color name="button_start_pressed">#DCAB47</color>
   -->
+
+  <!--<color name="list_item_border">@color/success_title</color>-->
+  <!--<color name="list_item_bg">@color/button_start_active</color>-->
+  <!--<color name="list_item_active_bg">#B5D197</color>-->
+
   <color name="button_start_active">#fff</color>
   <color name="button_start_pressed">#e0e0e0</color>
   <color name="button_start_border">@color/sky</color>  <!-- sky color -->
 
   <color name="sky">#8db6bd</color>
+
 </resources>

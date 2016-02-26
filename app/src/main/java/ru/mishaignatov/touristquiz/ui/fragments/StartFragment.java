@@ -46,7 +46,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_tips).setOnClickListener(this);
         TextView ver = (TextView) v.findViewById(R.id.version_text);
         ver.setText(App.getVersion());
-        ver.setOnClickListener(this);
+        //ver.setOnClickListener(this);
 
         return v;
     }

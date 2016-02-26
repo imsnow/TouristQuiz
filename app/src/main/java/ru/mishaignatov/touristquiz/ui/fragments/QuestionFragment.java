@@ -27,6 +27,7 @@ import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.FailDialog;
+import ru.mishaignatov.touristquiz.ui.dialogs.LevelDoneDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
@@ -175,7 +176,9 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void showDialogNextLevel() {
-        DialogHelper.showDialogNextLevel(getActivity());
+        //DialogHelper.showDialogNextLevel(getActivity());
+        LevelDoneDialog dialog = new LevelDoneDialog();
+        dialog.show(getFragmentManager(), "level_done");
         getActivity().onBackPressed();
     }
 

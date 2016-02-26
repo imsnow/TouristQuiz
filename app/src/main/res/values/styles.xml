@@ -32,8 +32,12 @@
     <style name="StartButtonStyle">
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginBottom">4dp</item>
-        <item name="android:layout_marginRight">32dp</item>
-        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginRight">48dp</item>
+        <item name="android:layout_marginLeft">48dp</item>
+    </style>
+
+    <style name="BaseDialogStyle" parent="AlertDialog.AppCompat">
+        <item name="android:title"></item>
     </style>
 
    </resources>
