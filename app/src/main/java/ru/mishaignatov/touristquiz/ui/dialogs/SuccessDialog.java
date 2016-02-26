@@ -16,7 +16,7 @@ import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 /**
  * Created by Mike on 11.02.2016.
  **/
-public class SuccessDialog extends DialogFragment implements View.OnClickListener{
+public class SuccessDialog extends BaseDialogFragment implements View.OnClickListener{
 
     private String time;
     private String scores;
@@ -24,8 +24,6 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         View v = inflater.inflate(R.layout.dialog_success, null);
         v.findViewById(R.id.dialog_success_next).setOnClickListener(this);
@@ -59,5 +57,15 @@ public class SuccessDialog extends DialogFragment implements View.OnClickListene
     public void result(){
         QuestionFragment frag = (QuestionFragment)getTargetFragment();
         frag.onResultDialog();
+    }
+
+    @Override
+    public int getTitleColor() {
+        return R.color.success_title;
+    }
+
+    @Override
+    public int getTitleString() {
+        return R.string.dialog_success_title;
     }
 }

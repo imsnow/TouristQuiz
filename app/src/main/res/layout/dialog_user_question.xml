@@ -6,14 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="@string/dialog_question_title"
-        android:textSize="20sp"
-        android:padding="8dp"
-        android:background="@color/highlighted_text_material_dark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
         android:text="@string/dialog_question_text"
         android:padding="8dp"
         android:layout_width="match_parent"

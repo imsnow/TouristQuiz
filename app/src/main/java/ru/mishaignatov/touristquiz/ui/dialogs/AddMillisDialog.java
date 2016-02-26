@@ -25,7 +25,7 @@ import ru.mishaignatov.touristquiz.game.GameManager;
 /***
  * Created by Mike on 19.02.2016.
  */
-public class AddMillisDialog extends DialogFragment implements View.OnClickListener {
+public class AddMillisDialog extends BaseDialogFragment implements View.OnClickListener {
 
     private InterstitialAd mInterstitialAd;
     private Button mShowAdButton;
@@ -34,8 +34,6 @@ public class AddMillisDialog extends DialogFragment implements View.OnClickListe
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         View v = inflater.inflate(R.layout.dialog_add_millis, container, false);
 
@@ -122,5 +120,15 @@ public class AddMillisDialog extends DialogFragment implements View.OnClickListe
             e.printStackTrace();
         }
         return "";
+    }
+
+    @Override
+    public int getTitleColor() {
+        return R.color.success_title;
+    }
+
+    @Override
+    public int getTitleString() {
+        return R.string.dialog_add_millis_title;
     }
 }

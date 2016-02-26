@@ -17,14 +17,12 @@ import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
 /***
  * Created by Mike on 24.02.2016.
  */
-public class BuyTicketDialog extends DialogFragment implements View.OnClickListener {
+public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickListener {
 
     private Country mCountry;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         View v = inflater.inflate(R.layout.dialog_buy_ticket, container, false);
 
@@ -61,5 +59,15 @@ public class BuyTicketDialog extends DialogFragment implements View.OnClickListe
         CountryListFragment frag = (CountryListFragment)getTargetFragment();
         frag.buyCountry(mCountry.id);
         dismiss();
+    }
+
+    @Override
+    public int getTitleColor() {
+        return R.color.success_title;
+    }
+
+    @Override
+    public int getTitleString() {
+        return 0;
     }
 }

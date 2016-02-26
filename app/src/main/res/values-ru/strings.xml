@@ -36,7 +36,7 @@
     <string name="button_leaderboard">Таблица лидеров</string>
     <string name="leaderboard_name">Имя</string>
     <string name="leaderboard_scores">Очки</string>
-    <string name="dialog_question_title">Загадай вопрос всему миру</string>
+    <string name="dialog_question_title">Загадай свой вопрос</string>
     <string name="dialog_question_text">Придумай вопрос:</string>
     <string name="dialog_question_answer">Правильный ответ:</string>
 
