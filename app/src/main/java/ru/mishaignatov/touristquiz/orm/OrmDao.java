@@ -33,7 +33,6 @@ public class OrmDao {
     private static OrmDao instance = null;
 
     private Context context = null;
-    private OrmHelper helper = null;
     private RuntimeExceptionDao<Country, Integer> mCountryDao;
     private RuntimeExceptionDao<Question, Integer> mQuestionDao;
     private RuntimeExceptionDao<Tip, Integer> mTipDao;
@@ -42,7 +41,7 @@ public class OrmDao {
 
     private OrmDao(Context context){
         this.context = context;
-        helper = new OrmHelper(context);
+        OrmHelper helper = new OrmHelper(context);
         mCountryDao = helper.getCountryDao();
         mQuestionDao = helper.getQuestionDao();
         mTipDao      = helper.getTipsDao();
