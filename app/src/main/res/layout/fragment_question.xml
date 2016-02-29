@@ -20,13 +20,17 @@
     <ru.mishaignatov.touristquiz.ui.views.CircleTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
         android:gravity="center"
         android:padding="64dp"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="10"
+        android:layout_marginTop="48dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/quiz_text"
         android:id="@+id/quiz_text"
-        android:layout_gravity="center" />
+        android:layout_gravity="start|top" />
 
     <LinearLayout
         android:layout_gravity="start|bottom"
@@ -34,56 +38,33 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-
             <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button1"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button1"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
                 android:layout_height="40dp" />
 
             <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button2"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button2"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
                 android:layout_height="40dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bottom_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button4"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button4"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
                 android:layout_height="40dp" />
 
             <ru.mishaignatov.touristquiz.ui.views.AnswerButton
                 android:id="@+id/button3"
                 style="@style/AnswerButtonStyle"
                 android:text="@string/quiz_button3"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"/>
-        </LinearLayout>
 
-        <TextView
-            android:paddingTop="8dp"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:text="@string/quiz_error"
-            android:id="@+id/error_text" />
     </LinearLayout>
 </FrameLayout>

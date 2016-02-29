@@ -70,11 +70,6 @@ public class QuestionFragment extends Fragment implements
 
         View v = inflater.inflate(R.layout.fragment_question, container, false);
 
-        TextView error = (TextView)v.findViewById(R.id.error_text);
-        error.setOnClickListener(this);
-        // temp
-        error.setVisibility(View.GONE);
-
         layout = (FrameLayout)v.findViewById(R.id.layout);
         layout.setOnClickListener(null);
 
@@ -105,22 +100,8 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if(id == R.id.error_text) { // send error
-            DialogHelper.showDialogErrorInQuestion(getActivity(), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (which == -1) {// Send
-                        //sendErrorEmail(currentQuiz);
-                        Toast.makeText(getActivity(), "You can send message in next version", Toast.LENGTH_LONG).show();
-                    }
-                    if (which == -2) { // cancel
-                        dialog.dismiss();
-                    }
-                }
-            });
-        }
-        else if (v instanceof AnswerButton){ // One of fourth answers buttons
+        // One of fourth answers buttons
+        if (v instanceof AnswerButton){
             //mStopwatch.stop();
             String s = ((AnswerButton) v).getText().toString();
             mClickedButton = (AnswerButton) v;
@@ -239,20 +220,4 @@ public class QuestionFragment extends Fragment implements
     public void onAnimationRepeat(Animation animation) {
         // unused
     }
-
-    /*
-    private void sendErrorEmail(final Quiz quiz){
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ruwinmike@gmail.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "Tourist Quiz");
-        i.putExtra(Intent.EXTRA_TEXT, "Quiz = " + quiz.getText() + "\n"
-                                    + "Answers = " + quiz.getStringAnswers() + "\n");
-        try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
-    */
 }
