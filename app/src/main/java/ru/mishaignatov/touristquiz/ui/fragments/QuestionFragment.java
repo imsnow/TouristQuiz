@@ -30,6 +30,7 @@ import ru.mishaignatov.touristquiz.ui.dialogs.FailDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.LevelDoneDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
+import ru.mishaignatov.touristquiz.ui.views.CircleTextView;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
 /**
@@ -39,7 +40,8 @@ import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 public class QuestionFragment extends Fragment implements
         View.OnClickListener, QuestionView {
 
-    private TextView questionText;
+//    private TextView questionText;
+    private CircleTextView questionText;
     private AnswerButton button1, button2, button3, button4;
     private Animation shakeAnim;
 
@@ -52,7 +54,7 @@ public class QuestionFragment extends Fragment implements
     private QuestionPresenter mPresenter;
 
     // temp
-    private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
+    //private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
 
     @Override
     public void onAttach(Context context) {
@@ -77,7 +79,7 @@ public class QuestionFragment extends Fragment implements
         layout.setOnClickListener(null);
 
         //mTimerText = (TextView)v.findViewById(R.id.timer_view);
-        questionText = (TextView)v.findViewById(R.id.quiz_text);
+        questionText = (CircleTextView) v.findViewById(R.id.quiz_text);
         button1      = (AnswerButton)v.findViewById(R.id.button1);
         button2      = (AnswerButton)v.findViewById(R.id.button2);
         button3      = (AnswerButton)v.findViewById(R.id.button3);
@@ -207,8 +209,10 @@ public class QuestionFragment extends Fragment implements
         button3.setText(list.get(2).trim());
         button4.setText(list.get(3).trim());
 
-        Utils.setBackground(layout, Utils.loadBitmapFromAssets(getActivity().getApplicationContext(),
-                bg_resource[question.getType()]));
+        Utils.setBackground(layout, Utils.loadBitmapFromAssets(App.getContext(),
+                App.BGs[question.getType()]));
+
+        Utils.setBackground(questionText, Utils.loadBitmapFromAssets(App.getContext(), App.CIRCLEs[question.getType()]));
 
         headerInterface.onUpdateHeader(mPresenter.getCurrentCountry());
     }

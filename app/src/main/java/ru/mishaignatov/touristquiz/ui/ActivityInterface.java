@@ -18,6 +18,7 @@ public interface ActivityInterface {
     void onCountryListFragment();
     void onLeaderBoardFragment();
     void onTipsFragment();
+    void onSettingsFragment();
 
     void showFragmentDialog(DialogFragment dialog, String tag);
 }

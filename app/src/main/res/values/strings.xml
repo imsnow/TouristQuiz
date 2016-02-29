@@ -81,6 +81,7 @@
     <string name="or">OR</string>
 
     <string name="level_text">Impressive</string>
+    <string name="reset_game">Reset</string>
 
     <string-array name="countries">
         <item>@string/france</item>

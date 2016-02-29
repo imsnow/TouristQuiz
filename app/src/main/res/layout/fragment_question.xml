@@ -2,33 +2,31 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="0dp"
     android:background="@android:color/transparent"
     android:id="@+id/layout">
-
+    <!--
     <TextView
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:layout_marginBottom="90dp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/quiz_text"
         android:id="@+id/quiz_text"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <!--
+        android:layout_height="wrap_content" /> -->
+
     <ru.mishaignatov.touristquiz.ui.views.CircleTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
         android:layout_marginBottom="90dp"
         android:gravity="center"
+        android:padding="64dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/quiz_text"
         android:id="@+id/quiz_text"
-        android:layout_gravity="center" /> -->
+        android:layout_gravity="center" />
 
     <LinearLayout
         android:layout_gravity="start|bottom"

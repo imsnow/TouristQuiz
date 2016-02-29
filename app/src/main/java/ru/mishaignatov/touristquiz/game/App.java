@@ -20,6 +20,10 @@ public class App extends Application {
 
     private static final String TAG = "Application";
     private static Context mContext;
+
+    public static final String[] BGs = {"img/bg_att.png", "img/bg_kit.png", "img/bg_geo.png", "img/bg_his.png"};
+    public static final String[] CIRCLEs = {"img/circle_att.png", "img/circle_kit.png", "img/circle_geo.png", "img/circle_his.png"};
+
     @Override
     public void onCreate() {
         super.onCreate();

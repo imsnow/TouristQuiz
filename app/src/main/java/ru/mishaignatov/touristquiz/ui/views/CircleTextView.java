@@ -74,9 +74,10 @@ public class CircleTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         // круг, в который вписан текст
-        for(int i=1; i<=10; i++)
-            canvas.drawCircle(mWidth/2, mWidth/2,i*mRadius/10, mGlowPaint);
-
+        //for(int i=1; i<=10; i++)
+        //    canvas.drawCircle(mWidth/2, mWidth/2,i*mRadius/10, mGlowPaint);
+        super.onDraw(canvas);
+        /*
         // высота строки
         float textHeight = mTextPaint.getFontSpacing();
         // измеряем длинну текста
@@ -138,7 +139,7 @@ public class CircleTextView extends TextView {
                 canvas.drawText(rightString, mWidth/2, mWidth/2 + textHeight * cnt, mTextPaint);
                 break;
             }
-        }
+        } */
     }
 
     private static int calcWidthLine(float r, float b){

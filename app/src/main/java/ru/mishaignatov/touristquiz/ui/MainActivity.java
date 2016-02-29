@@ -24,6 +24,7 @@ import ru.mishaignatov.touristquiz.ui.dialogs.AddMillisDialog;
 import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 
@@ -206,6 +207,13 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onTipsFragment() {
         addFragment(new TipsFragment(), "Tips");
+    }
+
+    @Override
+    public void onSettingsFragment() {
+        addFragment(new SettingsFragment(), "Settings");
+        showHeader();
+        onUpdateHeader(getString(R.string.action_settings));
     }
 
     @Override

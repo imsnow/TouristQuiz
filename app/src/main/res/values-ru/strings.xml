@@ -72,6 +72,7 @@
     <string name="load_ad">Загрузка...</string>
     <string name="or">или</string>
     <string name="level_text">Великолепно!</string>
+    <string name="reset_game">Начать заново</string>
 
     <string-array name="countries">
         <item>@string/france</item>

@@ -44,6 +44,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
         v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
         v.findViewById(R.id.button_tips).setOnClickListener(this);
+        v.findViewById(R.id.button_settings).setOnClickListener(this);
         TextView ver = (TextView) v.findViewById(R.id.version_text);
         ver.setText(App.getVersion());
         //ver.setOnClickListener(this);
@@ -67,6 +68,9 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_tips:
                 activityInterface.onTipsFragment();
+                break;
+            case R.id.button_settings:
+                activityInterface.onSettingsFragment();
                 break;
             case R.id.version_text:
                 Toast.makeText(getActivity(), GameManager.getInstance(getContext()).getUser().toString(), Toast.LENGTH_LONG).show();
