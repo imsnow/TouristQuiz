@@ -15,26 +15,26 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.database.Level;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.orm.Country;
-import ru.mishaignatov.touristquiz.presenters.CountryListPresenter;
-import ru.mishaignatov.touristquiz.presenters.CountryListPresenterImpl;
+import ru.mishaignatov.touristquiz.presenters.LevelListPresenter;
+import ru.mishaignatov.touristquiz.presenters.LevelListPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.DialogHelper;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.BuyTicketDialog;
-import ru.mishaignatov.touristquiz.ui.views.CountryListView;
+import ru.mishaignatov.touristquiz.ui.views.LevelListView;
 
 /**
  * Created by Ignatov on 13.08.2015.
  * Display all counties - levels
  */
-public class CountryListFragment extends ListFragment implements CountryListView {
+public class LevelListFragment extends ListFragment implements LevelListView {
 
-    private CountryAdapter adapter;
+    private LevelAdapter adapter;
     private ActivityInterface headerInterface;
 
-    private CountryListPresenter mPresenter;
+    private LevelListPresenter mPresenter;
 
     @Override
     public void onAttach(Context context) {
@@ -47,7 +47,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter = new CountryAdapter(getActivity(), mPresenter.getCountryList());
+        adapter = new LevelAdapter(getActivity(), mPresenter.getLevelList());
         setListAdapter(adapter);
     }
 
@@ -58,7 +58,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
     }
 
     @Override
-    public void showClosedCountry(int position) {
+    public void showClosedLevel(int position) {
         //headerInterface.onShowHiddenTip("Для полета необходимо купить билет");
         BuyTicketDialog dialog = new BuyTicketDialog();
         Bundle args = new Bundle();
@@ -91,7 +91,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
     @Override
     public void update(){
-        mPresenter.updateCountries();
+        mPresenter.updateLevels();
         adapter.notifyDataSetChanged();
 
         headerInterface.showHeader();
@@ -102,7 +102,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mPresenter = new CountryListPresenterImpl(App.getContext(), this);
+        mPresenter = new LevelListPresenterImpl(App.getContext(), this);
 
         return inflater.inflate(R.layout.fragment_country_list, container, false);
     }
@@ -114,11 +114,11 @@ public class CountryListFragment extends ListFragment implements CountryListView
         mPresenter.onListItemClick(position);
     }
 
-    private class CountryAdapter extends ArrayAdapter<Country> {
+    private class LevelAdapter extends ArrayAdapter<Level> {
 
-        private List<Country> mList;
+        private List<Level> mList;
 
-        public CountryAdapter(Context context, List<Country> objects) {
+        public LevelAdapter(Context context, List<Level> objects) {
             super(context, 0, objects);
             mList = objects;
         }
@@ -128,36 +128,36 @@ public class CountryListFragment extends ListFragment implements CountryListView
 
             LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view;
-            Country item = mList.get(position);
+            Level item = mList.get(position);
 
             //if(view == null)
-            if (item.opened) {
-                view = inflater.inflate(R.layout.item_country, parent, false);
+            if (item.is_opened) {
+                view = inflater.inflate(R.layout.item_level_open, parent, false);
 
-                TextView name = (TextView)view.findViewById(R.id.country_name);
-                name.setText(item.value);
+                TextView name = (TextView)view.findViewById(R.id.level_name);
+                name.setText(item.name);
 
-                TextView result = (TextView)view.findViewById(R.id.country_result);
-                result.setText("" + item.answered + "/" + item.total);
+                TextView result = (TextView)view.findViewById(R.id.level_result);
+                result.setText("" + item.questions_answered + "/" + item.questions_total);
 
-                if (item.ended){
-                    view.findViewById(R.id.country_thumb).setVisibility(View.VISIBLE);
+                if (item.is_ended){
+                    view.findViewById(R.id.level_thumb).setVisibility(View.VISIBLE);
                 }
             }
             else {
-                view = inflater.inflate(R.layout.item_country_closed, parent, false);
+                view = inflater.inflate(R.layout.item_level_closed, parent, false);
 
-                TextView name = (TextView)view.findViewById(R.id.item_country_name);
-                name.setText(item.value);
+                TextView name = (TextView)view.findViewById(R.id.item_level_name);
+                name.setText(item.name);
 
-                TextView cost = (TextView)view.findViewById(R.id.item_country_cost);
+                TextView cost = (TextView)view.findViewById(R.id.item_level_cost);
                 cost.setText(String.valueOf(item.cost));
 
-                ImageView buy = (ImageView)view.findViewById(R.id.item_country_buy);
+                ImageView buy = (ImageView)view.findViewById(R.id.item_level_buy);
                 buy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        buyCountry(position);
+                        buyLevel(position);
                     }
                 });
             }
@@ -166,7 +166,7 @@ public class CountryListFragment extends ListFragment implements CountryListView
         }
     }
 
-    public void buyCountry(int position){
-        mPresenter.onBuyCountry(position);
+    public void buyLevel(int position){
+        mPresenter.onBuyLevel(position);
     }
 }

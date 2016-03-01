@@ -15,7 +15,7 @@
         android:layout_height="48dp"/>  -->
 
     <TextView
-        android:id="@+id/item_country_name"
+        android:id="@+id/item_level_name"
         android:text="Russia"
         android:textSize="18sp"
         android:textColor="@color/text_primary"
@@ -32,7 +32,7 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/item_country_cost"
+        android:id="@+id/item_level_cost"
         android:text="450"
         android:textColor="@color/text_primary"
         android:textSize="12sp"
@@ -42,7 +42,7 @@
 
     <ImageView
         android:src="@drawable/ticket"
-        android:id="@+id/item_country_buy"
+        android:id="@+id/item_level_buy"
         android:layout_width="0dp"
         android:layout_weight="0.15"
         android:layout_height="match_parent" />

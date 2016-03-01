@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.orm.Tip;
+import ru.mishaignatov.touristquiz.database.Tip;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
 
@@ -43,7 +40,7 @@ public class TipsFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.tips_listview);
 
-        List<Tip> tipList = OrmDao.getInstance(App.getContext()).getTipsList();
+        List<Tip> tipList = App.getDbHelper().getTipDao().getTipsList();
 
         listView.setAdapter(new TipsAdapter(getActivity(), tipList));
 

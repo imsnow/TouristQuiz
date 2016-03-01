@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.orm.Country;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
+import ru.mishaignatov.touristquiz.database.Level;
+import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 
 /***
  * Created by Mike on 24.02.2016.
  */
 public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickListener {
 
-    private Country mCountry;
+    private Level mLevel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,10 +26,10 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
 
         Bundle args = getArguments();
         int id = args.getInt("KEY_ID");
-        mCountry = OrmDao.getInstance(getContext()).getCountryById(id);
+        mLevel = App.getDbHelper().getLevelDao().getLevelById(id);
 
         TextView text = (TextView)v.findViewById(R.id.buy_ticket_text);
-        text.setText(getString(R.string.dialog_buy_ticket_text, mCountry.cost));
+        text.setText(getString(R.string.dialog_buy_ticket_text, mLevel.cost));
 
         Button buyBtn = (Button)v.findViewById(R.id.button_send);
         buyBtn.setOnClickListener(this);
@@ -54,8 +54,8 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
     }
 
     private void sendBuyResult(){
-        CountryListFragment frag = (CountryListFragment)getTargetFragment();
-        frag.buyCountry(mCountry.id);
+        LevelListFragment frag = (LevelListFragment)getTargetFragment();
+        frag.buyLevel(mLevel.id);
         dismiss();
     }
 

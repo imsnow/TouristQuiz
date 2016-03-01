@@ -1,12 +1,8 @@
 package ru.mishaignatov.touristquiz.game;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
 
-import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.orm.Question;
-import ru.mishaignatov.touristquiz.ui.DialogHelper;
+import ru.mishaignatov.touristquiz.database.Question;
 
 /**
  * Created by Ignatov on 09.09.2015.
@@ -17,7 +13,6 @@ public class GameManager {
     private static final String TAG = "GameManager";
 
     private User user;
-    private OrmDao ormDao;
 
     private static GameManager instance = null;
     private Context mContext = null;
@@ -25,7 +20,6 @@ public class GameManager {
     private GameManager(Context context) {
         mContext = context;
         user = User.getUser(context);
-        ormDao = OrmDao.getInstance(context);
     }
 
     public static GameManager getInstance(Context context){
@@ -43,21 +37,22 @@ public class GameManager {
     }
 
     // Сколько всего загадок находится в файле
-    public int getTotal()           {  return OrmDao.getInstance(mContext).getSizeOfQuestions(); }
+    public int getTotal()           {  return App.getDbHelper().getQuestionDao().getSizeOfQuestions(); }
     // Сколько пользователь отгадал загадок
-    public int getAnswered()        {  return OrmDao.getInstance(mContext).getSizeOfAnswered();  }
+    public int getAnswered()        {  return App.getDbHelper().getQuestionDao().getSizeOfAnswered();  }
 
-    public Question getQuestion(int countryId){
-        return OrmDao.getInstance(mContext).getRandomQuestion(countryId);
+    public Question getQuestion(int level_id){
+        return App.getDbHelper().getQuestionDao().getRandomQuestion(level_id);
     }
 
     /*
     public void setCurrentCountryId(int mCurrentCountryId) {
         this.mCurrentCountryId = mCurrentCountryId;
     }
-    */
+
     public String getStatusTip(){
         return "Вопосы: отвеченные = " + getAnswered() + ", всего = " + getTotal()
                 + "\nочки = " + user.getScores() + " мили = " +  user.getMillis();
     }
+    */
 }

@@ -21,7 +21,7 @@ import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
 import ru.mishaignatov.touristquiz.ui.dialogs.AddMillisDialog;
-import ru.mishaignatov.touristquiz.ui.fragments.CountryListFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
@@ -126,11 +126,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         if(mFragmentManager.getBackStackEntryCount() == 0) // Start Fragment
             mHeaderLayout.setVisibility(View.GONE);
 
-        Fragment frag = mFragmentManager.findFragmentByTag("CountryListFragment");
-        if(frag instanceof CountryListFragment && frag.isVisible()) {
+        Fragment frag = mFragmentManager.findFragmentByTag("LevelListFragment");
+        if(frag instanceof LevelListFragment && frag.isVisible()) {
             // update methods
             Log.d("TAG", "update");
-            ((CountryListFragment)frag).update();
+            ((LevelListFragment)frag).update();
 
         }
     }
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
 
     @Override
     public void onCountryListFragment() {
-        addFragment(new CountryListFragment(), "CountryListFragment");
+        addFragment(new LevelListFragment(), "LevelListFragment");
     }
 
     @Override

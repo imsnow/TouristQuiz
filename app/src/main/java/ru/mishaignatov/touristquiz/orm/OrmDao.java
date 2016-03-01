@@ -16,13 +16,15 @@ import java.util.List;
 import java.util.Random;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.database.Question;
+import ru.mishaignatov.touristquiz.database.Tip;
 
 /**
  * Created by Leva on 17.12.2015.
  *
  */
 public class OrmDao {
-
+    /*
     private static final String[] filesArr = new String[] {
             "france.txt", "usa.txt", "spain.txt",
             "china.txt", "italy.txt", "turkey.txt",
@@ -53,27 +55,6 @@ public class OrmDao {
         return instance;
     }
 
-    public Question getRandomQuestion(int country_id){
-        try {
-            PreparedQuery<Question> preparedQuery = mQuestionDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_COUNTRY, country_id)
-                    .and()
-                    .eq(Question.COLUMN_IS_SHOWN, false)
-                    .prepare();
-
-            List<Question> list = mQuestionDao.query(preparedQuery);
-            if(list != null && list.size() != 0){
-                int randIndex = random.nextInt(list.size());
-                return list.get(randIndex);
-            }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public boolean isCountryShown(int country_id){
 
         try {
@@ -91,35 +72,6 @@ public class OrmDao {
         return false;
     }
 
-    public void setQuestionShown(Question question){
-        question.is_shown = true;
-        mQuestionDao.update(question);
-    }
-
-    // When user answered right
-    public void setQuestionAnswered(Question question) {
-        question.is_answered = true;
-        mQuestionDao.update(question);
-    }
-
-    // calculate all rows
-    public int getSizeOfQuestions() {
-        return (int)mQuestionDao.countOf();
-    }
-
-    // calculate answered rows
-    public int getSizeOfAnswered() {
-        try {
-            return (int) mQuestionDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_IS_ANSWERED, true)
-                    .countOf();
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return 0;
-    }
     /*
     public List<Question> getQuestionsList(int country_id){
 
@@ -135,70 +87,14 @@ public class OrmDao {
         return null;
     }
     */
-    public List<Country> getCountryList(){
-        return mCountryDao.queryForAll();
-    }
-
+    /*
     //public void updateCountry(int country_id){
-    public Country updateCountry(Country country){
-        try {
-            // size of answered question
-            int size = (int)mQuestionDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_COUNTRY, country.id)
-                    .and()
-                    .eq(Question.COLUMN_IS_ANSWERED, true)
-                    .countOf();
 
-            // size of shown question
-            int size_shown = (int)mQuestionDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_COUNTRY, country.id)
-                    .and()
-                    .eq(Question.COLUMN_IS_SHOWN, true)
-                    .countOf();
-
-            // all size question
-            int total = (int)mQuestionDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_COUNTRY, country.id)
-                    .countOf();
-
-            Log.d("TAG", "size answered = " + size + " size shown = " + size_shown);
-            country.answered = size;
-            country.shown    = size_shown;
-
-            if (country.shown == total)
-                country.ended = true;
-            mCountryDao.update(country);
-
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return country;
-    }
-
-    public void openCountry(Country country){
-        country.opened = true;
-        mCountryDao.update(country);
-    }
 
     public String getCountryName(int id){
         try {
             return mCountryDao.queryBuilder().where().
                     eq("id", id).queryForFirst().value;
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Country getCountryById(int id){
-        try {
-            return mCountryDao.queryBuilder().where().
-                    eq("id", id).queryForFirst();
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -230,7 +126,7 @@ public class OrmDao {
 
     public int createQuestionEntries(){
 
-        List<Country> list = getCountryList();
+        List<Country> list = getLevelList();
         int all_questions_cnt = 0;
 
         AssetManager assets = context.getAssets();
@@ -268,24 +164,5 @@ public class OrmDao {
         }
         return all_questions_cnt;
     }
-    //===========================================================================
-    // TIPS
-    public int createTipsEntries(){
-        int count = 0;
-
-        String[] tipsArr = context.getResources().getStringArray(R.array.tips);
-
-        for(int i = 0; i<tipsArr.length; i++){
-            Tip tip = new Tip();
-            tip.id   = i;
-            tip.text = tipsArr[i];
-            mTipDao.create(tip);
-            count++;
-        }
-        return count;
-    }
-
-    public List<Tip> getTipsList(){
-        return mTipDao.queryForAll();
-    }
+       */
 }

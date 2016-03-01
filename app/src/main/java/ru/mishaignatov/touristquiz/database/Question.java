@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.orm;
+package ru.mishaignatov.touristquiz.database;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 /**
  * Created by Mike on 05.12.15.
@@ -20,7 +21,7 @@ public class Question {
     public static final int PLUS_MILLIS = 30;
     public static final int MINUS_MILLIS = 10;
 
-    public static final String COLUMN_COUNTRY     = "country_id";
+    public static final String COLUMN_LEVEL_ID    = "level_id";
     public static final String COLUMN_IS_ANSWERED = "is_answered";
     public static final String COLUMN_IS_SHOWN    = "is_shown";
 
@@ -30,8 +31,8 @@ public class Question {
     public String quiz;
     @DatabaseField
     public String answers;
-    @DatabaseField (columnName = COLUMN_COUNTRY)
-    public int country_id;
+    @DatabaseField (columnName = COLUMN_LEVEL_ID)
+    public int level_id;
     @DatabaseField
     public String type;
     @DatabaseField(columnName = COLUMN_IS_ANSWERED)
@@ -69,7 +70,7 @@ public class Question {
 
     public int getType() {
         switch (type) {
-            case "lions":
+            case "attraction":
                 return 0;
             case "kitchen":
                 return 1;
@@ -87,7 +88,7 @@ public class Question {
     }
 
     public void setAnswered(){
-        OrmDao.getInstance(App.getContext()).setQuestionAnswered(this);
+        App.getDbHelper().getQuestionDao().setQuestionAnswered(this);
     }
 
     public int calcScore(long timeInMils){

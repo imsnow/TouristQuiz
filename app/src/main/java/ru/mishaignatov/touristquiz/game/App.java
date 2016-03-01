@@ -7,6 +7,7 @@ import android.util.Log;
 import com.facebook.FacebookSdk;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.database.DbHelper;
 
 /**
  * Created by Ignatov on 05.08.2015.
@@ -24,6 +25,8 @@ public class App extends Application {
     public static final String[] BGs = {"img/bg_att.png", "img/bg_kit.png", "img/bg_geo.png", "img/bg_his.png"};
     public static final String[] CIRCLEs = {"img/circle_att.png", "img/circle_kit.png", "img/circle_geo.png", "img/circle_his.png"};
 
+    private static DbHelper mDbHelper;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,10 +38,13 @@ public class App extends Application {
         FacebookSdk.sdkInitialize(mContext);
 
         mVersion = getString(R.string.version, version);
+
+        mDbHelper = new DbHelper(this);
     }
 
     public static Context getContext(){
         return mContext;
     }
     public static String getVersion()  { return mVersion; }
+    public static DbHelper getDbHelper(){ return mDbHelper; }
 }

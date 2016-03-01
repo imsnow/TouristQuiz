@@ -1,10 +1,9 @@
 package ru.mishaignatov.touristquiz.presenters;
 
+import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
-import ru.mishaignatov.touristquiz.orm.Question;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
@@ -35,7 +34,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
         mCurrentQuestion = mGameManager.getQuestion(mCountryId);
         questionView.setQuestion(mCurrentQuestion);
         if (mCurrentQuestion != null) {
-            OrmDao.getInstance(App.getContext()).setQuestionShown(mCurrentQuestion);
+            App.getDbHelper().getQuestionDao().setQuestionShown(mCurrentQuestion);
             mStopwatch.start();
         }
     }
@@ -74,6 +73,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
 
     @Override
     public String getCurrentCountry() {
-        return OrmDao.getInstance(App.getContext()).getCountryName(mCurrentQuestion.country_id);
+        //return OrmDao.getInstance(App.getContext()).getCountryName(mCurrentQuestion.country_id);
+        return "test";
     }
 }

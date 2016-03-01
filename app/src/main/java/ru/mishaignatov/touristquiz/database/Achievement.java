@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.orm;
+package ru.mishaignatov.touristquiz.database;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

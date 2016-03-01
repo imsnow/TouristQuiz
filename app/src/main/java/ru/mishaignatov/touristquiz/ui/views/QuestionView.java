@@ -2,7 +2,7 @@ package ru.mishaignatov.touristquiz.ui.views;
 
 import android.view.animation.Animation;
 
-import ru.mishaignatov.touristquiz.orm.Question;
+import ru.mishaignatov.touristquiz.database.Question;
 
 /**
  * Created by Leva on 23.01.2016.

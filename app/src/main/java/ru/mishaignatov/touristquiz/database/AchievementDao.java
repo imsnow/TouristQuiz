@@ -1,4 +1,4 @@
-package ru.mishaignatov.touristquiz.orm;
+package ru.mishaignatov.touristquiz.database;
 
 import android.content.Context;
 
@@ -13,12 +13,12 @@ public class AchievementDao {
 
     private RuntimeExceptionDao<Achievement, Integer> mDao;
 
-    public static AchievementDao getInstance(Context context){
-        if(instance == null) instance = new AchievementDao(context);
+    public static AchievementDao getInstance(DbHelper helper, Context context){
+        if(instance == null) instance = new AchievementDao(helper, context);
         return instance;
     }
-    private AchievementDao(Context context){
-        mDao = new OrmHelper(context).getAchievementDao();
+    private AchievementDao(DbHelper helper, Context context){
+        mDao = helper.getRuntimeExceptionDao(Achievement.class);
     }
 
     public int createEntries(){
