@@ -15,6 +15,7 @@ import ru.mishaignatov.touristquiz.server.APIStrings;
 public class LevelDao {
 
    // private Context mContext;
+    private DbHelper mHelper;
     private RuntimeExceptionDao<Level, Integer> mLevelDao;
 
     private static LevelDao INSTANCE;
@@ -25,6 +26,7 @@ public class LevelDao {
 
     private LevelDao(DbHelper helper, Context context){
         //mContext = context;
+        mHelper = helper;
         mLevelDao = helper.getRuntimeExceptionDao(Level.class);
     }
 
@@ -63,40 +65,20 @@ public class LevelDao {
     }
 
     public Level updateLevel(Level level){
-        try {
-            // size of answered question
-            int size = (int)mLevelDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_LEVEL_ID, level.id)
-                    .and()
-                    .eq(Question.COLUMN_IS_ANSWERED, true)
-                    .countOf();
+        // size of answered question
+        int size = mHelper.getQuestionDao().getAnsweredCount(level.id);
+        // size of shown question
+        int size_shown = mHelper.getQuestionDao().getShownCount(level.id);
+        // all size question
+        int total = mHelper.getQuestionDao().getTotalcount(level.id);
 
-            // size of shown question
-            int size_shown = (int)mLevelDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_LEVEL_ID, level.id)
-                    .and()
-                    .eq(Question.COLUMN_IS_SHOWN, true)
-                    .countOf();
+        level.questions_answered = size;
+        level.questions_shown    = size_shown;
 
-            // all size question
-            int total = (int)mLevelDao.queryBuilder()
-                    .where()
-                    .eq(Question.COLUMN_LEVEL_ID, level.id)
-                    .countOf();
+        if (level.questions_shown == total)
+            level.is_ended = true;
+        mLevelDao.update(level);
 
-            level.questions_answered = size;
-            level.questions_shown    = size_shown;
-
-            if (level.questions_shown == total)
-                level.is_ended = true;
-            mLevelDao.update(level);
-
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
         return level;
     }
 }

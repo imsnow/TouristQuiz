@@ -3,6 +3,7 @@ package ru.mishaignatov.touristquiz.database;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -36,6 +37,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
         mLevelDao = LevelDao.getInstance(this, context);
         mQuestionDao = QuestionDao.getInstance(this, context);
         mAchievementDao = AchievementDao.getInstance(this, context);
+        mTipDao = TipDao.getInstance(this, context);
     }
 
     public LevelDao getLevelDao(){
@@ -84,12 +86,9 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
                     if(level == null) {
                         level = new Level();
                         level.name = levelName;
-                        level.questions_total    = 0;
-                        level.questions_answered = 0;
-                        level.questions_shown    = 0;
-                        level.is_ended = false;
                         level.is_opened = true;
                         level.cost = 0;
+                        Log.d("TAG", "here = " + level);
                         mLevelDao.createLevel(level);
                     }
 

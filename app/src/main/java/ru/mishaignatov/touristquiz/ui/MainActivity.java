@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
-    public void onCountryListFragment() {
+    public void onLevelListFragment() {
         addFragment(new LevelListFragment(), "LevelListFragment");
     }
 

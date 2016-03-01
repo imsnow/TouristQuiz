@@ -15,7 +15,7 @@ public interface ActivityInterface {
 
     void onLoadFragment();
     void onStartFragment();
-    void onCountryListFragment();
+    void onLevelListFragment();
     void onLeaderBoardFragment();
     void onTipsFragment();
     void onSettingsFragment();

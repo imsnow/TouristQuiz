@@ -82,4 +82,44 @@ public class QuestionDao {
         question.is_shown = true;
         mQuestionDao.update(question);
     }
+
+    public int getAnsweredCount(int level_id){
+        try {
+            return  (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_LEVEL_ID, level_id)
+                    .and()
+                    .eq(Question.COLUMN_IS_ANSWERED, true)
+                    .countOf();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getShownCount(int level_id){
+        try {
+            return (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_LEVEL_ID, level_id)
+                    .and()
+                    .eq(Question.COLUMN_IS_SHOWN, true)
+                    .countOf();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getTotalcount(int level_id){
+        try {
+            return (int)mQuestionDao.queryBuilder()
+                    .where()
+                    .eq(Question.COLUMN_LEVEL_ID, level_id)
+                    .countOf();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

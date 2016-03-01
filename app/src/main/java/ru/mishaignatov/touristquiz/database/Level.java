@@ -11,7 +11,7 @@ public class Level {
 
     public Level(){}
 
-    @DatabaseField(id = true, index = true)
+    @DatabaseField(generatedId = true)
     public int id;
     @DatabaseField
     public String name;

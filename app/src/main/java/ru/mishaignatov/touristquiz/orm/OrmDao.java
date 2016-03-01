@@ -88,9 +88,6 @@ public class OrmDao {
     }
     */
     /*
-    //public void updateCountry(int country_id){
-
-
     public String getCountryName(int id){
         try {
             return mCountryDao.queryBuilder().where().
