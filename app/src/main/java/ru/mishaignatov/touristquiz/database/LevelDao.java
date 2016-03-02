@@ -1,10 +1,18 @@
 package ru.mishaignatov.touristquiz.database;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
 
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.server.APIStrings;
@@ -14,7 +22,7 @@ import ru.mishaignatov.touristquiz.server.APIStrings;
  */
 public class LevelDao {
 
-   // private Context mContext;
+    private Context mContext;
     private DbHelper mHelper;
     private RuntimeExceptionDao<Level, Integer> mLevelDao;
 
@@ -25,7 +33,7 @@ public class LevelDao {
     }
 
     private LevelDao(DbHelper helper, Context context){
-        //mContext = context;
+        mContext = context;
         mHelper = helper;
         mLevelDao = helper.getRuntimeExceptionDao(Level.class);
     }
@@ -38,10 +46,6 @@ public class LevelDao {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public void createLevel(Level level){
-        mLevelDao.create(level);
     }
 
     public Level getLevelById(int id){
@@ -70,7 +74,7 @@ public class LevelDao {
         // size of shown question
         int size_shown = mHelper.getQuestionDao().getShownCount(level.id);
         // all size question
-        int total = mHelper.getQuestionDao().getTotalcount(level.id);
+        int total = mHelper.getQuestionDao().getTotalCount(level.id);
 
         level.questions_answered = size;
         level.questions_shown    = size_shown;
@@ -80,5 +84,38 @@ public class LevelDao {
         mLevelDao.update(level);
 
         return level;
+    }
+
+    public void calcTotalQuestion(){
+        List<Level> list = getLevelList();
+        for(int i=0; i<list.size(); i++){
+            Level level = list.get(i);
+            int total = mHelper.getQuestionDao().getTotalCount(level.id);
+            level.questions_total = total;
+            mLevelDao.update(level);
+        }
+    }
+
+    public void fillTable(){
+        AssetManager am = mContext.getAssets();
+        int cnt = 0;
+        try {
+            InputStream is = am.open("levels.csv");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String s;
+            while((s = reader.readLine()) != null) {
+                String[] row = s.split(";");
+                Level level = new Level();
+                level.id = cnt;
+                level.name = row[1];
+                level.cost = Integer.parseInt(row[3]);
+                level.is_opened = level.cost == 0;
+                mLevelDao.create(level);
+                Log.d("TAG", level.toString());
+                cnt++;
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

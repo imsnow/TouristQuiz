@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,8 +129,9 @@ public class LevelListFragment extends ListFragment implements LevelListView {
 
             LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view;
-            Level item = mList.get(position);
 
+            Level item = mPresenter.getLevel(position);
+            Log.d("TAG", "pos = " + position + " id = " + item.id);
             //if(view == null)
             if (item.is_opened) {
                 view = inflater.inflate(R.layout.item_level_open, parent, false);

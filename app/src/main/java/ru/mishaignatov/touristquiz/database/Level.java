@@ -1,5 +1,7 @@
 package ru.mishaignatov.touristquiz.database;
 
+import android.util.Log;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -7,11 +9,11 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by Mike on 01.03.2016.
  **/
 @DatabaseTable(tableName = "levels")
-public class Level {
+public class Level implements Comparable<Level> {
 
     public Level(){}
 
-    @DatabaseField(generatedId = true)
+    @DatabaseField(id = true, index = true)
     public int id;
     @DatabaseField
     public String name;
@@ -42,5 +44,13 @@ public class Level {
                 ", is_ended=" + is_ended +
                 ", is_opened=" + is_opened +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Level another) {
+        if (this.id >= another.id)
+            return -1;
+        else
+            return 1;
     }
 }
