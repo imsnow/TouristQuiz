@@ -130,7 +130,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view;
 
-            Level item = mPresenter.getLevel(position);
+            Level item = App.getDbHelper().getLevelDao().getLevelById(position);
             Log.d("TAG", "pos = " + position + " id = " + item.id);
             //if(view == null)
             if (item.is_opened) {
