@@ -2,6 +2,8 @@ package ru.mishaignatov.touristquiz.game;
 
 import android.content.Context;
 
+import com.facebook.AccessToken;
+
 /**
  * Created by Leva on 26.12.2015.
  *
@@ -9,6 +11,7 @@ import android.content.Context;
 public class User {
 
     private String token;
+    private AccessToken fbAccessToken; // facebook access token
 
     private String displayName;
     private String email;
@@ -81,6 +84,14 @@ public class User {
     public boolean isRegistered() { return isRegistered; }
     public boolean isEnterName()  { return (displayName.length() != 0); }
     public void confirmRegistration()   { isRegistered = true;}
+
+    public AccessToken getFbAccessToken() {
+        return fbAccessToken;
+    }
+
+    public void setFbAccessToken(AccessToken fbAccessToken) {
+        this.fbAccessToken = fbAccessToken;
+    }
 
     @Override
     public String toString() {

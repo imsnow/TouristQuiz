@@ -3,6 +3,9 @@ package ru.mishaignatov.touristquiz.presenters;
 import android.content.Context;
 
 import com.android.volley.Response;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,12 +14,13 @@ import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.server.APIStrings;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
+import ru.mishaignatov.touristquiz.server.FBApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.EnterNameView;
 
 /**
  * Created by Leva on 23.02.2016.
  **/
-public class EnterNamePresenterImpl implements EnterNamePresenter, Response.Listener<String> {
+public class EnterNamePresenterImpl implements EnterNamePresenter, Response.Listener<String>, FacebookCallback<LoginResult> {
 
     private EnterNameView view;
     private Context mContext;
@@ -49,6 +53,11 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
                 mType,
                 this,
                 null);
+    }
+
+    @Override
+    public FacebookCallback<LoginResult> getCallback() {
+        return this;
     }
 
     @Override
@@ -85,5 +94,23 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSuccess(LoginResult loginResult) {
+        if(loginResult != null ) {
+            GameManager.getInstance(mContext).getUser().setFbAccessToken(loginResult.getAccessToken());
+            new FBApiHelper().sendProfileRequest(GameManager.getInstance(mContext).getUser());
+        }
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
+
+    @Override
+    public void onError(FacebookException error) {
+
     }
 }

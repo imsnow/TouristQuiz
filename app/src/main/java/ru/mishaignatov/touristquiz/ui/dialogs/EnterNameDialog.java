@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
 
 import ru.mishaignatov.touristquiz.R;
@@ -48,6 +50,8 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
         v.findViewById(R.id.button_cancel).setOnClickListener(this);
 
         LoginButton loginButton = (LoginButton)v.findViewById(R.id.facebook_login_button);
+        loginButton.setFragment(this);
+        loginButton.registerCallback(CallbackManager.Factory.create(), mPresenter.getCallback());
 
         mSendButton = (Button)v.findViewById(R.id.button_send);
         mSendButton.setOnClickListener(this);
@@ -80,6 +84,12 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
         mPresenter = new EnterNamePresenterImpl(this, getContext());
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
