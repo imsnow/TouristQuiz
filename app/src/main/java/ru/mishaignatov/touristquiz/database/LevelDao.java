@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.server.APIStrings;
@@ -58,7 +59,14 @@ public class LevelDao {
     }
 
     public List<Level> getLevelList(){
-        return mLevelDao.queryForAll();
+
+        List<Level> list = mLevelDao.queryForAll();
+
+        for(int i=0; i<list.size(); i++)
+            Log.d("TAG", "index = " + i + " id = " + list.get(i).id);
+
+
+        return list;
     }
 
     public void openLevel(Level level){

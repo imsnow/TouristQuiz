@@ -81,7 +81,7 @@ public class LevelListPresenterImpl implements LevelListPresenter {
     public void updateLevel(int position){
         Level item = mList.remove(position);
         item = App.getDbHelper().getLevelDao().updateLevel(item);
-        mList.add(item);
+        mList.add(position, item);
     }
 
 }
