@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
-
-import ru.mishaignatov.touristquiz.server.APIStrings;
 
 /***
  * Created by Mike on 01.03.2016.
@@ -36,7 +33,7 @@ public class LevelDao {
         mHelper = helper;
         mLevelDao = helper.getRuntimeExceptionDao(Level.class);
     }
-
+    /*
     public Level searchLevel(String name){
 
         try {
@@ -46,7 +43,7 @@ public class LevelDao {
         }
         return null;
     }
-
+    */
     public Level getLevelById(int id){
         try {
             return mLevelDao.queryBuilder().where().
@@ -96,8 +93,7 @@ public class LevelDao {
         List<Level> list = getLevelList();
         for(int i=0; i<list.size(); i++){
             Level level = list.get(i);
-            int total = mHelper.getQuestionDao().getTotalCount(level.id);
-            level.questions_total = total;
+            level.questions_total = mHelper.getQuestionDao().getTotalCount(level.id);
             mLevelDao.update(level);
         }
     }
@@ -113,6 +109,8 @@ public class LevelDao {
                 String[] row = s.split(";");
                 Level level = new Level();
                 level.id = cnt;
+                if(row[1] == null || row[1].length() == 0)
+                    continue;
                 level.name = row[1];
                 level.cost = Integer.parseInt(row[3]);
                 level.is_opened = level.cost == 0;
