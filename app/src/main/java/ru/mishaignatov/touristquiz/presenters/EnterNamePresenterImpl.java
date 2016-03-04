@@ -1,10 +1,14 @@
 package ru.mishaignatov.touristquiz.presenters;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 
 import org.json.JSONException;
@@ -20,7 +24,7 @@ import ru.mishaignatov.touristquiz.ui.views.EnterNameView;
 /**
  * Created by Leva on 23.02.2016.
  **/
-public class EnterNamePresenterImpl implements EnterNamePresenter, Response.Listener<String>, FacebookCallback<LoginResult> {
+public class EnterNamePresenterImpl implements EnterNamePresenter, Response.Listener<String>, FacebookCallback<LoginResult>, GraphRequest.GraphJSONObjectCallback {
 
     private EnterNameView view;
     private Context mContext;
@@ -98,19 +102,26 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
 
     @Override
     public void onSuccess(LoginResult loginResult) {
+        Log.d("TAG", "here");
         if(loginResult != null ) {
             GameManager.getInstance(mContext).getUser().setFbAccessToken(loginResult.getAccessToken());
-            new FBApiHelper().sendProfileRequest(GameManager.getInstance(mContext).getUser());
+            new FBApiHelper().sendProfileRequest(GameManager.getInstance(mContext).getUser(), this);
+            view.closeDialog();
         }
     }
 
     @Override
     public void onCancel() {
-
+        Log.d("TAG", "cancel");
     }
 
     @Override
     public void onError(FacebookException error) {
+        Log.d("TAG", "error");
+    }
 
+    @Override
+    public void onCompleted(JSONObject object, GraphResponse response) {
+        Log.d("TAG", object.toString());
     }
 }

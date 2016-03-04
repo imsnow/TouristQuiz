@@ -19,19 +19,10 @@ import ru.mishaignatov.touristquiz.game.User;
  **/
 public class FBApiHelper {
 
-    public void sendProfileRequest(User user){
+    public void sendProfileRequest(User user, GraphRequest.GraphJSONObjectCallback callback){
 
-        GraphRequest request = GraphRequest.newMeRequest(
-                user.getFbAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(
-                            JSONObject object,
-                            GraphResponse response) {
-                        // Application code
-                        Log.d("TAG", object.toString());
-                    }
-                });
+        GraphRequest request = GraphRequest.newMeRequest(user.getFbAccessToken(), callback);
+
         Bundle parameters = new Bundle();
         parameters.putString("fields", "first_name, last_name");
         request.setParameters(parameters);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.database.DbHelper;

@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
@@ -67,6 +71,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 activityInterface.onLeaderBoardFragment();
                 break;
             case R.id.button_tips:
+                LoginManager.getInstance().logOut();
                 activityInterface.onTipsFragment();
                 break;
             case R.id.button_settings:

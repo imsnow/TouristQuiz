@@ -10,4 +10,5 @@ public interface EnterNameView {
     void onBusyName();
     void onAcceptingName();
     void onNameOk();
+    void closeDialog();
 }
