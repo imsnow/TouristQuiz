@@ -2,7 +2,6 @@ package ru.mishaignatov.touristquiz.presenters;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.facebook.FacebookCallback;
@@ -30,7 +29,6 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
     private Context mContext;
 
     private String mName;
-    private User.TypeName mType;
 
     public EnterNamePresenterImpl(EnterNameView view, Context context){
         this.view = view;
@@ -54,7 +52,7 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
         ApiHelper.getHelper(mContext).userNameSet(
                 GameManager.getInstance(mContext).getUser(),
                 mName,
-                mType,
+                User.TypeName.ENTERED,
                 this,
                 null);
     }
@@ -78,8 +76,6 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
                 if (json.get(APIStrings.STATUS).equals(APIStrings.OK)) {
                     // show accept
                     view.onAcceptingName();
-
-                    mType = User.TypeName.ENTERED;
                 }
                 else {
                     view.onBusyName();
@@ -120,8 +116,25 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
         Log.d("TAG", "error");
     }
 
+    // receive GraphResponse
     @Override
     public void onCompleted(JSONObject object, GraphResponse response) {
-        Log.d("TAG", object.toString());
+
+        if(object != null){
+            String first = object.optString(FBApiHelper.FIRST_NAME_TAG);
+            String last  = object.optString(FBApiHelper.LAST_NAME_TAG);
+
+            if(first.length() != 0 && last.length() != 0) {
+                mName = first + " " + last;
+                GameManager.getInstance(mContext).getUser().setDisplayName(mName);
+
+                ApiHelper.getHelper(mContext).userNameSet(
+                        GameManager.getInstance(mContext).getUser(),
+                        mName,
+                        User.TypeName.FACEBOOK,
+                        this,
+                        null);
+            }
+        }
     }
 }
