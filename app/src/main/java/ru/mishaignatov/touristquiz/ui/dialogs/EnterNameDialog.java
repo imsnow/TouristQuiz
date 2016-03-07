@@ -1,19 +1,28 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.presenters.EnterNamePresenter;
 import ru.mishaignatov.touristquiz.presenters.EnterNamePresenterImpl;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
@@ -24,7 +33,6 @@ import ru.mishaignatov.touristquiz.ui.views.EnterNameView;
  */
 public class EnterNameDialog extends BaseDialogFragment implements View.OnClickListener, EnterNameView {
 
-    private Button mSendButton;
     private ProgressBar mProgressBar;
     private ImageView mAcceptView;
 
@@ -36,59 +44,59 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mPresenter = new EnterNamePresenterImpl(this, getContext());
 
-        final Button ok = new Button(getContext());
-        ok.setText("Ok");
-        addView(ok);
+        callbackManager = CallbackManager.Factory.create();
+
+        final TextView text = new TextView(getContext());
+        text.setText(getString(R.string.dialog_enter_name_hint));
+        text.setGravity(Gravity.CENTER);
+        text.setPadding(0, 0, 0 , Utils.dpToPx(8));
+        addView(text);
+
+        final LoginButton loginButton = new LoginButton(getContext());
+        loginButton.setFragment(this);
+        loginButton.registerCallback(callbackManager, mPresenter.getCallback());
+        addView(loginButton);
+
+        final TextView or = new TextView(getContext());
+        or.setText(getString(R.string.or));
+        or.setGravity(Gravity.CENTER);
+        addView(or);
+
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.item_enter_name, getContainer(), false);
+
+        mProgressBar = (ProgressBar)ll.findViewById(R.id.enter_name_progress_bar);
+        mAcceptView  = (ImageView)ll.findViewById(R.id.image_accept);
+
+        EditText mNameEdit = (EditText) ll.findViewById(R.id.name_edit_text);
+        mNameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                onWaitingUser();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 3){
+                    mName = s.toString();
+                    mPresenter.checkName(mName);
+                }
+            }
+        });
+        addView(ll);
+
+        addCancelAndOkButtons(R.string.send, this);
+        mSendButton.setEnabled(false);
     }
 
-    /*
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            mPresenter = new EnterNamePresenterImpl(this, getContext());
-
-            View v = inflater.inflate(R.layout.dialog_enter_name, container, false);
-
-            v.findViewById(R.id.button_cancel).setOnClickListener(this);
-
-            callbackManager = CallbackManager.Factory.create();
-
-            LoginButton loginButton = (LoginButton)v.findViewById(R.id.facebook_login_button);
-            loginButton.setFragment(this);
-            loginButton.registerCallback(callbackManager, mPresenter.getCallback());
-
-            mSendButton = (Button)v.findViewById(R.id.button_send);
-            mSendButton.setOnClickListener(this);
-            mSendButton.setEnabled(false);
-
-            mProgressBar = (ProgressBar)v.findViewById(R.id.enter_name_progress_bar);
-            mAcceptView  = (ImageView)v.findViewById(R.id.image_accept);
-
-            EditText mNameEdit = (EditText) v.findViewById(R.id.name_edit_text);
-            mNameEdit.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    onWaitingUser();
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if(s.length() > 3){
-                        mName = s.toString();
-                        mPresenter.checkName(mName);
-                    }
-                }
-            });
-            return v;
-        }
-        */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,14 +106,10 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.button_cancel:
-                result();
-                break;
-            case R.id.button_send:
-                mPresenter.sendName();
-                break;
+        String tag = (String) v.getTag();
+        switch (tag){
+            case "cancel": result(); break;
+            case "send": mPresenter.sendName(); break;
         }
     }
 
@@ -164,7 +168,7 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

@@ -1,40 +1,43 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.Utils;
 
 /***
  * Created by Mike on 26.02.2016.
  */
 public class LevelDoneDialog extends BaseDialogFragment implements View.OnClickListener {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dialog_level_done, container, false);
-        v.findViewById(R.id.button_next).setOnClickListener(this);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        ((TextView) v.findViewById(R.id.dialog_level_miles)).setText(getString(R.string.show_plus_and_result, "30"));
+        final TextView text = new TextView(getContext());
+        text.setText(getString(R.string.level_text));
+        text.setTextAppearance(getContext(), R.style.DialogTextViewBig);
+        text.setPadding(0, 0, 0, Utils.dpToPx(8));
+        text.setGravity(Gravity.CENTER);
 
-        return v;
+        addView(text);
+        addImageAndTextView(R.drawable.ic_miles, R.string.show_plus_and_result, "30");
+        addNextButton(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.button_next:
-                dismiss();
-                break;
-        }
+        if(v.getTag().equals("next"))
+            dismiss();
     }
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

@@ -25,6 +25,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private List<View> mViewList = new ArrayList<>();
 
     private LinearLayout mContainer;
+    protected Button mSendButton;
 
     // return color resource
     public abstract int getTitleColor();
@@ -63,6 +64,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
     }
 
+    public ViewGroup getContainer(){
+        return mContainer;
+    }
+
 
     public void addCancelButton(final View.OnClickListener listener){
         final Button cancel = new Button(getContext());
@@ -90,10 +95,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
         cancel.setOnClickListener(listener);
         cancel.setTag("cancel");
 
-        final Button send = (Button) ll.findViewById(R.id.button_send);
-        send.setOnClickListener(listener);
-        send.setText(getResources().getString(sendResStringId));
-        send.setTag("send");
+        mSendButton = (Button) ll.findViewById(R.id.button_send);
+        mSendButton.setOnClickListener(listener);
+        mSendButton.setText(getResources().getString(sendResStringId));
+        mSendButton.setTag("send");
 
         mViewList.add(ll);
     }

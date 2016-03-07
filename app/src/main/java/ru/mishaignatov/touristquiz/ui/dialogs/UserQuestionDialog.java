@@ -1,10 +1,11 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,18 +25,20 @@ public class UserQuestionDialog extends BaseDialogFragment implements View.OnCli
     private EditText mAnswerText;
     private EditText mCountryText;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        View v = inflater.inflate(R.layout.dialog_user_question, container, false);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.dialog_user_question, getContainer(), false);
         v.findViewById(R.id.button_send).setOnClickListener(this);
         v.findViewById(R.id.button_cancel).setOnClickListener(this);
 
         mQuestionText = (EditText) v.findViewById(R.id.user_question_text);
         mAnswerText = (EditText) v.findViewById(R.id.user_question_answers);
         mCountryText = (EditText) v.findViewById(R.id.user_question_country);
-        //v.findViewById(R.id.btnMaybe).setOnClickListener(this);
-        return v;
+
+        addView(v);
     }
 
     @Override
@@ -76,7 +79,7 @@ public class UserQuestionDialog extends BaseDialogFragment implements View.OnCli
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

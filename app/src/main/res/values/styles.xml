@@ -38,4 +38,8 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="DialogTextViewBig">
+        <item name="android:textSize">22sp</item>
+    </style>
+
 </resources>
