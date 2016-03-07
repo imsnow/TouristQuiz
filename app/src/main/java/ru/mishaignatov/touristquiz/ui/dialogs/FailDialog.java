@@ -16,7 +16,7 @@ public class FailDialog extends BaseDialogFragment implements View.OnClickListen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addImageAndTextView(R.drawable.ic_miles, R.string.minus_millis);
+        addImageAndTextView(R.drawable.ic_miles, R.string.minus_millis, null);
         addNextButton(this);
     }
 

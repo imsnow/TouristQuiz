@@ -3,12 +3,8 @@ package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
@@ -22,11 +18,9 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
     private String scores;
     private String millis;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.dialog_success, null);
-        v.findViewById(R.id.dialog_success_next).setOnClickListener(this);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -34,12 +28,10 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
             scores = args.getString("KEY_SCORES");
             millis = args.getString("KEY_MILLIS");
         }
-
-        ((TextView) v.findViewById(R.id.dialog_success_time)).setText(getString(R.string.show_time_result, time));
-        ((TextView) v.findViewById(R.id.dialog_success_scores)).setText(getString(R.string.show_plus_and_result, scores));
-        ((TextView) v.findViewById(R.id.dialog_success_millis)).setText(getString(R.string.show_plus_and_result, millis));
-
-        return v;
+        addImageAndTextView(R.drawable.ic_time, R.string.show_time_result, time);
+        addImageAndTextView(R.drawable.ic_scores, R.string.show_plus_and_result, scores);
+        addImageAndTextView(R.drawable.ic_miles, R.string.show_plus_and_result, millis);
+        addNextButton(this);
     }
 
     @Override
@@ -61,7 +53,7 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

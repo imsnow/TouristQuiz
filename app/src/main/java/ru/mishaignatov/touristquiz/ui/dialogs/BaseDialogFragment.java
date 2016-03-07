@@ -98,7 +98,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         mViewList.add(ll);
     }
 
-    public void addImageAndTextView(int resImageId, int resTextId){
+    public void addImageAndTextView(int resImageId, int resTextId, String value){
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.item_image_text, mContainer, false);
@@ -106,8 +106,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
         final ImageView icon = (ImageView) ll.findViewById(R.id.dialog_icon);
         icon.setImageResource(resImageId);
 
-        final TextView value = (TextView) ll.findViewById(R.id.dialog_value);
-        value.setText(getString(resTextId));
+        final TextView text = (TextView) ll.findViewById(R.id.dialog_value);
+        text.setText(getString(resTextId, value));
 
         mViewList.add(ll);
     }
