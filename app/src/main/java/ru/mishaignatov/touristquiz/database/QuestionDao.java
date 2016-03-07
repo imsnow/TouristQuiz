@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
-import ru.mishaignatov.touristquiz.game.App;
-
 /***
  * Created by Leva on 01.03.2016.
  */
@@ -144,15 +142,21 @@ public class QuestionDao {
             String s;
             while((s = reader.readLine()) != null) {
                 String[] row = s.split(";");
+                if(row.length == 7) {
+                    Question question = new Question();
+                    question.quiz = row[1].trim();
+                    question.answers = row[3].trim();
+                    question.type = row[6].trim();
+                    question.is_answered = false;
+                    question.is_shown = false;
 
-                Question question = new Question();
-                question.quiz    = row[1].trim();
-                question.answers = row[3].trim();
-                question.type    = row[6].trim();
-                question.is_answered = false;
-                question.is_shown    = false;
-                question.level_id = Integer.parseInt(row[0]);
-                mQuestionDao.create(question);
+                    String num = row[0].trim();
+                    Log.d("TAG", "num = " + Integer.parseInt(num));
+                    question.level_id = Integer.parseInt(num);
+                    mQuestionDao.create(question);
+                }
+                else
+                    Log.d("TAG", "s = " + row);
             }
         }catch (IOException e){
             e.printStackTrace();

@@ -62,6 +62,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/merge_ok_cancel_buttons"/>
+    <include layout="@layout/item_ok_cancel_buttons"/>
 
 </LinearLayout>

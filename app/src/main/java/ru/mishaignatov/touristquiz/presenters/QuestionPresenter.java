@@ -1,6 +1,6 @@
 package ru.mishaignatov.touristquiz.presenters;
 
-import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
+import android.widget.TextView;
 
 /**
  * Created by Leva on 28.01.2016.
@@ -9,6 +9,6 @@ public interface QuestionPresenter extends BasePresenter {
 
     void takeQuestion();
     void sendResult();
-    void onAnswerButtonClick(String answer, AnswerButton button);
+    void onAnswerButtonClick(String answer, TextView button);
     String getCurrentCountry();
 }

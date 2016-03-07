@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
-import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.database.Question;
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
@@ -25,7 +26,6 @@ import ru.mishaignatov.touristquiz.ui.MainActivity;
 import ru.mishaignatov.touristquiz.ui.dialogs.FailDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.LevelDoneDialog;
 import ru.mishaignatov.touristquiz.ui.dialogs.SuccessDialog;
-import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.views.CircleTextView;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
@@ -38,10 +38,10 @@ public class QuestionFragment extends Fragment implements
 
 //    private TextView questionText;
     private CircleTextView questionText;
-    private AnswerButton button1, button2, button3, button4;
+    private TextView button1, button2, button3, button4;
     private Animation shakeAnim;
 
-    private AnswerButton mClickedButton;
+    private TextView mClickedButton;
 
     private FrameLayout layout;
 
@@ -71,10 +71,10 @@ public class QuestionFragment extends Fragment implements
 
         //mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (CircleTextView) v.findViewById(R.id.quiz_text);
-        button1      = (AnswerButton)v.findViewById(R.id.button1);
-        button2      = (AnswerButton)v.findViewById(R.id.button2);
-        button3      = (AnswerButton)v.findViewById(R.id.button3);
-        button4      = (AnswerButton)v.findViewById(R.id.button4);
+        button1      = (TextView) v.findViewById(R.id.button1);
+        button2      = (TextView)v.findViewById(R.id.button2);
+        button3      = (TextView)v.findViewById(R.id.button3);
+        button4      = (TextView)v.findViewById(R.id.button4);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -97,10 +97,10 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void onClick(View v) {
         // One of fourth answers buttons
-        if (v instanceof AnswerButton){
+        if (v instanceof TextView){
             //mStopwatch.stop();
-            String s = ((AnswerButton) v).getText().toString();
-            mClickedButton = (AnswerButton) v;
+            String s = ((TextView) v).getText().toString();
+            mClickedButton = (TextView) v;
             mPresenter.onAnswerButtonClick(s, mClickedButton);
         }
     }
@@ -117,7 +117,7 @@ public class QuestionFragment extends Fragment implements
     }
 
     @Override
-    public void onFailAnswer(AnswerButton button) {
+    public void onFailAnswer(TextView button) {
         mClickedButton.startAnimation(shakeAnim); // after finishing of animation
     }
 

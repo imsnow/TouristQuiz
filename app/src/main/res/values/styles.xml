@@ -8,34 +8,34 @@
         <!--  <item name="android:windowContentOverlay">@null</item> -->
        </style>
 
-      <style name="AnswerButtonStyle" parent="Base.Widget.AppCompat.AutoCompleteTextView">
-          <item name="android:background">@color/accent_material_light</item>
+      <style name="AnswerButtonStyle" parent="BaseMargin">
+          <item name="android:background">@drawable/sel_button_answer</item>
           <item name="android:textColor">@android:color/white</item>
-          <item name="android:layout_margin">4dp</item>
           <item name="android:layout_gravity">center</item>
           <item name="android:gravity">center</item>
           <item name="android:singleLine">true</item>
-          <item name="android:clickable">true</item>
-          <item name="android:focusable">false</item>
-          <item name="android:padding">4dp</item>
+          <item name="android:padding">8dp</item>
+          <item name="android:textSize">20sp</item>
       </style>
 
       <style name="ItemListTextView">
           <item name="android:textColor">@color/text_primary</item>
-          <item name="android:textSize">16sp</item>
+          <item name="android:textSize">18sp</item>
           <item name="android:padding">8dp</item>
       </style>
 
-    <style name="StartButtonStyle">
-        <item name="android:layout_marginTop">4dp</item>
-        <item name="android:layout_marginBottom">4dp</item>
-        <item name="android:layout_marginRight">48dp</item>
-        <item name="android:layout_marginLeft">48dp</item>
+    <style name="StartButtonStyle" parent="BaseMargin">
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="BaseDialogStyle" parent="AlertDialog.AppCompat">
-        <item name="android:title"></item>
+    <style name="BaseMargin">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
     </style>
 
-   </resources>
+    <style name="DialogTextView">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

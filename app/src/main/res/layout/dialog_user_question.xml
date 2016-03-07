@@ -58,6 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/merge_ok_cancel_buttons"/>
+    <include layout="@layout/item_ok_cancel_buttons"/>
 
 </LinearLayout>

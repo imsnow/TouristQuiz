@@ -1,13 +1,13 @@
 package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.database.Level;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
@@ -19,35 +19,33 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
 
     private Level mLevel;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.dialog_buy_ticket, container, false);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
         int id = args.getInt("KEY_ID");
         mLevel = App.getDbHelper().getLevelDao().getLevelById(id);
 
-        TextView text = (TextView)v.findViewById(R.id.buy_ticket_text);
+        final TextView text = new TextView(getContext());
+        text.setGravity(Gravity.CENTER);
+        text.setPadding(0,0,0, Utils.dpToPx(16));
+        text.setTextAppearance(getContext(), R.style.DialogTextView);
         text.setText(getString(R.string.dialog_buy_ticket_text, mLevel.cost));
 
-        Button buyBtn = (Button)v.findViewById(R.id.button_send);
-        buyBtn.setOnClickListener(this);
-        buyBtn.setText(getString(R.string.buy));
+        addView(text);
 
-        v.findViewById(R.id.button_cancel).setOnClickListener(this);
-
-        return v;
+        addCancelAndOkButtons(R.string.buy, this);
     }
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.button_cancel:
+        String tag = (String)v.getTag();
+        switch (tag){
+            case "cancel":
                 dismiss();
                 break;
-            case R.id.button_send:
+            case "send":
                 sendBuyResult();
                 break;
         }
@@ -61,7 +59,7 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.LeaderBoardItem;
 import ru.mishaignatov.touristquiz.presenters.LeaderBoardPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
@@ -135,11 +136,13 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     private class LeaderBoardAdapter extends ArrayAdapter<LeaderBoardItem> {
 
         List<LeaderBoardItem> mList;
+        private String mName;
 
         public LeaderBoardAdapter(Context context, int res, List<LeaderBoardItem> objects) {
             super(context, res, objects);
             Collections.sort(objects);
             mList = objects;
+            mName = GameManager.getInstance(context).getUser().getDisplayName();
         }
 
         @Override
@@ -155,7 +158,17 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
             TextView scores = (TextView)v.findViewById(R.id.leader_board_scores);
 
             LeaderBoardItem item = mList.get(position);
-            place.setText("" + (position+1));
+
+            if (item.getName().equals(mName))
+                v.setBackgroundResource(R.drawable.item_accent);
+            else
+                v.setBackgroundResource(R.drawable.item);
+
+            final float scale = getResources().getDisplayMetrics().density;
+            int dpInPx = (int) (4 * scale + 0.5f);
+            v.setPadding(dpInPx, dpInPx, dpInPx, dpInPx);
+
+            place.setText(String.valueOf(position+1));
             name.setText(item.getName());
             scores.setText(String.valueOf(item.getScores()));
 

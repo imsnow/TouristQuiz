@@ -9,7 +9,6 @@ import java.util.List;
 
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
 
 /**
  * Created by Mike on 05.12.15.
@@ -31,7 +30,7 @@ public class Question {
     public String quiz;
     @DatabaseField
     public String answers;
-    @DatabaseField (columnName = COLUMN_LEVEL_ID)
+    @DatabaseField(columnName = COLUMN_LEVEL_ID)
     public int level_id;
     @DatabaseField
     public String type;

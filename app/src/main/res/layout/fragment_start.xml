@@ -51,22 +51,25 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
+            android:layout_marginRight="16dp"
             android:background="@drawable/sel_button_start"
             android:layout_height="match_parent"
             android:src="@drawable/ic_leaderboard"
             android:id="@+id/button_leaderboard" />
 
-        <ImageButton
+  <!--      <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
+            android:layout_marginRight="8dp"
             android:background="@drawable/sel_button_start"
             android:layout_height="match_parent"
             android:src="@drawable/ic_achievement"
-            android:id="@+id/button_achievements" />
+            android:id="@+id/button_achievements" /> -->
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.25"
+            android:layout_marginRight="16dp"
             android:background="@drawable/sel_button_start"
             android:layout_height="match_parent"
             android:src="@drawable/ic_tip"
@@ -90,7 +93,8 @@
     <TextView
         android:id="@+id/version_text"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_hint"
+        android:textSize="12sp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1" />

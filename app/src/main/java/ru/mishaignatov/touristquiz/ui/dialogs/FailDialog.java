@@ -2,11 +2,8 @@ package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
@@ -16,12 +13,11 @@ import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
  */
 public class FailDialog extends BaseDialogFragment implements View.OnClickListener{
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.dialog_fail, container, false);
-        v.findViewById(R.id.dialog_fail_next).setOnClickListener(this);
-        return v;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addImageAndTextView(R.drawable.ic_miles, R.string.minus_millis);
+        addNextButton(this);
     }
 
     @Override
@@ -43,7 +39,7 @@ public class FailDialog extends BaseDialogFragment implements View.OnClickListen
 
     @Override
     public int getTitleColor() {
-        return R.color.fail_title;
+        return R.drawable.dialog_title_red;
     }
 
     @Override

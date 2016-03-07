@@ -1,11 +1,12 @@
 package ru.mishaignatov.touristquiz.presenters;
 
+import android.widget.TextView;
+
 import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
-import ru.mishaignatov.touristquiz.ui.views.AnswerButton;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
 /**
@@ -46,7 +47,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     }
 
     @Override
-    public void onAnswerButtonClick(String answer, AnswerButton button) {
+    public void onAnswerButtonClick(String answer, TextView button) {
 
         if (mCurrentQuestion.isAnswer(answer)) {
             // SUCCESS !!

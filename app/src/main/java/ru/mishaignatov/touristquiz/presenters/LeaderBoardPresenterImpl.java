@@ -77,6 +77,8 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
                                 Integer.parseInt(jsonItem.getString(APIStrings.SCORES)));
                         list.add(item);
                     }
+
+                    iView.hideProgressBar();
                 }
             }
             else iView.showError();
@@ -87,7 +89,6 @@ public class LeaderBoardPresenterImpl implements LeaderBoardPresenter, Response.
         }
 
         iView.onUpdateTable(list);
-        iView.hideProgressBar();
     }
 
     @Override

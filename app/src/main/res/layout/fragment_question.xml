@@ -21,11 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="64dp"
-        android:shadowColor="@android:color/white"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="10"
+        android:padding="60dp"
         android:layout_marginTop="48dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/quiz_text"
@@ -38,33 +34,29 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
-            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
+            <TextView
                 android:id="@+id/button1"
                 style="@style/AnswerButtonStyle"
-                android:text="@string/quiz_button1"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="wrap_content" />
 
-            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
+            <TextView
                 android:id="@+id/button2"
                 style="@style/AnswerButtonStyle"
-                android:text="@string/quiz_button2"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="wrap_content" />
 
-            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
+            <TextView
                 android:id="@+id/button4"
                 style="@style/AnswerButtonStyle"
-                android:text="@string/quiz_button4"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="wrap_content" />
 
-            <ru.mishaignatov.touristquiz.ui.views.AnswerButton
+            <TextView
                 android:id="@+id/button3"
                 style="@style/AnswerButtonStyle"
-                android:text="@string/quiz_button3"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"/>
+                android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </FrameLayout>

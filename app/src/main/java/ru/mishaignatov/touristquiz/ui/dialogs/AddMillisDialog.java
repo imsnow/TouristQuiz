@@ -2,12 +2,9 @@ package ru.mishaignatov.touristquiz.ui.dialogs;
 
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -32,31 +29,32 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
 
     private String mDeviceId;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        View v = inflater.inflate(R.layout.dialog_add_millis, container, false);
-
-        mShowAdButton = (Button)v.findViewById(R.id.dialog_show_ad);
+        mShowAdButton = new Button(getContext());
+        mShowAdButton.setText(getResources().getString(R.string.dialog_add_millis_ad));
         mShowAdButton.setOnClickListener(this);
+        mShowAdButton.setTag("showAd");
+        addView(mShowAdButton);
+
+        addCancelButton(this);
 
         String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         mDeviceId = md5(android_id).toUpperCase();
-
-        v.findViewById(R.id.button_cancel).setOnClickListener(this);
-        return v;
     }
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.dialog_show_ad:
+        String tag = (String) v.getTag();
+        switch (tag){
+            case "cancel":
+                dismiss();
+                break;
+            case "showAd":
                 mShowAdButton.setText(R.string.load_ad);
                 initAd();
-                break;
-            case R.id.button_cancel:
-                dismiss();
                 break;
         }
     }
@@ -124,7 +122,7 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public int getTitleColor() {
-        return R.color.success_title;
+        return R.drawable.dialog_title_green;
     }
 
     @Override

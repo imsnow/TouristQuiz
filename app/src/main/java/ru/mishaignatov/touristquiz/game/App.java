@@ -4,9 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
 
+import io.fabric.sdk.android.Fabric;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.database.DbHelper;
 
@@ -17,7 +18,7 @@ import ru.mishaignatov.touristquiz.database.DbHelper;
  */
 public class App extends Application {
 
-    private static final String version = "0.8";
+    private static final String version = "0.9";
     private static String mVersion;
 
     private static final String TAG = "Application";
@@ -33,7 +34,8 @@ public class App extends Application {
         super.onCreate();
         Log.d(TAG, "App onCreate");
         //if(!BuildConfig.DEBUG)
-        //Fabric.with(this, new Crashlytics());
+
+        Fabric.with(this, new Crashlytics());
 
         mContext = getApplicationContext();
         FacebookSdk.sdkInitialize(mContext);

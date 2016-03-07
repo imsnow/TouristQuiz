@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,6 +16,11 @@ import java.util.List;
  * Created by Ignatov Work on 06.08.2015.
  **/
 public class Utils {
+
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
     /*
     // Алгоритм перемешивания Фишера–Йетса
     // https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D1%81%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A4%D0%B8%D1%88%D0%B5%D1%80%D0%B0%E2%80%93%D0%99%D0%B5%D1%82%D1%81%D0%B0
@@ -37,7 +43,10 @@ public class Utils {
 
     public static String doAnswerString(final String str) {
         String trim = str.trim();
-        return trim.substring(0,1).toUpperCase() + trim.substring(1);
+        if(str.length()>1)
+            return trim.substring(0,1).toUpperCase() + trim.substring(1);
+        else
+            return trim;
     }
 
     public static void setBackground(View view, Drawable drawable){
