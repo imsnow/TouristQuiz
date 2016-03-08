@@ -120,7 +120,7 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     public void showEnterNameDialog() {
         EnterNameDialog enterNameDialog = new EnterNameDialog();
         enterNameDialog.setTargetFragment(this, 0x23);
-        enterNameDialog.show(getFragmentManager(), "enter_name");
+        enterNameDialog.show(getChildFragmentManager(), "enter_name");
     }
 
     @Override

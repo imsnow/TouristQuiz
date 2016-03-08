@@ -125,7 +125,7 @@ public class QuestionFragment extends Fragment implements
     public void onTotalFailure() {
         FailDialog failDialog = new FailDialog();
         failDialog.setTargetFragment(this, 0x22);
-        failDialog.show(getFragmentManager(), "fail");
+        failDialog.show(getChildFragmentManager(), "fail");
     }
 
     @Override
@@ -139,7 +139,7 @@ public class QuestionFragment extends Fragment implements
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
         successDialog.setTargetFragment(this, 0x22);
-        successDialog.show(getFragmentManager(), "success");
+        successDialog.show(getChildFragmentManager(), "success");
     }
 
     @Override
@@ -157,7 +157,7 @@ public class QuestionFragment extends Fragment implements
     public void showDialogNextLevel() {
         //DialogHelper.showDialogNextLevel(getActivity());
         LevelDoneDialog dialog = new LevelDoneDialog();
-        dialog.show(getFragmentManager(), "level_done");
+        dialog.show(getChildFragmentManager(), "level_done");
         getActivity().onBackPressed();
     }
 
