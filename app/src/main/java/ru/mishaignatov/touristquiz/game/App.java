@@ -18,7 +18,7 @@ import ru.mishaignatov.touristquiz.database.DbHelper;
  */
 public class App extends Application {
 
-    private static final String version = "0.9";
+    public static final String version = "0.9";
     private static String mVersion;
 
     private static final String TAG = "Application";

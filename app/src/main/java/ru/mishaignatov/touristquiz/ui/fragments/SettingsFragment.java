@@ -22,7 +22,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         TextView version = (TextView) v.findViewById(R.id.settings_item_version);
-        version.setText(getString(R.string.version, App.getVersion()));
+        version.setText(getString(R.string.version, App.version));
 
         v.findViewById(R.id.settings_item_reset).setOnClickListener(this);
 
