@@ -31,7 +31,7 @@ import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
  **/
 public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
 
-    private ActivityInterface headerInterface;
+    private ActivityInterface activityInterface;
     private LeaderBoardPresenterImpl mPresenter;
 
     private ListView mListView;
@@ -44,14 +44,14 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
         super.onAttach(context);
 
         if(context instanceof Activity)
-            headerInterface = (MainActivity)context;
+            activityInterface = (MainActivity)context;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        headerInterface.showHeader();
-        headerInterface.onUpdateHeader(getActivity().getString(R.string.header_leaderboard));
+        activityInterface.showHeader();
+        activityInterface.onUpdateHeader(getActivity().getString(R.string.header_leaderboard));
     }
 
 
@@ -120,7 +120,8 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     public void showEnterNameDialog() {
         EnterNameDialog enterNameDialog = new EnterNameDialog();
         enterNameDialog.setTargetFragment(this, 0x23);
-        enterNameDialog.show(getChildFragmentManager(), "enter_name");
+        activityInterface.showDialog(enterNameDialog, "enter_name");
+        //enterNameDialog.show(getChildFragmentManager(), "enter_name");
     }
 
     @Override

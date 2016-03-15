@@ -1,6 +1,7 @@
 package ru.mishaignatov.touristquiz.presenters;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class LevelListPresenterImpl implements LevelListPresenter {
     public LevelListPresenterImpl(Context context, LevelListView view){
         this.view = view;
         mList = App.getDbHelper().getLevelDao().getLevelList();
+        Log.d("TAG", "size = " + mList.size());
         mContext = context;
     }
 

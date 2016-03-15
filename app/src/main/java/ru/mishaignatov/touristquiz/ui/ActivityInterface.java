@@ -20,7 +20,7 @@ public interface ActivityInterface {
     void onTipsFragment();
     void onSettingsFragment();
 
-    void showFragmentDialog(DialogFragment dialog, String tag);
+    void showDialog(DialogFragment dialog, String tag);
 }
 
 

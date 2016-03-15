@@ -66,7 +66,8 @@ public class LevelListFragment extends ListFragment implements LevelListView {
         args.putInt("KEY_ID", position);
         dialog.setArguments(args);
         dialog.setTargetFragment(this, 0x24);
-        dialog.show(getChildFragmentManager(), "buy_dialog");
+        //dialog.show(getChildFragmentManager(), "buy_dialog");
+        headerInterface.showDialog(dialog, "buy_dialog");
     }
 
     @Override

@@ -107,16 +107,18 @@ public class LevelDao {
             String s;
             while((s = reader.readLine()) != null) {
                 String[] row = s.split(";");
-                Level level = new Level();
-                level.id = cnt;
-                if(row[1] == null || row[1].length() == 0)
-                    continue;
-                level.name = row[1];
-                level.cost = Integer.parseInt(row[3]);
-                level.is_opened = level.cost == 0;
-                mLevelDao.create(level);
-                Log.d("TAG", level.toString());
-                cnt++;
+                if (row.length != 1) {
+                    Level level = new Level();
+                    level.id = cnt;
+                    if (row[1] == null || row[1].length() == 0)
+                        continue;
+                    level.name = row[1];
+                    level.cost = Integer.parseInt(row[3]);
+                    level.is_opened = level.cost == 0;
+                    mLevelDao.create(level);
+                    Log.d("TAG", level.toString());
+                    cnt++;
+                }
             }
         }catch (IOException e){
             e.printStackTrace();

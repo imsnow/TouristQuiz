@@ -217,7 +217,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
-    public void showFragmentDialog(DialogFragment dialog, String tag) {
-        dialog.show(mFragmentManager, tag);
+    public void showDialog(DialogFragment dialog, String tag) {
+        if(mFragmentManager != null)
+            dialog.show(mFragmentManager, tag);
     }
 }

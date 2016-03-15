@@ -84,7 +84,6 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
             public void onAdOpened() {
                 super.onAdOpened();
                 Log.d("TAG", "ad opened");
-                GameManager.getInstance(App.getContext()).getUser().addResult(0, 10);
             }
         });
         if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {

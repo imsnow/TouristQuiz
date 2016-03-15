@@ -45,7 +45,7 @@ public class QuestionFragment extends Fragment implements
 
     private FrameLayout layout;
 
-    private ActivityInterface headerInterface;
+    private ActivityInterface activityInterface;
 
     private QuestionPresenter mPresenter;
 
@@ -57,7 +57,7 @@ public class QuestionFragment extends Fragment implements
         super.onAttach(context);
 
         if(context instanceof Activity)
-            headerInterface = (MainActivity)context;
+            activityInterface = (MainActivity)context;
     }
 
     @Override
@@ -125,7 +125,8 @@ public class QuestionFragment extends Fragment implements
     public void onTotalFailure() {
         FailDialog failDialog = new FailDialog();
         failDialog.setTargetFragment(this, 0x22);
-        failDialog.show(getChildFragmentManager(), "fail");
+        //failDialog.show(getChildFragmentManager(), "fail");
+        activityInterface.showDialog(failDialog, "fail");
     }
 
     @Override
@@ -139,7 +140,8 @@ public class QuestionFragment extends Fragment implements
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
         successDialog.setTargetFragment(this, 0x22);
-        successDialog.show(getChildFragmentManager(), "success");
+        activityInterface.showDialog(successDialog, "success");
+        //successDialog.show(getChildFragmentManager(), "success");
     }
 
     @Override
@@ -156,8 +158,9 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void showDialogNextLevel() {
         //DialogHelper.showDialogNextLevel(getActivity());
-        LevelDoneDialog dialog = new LevelDoneDialog();
-        dialog.show(getChildFragmentManager(), "level_done");
+        //LevelDoneDialog dialog = new LevelDoneDialog();
+        //dialog.show(getActivity().getSupportFragmentManager(), "level_done");
+        activityInterface.showDialog(new LevelDoneDialog(), "level_done");
         getActivity().onBackPressed();
     }
 
@@ -191,7 +194,7 @@ public class QuestionFragment extends Fragment implements
 
         Utils.setBackground(questionText, Utils.loadBitmapFromAssets(App.getContext(), App.CIRCLEs[question.getType()]));
 
-        headerInterface.onUpdateHeader(mPresenter.getCurrentCountry());
+        activityInterface.onUpdateHeader(mPresenter.getCurrentCountry());
     }
 
     @Override
