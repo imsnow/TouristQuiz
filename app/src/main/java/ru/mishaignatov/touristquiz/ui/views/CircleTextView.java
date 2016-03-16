@@ -64,12 +64,14 @@ public class CircleTextView extends TextView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int h = MeasureSpec.getSize(heightMeasureSpec);
+
+
+        int h = 744*mWidth/720;
         // радиус ограничивающего круга
         mRadius = mWidth/2 - getPaddingRight();
         // квадратный контейнер
         Log.d("TAG", "w = " + mWidth + " h = " + h);
-        setMeasuredDimension(mWidth, mWidth);
+        setMeasuredDimension(mWidth, h);
     }
 
     @Override

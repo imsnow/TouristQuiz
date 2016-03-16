@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -141,6 +140,30 @@ public class LevelListFragment extends ListFragment implements LevelListView {
 
             TextView result = (TextView)view.findViewById(R.id.level_result);
             result.setText("" + item.questions_answered + "/" + item.questions_total);
+
+            TextView buy = (TextView)view.findViewById(R.id.buy_ticket_text);
+            buy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buyLevel(position);
+                }
+            });
+
+            if(item.is_opened) {
+                buy.setVisibility(View.GONE);
+                if(item.is_ended)
+                    view.setBackgroundResource(R.drawable.item_accent);
+                else
+                    view.setBackgroundResource(R.drawable.item);
+            }
+            else {
+                buy.setVisibility(View.VISIBLE);
+                view.setBackgroundResource(R.drawable.item_close);
+            }
+
+            final float scale = getResources().getDisplayMetrics().density;
+            int dpInPx = (int) (4 * scale + 0.5f);
+            view.setPadding(dpInPx, dpInPx, dpInPx, dpInPx);
             /*
             if (item.is_opened) {
                 view = inflater.inflate(R.layout.item_level_open, parent, false);

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/item"
-    android:padding="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -33,12 +31,12 @@
     </LinearLayout>
 
     <TextView
-        android:text="Buy ticket"
+        android:id="@+id/buy_ticket_text"
+        android:text=" Открыть"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="22sp"
         android:textScaleX="1.25"
-        android:background="@color/lock_alpha"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
