@@ -134,6 +134,14 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             Level item = mList.get(position);
             Log.d("TAG", "pos = " + position + " id = " + item.id);
             //if(view == null)
+            view = inflater.inflate(R.layout.item_level, parent, false);
+
+            TextView name = (TextView)view.findViewById(R.id.level_name);
+            name.setText(item.name);
+
+            TextView result = (TextView)view.findViewById(R.id.level_result);
+            result.setText("" + item.questions_answered + "/" + item.questions_total);
+            /*
             if (item.is_opened) {
                 view = inflater.inflate(R.layout.item_level_open, parent, false);
 
@@ -164,7 +172,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
                     }
                 });
             }
-
+            */
             return view;
         }
     }

@@ -2,6 +2,7 @@
 <resources>
   <color name="start_bg">#6C787B</color>
   <color name="toolbar_alpha">#10000000</color>
+  <color name="lock_alpha">#55000000</color>
 
   <color name="success_title">#81C784</color> <!-- green 300 -->
   <color name="fail_title">#E57373</color>    <!-- red 300   -->
