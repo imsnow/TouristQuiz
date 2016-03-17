@@ -145,7 +145,8 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             buy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    buyLevel(position);
+                    showClosedLevel(position);
+                    //buyLevel(position);
                 }
             });
 
@@ -158,6 +159,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             }
             else {
                 buy.setVisibility(View.VISIBLE);
+                buy.setText("Открыть за " + item.cost + " миль");
                 view.setBackgroundResource(R.drawable.item_close);
             }
 
