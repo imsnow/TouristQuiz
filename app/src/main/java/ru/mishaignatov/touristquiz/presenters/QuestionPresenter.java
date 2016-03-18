@@ -10,5 +10,5 @@ public interface QuestionPresenter extends BasePresenter {
     void takeQuestion();
     void sendResult();
     void onAnswerButtonClick(String answer, TextView button);
-    String getCurrentCountry();
+    String getCurrentLevel();
 }

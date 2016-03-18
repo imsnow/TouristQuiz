@@ -5,19 +5,42 @@
     android:layout_height="match_parent"
     android:background="@color/start_bg">
 
-    <ImageView
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/selfie"
+    <View
+        android:background="@color/sky"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
+        android:layout_height="48dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/selfie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textScaleX="1.2"
+            android:paddingBottom="16dp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
     <Button
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:id="@+id/button_start"
         android:text="@string/start_button"
-        android:background="@drawable/sel_button_start"
-        style="@style/StartButtonStyle"
+        android:background="@drawable/sel_play_button"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        style="@style/BaseMargin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"/>

@@ -28,6 +28,13 @@
         android:id="@+id/quiz_text"
         android:layout_gravity="start|top" />
 
+    <TextView
+        android:id="@+id/question_level_name"
+        android:text="Галопом по Европам"
+        style="@style/TopTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_gravity="start|bottom"
         android:layout_width="match_parent"

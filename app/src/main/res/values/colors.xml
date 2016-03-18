@@ -4,6 +4,12 @@
   <color name="toolbar_alpha">#10000000</color>
   <color name="lock_alpha">#95000000</color>
 
+  <color name="play_button">#A581C784</color>
+  <color name="play_button_pressed">#F581C784</color>
+
+  <color name="main_button">#7581C784</color>
+  <color name="main_button_pressed">#95ffffff</color>
+
   <color name="success_title">#81C784</color> <!-- green 300 -->
   <color name="fail_title">#E57373</color>    <!-- red 300   -->
 

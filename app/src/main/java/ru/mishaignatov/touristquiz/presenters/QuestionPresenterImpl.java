@@ -73,8 +73,8 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     }
 
     @Override
-    public String getCurrentCountry() {
+    public String getCurrentLevel() {
         //return OrmDao.getInstance(App.getContext()).getCountryName(mCurrentQuestion.country_id);
-        return "test";
+        return App.getDbHelper().getLevelDao().getLevelById(mCurrentQuestion.level_id).name;
     }
 }

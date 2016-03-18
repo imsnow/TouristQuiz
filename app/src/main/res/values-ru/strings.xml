@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Туристическая викторина</string>
-    <string name="start_button">Старт</string>
+
+    <string name="start_button">Играть</string>
     <string name="action_settings">Настройки</string>
     <string name="version">Версия %1$s</string>
 

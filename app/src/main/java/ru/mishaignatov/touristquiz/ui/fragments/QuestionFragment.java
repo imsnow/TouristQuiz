@@ -36,6 +36,7 @@ import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 public class QuestionFragment extends Fragment implements
         View.OnClickListener, QuestionView {
 
+    private TextView levelText;
 //    private TextView questionText;
     private CircleTextView questionText;
     private TextView button1, button2, button3, button4;
@@ -69,6 +70,7 @@ public class QuestionFragment extends Fragment implements
         layout = (FrameLayout)v.findViewById(R.id.layout);
         layout.setOnClickListener(null);
 
+        levelText    = (TextView) v.findViewById(R.id.question_level_name);
         //mTimerText = (TextView)v.findViewById(R.id.timer_view);
         questionText = (CircleTextView) v.findViewById(R.id.quiz_text);
         button1      = (TextView) v.findViewById(R.id.button1);
@@ -194,7 +196,9 @@ public class QuestionFragment extends Fragment implements
 
         Utils.setBackground(questionText, Utils.loadBitmapFromAssets(App.getContext(), App.CIRCLEs[question.getType()]));
 
-        activityInterface.onUpdateHeader(mPresenter.getCurrentCountry());
+        activityInterface.onUpdateHeader("");
+
+        levelText.setText(mPresenter.getCurrentLevel());
     }
 
     @Override
