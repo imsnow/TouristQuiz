@@ -16,6 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 
@@ -36,7 +37,11 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
         mShowAdButton = new Button(getContext());
         mShowAdButton.setText(getResources().getString(R.string.dialog_add_millis_ad));
         mShowAdButton.setOnClickListener(this);
+        mShowAdButton.setBackgroundResource(R.drawable.sel_button_answer);
+        mShowAdButton.setTextAppearance(getContext(), R.style.AnswerButtonStyle);
         mShowAdButton.setTag("showAd");
+        //mShowAdButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_play), null, null, null);
+        mShowAdButton.setPadding(0, Utils.dpToPx(8), 0, Utils.dpToPx(8));
         addView(mShowAdButton);
 
         addCancelButton(this);

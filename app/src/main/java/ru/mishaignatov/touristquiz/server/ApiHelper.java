@@ -3,6 +3,7 @@ package ru.mishaignatov.touristquiz.server;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -46,7 +47,10 @@ public class ApiHelper {
         Log.d("TAG", "request param = " + param);
 
         StringRequest request = new StringRequest(Request.Method.GET, APIStrings.URL + param, listener, errorListener);
+        request.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         queue.add(request);
+
     }
 
     //=================================================

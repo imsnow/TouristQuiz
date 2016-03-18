@@ -59,7 +59,7 @@
     <string name="dialog_enter_name_hint">To compare your result with other players you need to introduce yourself. You can login via Facebook or enter you own name (mick)</string>
 
     <string name="dialog_add_millis_title">Add miles</string>
-    <string name="dialog_add_millis_ad">Watch promo video</string>
+    <string name="dialog_add_millis_ad">Watch ad video\n+10 miles</string>
 
     <string name="dialog_buy_ticket_text">To travel to the chosen country you need to buy a ticket. To buy for %1$d miles?</string>
 
