@@ -8,7 +8,7 @@
     <View
         android:background="@color/sky"
         android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+        android:layout_height="24dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
         <TextView
             android:text="@string/app_name"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="48sp"
             android:textScaleX="1.2"
             android:paddingBottom="16dp"
             android:textColor="@android:color/white"
@@ -37,8 +37,8 @@
         android:layout_marginTop="16dp"
         android:id="@+id/button_start"
         android:text="@string/start_button"
-        android:background="@drawable/sel_play_button"
-        android:textSize="20sp"
+        android:background="@drawable/rect_green_button"
+        android:textSize="28sp"
         android:textColor="@android:color/white"
         style="@style/BaseMargin"
         android:layout_width="match_parent"
@@ -58,25 +58,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
         style="@style/StartButtonStyle"
-        android:background="@drawable/sel_button_start"
+        android:background="@drawable/rect_white_button"
         android:text="@string/button_my_quiz"
         android:id="@+id/button_my_quiz" />
 
 
-    <LinearLayout
+    <FrameLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        style="@style/StartButtonStyle"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginLeft="48dp"
         android:layout_height="0dp"
         android:layout_weight="0.2">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/sel_button_start"
+        <ru.mishaignatov.touristquiz.ui.views.CircleButton
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/circle_red_button"
             android:src="@drawable/ic_leaderboard"
             android:id="@+id/button_leaderboard" />
 
@@ -89,37 +92,43 @@
             android:src="@drawable/ic_achievement"
             android:id="@+id/button_achievements" /> -->
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/sel_button_start"
+        <ru.mishaignatov.touristquiz.ui.views.CircleButton
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_tip"
+            android:background="@drawable/circle_yellow_button"
+            android:src="@drawable/ic_tips"
             android:id="@+id/button_tips" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:background="@drawable/sel_button_start"
+        <ru.mishaignatov.touristquiz.ui.views.CircleButton
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_setting"
-            android:id="@+id/button_settings" />
+            android:background="@drawable/circle_blue_button"
+            android:src="@drawable/ic_achievement"
+            android:id="@+id/button_achievement" />
 
-    </LinearLayout>
+    </FrameLayout>
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"/>
+        android:layout_weight="0.2">
+
+        <ru.mishaignatov.touristquiz.ui.views.CircleButton
+            android:id="@+id/vk"
+            android:layout_gravity="center"
+            android:background="@drawable/vk"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/version_text"
-        android:gravity="center"
+        android:gravity="bottom|center"
         android:textColor="@color/text_hint"
         android:textSize="12sp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

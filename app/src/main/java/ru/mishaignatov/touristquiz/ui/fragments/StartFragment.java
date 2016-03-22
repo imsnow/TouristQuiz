@@ -2,6 +2,8 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,7 +48,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_my_quiz).setOnClickListener(this);
         v.findViewById(R.id.button_leaderboard).setOnClickListener(this);
         v.findViewById(R.id.button_tips).setOnClickListener(this);
-        v.findViewById(R.id.button_settings).setOnClickListener(this);
+        v.findViewById(R.id.button_achievement).setOnClickListener(this);
+        v.findViewById(R.id.vk).setOnClickListener(this);
         TextView ver = (TextView) v.findViewById(R.id.version_text);
         ver.setText(App.getVersion());
         //ver.setOnClickListener(this);
@@ -72,11 +75,18 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 LoginManager.getInstance().logOut();
                 activityInterface.onTipsFragment();
                 break;
-            case R.id.button_settings:
-                activityInterface.onSettingsFragment();
+            case R.id.button_achievement:
+                Toast.makeText(getActivity(), "soon will be", Toast.LENGTH_LONG).show();
+                //activityInterface.onSettingsFragment();
                 break;
             case R.id.version_text:
                 Toast.makeText(getActivity(), GameManager.getInstance(getContext()).getUser().toString(), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.vk:
+                String url = "https://vk.com/tquiz";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
                 break;
         }
     }

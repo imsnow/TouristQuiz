@@ -4,8 +4,20 @@
   <color name="toolbar_alpha">#10000000</color>
   <color name="lock_alpha">#95000000</color>
 
-  <color name="play_button">#A581C784</color>
-  <color name="play_button_pressed">#F581C784</color>
+  <color name="white_button">#55FFFFFF</color>
+  <color name="white_button_pressed">#A5FFFFFF</color>
+
+  <color name="green_button">#A581C784</color>
+  <color name="green_button_pressed">#F581C784</color>
+
+  <color name="yellow_button">#A5FFF176</color>
+  <color name="yellow_button_pressed">#F5FFF176</color>
+
+  <color name="blue_button">#A564B5F6</color>
+  <color name="blue_button_pressed">#F564B5F6</color>
+
+  <color name="red_button">#A5E57373</color>
+  <color name="red_button_pressed">#F5E57373</color>
 
   <color name="main_button">#7581C784</color>
   <color name="main_button_pressed">#95ffffff</color>
