@@ -31,6 +31,7 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
         text.setGravity(Gravity.CENTER);
         text.setPadding(0,0,0, Utils.dpToPx(16));
         text.setTextAppearance(getContext(), R.style.DialogTextView);
+        text.setTextSize(Utils.dpToPx(10));
         text.setText(getString(R.string.dialog_buy_ticket_text, mLevel.cost));
 
         addView(text);

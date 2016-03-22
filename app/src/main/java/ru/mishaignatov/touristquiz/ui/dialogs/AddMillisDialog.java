@@ -5,7 +5,9 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -42,6 +44,9 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
         mShowAdButton.setTag("showAd");
         //mShowAdButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_play), null, null, null);
         mShowAdButton.setPadding(0, Utils.dpToPx(8), 0, Utils.dpToPx(8));
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(0,0,0, Utils.dpToPx(8));
+        mShowAdButton.setLayoutParams(lp);
         addView(mShowAdButton);
 
         addCancelButton(this);
