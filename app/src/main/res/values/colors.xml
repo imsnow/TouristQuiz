@@ -2,7 +2,7 @@
 <resources>
   <color name="start_bg">#6C787B</color>
   <color name="toolbar_alpha">#10000000</color>
-  <color name="lock_alpha">#95000000</color>
+  <color name="lock_alpha">#65000000</color>
 
   <color name="white_button">#55FFFFFF</color>
   <color name="white_button_pressed">#A5FFFFFF</color>

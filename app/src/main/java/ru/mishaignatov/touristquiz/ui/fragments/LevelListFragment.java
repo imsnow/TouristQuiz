@@ -2,6 +2,9 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -105,7 +108,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
 
         mPresenter = new LevelListPresenterImpl(App.getContext(), this);
 
-        return inflater.inflate(R.layout.fragment_country_list, container, false);
+        return inflater.inflate(R.layout.fragment_level_list, container, false);
     }
 
     @Override
@@ -139,7 +142,6 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             name.setText(item.name);
 
             TextView result = (TextView)view.findViewById(R.id.level_result);
-            result.setText("" + item.questions_answered + "/" + item.questions_total);
 
             TextView buy = (TextView)view.findViewById(R.id.buy_ticket_text);
             buy.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +154,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
 
             if(item.is_opened) {
                 buy.setVisibility(View.GONE);
+                result.setText("" + item.questions_answered + "/" + item.questions_total);
                 if(item.is_ended)
                     view.setBackgroundResource(R.drawable.item_accent);
                 else
@@ -159,45 +162,20 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             }
             else {
                 buy.setVisibility(View.VISIBLE);
-                buy.setText("Открыть за " + item.cost + " миль");
+                buy.setText(String.valueOf(item.cost));
+                Drawable d = getResources().getDrawable(R.drawable.ic_miles);
+                if (d != null) {
+                    d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                    buy.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
+                }
                 view.setBackgroundResource(R.drawable.item_close);
+                result.setVisibility(View.INVISIBLE);
             }
 
             final float scale = getResources().getDisplayMetrics().density;
             int dpInPx = (int) (4 * scale + 0.5f);
             view.setPadding(dpInPx, dpInPx, dpInPx, dpInPx);
-            /*
-            if (item.is_opened) {
-                view = inflater.inflate(R.layout.item_level_open, parent, false);
 
-                TextView name = (TextView)view.findViewById(R.id.level_name);
-                name.setText(item.name);
-
-                TextView result = (TextView)view.findViewById(R.id.level_result);
-                result.setText("" + item.questions_answered + "/" + item.questions_total);
-
-                if (item.is_ended){
-                    view.findViewById(R.id.level_thumb).setVisibility(View.VISIBLE);
-                }
-            }
-            else {
-                view = inflater.inflate(R.layout.item_level_closed, parent, false);
-
-                TextView name = (TextView)view.findViewById(R.id.item_level_name);
-                name.setText(item.name);
-
-                TextView cost = (TextView)view.findViewById(R.id.item_level_cost);
-                cost.setText(String.valueOf(item.cost));
-
-                ImageView buy = (ImageView)view.findViewById(R.id.item_level_buy);
-                buy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        buyLevel(position);
-                    }
-                });
-            }
-            */
             return view;
         }
     }

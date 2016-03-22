@@ -13,8 +13,7 @@
             android:layout_width="0dp"
             android:textColor="@color/text_primary"
             android:gravity="center|left"
-            android:text="Russia"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:padding="8dp"
             android:layout_weight="0.8"
             android:layout_height="match_parent" />
@@ -22,8 +21,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="0.2"
-            android:gravity="center"
-            android:text="1/10"
+            android:padding="8dp"
+            android:gravity="center|right"
             android:textColor="@color/text_primary"
             android:id="@+id/level_result"
             android:layout_height="match_parent" />
@@ -32,12 +31,12 @@
 
     <TextView
         android:id="@+id/buy_ticket_text"
-        android:text="Открыть"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textScaleX="1.25"
-        android:layout_width="match_parent"
+        android:layout_gravity="center|right"
+        android:gravity="center|right"
+        android:textColor="@color/white_button_pressed"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent" />
 
 </FrameLayout>

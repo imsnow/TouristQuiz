@@ -55,7 +55,7 @@
     <string name="dialog_add_millis_title">Добавить мили</string>
     <string name="dialog_add_millis_ad">Рекламный ролик\n+10 миль</string>
 
-    <string name="dialog_buy_ticket_text">Для путешествия по выбранной стране необходимо купить билет. Купить за %1$d миль?</string>
+    <string name="dialog_buy_ticket_text">Для путешествия необходимо купить билет. Купить за %1$d миль?</string>
 
     <string name="country">Страна:</string>
     <string name="send">Отправить</string>
