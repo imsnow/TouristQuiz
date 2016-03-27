@@ -76,7 +76,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 activityInterface.onTipsFragment();
                 break;
             case R.id.button_achievement:
-                Toast.makeText(getActivity(), "soon will be", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Достижения скоро появятся", Toast.LENGTH_LONG).show();
                 //activityInterface.onSettingsFragment();
                 break;
             case R.id.version_text:
