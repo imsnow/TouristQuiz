@@ -115,11 +115,13 @@ public class QuestionFragment extends Fragment implements
 
     @Override
     public void onTrueAnswer(long timeInMills, int score, int millis) {
+        mClickedButton.setBackgroundResource(R.color.success_title);
         showSuccessDialog(timeInMills, score, millis);
     }
 
     @Override
     public void onFailAnswer(TextView button) {
+        mClickedButton.setBackgroundResource(R.color.fail_title);
         mClickedButton.startAnimation(shakeAnim); // after finishing of animation
     }
 
@@ -174,6 +176,10 @@ public class QuestionFragment extends Fragment implements
     @Override
     public void setQuestion(Question question) {
 
+        button1.setBackgroundResource(R.color.answer_button);
+        button2.setBackgroundResource(R.color.answer_button);
+        button3.setBackgroundResource(R.color.answer_button);
+        button4.setBackgroundResource(R.color.answer_button);
         button1.setVisibility(View.VISIBLE);
         button2.setVisibility(View.VISIBLE);
         button3.setVisibility(View.VISIBLE);

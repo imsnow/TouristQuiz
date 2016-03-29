@@ -9,7 +9,7 @@
        </style>
 
       <style name="AnswerButtonStyle" parent="BaseMargin">
-          <item name="android:background">@drawable/sel_button_answer</item>
+          <!--<item name="android:background">@drawable/item_button_answer</item>-->
           <item name="android:textColor">@android:color/white</item>
           <item name="android:layout_gravity">center</item>
           <item name="android:gravity">center</item>

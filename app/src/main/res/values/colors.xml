@@ -29,6 +29,7 @@
   <color name="text_secondary">#8A000000</color>
   <color name="text_hint">#61000000</color>
 
+  <color name="answer_button">#df009688</color>
   <!--  <color name="lime100">#FFF0F4C3</color>
     <color name="deep_orange100">#FFFFCCBC</color>
     <color name="green100">#FFC8E6C9</color>

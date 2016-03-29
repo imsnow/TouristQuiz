@@ -23,7 +23,8 @@
         android:gravity="center"
         android:padding="60dp"
         android:layout_marginTop="48dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="22sp"
+        android:textColor="@android:color/black"
         android:text="@string/quiz_text"
         android:id="@+id/quiz_text"
         android:layout_gravity="start|top" />
@@ -45,6 +46,7 @@
             <TextView
                 android:id="@+id/button1"
                 style="@style/AnswerButtonStyle"
+                android:padding="8dp"
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -52,6 +54,7 @@
             <TextView
                 android:id="@+id/button2"
                 style="@style/AnswerButtonStyle"
+                android:padding="8dp"
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -60,12 +63,14 @@
                 android:id="@+id/button4"
                 style="@style/AnswerButtonStyle"
                 android:layout_marginBottom="12dp"
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/button3"
                 style="@style/AnswerButtonStyle"
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
