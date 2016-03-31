@@ -18,6 +18,7 @@ public interface QuestionView extends Animation.AnimationListener {
     void showDialogNextLevel();
     void startDeleteButton(int resource_id);
     void setQuestion(Question question);
+    void questionNotAnswered();
 
     void onResultDialog();
 }

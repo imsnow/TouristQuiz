@@ -91,6 +91,11 @@ public class QuestionDao {
         mQuestionDao.update(question);
     }
 
+    public void setQuestionNotShown(Question question){
+        question.is_shown = false;
+        mQuestionDao.update(question);
+    }
+
     public int getAnsweredCount(int level_id){
         try {
             return  (int)mQuestionDao.queryBuilder()

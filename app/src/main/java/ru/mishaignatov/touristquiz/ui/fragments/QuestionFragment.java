@@ -208,6 +208,11 @@ public class QuestionFragment extends Fragment implements
     }
 
     @Override
+    public void questionNotAnswered() {
+        mPresenter.setQuestionNotShown();
+    }
+
+    @Override
     public void onAnimationStart(Animation animation) {
         // if user click buttons, when anim
         button1.setClickable(false);

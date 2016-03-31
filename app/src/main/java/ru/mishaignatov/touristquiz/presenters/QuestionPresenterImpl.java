@@ -77,4 +77,10 @@ public class QuestionPresenterImpl implements QuestionPresenter {
         //return OrmDao.getInstance(App.getContext()).getCountryName(mCurrentQuestion.country_id);
         return App.getDbHelper().getLevelDao().getLevelById(mCurrentQuestion.level_id).name;
     }
+
+    @Override
+    public void setQuestionNotShown() {
+        if (mCurrentQuestion != null)
+            App.getDbHelper().getQuestionDao().setQuestionNotShown(mCurrentQuestion);
+    }
 }

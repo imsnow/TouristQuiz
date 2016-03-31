@@ -11,4 +11,5 @@ public interface QuestionPresenter extends BasePresenter {
     void sendResult();
     void onAnswerButtonClick(String answer, TextView button);
     String getCurrentLevel();
+    void setQuestionNotShown();
 }

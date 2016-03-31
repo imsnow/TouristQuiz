@@ -24,6 +24,7 @@ import ru.mishaignatov.touristquiz.ui.dialogs.AddMillisDialog;
 import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
@@ -126,12 +127,15 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         if(mFragmentManager.getBackStackEntryCount() == 0) // Start Fragment
             mHeaderLayout.setVisibility(View.GONE);
 
-        Fragment frag = mFragmentManager.findFragmentByTag("LevelListFragment");
-        if(frag instanceof LevelListFragment && frag.isVisible()) {
+        Fragment levels = mFragmentManager.findFragmentByTag("LevelListFragment");
+        if (levels instanceof LevelListFragment && levels.isVisible()) {
             // update methods
             Log.d("TAG", "update");
-            ((LevelListFragment)frag).update();
-
+            ((LevelListFragment) levels).update();
+        }
+        Fragment question = mFragmentManager.findFragmentByTag("Question");
+        if (question instanceof QuestionFragment && question.isVisible()) {
+            ((QuestionFragment)question).questionNotAnswered();
         }
     }
 
