@@ -163,7 +163,8 @@ public class LevelListFragment extends ListFragment implements LevelListView {
             else {
                 buy.setVisibility(View.VISIBLE);
                 buy.setText(String.valueOf(item.cost));
-                Drawable d = getResources().getDrawable(R.drawable.ic_miles);
+                // чтобы не изменились все иконки с этой кртинкой
+                Drawable d = getResources().getDrawable(R.drawable.ic_miles).getConstantState().newDrawable();
                 if (d != null) {
                     d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
                     buy.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
