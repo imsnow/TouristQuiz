@@ -24,12 +24,8 @@
           <item name="android:padding">8dp</item>
       </style>
 
-    <style name="StartButtonStyle" parent="BaseMargin">
-        <item name="android:textSize">18sp</item>
-    </style>
-
     <style name="BaseMargin">
-        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginBottom">@dimen/pad16dp</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_marginLeft">16dp</item>
     </style>

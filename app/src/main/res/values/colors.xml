@@ -7,8 +7,8 @@
   <color name="white_button">#55FFFFFF</color>
   <color name="white_button_pressed">#A5FFFFFF</color>
 
-  <color name="green_button">#A581C784</color>
-  <color name="green_button_pressed">#F581C784</color>
+  <color name="green_button">#D581C784</color>
+  <color name="green_button_pressed">#FF81C784</color>
 
   <color name="yellow_button">#A5FFF176</color>
   <color name="yellow_button_pressed">#F5FFF176</color>

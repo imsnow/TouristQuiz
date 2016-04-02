@@ -5,4 +5,10 @@
 
     <dimen name="pad8dp">8dp</dimen>
     <dimen name="pad16dp">16dp</dimen>
+
+    <dimen name="textSize_12sp">12sp</dimen>
+    <dimen name="textSize_28sp">28sp</dimen>
+    <dimen name="textSize_48sp">48sp</dimen>
+
+    <dimen name="height24dp">24dp</dimen>
 </resources>

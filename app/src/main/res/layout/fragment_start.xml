@@ -1,14 +1,8 @@
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/start_bg">
-
-    <View
-        android:background="@color/sky"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,111 +18,120 @@
         <TextView
             android:text="@string/app_name"
             android:gravity="center"
-            android:textSize="48sp"
+            android:textSize="@dimen/textSize_48sp"
             android:textScaleX="1.2"
-            android:paddingBottom="16dp"
             android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </FrameLayout>
 
-    <Button
-        android:layout_marginTop="16dp"
-        android:id="@+id/button_start"
-        android:text="@string/start_button"
-        android:background="@drawable/rect_green_button"
-        android:textSize="28sp"
-        android:textColor="@android:color/white"
-        style="@style/BaseMargin"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"/>
-    <!--
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        style="@style/StartButtonStyle"
-        android:background="@drawable/sel_button_start"
-        android:text="@string/button_partner_quiz"
-        android:id="@+id/button_partner" />
-    -->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:textSize="28sp"
-        android:textColor="@android:color/white"
-        style="@style/StartButtonStyle"
-        android:background="@drawable/rect_white_button"
-        android:text="@string/button_my_quiz"
-        android:id="@+id/button_my_quiz" />
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <Button
+                android:id="@+id/button_start"
+                android:text="@string/start_button"
+                android:background="@drawable/rect_green_button"
+                android:textSize="28sp"
+                android:textColor="@android:color/white"
+                style="@style/BaseMargin"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:textSize="28sp"
+                android:textColor="@android:color/white"
+                style="@style/BaseMargin"
+                android:background="@drawable/rect_white_button"
+                android:text="@string/button_my_quiz"
+                android:id="@+id/button_my_quiz" />
+
+            <FrameLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/pad16dp"
+                android:layout_marginRight="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+                <ru.mishaignatov.touristquiz.ui.views.CircleButton
+                    android:layout_gravity="left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_red_button"
+                    android:src="@drawable/ic_leaderboard"
+                    android:id="@+id/button_leaderboard" />
 
 
-    <FrameLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.2">
+                <ru.mishaignatov.touristquiz.ui.views.CircleButton
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_yellow_button"
+                    android:src="@drawable/ic_tips"
+                    android:id="@+id/button_tips" />
 
-        <ru.mishaignatov.touristquiz.ui.views.CircleButton
-            android:layout_gravity="left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle_red_button"
-            android:src="@drawable/ic_leaderboard"
-            android:id="@+id/button_leaderboard" />
+                <ru.mishaignatov.touristquiz.ui.views.CircleButton
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_blue_button"
+                    android:src="@drawable/ic_achievement"
+                    android:id="@+id/button_achievement" />
 
-  <!--      <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/sel_button_start"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_achievement"
-            android:id="@+id/button_achievements" /> -->
+            </FrameLayout>
 
-        <ru.mishaignatov.touristquiz.ui.views.CircleButton
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle_yellow_button"
-            android:src="@drawable/ic_tips"
-            android:id="@+id/button_tips" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginRight="96dp"
+                android:layout_marginLeft="96dp"
+                android:layout_weight="0.2">
 
-        <ru.mishaignatov.touristquiz.ui.views.CircleButton
-            android:layout_gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle_blue_button"
-            android:src="@drawable/ic_achievement"
-            android:id="@+id/button_achievement" />
+                <ru.mishaignatov.touristquiz.ui.views.CircleButton
+                    android:id="@+id/vk"
+                    android:layout_gravity="left"
+                    android:background="@drawable/vk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
 
-    </FrameLayout>
+                <ru.mishaignatov.touristquiz.ui.views.CircleButton
+                    android:id="@+id/fb"
+                    android:layout_gravity="right"
+                    android:background="@drawable/facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2">
+            <TextView
+                android:id="@+id/version_text"
+                android:gravity="bottom|center"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <ru.mishaignatov.touristquiz.ui.views.CircleButton
-            android:id="@+id/vk"
-            android:layout_gravity="center"
-            android:background="@drawable/vk"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/version_text"
-        android:gravity="bottom|center"
-        android:textColor="@color/text_hint"
-        android:textSize="12sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
