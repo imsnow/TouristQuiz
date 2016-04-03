@@ -19,15 +19,7 @@ import ru.mishaignatov.touristquiz.game.App;
  * Created by Mike on 16.02.2016.
  */
 public class TipsFragment extends BaseToolbarFragment {
-    /*
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ActivityInterface headerInterface = (MainActivity)activity;
-        //headerInterface.showHeader();
-        //headerInterface.onUpdateHeader(activity.getString(R.string.header_tips));
-    }
-    */
+
     @Override
     public void onResume() {
         super.onResume();
