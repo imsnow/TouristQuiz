@@ -72,6 +72,7 @@ public class EnterNameDialog extends BaseDialogFragment implements View.OnClickL
         mAcceptView  = (ImageView)ll.findViewById(R.id.image_accept);
 
         EditText mNameEdit = (EditText) ll.findViewById(R.id.name_edit_text);
+        mNameEdit.setSingleLine();
         mNameEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

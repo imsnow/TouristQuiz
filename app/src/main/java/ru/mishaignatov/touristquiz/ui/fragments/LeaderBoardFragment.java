@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,7 @@ import ru.mishaignatov.touristquiz.ui.views.LeaderBoardView;
 /**
  * Created by Mike on 01.02.2016.
  **/
-public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
+public class LeaderBoardFragment extends BaseToolbarFragment implements LeaderBoardView {
 
     private ActivityInterface activityInterface;
     private LeaderBoardPresenterImpl mPresenter;
@@ -50,18 +49,13 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     @Override
     public void onResume() {
         super.onResume();
-        activityInterface.showHeader();
-        activityInterface.onUpdateHeader(getActivity().getString(R.string.header_leaderboard));
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        updateHeader(getString(R.string.header_leaderboard));
+        //activityInterface.showHeader();
+        //activityInterface.onUpdateHeader(getActivity().getString(R.string.header_leaderboard));
     }
 
     private View createTableHeader(){
-        View header = getLayoutInflater(Bundle.EMPTY).inflate(R.layout.item_leaderboard, null);
+        View header = getLayoutInflater(Bundle.EMPTY).inflate(R.layout.item_leaderboard, null, false);
         TextView place = (TextView)header.findViewById(R.id.leader_board_place);
         place.setText(R.string.leaderboard_place);
         place.setGravity(Gravity.CENTER);
@@ -78,6 +72,8 @@ public class LeaderBoardFragment extends Fragment implements LeaderBoardView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+
+        initHeader(rootView);
 
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.leader_board_progressbar);
 

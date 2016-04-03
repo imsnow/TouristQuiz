@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp"
+    android:orientation="vertical"
     android:background="@android:color/transparent"
     android:id="@+id/layout">
-    <!--
-    <TextView
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:layout_marginBottom="90dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/quiz_text"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" /> -->
 
     <ru.mishaignatov.touristquiz.ui.views.CircleTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="64dp"
-        android:layout_marginTop="48dp"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
         android:textSize="20sp"
         android:textColor="@android:color/black"
         android:text="@string/quiz_text"
         android:id="@+id/quiz_text"
         android:layout_gravity="start|top" />
 
-    <TextView
-        android:id="@+id/question_level_name"
-        android:text="Галопом по Европам"
-        style="@style/TopTextStyle"
-        android:layout_marginTop="48dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/merge_toolbar"/>
+
+        <TextView
+            android:id="@+id/question_level_name"
+            android:text="Галопом по Европам"
+            android:textColor="@color/text_primary"
+            style="@style/TopTextStyle"
+            android:paddingBottom="8dp"
+            android:shadowColor="@android:color/white"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:layout_gravity="center"
+            android:background="@color/toolbar_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_gravity="start|bottom"
@@ -46,33 +53,32 @@
             <TextView
                 android:id="@+id/button1"
                 style="@style/AnswerButtonStyle"
-                android:padding="8dp"
-                android:layout_marginBottom="12dp"
+                android:padding="@dimen/pad8dp"
+                android:layout_marginBottom="@dimen/margin12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/button2"
                 style="@style/AnswerButtonStyle"
-                android:padding="8dp"
-                android:layout_marginBottom="12dp"
+                android:padding="@dimen/pad8dp"
+                android:layout_marginBottom="@dimen/margin12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/button4"
                 style="@style/AnswerButtonStyle"
-                android:layout_marginBottom="12dp"
-                android:padding="8dp"
+                android:layout_marginBottom="@dimen/margin12dp"
+                android:padding="@dimen/pad8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/button3"
                 style="@style/AnswerButtonStyle"
-                android:padding="8dp"
+                android:padding="@dimen/pad8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
     </LinearLayout>
 </FrameLayout>

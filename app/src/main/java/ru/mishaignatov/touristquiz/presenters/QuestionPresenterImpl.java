@@ -35,7 +35,6 @@ public class QuestionPresenterImpl implements QuestionPresenter {
         mCurrentQuestion = mGameManager.getQuestion(mCountryId);
         questionView.setQuestion(mCurrentQuestion);
         if (mCurrentQuestion != null) {
-            App.getDbHelper().getQuestionDao().setQuestionShown(mCurrentQuestion);
             mStopwatch.start();
         }
     }
@@ -48,6 +47,8 @@ public class QuestionPresenterImpl implements QuestionPresenter {
 
     @Override
     public void onAnswerButtonClick(String answer, TextView button) {
+
+        App.getDbHelper().getQuestionDao().setQuestionShown(mCurrentQuestion);
 
         if (mCurrentQuestion.isAnswer(answer)) {
             // SUCCESS !!

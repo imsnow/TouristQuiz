@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,23 +19,14 @@ import com.facebook.appevents.AppEventsLogger;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
-import ru.mishaignatov.touristquiz.ui.dialogs.AddMillisDialog;
-import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
+import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
-import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 
 public class MainActivity extends AppCompatActivity implements ActivityInterface {
-
-    // header views
-    private LinearLayout mHeaderLayout;
-    private ImageView mHomeButton;
-    private TextView mHeaderTitle;
-    private TextView mScoresText;
-    private TextView mMilesText;
 
     // tips views
     private LinearLayout mTipsLayout;
@@ -58,28 +48,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mGameManager.makeSnapshot();
 
         mSessionManager = new SessionManager(this);
-
-        mHeaderLayout = (LinearLayout)findViewById(R.id.header_layout);
-        mHeaderTitle = (TextView)findViewById(R.id.header_title);
-        mScoresText  = (TextView)findViewById(R.id.header_scores);
-        mMilesText  = (TextView)findViewById(R.id.header_miles);
-
-        mHomeButton = (ImageView)findViewById(R.id.button_back);
-        mHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-        ImageView plusMillisButton = (ImageView)findViewById(R.id.button_plus);
-        plusMillisButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddMillisDialog dialog = new AddMillisDialog();
-                dialog.show(mFragmentManager, "add_millis");
-            }
-        });
 
         mTipsLayout = (LinearLayout)findViewById(R.id.tips_view);
         mTipsText   = (TextView)findViewById(R.id.tips_text);
@@ -124,32 +92,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void onBackPressed() {
         super.onBackPressed();
 
-        if(mFragmentManager.getBackStackEntryCount() == 0) // Start Fragment
-            mHeaderLayout.setVisibility(View.GONE);
-
         Fragment levels = mFragmentManager.findFragmentByTag("LevelListFragment");
         if (levels instanceof LevelListFragment && levels.isVisible()) {
             // update methods
             Log.d("TAG", "update");
             ((LevelListFragment) levels).update();
         }
-        Fragment question = mFragmentManager.findFragmentByTag("Question");
-        if (question instanceof QuestionFragment && question.isVisible()) {
-            ((QuestionFragment)question).questionNotAnswered();
-        }
-    }
-
-    @Override
-    public void showHeader() {
-        mHeaderLayout.setVisibility(View.VISIBLE);
-        mHomeButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onUpdateHeader(String title) {
-        mHeaderTitle.setText(title);
-        mScoresText.setText(String.valueOf(mGameManager.getUser().getScores()));
-        mMilesText.setText(String.valueOf(mGameManager.getUser().getMillis()));
     }
 
     @Override
@@ -216,8 +164,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onSettingsFragment() {
         addFragment(new SettingsFragment(), "Settings");
-        showHeader();
-        onUpdateHeader(getString(R.string.action_settings));
+        //showHeader();
+        //onUpdateHeader(getString(R.string.action_settings));
     }
 
     @Override

@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
-
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
@@ -72,7 +70,6 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 activityInterface.onLeaderBoardFragment();
                 break;
             case R.id.button_tips:
-                LoginManager.getInstance().logOut();
                 activityInterface.onTipsFragment();
                 break;
             case R.id.button_achievement:

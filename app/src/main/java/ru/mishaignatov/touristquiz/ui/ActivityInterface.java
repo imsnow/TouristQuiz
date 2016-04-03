@@ -7,8 +7,6 @@ import android.support.v4.app.DialogFragment;
  **/
 public interface ActivityInterface {
 
-    void showHeader();
-    void onUpdateHeader(String country);
 
     void onShowHiddenTip(String s);
     void onShowTip(String s);

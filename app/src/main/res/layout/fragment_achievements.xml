@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- fake view for toolbar -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+    <include layout="@layout/merge_toolbar"/>
 
     <ListView
         android:id="@+id/achievements_list_view"

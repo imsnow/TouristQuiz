@@ -11,4 +11,7 @@
     <dimen name="textSize_48sp">32sp</dimen>
 
     <dimen name="height24dp">12dp</dimen>
+
+    <dimen name="margin12dp">8dp</dimen>
+    <dimen name="margin48dp">24dp</dimen>
 </resources>

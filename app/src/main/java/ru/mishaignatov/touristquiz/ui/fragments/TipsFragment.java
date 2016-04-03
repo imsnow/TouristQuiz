@@ -1,9 +1,7 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +12,34 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
-import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.orm.OrmDao;
 import ru.mishaignatov.touristquiz.database.Tip;
-import ru.mishaignatov.touristquiz.ui.ActivityInterface;
-import ru.mishaignatov.touristquiz.ui.MainActivity;
+import ru.mishaignatov.touristquiz.game.App;
 
 /***
  * Created by Mike on 16.02.2016.
  */
-public class TipsFragment extends Fragment {
-
+public class TipsFragment extends BaseToolbarFragment {
+    /*
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ActivityInterface headerInterface = (MainActivity)activity;
-        headerInterface.showHeader();
-        headerInterface.onUpdateHeader(activity.getString(R.string.header_tips));
+        //headerInterface.showHeader();
+        //headerInterface.onUpdateHeader(activity.getString(R.string.header_tips));
     }
-    
+    */
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateHeader(getString(R.string.header_tips));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_tips, null);
+
+        initHeader(rootView);
 
         ListView listView = (ListView)rootView.findViewById(R.id.tips_listview);
 

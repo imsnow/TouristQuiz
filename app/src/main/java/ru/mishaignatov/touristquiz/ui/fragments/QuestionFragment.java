@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,7 @@ import ru.mishaignatov.touristquiz.ui.views.QuestionView;
  * Created by Leva on 22.12.2015.
  *
  */
-public class QuestionFragment extends Fragment implements
+public class QuestionFragment extends BaseToolbarFragment implements
         View.OnClickListener, QuestionView {
 
     private TextView levelText;
@@ -50,9 +49,6 @@ public class QuestionFragment extends Fragment implements
 
     private QuestionPresenter mPresenter;
 
-    // temp
-    //private String bg_resource[] = {"background/places.png", "background/kitchen.png", "background/geo.png", "background/history.png"};
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -66,6 +62,8 @@ public class QuestionFragment extends Fragment implements
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_question, container, false);
+
+        initHeader(v);
 
         layout = (FrameLayout)v.findViewById(R.id.layout);
         layout.setOnClickListener(null);
@@ -202,7 +200,8 @@ public class QuestionFragment extends Fragment implements
 
         Utils.setBackground(questionText, Utils.loadBitmapFromAssets(App.getContext(), App.CIRCLEs[question.getType()]));
 
-        activityInterface.onUpdateHeader("");
+        //activityInterface.onUpdateHeader("");
+        updateHeader("");
 
         levelText.setText(mPresenter.getCurrentLevel());
     }

@@ -2,15 +2,13 @@ package ru.mishaignatov.touristquiz.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,7 +30,7 @@ import ru.mishaignatov.touristquiz.ui.views.LevelListView;
  * Created by Ignatov on 13.08.2015.
  * Display all counties - levels
  */
-public class LevelListFragment extends ListFragment implements LevelListView {
+public class LevelListFragment extends BaseToolbarFragment implements LevelListView, AdapterView.OnItemClickListener {
 
     private LevelAdapter adapter;
     private ActivityInterface headerInterface;
@@ -42,17 +40,10 @@ public class LevelListFragment extends ListFragment implements LevelListView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         if(context instanceof Activity)
             headerInterface = (MainActivity)context;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        adapter = new LevelAdapter(getActivity(), mPresenter.getLevelList());
-        setListAdapter(adapter);
-    }
 
     @Override
     public void onResume() {
@@ -97,9 +88,7 @@ public class LevelListFragment extends ListFragment implements LevelListView {
     public void update(){
         mPresenter.updateLevels();
         adapter.notifyDataSetChanged();
-
-        headerInterface.showHeader();
-        headerInterface.onUpdateHeader("Куда отправимся?");
+        updateHeader("Куда отправимся?");
     }
 
     @Override
@@ -108,13 +97,20 @@ public class LevelListFragment extends ListFragment implements LevelListView {
 
         mPresenter = new LevelListPresenterImpl(App.getContext(), this);
 
-        return inflater.inflate(R.layout.fragment_level_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_level_list, container, false);
+
+        initHeader(v);
+
+        ListView mLevelList = (ListView) v.findViewById(R.id.level_list);
+        adapter = new LevelAdapter(getActivity(), mPresenter.getLevelList());
+        mLevelList.setAdapter(adapter);
+        mLevelList.setOnItemClickListener(this);
+
+        return v;
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-
-        //GameManager.getInstance(getActivity()).setCurrentCountryId(position);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPresenter.onListItemClick(position);
     }
 
@@ -164,11 +160,8 @@ public class LevelListFragment extends ListFragment implements LevelListView {
                 buy.setVisibility(View.VISIBLE);
                 buy.setText(String.valueOf(item.cost));
                 // чтобы не изменились все иконки с этой кртинкой
-                Drawable d = getResources().getDrawable(R.drawable.ic_miles).getConstantState().newDrawable();
-                if (d != null) {
-                    d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-                    buy.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
-                }
+                Drawable d = getResources().getDrawable(R.drawable.ic_miles_white);
+                buy.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
                 view.setBackgroundResource(R.drawable.item_close);
                 result.setVisibility(View.INVISIBLE);
             }
