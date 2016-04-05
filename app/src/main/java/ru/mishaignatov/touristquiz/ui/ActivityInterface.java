@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
  **/
 public interface ActivityInterface {
 
+    void onShowAchievement();
 
     void onShowHiddenTip(String s);
     void onShowTip(String s);

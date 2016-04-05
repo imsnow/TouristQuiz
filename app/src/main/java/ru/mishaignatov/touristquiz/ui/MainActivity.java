@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +27,12 @@ import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 
-public class MainActivity extends AppCompatActivity implements ActivityInterface {
+public class MainActivity extends AppCompatActivity implements ActivityInterface, Animation.AnimationListener {
+
+    // achievement views
+    private LinearLayout mAchievementLayout;
+    private ImageView mAchievementIcon;
+    private TextView mAchievemnetText;
 
     // tips views
     private LinearLayout mTipsLayout;
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
 
         mTipsLayout = (LinearLayout)findViewById(R.id.tips_view);
         mTipsText   = (TextView)findViewById(R.id.tips_text);
+
+        mAchievementLayout = (LinearLayout)findViewById(R.id.achiev_layout);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -101,6 +109,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
+    public void onShowAchievement() {
+        showAchievement();
+    }
+
+    @Override
     public void onShowHiddenTip(String s) {
         onShowTip(s);
         mHandler.postDelayed(mHideTipRunnable, 3000);
@@ -110,6 +123,16 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void onShowTip(String s){
         mTipsText.setText(s);
         showTip();
+    }
+
+
+    private void showAchievement(){
+        mAchievementLayout.bringToFront();
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.achievement);
+        //anim.setInterpolator(new FastOutSlowInInterpolator());
+        anim.setAnimationListener(this);
+        mAchievementLayout.startAnimation(anim);
+        mAchievementLayout.setVisibility(View.VISIBLE);
     }
 
     private Runnable mHideTipRunnable = new Runnable() {
@@ -172,5 +195,20 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void showDialog(DialogFragment dialog, String tag) {
         if(mFragmentManager != null)
             dialog.show(mFragmentManager, tag);
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        mAchievementLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 }
