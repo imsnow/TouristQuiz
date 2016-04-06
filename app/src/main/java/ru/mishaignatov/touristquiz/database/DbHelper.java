@@ -2,6 +2,7 @@ package ru.mishaignatov.touristquiz.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -16,8 +17,6 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
     private static final int DB_VERSION = 1;
-
-//
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;
@@ -53,6 +52,10 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             e.printStackTrace();
         }
 
+        fillTables();
+    }
+
+    private void fillTables(){
         mLevelDao.fillTable();
         mQuestionDao.fillTable();
 
@@ -61,8 +64,21 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
         mTipDao.createTipsEntries();
     }
 
+    // NEED TEST
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+        Log.d("TAG", "upgrade database oldV = " + oldVersion + " newVer = " + newVersion);
+        if(oldVersion < newVersion){
+            try {
+                TableUtils.dropTable(connectionSource, Level.class, false);
+                TableUtils.dropTable(connectionSource, Question.class, false);
+                TableUtils.dropTable(connectionSource, Achievement.class, false);
+                TableUtils.dropTable(connectionSource, Tip.class, false);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+            fillTables();
+        }
     }
 }
