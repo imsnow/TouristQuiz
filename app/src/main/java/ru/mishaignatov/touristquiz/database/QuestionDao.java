@@ -156,7 +156,7 @@ public class QuestionDao {
                     question.is_shown = false;
 
                     String num = row[0].trim();
-                    Log.d("TAG", "num = " + Integer.parseInt(num));
+                    //Log.d("TAG", "num = " + Integer.parseInt(num));
                     question.level_id = Integer.parseInt(num);
                     mQuestionDao.create(question);
                 }

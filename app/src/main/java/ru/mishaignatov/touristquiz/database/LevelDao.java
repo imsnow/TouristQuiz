@@ -116,7 +116,7 @@ public class LevelDao {
                     level.cost = Integer.parseInt(row[3]);
                     level.is_opened = level.cost == 0;
                     mLevelDao.create(level);
-                    Log.d("TAG", level.toString());
+                    //Log.d("TAG", level.toString());
                     cnt++;
                 }
             }

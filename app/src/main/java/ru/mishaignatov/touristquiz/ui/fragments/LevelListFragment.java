@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +129,6 @@ public class LevelListFragment extends BaseToolbarFragment implements LevelListV
             View view;
 
             Level item = mList.get(position);
-            Log.d("TAG", "pos = " + position + " id = " + item.id);
             //if(view == null)
             view = inflater.inflate(R.layout.item_level, parent, false);
 
