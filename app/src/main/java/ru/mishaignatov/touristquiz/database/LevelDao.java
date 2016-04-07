@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 
+import ru.mishaignatov.touristquiz.server.APIStrings;
+
 /***
  * Created by Mike on 01.03.2016.
  */
@@ -33,6 +35,7 @@ public class LevelDao {
         mHelper = helper;
         mLevelDao = helper.getRuntimeExceptionDao(Level.class);
     }
+
     /*
     public Level searchLevel(String name){
 
@@ -100,7 +103,7 @@ public class LevelDao {
 
     public void fillTable(){
         AssetManager am = mContext.getAssets();
-        int cnt = 0;
+        //int cnt = 0;
         try {
             InputStream is = am.open("levels.csv");
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -108,8 +111,13 @@ public class LevelDao {
             while((s = reader.readLine()) != null) {
                 String[] row = s.split(";");
                 if (row.length != 1) {
+                    int id = Integer.parseInt(row[0]);
+
+                    if (getLevelById(id) != null)
+                        continue; // Уровень уже существует
+
                     Level level = new Level();
-                    level.id = cnt;
+                    level.id = Integer.parseInt(row[0]);
                     if (row[1] == null || row[1].length() == 0)
                         continue;
                     level.name = row[1];
@@ -117,7 +125,7 @@ public class LevelDao {
                     level.is_opened = level.cost == 0;
                     mLevelDao.create(level);
                     //Log.d("TAG", level.toString());
-                    cnt++;
+                    //cnt++;
                 }
             }
         }catch (IOException e){

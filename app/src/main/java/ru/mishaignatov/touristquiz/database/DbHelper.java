@@ -18,7 +18,7 @@ import ru.mishaignatov.touristquiz.BuildConfig;
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
-    private static final int DB_VERSION = BuildConfig.VERSION_CODE;
+    private static final int DB_VERSION = 3;
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;
