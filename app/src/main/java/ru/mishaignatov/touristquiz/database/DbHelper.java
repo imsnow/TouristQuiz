@@ -10,15 +10,13 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-import ru.mishaignatov.touristquiz.BuildConfig;
-
 /***
  * Created by Mike on 01.03.2016.
  */
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 7;
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;
@@ -71,7 +69,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         Log.d("TAG", "upgrade database oldV = " + oldVersion + " newVer = " + newVersion);
         if(oldVersion < newVersion){
-            try {
+            /*try {
                 TableUtils.dropTable(connectionSource, Level.class, false);
                 TableUtils.dropTable(connectionSource, Question.class, false);
                 TableUtils.dropTable(connectionSource, Achievement.class, false);
@@ -84,8 +82,10 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            */
 
-            fillTables();
+            mLevelDao.fillTable();
+            //fillTables();
         }
     }
 }

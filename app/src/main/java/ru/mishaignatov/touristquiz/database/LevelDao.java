@@ -2,7 +2,6 @@ package ru.mishaignatov.touristquiz.database;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
 
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
@@ -36,7 +35,6 @@ public class LevelDao {
         mLevelDao = helper.getRuntimeExceptionDao(Level.class);
     }
 
-    /*
     public Level searchLevel(String name){
 
         try {
@@ -46,7 +44,7 @@ public class LevelDao {
         }
         return null;
     }
-    */
+
     public Level getLevelById(int id){
         try {
             return mLevelDao.queryBuilder().where().
@@ -59,13 +57,7 @@ public class LevelDao {
     }
 
     public List<Level> getLevelList(){
-
         List<Level> list = mLevelDao.queryForAll();
-
-        for(int i=0; i<list.size(); i++)
-            Log.d("TAG", "index = " + i + " id = " + list.get(i).id);
-
-
         return list;
     }
 
@@ -112,8 +104,8 @@ public class LevelDao {
                 String[] row = s.split(";");
                 if (row.length != 1) {
                     int id = Integer.parseInt(row[0]);
-
-                    if (getLevelById(id) != null)
+                    String name = row[1];
+                    if (getLevelById(id) != null && searchLevel(name) != null)
                         continue; // Уровень уже существует
 
                     Level level = new Level();
@@ -123,7 +115,7 @@ public class LevelDao {
                     level.name = row[1];
                     level.cost = Integer.parseInt(row[3]);
                     level.is_opened = level.cost == 0;
-                    mLevelDao.create(level);
+                    mLevelDao.createOrUpdate(level);
                     //Log.d("TAG", level.toString());
                     //cnt++;
                 }
