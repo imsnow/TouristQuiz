@@ -138,8 +138,6 @@ public class QuestionDao {
 
     public void fillTable(){
 
-        //List<Level> list = App.getDbHelper().getLevelDao().getLevelList();
-
         AssetManager am = mContext.getAssets();
         try {
             InputStream is = am.open("questions.csv");
@@ -147,18 +145,35 @@ public class QuestionDao {
             String s;
             while((s = reader.readLine()) != null) {
                 String[] row = s.split(";");
-                if(row.length == 7) {
-                    Question question = new Question();
-                    question.quiz = row[1].trim();
-                    question.answers = row[3].trim();
-                    question.type = row[6].trim();
-                    question.is_answered = false;
-                    question.is_shown = false;
+                if(row.length == 8) {
+                    // 0 - index, 1 - level index, 2 - text, 3 - null, 4 - answers, 5 - null, 6 - country, 7 - type
+                    int index = Integer.parseInt(row[0]);
+                    String text = row[2].trim();
 
-                    String num = row[0].trim();
-                    //Log.d("TAG", "num = " + Integer.parseInt(num));
-                    question.level_id = Integer.parseInt(num);
-                    mQuestionDao.create(question);
+                    Question question = findQuestionByIndex(index);
+
+                    if (question == null) {
+                        // new question
+                        question = new Question();
+                        question.id = index;
+                        question.quiz = text;
+                        question.answers = row[4].trim();
+                        question.type = row[7].trim();
+                        question.is_answered = false;
+                        question.is_shown = false;
+                        question.level_id = Integer.parseInt(row[1].trim());
+                    }
+                    else { // question exist in db
+                        if (question.quiz.equals(text))
+                            continue;
+                        // text of question has changed
+                        question.quiz = text;
+                        question.answers = row[4].trim();
+                        question.type = row[7].trim();
+                        question.level_id = Integer.parseInt(row[1].trim());
+                    }
+
+                    mQuestionDao.createOrUpdate(question);
                 }
                 else
                     Log.d("TAG", "s = " + row);
@@ -167,4 +182,25 @@ public class QuestionDao {
             e.printStackTrace();
         }
     }
+
+    private Question findQuestionByIndex(int index) {
+
+        try {
+            return mQuestionDao.queryBuilder().where().eq("id", index).queryForFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    /*
+    private Question findQuestionByText(String text) {
+        try {
+            return mQuestionDao.queryBuilder().where().eq("quiz", text).queryForFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    */
 }

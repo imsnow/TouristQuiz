@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 8;
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;
@@ -69,23 +69,9 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         Log.d("TAG", "upgrade database oldV = " + oldVersion + " newVer = " + newVersion);
         if(oldVersion < newVersion){
-            /*try {
-                TableUtils.dropTable(connectionSource, Level.class, false);
-                TableUtils.dropTable(connectionSource, Question.class, false);
-                TableUtils.dropTable(connectionSource, Achievement.class, false);
-                TableUtils.dropTable(connectionSource, Tip.class, false);
-
-                TableUtils.createTable(connectionSource, Level.class);
-                TableUtils.createTable(connectionSource, Question.class);
-                TableUtils.createTable(connectionSource, Achievement.class);
-                TableUtils.createTable(connectionSource, Tip.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            */
-
             mLevelDao.fillTable();
-            //fillTables();
+            mQuestionDao.fillTable();
+            mLevelDao.calcTotalQuestion();
         }
     }
 }
