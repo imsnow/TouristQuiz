@@ -71,6 +71,9 @@
     <string name="toast_plus_millis">+10 миль</string>
     <string name="load_ad">Загрузка...</string>
     <string name="or">или</string>
+
+    <string name="no_connection">Нет подключения к сети Интернет =(</string>
+
     <string name="level_text">Великолепно!</string>
     <string name="reset_game">Начать заново</string>
 

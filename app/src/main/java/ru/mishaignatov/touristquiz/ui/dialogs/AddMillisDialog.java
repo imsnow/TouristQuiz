@@ -17,6 +17,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import ru.mishaignatov.touristquiz.BuildConfig;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.game.App;
@@ -71,8 +72,11 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
 
     private void initAd(){
         mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id_test));  // TEST MODE
-        //mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));       // WORK MODE
+        if (BuildConfig.DEBUG)
+            mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id_test));  // TEST MODE
+        else
+            mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));       // WORK MODE
+
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
@@ -87,13 +91,14 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
             public void onAdLoaded() {
                 super.onAdLoaded();
                 Log.d("TAG", "ad loaded");
-                mInterstitialAd.show();
+                if (getDialog() != null && getDialog().isShowing())
+                    mInterstitialAd.show();
             }
 
             @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                Log.d("TAG", "ad opened");
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                Toast.makeText(getActivity(), R.string.no_connection, Toast.LENGTH_LONG ).show();
             }
         });
         if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {

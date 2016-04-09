@@ -80,6 +80,8 @@
     <string name="load_ad">Loading...</string>
     <string name="or">OR</string>
 
+    <string name="no_connection">No connection to Internet  =(</string>
+
     <string name="level_text">Impressive</string>
     <string name="reset_game">Reset</string>
 
