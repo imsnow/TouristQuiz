@@ -32,6 +32,8 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
         mTipDao = TipDao.getInstance(this, context);
     }
 
+    public int getDbVersion() { return DB_VERSION; }
+
     public LevelDao getLevelDao(){
         return mLevelDao;
     }

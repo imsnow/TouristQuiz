@@ -40,9 +40,9 @@ public class App extends Application {
         mContext = getApplicationContext();
         FacebookSdk.sdkInitialize(mContext);
 
-        mVersion = getString(R.string.version, version);
-
         mDbHelper = new DbHelper(this);
+        int db_version = mDbHelper.getDbVersion();
+        mVersion = getString(R.string.version, version, db_version);
     }
 
     public static Context getContext(){
