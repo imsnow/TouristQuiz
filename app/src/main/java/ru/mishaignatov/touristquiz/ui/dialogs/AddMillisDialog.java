@@ -3,7 +3,6 @@ package ru.mishaignatov.touristquiz.ui.dialogs;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -81,16 +80,17 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
-                Log.d("TAG", "ad closed");
-                Toast.makeText(getActivity(), R.string.toast_plus_millis, Toast.LENGTH_LONG ).show();
-                GameManager.getInstance(App.getContext()).getUser().addResult(0, 10);
-                mShowAdButton.setText(getString(R.string.dialog_add_millis_ad));
+                if (getDialog() != null && getDialog().isShowing()) {
+                    Toast.makeText(getActivity(), R.string.toast_plus_millis, Toast.LENGTH_LONG).show();
+                    GameManager.getInstance(App.getContext()).getUser().addResult(0, 10);
+                    mShowAdButton.setText(getString(R.string.dialog_add_millis_ad));
+                }
             }
 
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                Log.d("TAG", "ad loaded");
+                //Log.d("TAG", "ad loaded");
                 if (getDialog() != null && getDialog().isShowing())
                     mInterstitialAd.show();
             }
@@ -98,14 +98,16 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 super.onAdFailedToLoad(errorCode);
-                Toast.makeText(getActivity(), R.string.no_connection, Toast.LENGTH_LONG ).show();
+                if (getDialog() != null && getDialog().isShowing())
+                    Toast.makeText(getActivity(), getString(R.string.no_connection) + "\nCode = " + errorCode, Toast.LENGTH_LONG ).show();
             }
         });
         if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
-            AdRequest adRequest = new AdRequest.Builder()
+            AdRequest.Builder builder = new AdRequest.Builder();
                     //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice(mDeviceId)   // TEST MODE
-                    .build();
+            if (BuildConfig.DEBUG)
+                builder.addTestDevice(mDeviceId);  // TEST MODE
+            AdRequest adRequest = builder.build();
             mInterstitialAd.loadAd(adRequest);
         }
     }
