@@ -11,9 +11,8 @@
 
     <ImageView
         android:id="@+id/achiev_image"
-        android:layout_width="0dp"
-        android:layout_weight="0.4"
-        android:background="@color/sky"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_best"
         android:layout_height="match_parent" />
 
     <TextView
@@ -22,6 +21,6 @@
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_weight="0.6"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

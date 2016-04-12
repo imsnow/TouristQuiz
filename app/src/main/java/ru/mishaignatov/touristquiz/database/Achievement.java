@@ -13,8 +13,8 @@ public class Achievement {
 
     @DatabaseField(id = true, index = true)
     public int id;
-    @DatabaseField
-    public String title;
+    //@DatabaseField
+    //public String title;
     @DatabaseField
     public String content;
     @DatabaseField

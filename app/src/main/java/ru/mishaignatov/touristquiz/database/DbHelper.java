@@ -64,6 +64,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
         mLevelDao.calcTotalQuestion();
 
         mTipDao.createTipsEntries();
+        mAchievementDao.createEntries();
     }
 
     // NEED TEST
