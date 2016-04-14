@@ -17,6 +17,7 @@ public class PreferenceStorage {
     private static final String KEY_MILES        = "miles";
     private static final String KEY_SCORE        = "score";
     private static final String KEY_REGISTER     = "register";
+    private static final String KEY_LEVELS_COUNT = "levels_count";
 
     private static PreferenceStorage INSTANCE;
 
@@ -38,6 +39,7 @@ public class PreferenceStorage {
         editor.putInt(KEY_MILES, user.getMillis());
         editor.putInt(KEY_SCORE, user.getScores());
         editor.putString(KEY_TOKEN, user.getToken());
+        editor.putInt(KEY_LEVELS_COUNT, user.getCountLevelsDone());
         editor.apply();
     }
 
@@ -47,5 +49,6 @@ public class PreferenceStorage {
         user.setScores(preferences.getInt(KEY_SCORE, 0));
         user.setToken(preferences.getString(KEY_TOKEN, ""));
         user.setDisplayName(preferences.getString(KEY_DISPLAY_NAME, ""));
+        user.setCountLevelsDone(preferences.getInt(KEY_LEVELS_COUNT, 0));
     }
 }

@@ -1,6 +1,5 @@
 package ru.mishaignatov.touristquiz.ui.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,11 +14,7 @@ import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.database.Achievement;
-import ru.mishaignatov.touristquiz.database.DbHelper;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.server.ApiHelper;
-import ru.mishaignatov.touristquiz.ui.ActivityInterface;
-import ru.mishaignatov.touristquiz.ui.MainActivity;
 
 /** *
  * Created by Mike on 09.02.2016.

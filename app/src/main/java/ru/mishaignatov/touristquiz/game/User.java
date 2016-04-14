@@ -22,6 +22,8 @@ public class User {
     private int millis;               // Зработанные мили пользователя
     private int scores;               // Заработанные очки пользователя
 
+    private int countLevelsDone = 0;  // Количество пройденных уровней
+
     private Context mContext;
 
     private boolean isRegistered = false;
@@ -74,11 +76,13 @@ public class User {
 
     public int getMillis()           {  return millis; }
     public int getScores()           {  return scores; }
+    public int getCountLevelsDone()  {  return countLevelsDone; }
 
     public void setDisplayName(String name) { displayName = name; }
     public void setToken(String token){ this.token = token; }
     public void setMillis(int millis)   { this.millis = millis; }
     public void setScores(int scores) { this.scores = scores; }
+    public void setCountLevelsDone(int count) { countLevelsDone = count; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }
