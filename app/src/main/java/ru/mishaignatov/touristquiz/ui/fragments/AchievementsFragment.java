@@ -26,13 +26,19 @@ import ru.mishaignatov.touristquiz.ui.MainActivity;
  */
 public class AchievementsFragment extends BaseToolbarFragment {
 
-    private ActivityInterface headerInterface;
+    /*private ActivityInterface headerInterface;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        headerInterface = (MainActivity)activity;
-        //headerInterface.onUpdateHeader("Достижения");
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity)
+            headerInterface = (MainActivity)context;
+    }
+    */
+    @Override
+    public void onResume() {
+        super.onResume();
         updateHeader("Достижения");
     }
 
@@ -73,6 +79,10 @@ public class AchievementsFragment extends BaseToolbarFragment {
 
                 TextView title = (TextView)v.findViewById(R.id.item_achievement_text);
                 title.setText(item.content);
+
+                if (!item.isAchieved) {
+                    v.setBackgroundResource(R.drawable.item_close);
+                }
             }
 
             return v;
