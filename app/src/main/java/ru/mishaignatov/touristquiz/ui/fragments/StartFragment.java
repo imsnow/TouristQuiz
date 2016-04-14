@@ -48,6 +48,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         v.findViewById(R.id.button_tips).setOnClickListener(this);
         v.findViewById(R.id.button_achievement).setOnClickListener(this);
         v.findViewById(R.id.vk).setOnClickListener(this);
+        v.findViewById(R.id.fb).setOnClickListener(this);
         TextView ver = (TextView) v.findViewById(R.id.version_text);
         ver.setText(App.getVersion());
         //ver.setOnClickListener(this);
@@ -73,8 +74,9 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 activityInterface.onTipsFragment();
                 break;
             case R.id.button_achievement:
-                Toast.makeText(getActivity(), "Достижения скоро появятся", Toast.LENGTH_LONG).show();
-                activityInterface.onShowAchievement();
+                activityInterface.onAchievementFragment();
+                //Toast.makeText(getActivity(), "Достижения скоро появятся", Toast.LENGTH_LONG).show();
+                //activityInterface.onShowAchievement();
                 //activityInterface.onSettingsFragment();
                 break;
             case R.id.version_text:
@@ -85,6 +87,9 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
+                break;
+            case R.id.fb:
+                Toast.makeText(getActivity(), "В разработке", Toast.LENGTH_LONG).show();
                 break;
         }
     }

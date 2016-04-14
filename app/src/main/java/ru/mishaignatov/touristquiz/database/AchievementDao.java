@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class AchievementDao {
             achievement.id = i;
             achievement.content = contents[i];
             achievement.draw_resource = R.drawable.ic_best;
-
+            achievement.isAchieved = false;
             mDao.create(achievement);
         }
 
@@ -46,5 +47,14 @@ public class AchievementDao {
 
     public List<Achievement> getAllList() {
         return mDao.queryForAll();
+    }
+
+    public Achievement getAchievementById(int id) {
+        try {
+            return mDao.queryBuilder().where().eq("id", id).queryForFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

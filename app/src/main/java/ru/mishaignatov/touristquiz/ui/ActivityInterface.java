@@ -17,6 +17,7 @@ public interface ActivityInterface {
     void onLevelListFragment();
     void onLeaderBoardFragment();
     void onTipsFragment();
+    void onAchievementFragment();
     void onSettingsFragment();
 
     void showDialog(DialogFragment dialog, String tag);

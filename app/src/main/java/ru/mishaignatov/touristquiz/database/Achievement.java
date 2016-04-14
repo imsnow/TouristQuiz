@@ -19,4 +19,6 @@ public class Achievement {
     public String content;
     @DatabaseField
     public int draw_resource;
+    @DatabaseField
+    public boolean isAchieved;
 }

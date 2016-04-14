@@ -20,6 +20,7 @@ import com.facebook.appevents.AppEventsLogger;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
+import ru.mishaignatov.touristquiz.ui.fragments.AchievementsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LeaderBoardFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LevelListFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.LoadFragment;
@@ -182,6 +183,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void onTipsFragment() {
         addFragment(new TipsFragment(), "Tips");
+    }
+
+    @Override
+    public void onAchievementFragment() {
+        addFragment(new AchievementsFragment(), "Achievement");
     }
 
     @Override
