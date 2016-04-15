@@ -6,6 +6,7 @@ import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
+import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.server.ApiHelper;
 import ru.mishaignatov.touristquiz.ui.views.QuestionView;
 
@@ -17,15 +18,17 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     private GameManager mGameManager;
 
     private QuestionView questionView;
+    private User.ResultInterface resultInterface;
 
     private Question mCurrentQuestion;
     private Stopwatch mStopwatch;
 
     private int mCountryId = 0;
 
-    public QuestionPresenterImpl(QuestionView questionView, int country_id){
+    public QuestionPresenterImpl(QuestionView questionView, int country_id, User.ResultInterface resultInterface) {
         mStopwatch = new Stopwatch();
         this.questionView = questionView;
+        this.resultInterface = resultInterface;
         mGameManager = GameManager.getInstance(App.getContext());
         mCountryId = country_id;
     }
@@ -55,7 +58,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
             mCurrentQuestion.setAnswered();
             long time = mStopwatch.stop();
             int score = mCurrentQuestion.calcScore(time);
-            mGameManager.getUser().addResult(score, Question.PLUS_MILLIS);
+            mGameManager.getUser().addResult(score, Question.PLUS_MILLIS, mCurrentQuestion.isFirstAttempt(), resultInterface);
             questionView.onTrueAnswer(time, score, Question.PLUS_MILLIS);
         }
         else { // Try again, buddy

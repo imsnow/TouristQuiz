@@ -48,6 +48,11 @@ public class Question {
         return true;
     }
 
+    // if attempt == 3, that user answered right the first time
+    public boolean isFirstAttempt() {
+        return attempt == 3;
+    }
+
     Question(){}
 
     public List<String> getRandomListAnswers(){

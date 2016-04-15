@@ -82,7 +82,7 @@ public class AddMillisDialog extends BaseDialogFragment implements View.OnClickL
                 super.onAdClosed();
                 if (getDialog() != null && getDialog().isShowing()) {
                     Toast.makeText(getActivity(), R.string.toast_plus_millis, Toast.LENGTH_LONG).show();
-                    GameManager.getInstance(App.getContext()).getUser().addResult(0, 10);
+                    GameManager.getInstance(App.getContext()).getUser().addMiles(10);
                     mShowAdButton.setText(getString(R.string.dialog_add_millis_ad));
                 }
             }

@@ -18,6 +18,7 @@ import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
@@ -33,7 +34,7 @@ import ru.mishaignatov.touristquiz.ui.views.QuestionView;
  *
  */
 public class QuestionFragment extends BaseToolbarFragment implements
-        View.OnClickListener, QuestionView {
+        View.OnClickListener, QuestionView, User.ResultInterface {
 
     private TextView levelText;
 //    private TextView questionText;
@@ -88,7 +89,7 @@ public class QuestionFragment extends BaseToolbarFragment implements
         Bundle args = getArguments();
         int countryID = args.getInt("COUNTRY_ID");
 
-        mPresenter = new QuestionPresenterImpl(this, countryID);
+        mPresenter = new QuestionPresenterImpl(this, countryID, this);
         mPresenter.takeQuestion();
 
         return v;
@@ -232,5 +233,15 @@ public class QuestionFragment extends BaseToolbarFragment implements
     @Override
     public void onAnimationRepeat(Animation animation) {
         // unused
+    }
+
+    @Override
+    public void onFiveAnsweredTrue() {
+        activityInterface.onShowAchievement();
+    }
+
+    @Override
+    public void onTenAnsweredTrue() {
+        activityInterface.onShowAchievement();
     }
 }

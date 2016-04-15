@@ -10,6 +10,11 @@ import com.facebook.AccessToken;
  */
 public class User {
 
+    public interface ResultInterface {
+        void onFiveAnsweredTrue();
+        void onTenAnsweredTrue();
+    }
+
     private String token;
     private AccessToken fbAccessToken; // facebook access token
 
@@ -23,6 +28,7 @@ public class User {
     private int scores;               // Заработанные очки пользователя
 
     private int countLevelsDone = 0;  // Количество пройденных уровней
+    private int countRightQuestionsAnswered = 0; // кол-во правильно отвеченных вопросов подряд
 
     private Context mContext;
 
@@ -53,9 +59,23 @@ public class User {
         PreferenceStorage.getInstance(mContext).saveUser(this);
     }
 
-    public void addResult(int progressScore, int progressMiles) {
+    public void addMiles(int miles) {
+        millis += miles;
+    }
+
+    // invoke when user answer true
+    public void addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
         scores += progressScore;
         millis += progressMiles;
+        if (isFirstAttempt) countRightQuestionsAnswered++;
+
+        if (countRightQuestionsAnswered == 5) {
+            callback.onFiveAnsweredTrue();
+        }
+
+        if (countRightQuestionsAnswered == 10) {
+            callback.onTenAnsweredTrue();
+        }
     }
 
     public void removeMillis(int progressMillis){
@@ -77,12 +97,14 @@ public class User {
     public int getMillis()           {  return millis; }
     public int getScores()           {  return scores; }
     public int getCountLevelsDone()  {  return countLevelsDone; }
+    public int getCountRightQuestionsAnswered() { return countRightQuestionsAnswered; }
 
     public void setDisplayName(String name) { displayName = name; }
     public void setToken(String token){ this.token = token; }
     public void setMillis(int millis)   { this.millis = millis; }
     public void setScores(int scores) { this.scores = scores; }
     public void setCountLevelsDone(int count) { countLevelsDone = count; }
+    public void setCountRightQuestionsAnswered(int count) { countRightQuestionsAnswered = count; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }
