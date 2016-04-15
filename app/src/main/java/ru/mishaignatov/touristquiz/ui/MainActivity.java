@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.facebook.appevents.AppEventsLogger;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.database.Achievement;
+import ru.mishaignatov.touristquiz.game.App;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
 import ru.mishaignatov.touristquiz.ui.fragments.AchievementsFragment;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mTipsText   = (TextView)findViewById(R.id.tips_text);
 
         mAchievementLayout = (LinearLayout)findViewById(R.id.achiev_layout);
+        mAchievementIcon = (ImageView) findViewById(R.id.achiev_image);
+        mAchievemnetText = (TextView) findViewById(R.id.achiev_text);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -110,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
-    public void onShowAchievement() {
-        showAchievement();
+    public void onShowAchievement(Achievement achievement) {
+        showAchievement(achievement);
     }
 
     @Override
@@ -127,9 +131,16 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
 
-    private void showAchievement(){
+    private void showAchievement(Achievement achievement) {
         mAchievementLayout.bringToFront();
+
+        mAchievementIcon.setImageResource(achievement.draw_resource);
+        mAchievemnetText.setText(achievement.content);
+
+        App.getDbHelper().getAchievementDao().setAchieved(achievement, true);
+
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.achievement);
+        anim.setStartOffset(3000);
         //anim.setInterpolator(new FastOutSlowInInterpolator());
         anim.setAnimationListener(this);
         mAchievementLayout.startAnimation(anim);

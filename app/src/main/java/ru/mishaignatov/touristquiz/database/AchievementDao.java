@@ -57,4 +57,9 @@ public class AchievementDao {
         }
         return null;
     }
+
+    public void setAchieved(Achievement achievement, boolean isAchieved) {
+        achievement.isAchieved = isAchieved;
+        mDao.update(achievement);
+    }
 }

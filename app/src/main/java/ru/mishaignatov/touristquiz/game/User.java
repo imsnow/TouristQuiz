@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.facebook.AccessToken;
 
+import ru.mishaignatov.touristquiz.database.Achievement;
+import ru.mishaignatov.touristquiz.database.AchievementDao;
+
 /**
  * Created by Leva on 26.12.2015.
  *
@@ -13,6 +16,7 @@ public class User {
     public interface ResultInterface {
         void onFiveAnsweredTrue();
         void onTenAnsweredTrue();
+        void onShowLevelsAchievement(Achievement achievement);
     }
 
     private String token;
@@ -65,16 +69,55 @@ public class User {
 
     // invoke when user answer true
     public void addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
+
         scores += progressScore;
         millis += progressMiles;
-        if (isFirstAttempt) countRightQuestionsAnswered++;
 
-        if (countRightQuestionsAnswered == 5) {
-            callback.onFiveAnsweredTrue();
+        if (isFirstAttempt) {
+            // the first time
+            countRightQuestionsAnswered++;
+
+            if (countRightQuestionsAnswered == 5) {
+                callback.onFiveAnsweredTrue();
+            }
+
+            if (countRightQuestionsAnswered == 10) {
+                callback.onTenAnsweredTrue();
+            }
         }
+        else
+            if (countRightQuestionsAnswered != 0) {
+                countRightQuestionsAnswered = 0;
+                // забираем оба достижения
+                AchievementDao dao = App.getDbHelper().getAchievementDao();
+                Achievement five = dao.getAchievementById(0);
+                Achievement ten  = dao.getAchievementById(1);
+                dao.setAchieved(five, false);
+                dao.setAchieved(ten, false);
+            }
 
-        if (countRightQuestionsAnswered == 10) {
-            callback.onTenAnsweredTrue();
+    }
+
+    public void addLevelDone(ResultInterface callback) {
+
+        countLevelsDone++;
+
+        switch (countLevelsDone) {
+            case 1:
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(2));
+                break;
+            case 5:
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(3));
+                break;
+            case 10:
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(4));
+                break;
+            case 20:
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(5));
+                break;
+            case 30:
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(6));
+                break;
         }
     }
 

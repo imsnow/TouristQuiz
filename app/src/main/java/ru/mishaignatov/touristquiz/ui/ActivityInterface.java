@@ -2,12 +2,14 @@ package ru.mishaignatov.touristquiz.ui;
 
 import android.support.v4.app.DialogFragment;
 
+import ru.mishaignatov.touristquiz.database.Achievement;
+
 /**
  * Created by Leva on 15.01.2016.
  **/
 public interface ActivityInterface {
 
-    void onShowAchievement();
+    void onShowAchievement(Achievement achievement);
 
     void onShowHiddenTip(String s);
     void onShowTip(String s);

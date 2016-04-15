@@ -16,8 +16,10 @@ import java.util.List;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
+import ru.mishaignatov.touristquiz.database.Achievement;
 import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenterImpl;
@@ -165,6 +167,8 @@ public class QuestionFragment extends BaseToolbarFragment implements
         //dialog.show(getActivity().getSupportFragmentManager(), "level_done");
         activityInterface.showDialog(new LevelDoneDialog(), "level_done");
         getActivity().onBackPressed();
+
+        GameManager.getInstance(getContext()).getUser().addLevelDone(this);
     }
 
     @Override
@@ -237,11 +241,18 @@ public class QuestionFragment extends BaseToolbarFragment implements
 
     @Override
     public void onFiveAnsweredTrue() {
-        activityInterface.onShowAchievement();
+        Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(0);
+        activityInterface.onShowAchievement(ach);
     }
 
     @Override
     public void onTenAnsweredTrue() {
-        activityInterface.onShowAchievement();
+        Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(1);
+        activityInterface.onShowAchievement(ach);
+    }
+
+    @Override
+    public void onShowLevelsAchievement(Achievement achievement) {
+        activityInterface.onShowAchievement(achievement);
     }
 }
