@@ -33,6 +33,7 @@ public class User {
 
     private int countLevelsDone = 0;  // Количество пройденных уровней
     private int countRightQuestionsAnswered = 0; // кол-во правильно отвеченных вопросов подряд
+    private int kAchiev = 1; // коеффициент достижений влияющий на кол-во очков
 
     private Context mContext;
 
@@ -70,32 +71,36 @@ public class User {
     // invoke when user answer true
     public void addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
 
-        scores += progressScore;
-        millis += progressMiles;
-
         if (isFirstAttempt) {
             // the first time
             countRightQuestionsAnswered++;
 
             if (countRightQuestionsAnswered == 5) {
                 callback.onFiveAnsweredTrue();
+                kAchiev = 2; // очки умножаем на два
             }
 
             if (countRightQuestionsAnswered == 10) {
                 callback.onTenAnsweredTrue();
+                kAchiev = 3;
             }
         }
-        else
+        else {
             if (countRightQuestionsAnswered != 0) {
+                kAchiev = 1;
                 countRightQuestionsAnswered = 0;
                 // забираем оба достижения
                 AchievementDao dao = App.getDbHelper().getAchievementDao();
                 Achievement five = dao.getAchievementById(0);
-                Achievement ten  = dao.getAchievementById(1);
+                Achievement ten = dao.getAchievementById(1);
                 dao.setAchieved(five, false);
                 dao.setAchieved(ten, false);
             }
+        }
 
+        // прибавляем очки и мили
+        scores += progressScore*kAchiev;
+        millis += progressMiles;
     }
 
     public void addLevelDone(ResultInterface callback) {
