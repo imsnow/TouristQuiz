@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/item_achievement_image"
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.3"
         android:layout_gravity="center"
         android:src="@drawable/ic_best"
         android:layout_height="match_parent" />
@@ -20,7 +20,7 @@
         android:gravity="center"
         android:layout_width="0dp"
         style="@style/ItemListTextView"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -4,14 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:visibility="gone"
     android:padding="16dp"
     android:background="@color/list_item_bg"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/achiev_image"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="0.3"
         android:src="@drawable/ic_best"
         android:layout_height="match_parent" />
 
@@ -19,8 +19,9 @@
         android:id="@+id/achiev_text"
         android:text="Описание достижения"
         android:gravity="center"
+        android:textSize="22sp"
         android:layout_width="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.7"
         android:layout_height="match_parent" />
 
 </LinearLayout>

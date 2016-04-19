@@ -45,7 +45,11 @@ public class AchievementsFragment extends BaseToolbarFragment {
         initHeader(rootView);
 
         ListView mListView = (ListView) rootView.findViewById(R.id.achievements_list_view);
-        mListView.setAdapter(new AchievementAdapter(getContext(), R.layout.item_achievement, App.getDbHelper().getAchievementDao().getAllList()));
+        List<Achievement> list = App.getDbHelper().getAchievementDao().getAllList();
+        // удаляем из списка бонусы х2 и х3
+        list.remove(0);
+        list.remove(0);
+        mListView.setAdapter(new AchievementAdapter(getContext(), R.layout.item_achievement, list));
 
         return rootView;
     }
