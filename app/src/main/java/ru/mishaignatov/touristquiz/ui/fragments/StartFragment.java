@@ -89,6 +89,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.fb:
+                activityInterface.onShowBonus();
                 Toast.makeText(getActivity(), "В разработке", Toast.LENGTH_LONG).show();
                 break;
         }

@@ -242,12 +242,14 @@ public class QuestionFragment extends BaseToolbarFragment implements
     @Override
     public void onFiveAnsweredTrue() {
         Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(0);
+        ach.color_resource = R.color.by_two_achieve;
         activityInterface.onShowAchievement(ach);
     }
 
     @Override
     public void onTenAnsweredTrue() {
         Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(1);
+        ach.color_resource = R.color.by_three_achieve;
         activityInterface.onShowAchievement(ach);
     }
 

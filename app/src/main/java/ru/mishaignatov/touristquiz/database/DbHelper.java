@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
-    private static final int DB_VERSION = 8;
+    private static final int DB_VERSION = 10;
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;
@@ -75,6 +75,14 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             mLevelDao.fillTable();
             mQuestionDao.fillTable();
             mLevelDao.calcTotalQuestion();
+
+            try {
+                TableUtils.dropTable(connectionSource, Achievement.class, false);
+                TableUtils.createTable(connectionSource, Achievement.class);
+                mAchievementDao.createEntries();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

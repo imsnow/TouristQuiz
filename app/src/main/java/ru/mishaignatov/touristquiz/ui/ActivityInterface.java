@@ -9,6 +9,8 @@ import ru.mishaignatov.touristquiz.database.Achievement;
  **/
 public interface ActivityInterface {
 
+    void onShowBonus();
+
     void onShowAchievement(Achievement achievement);
 
     void onShowHiddenTip(String s);

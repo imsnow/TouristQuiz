@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:padding="16dp"
+    android:visibility="gone"
     android:background="@color/list_item_bg"
     android:layout_height="wrap_content">
 
@@ -19,6 +20,7 @@
         android:id="@+id/achiev_text"
         android:text="Описание достижения"
         android:gravity="center"
+        android:textColor="@android:color/black"
         android:textSize="22sp"
         android:layout_width="0dp"
         android:layout_weight="0.7"

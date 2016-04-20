@@ -9,6 +9,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -30,7 +31,10 @@ import ru.mishaignatov.touristquiz.ui.fragments.SettingsFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.StartFragment;
 import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 
-public class MainActivity extends AppCompatActivity implements ActivityInterface, Animation.AnimationListener {
+public class MainActivity extends AppCompatActivity implements ActivityInterface {
+
+    // bonus
+    private TextView mBonusText;
 
     // achievement views
     private LinearLayout mAchievementLayout;
@@ -64,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mAchievementLayout = (LinearLayout)findViewById(R.id.achiev_layout);
         mAchievementIcon = (ImageView) findViewById(R.id.achiev_image);
         mAchievemnetText = (TextView) findViewById(R.id.achiev_text);
+
+        mBonusText = (TextView) findViewById(R.id.bonus_text);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -114,6 +120,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
+    public void onShowBonus() {
+        showBonus();
+    }
+
+    @Override
     public void onShowAchievement(Achievement achievement) {
         showAchievement(achievement);
     }
@@ -130,10 +141,34 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         showTip();
     }
 
+    private void showBonus() {
+        mBonusText.bringToFront();
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.bonus);
+        //anim.setInterpolator(new FastOutSlowInInterpolator());
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mBonusText.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        mBonusText.startAnimation(anim);
+        mBonusText.setVisibility(View.VISIBLE);
+    }
 
     private void showAchievement(Achievement achievement) {
         mAchievementLayout.bringToFront();
 
+        mAchievementLayout.setBackgroundResource(achievement.color_resource);
         mAchievementIcon.setImageResource(achievement.draw_resource);
         mAchievemnetText.setText(achievement.content);
 
@@ -142,7 +177,22 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.achievement);
         anim.setStartOffset(3000);
         //anim.setInterpolator(new FastOutSlowInInterpolator());
-        anim.setAnimationListener(this);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAchievementLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         mAchievementLayout.startAnimation(anim);
         mAchievementLayout.setVisibility(View.VISIBLE);
     }
@@ -212,20 +262,5 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     public void showDialog(DialogFragment dialog, String tag) {
         if(mFragmentManager != null)
             dialog.show(mFragmentManager, tag);
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        mAchievementLayout.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
     }
 }
