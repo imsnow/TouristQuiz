@@ -21,6 +21,7 @@ import com.facebook.appevents.AppEventsLogger;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.database.Achievement;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
 import ru.mishaignatov.touristquiz.ui.fragments.AchievementsFragment;
@@ -120,8 +121,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
-    public void onShowBonus() {
-        showBonus();
+    public void onShowBonus(Bonus bonus) {
+        showBonus(bonus);
     }
 
     @Override
@@ -141,9 +142,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         showTip();
     }
 
-    private void showBonus() {
+    private void showBonus(Bonus bonus) {
         mBonusText.bringToFront();
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.bonus);
+
+        mBonusText.setText(bonus.getTitle());
+        mBonusText.setTextColor(bonus.getResourceColor());
         //anim.setInterpolator(new FastOutSlowInInterpolator());
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override

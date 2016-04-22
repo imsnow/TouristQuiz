@@ -19,6 +19,7 @@ import ru.mishaignatov.touristquiz.Utils;
 import ru.mishaignatov.touristquiz.database.Achievement;
 import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.User;
 import ru.mishaignatov.touristquiz.presenters.QuestionPresenter;
@@ -241,16 +242,12 @@ public class QuestionFragment extends BaseToolbarFragment implements
 
     @Override
     public void onFiveAnsweredTrue() {
-        Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(0);
-        ach.color_resource = R.color.by_two_achieve;
-        activityInterface.onShowAchievement(ach);
+        activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_TWO));
     }
 
     @Override
     public void onTenAnsweredTrue() {
-        Achievement ach = App.getDbHelper().getAchievementDao().getAchievementById(1);
-        ach.color_resource = R.color.by_three_achieve;
-        activityInterface.onShowAchievement(ach);
+        activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_THREE));
     }
 
     @Override
