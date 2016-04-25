@@ -1,11 +1,14 @@
 package ru.mishaignatov.touristquiz.game;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import ru.mishaignatov.touristquiz.R;
 
 /***
  * Created by Mike on 22.04.2016.
  */
-public class Bonus {
+public class Bonus  {
 
     public enum Type { BY_TWO, BY_THREE}
 
@@ -16,6 +19,7 @@ public class Bonus {
     private int resource_color;
 
     public Bonus(Type type) {
+        this.type = type;
         switch (type) {
             case BY_TWO:
                 title = "x2";
@@ -30,4 +34,5 @@ public class Bonus {
 
     public String getTitle() {return title;}
     public int getResourceColor() { return resource_color; }
+    public Type getType() { return type; }
 }

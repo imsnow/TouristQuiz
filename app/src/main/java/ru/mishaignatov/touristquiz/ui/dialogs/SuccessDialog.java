@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import ru.mishaignatov.touristquiz.R;
+import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.ui.fragments.QuestionFragment;
 
 /**
@@ -17,6 +18,7 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
     private String time;
     private String scores;
     private String millis;
+    private String factor = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,10 +29,13 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
             time = args.getString("KEY_TIME");
             scores = args.getString("KEY_SCORES");
             millis = args.getString("KEY_MILLIS");
+            boolean isBonus = args.getBoolean("KEY_IS_BONUS", false);
+            if (isBonus)
+                factor = args.getString("KEY_BONUS_FACTOR");
         }
         addImageAndTextView(R.drawable.ic_time, R.string.show_time_result, time);
-        addImageAndTextView(R.drawable.ic_scores, R.string.show_plus_and_result, scores);
-        addImageAndTextView(R.drawable.ic_miles, R.string.show_plus_and_result, millis);
+        addImageAndTextView(R.drawable.ic_scores, R.string.show_plus_and_result, scores + " " + factor);
+        addImageAndTextView(R.drawable.ic_miles, R.string.show_plus_and_result, millis + " " + factor);
         addNextButton(this);
     }
 

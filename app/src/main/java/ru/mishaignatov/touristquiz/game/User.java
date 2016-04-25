@@ -69,7 +69,9 @@ public class User {
     }
 
     // invoke when user answer true
-    public void addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
+    public Bonus addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
+
+        Bonus bonus = null;
 
         if (isFirstAttempt) {
             // the first time
@@ -78,11 +80,13 @@ public class User {
             if (countRightQuestionsAnswered == 5) {
                 callback.onFiveAnsweredTrue();
                 kAchiev = 2; // очки умножаем на два
+                bonus = new Bonus(Bonus.Type.BY_TWO);
             }
 
             if (countRightQuestionsAnswered == 10) {
                 callback.onTenAnsweredTrue();
                 kAchiev = 3;
+                bonus = new Bonus(Bonus.Type.BY_THREE);
             }
         }
         else {
@@ -90,17 +94,19 @@ public class User {
                 kAchiev = 1;
                 countRightQuestionsAnswered = 0;
                 // забираем оба достижения
-                AchievementDao dao = App.getDbHelper().getAchievementDao();
+                /*AchievementDao dao = App.getDbHelper().getAchievementDao();
                 Achievement five = dao.getAchievementById(0);
                 Achievement ten = dao.getAchievementById(1);
                 dao.setAchieved(five, false);
-                dao.setAchieved(ten, false);
+                dao.setAchieved(ten, false); */
             }
         }
 
         // прибавляем очки и мили
         scores += progressScore*kAchiev;
         millis += progressMiles;
+
+        return bonus;
     }
 
     public void addLevelDone(ResultInterface callback) {
@@ -109,19 +115,19 @@ public class User {
 
         switch (countLevelsDone) {
             case 1:
-                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(2));
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(0));
                 break;
             case 5:
-                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(3));
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(1));
                 break;
             case 10:
-                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(4));
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(2));
                 break;
             case 20:
-                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(5));
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(3));
                 break;
             case 30:
-                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(6));
+                callback.onShowLevelsAchievement(App.getDbHelper().getAchievementDao().getAchievementById(4));
                 break;
         }
     }

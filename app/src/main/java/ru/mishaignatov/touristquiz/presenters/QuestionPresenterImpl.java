@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.database.Question;
 import ru.mishaignatov.touristquiz.game.App;
+import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.Stopwatch;
 import ru.mishaignatov.touristquiz.game.User;
@@ -58,8 +59,8 @@ public class QuestionPresenterImpl implements QuestionPresenter {
             mCurrentQuestion.setAnswered();
             long time = mStopwatch.stop();
             int score = mCurrentQuestion.calcScore(time);
-            mGameManager.getUser().addResult(score, Question.PLUS_MILLIS, mCurrentQuestion.isFirstAttempt(), resultInterface);
-            questionView.onTrueAnswer(time, score, Question.PLUS_MILLIS);
+            Bonus bonus = mGameManager.getUser().addResult(score, Question.PLUS_MILLIS, mCurrentQuestion.isFirstAttempt(), resultInterface);
+            questionView.onTrueAnswer(time, score, Question.PLUS_MILLIS, bonus);
         }
         else { // Try again, buddy
             if(mCurrentQuestion.minusAttempt())

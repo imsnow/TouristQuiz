@@ -116,9 +116,10 @@ public class QuestionFragment extends BaseToolbarFragment implements
     }
 
     @Override
-    public void onTrueAnswer(long timeInMills, int score, int millis) {
+    public void onTrueAnswer(long timeInMills, int score, int millis, Bonus bonus) {
         mClickedButton.setBackgroundResource(R.color.success_title);
-        showSuccessDialog(timeInMills, score, millis);
+
+        showSuccessDialog(timeInMills, score, millis, bonus );
     }
 
     @Override
@@ -136,12 +137,16 @@ public class QuestionFragment extends BaseToolbarFragment implements
     }
 
     @Override
-    public void showSuccessDialog(long timeInMills, int score, int millis) {
+    public void showSuccessDialog(long timeInMills, int score, int millis, Bonus bonus) {
 
         Bundle args = new Bundle();
         args.putString("KEY_TIME", String.format("%s", 1f * timeInMills / 1000));
         args.putString("KEY_SCORES", new DecimalFormat("#.##").format(score));
         args.putString("KEY_MILLIS", String.valueOf(millis));
+        if (bonus != null) {
+            args.putBoolean("KEY_IS_BONUS", true);
+            args.putString("KEY_BONUS_FACTOR", bonus.getTitle());
+        }
 
         SuccessDialog successDialog = new SuccessDialog();
         successDialog.setArguments(args);
