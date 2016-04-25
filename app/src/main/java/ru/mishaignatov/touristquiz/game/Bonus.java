@@ -1,8 +1,5 @@
 package ru.mishaignatov.touristquiz.game;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import ru.mishaignatov.touristquiz.R;
 
 /***
