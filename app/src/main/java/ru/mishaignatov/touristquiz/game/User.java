@@ -5,7 +5,6 @@ import android.content.Context;
 import com.facebook.AccessToken;
 
 import ru.mishaignatov.touristquiz.database.Achievement;
-import ru.mishaignatov.touristquiz.database.AchievementDao;
 
 /**
  * Created by Leva on 26.12.2015.
@@ -14,8 +13,8 @@ import ru.mishaignatov.touristquiz.database.AchievementDao;
 public class User {
 
     public interface ResultInterface {
-        void onFiveAnsweredTrue();
-        void onTenAnsweredTrue();
+        //void onFiveAnsweredTrue();
+        //void onTenAnsweredTrue();
         void onShowLevelsAchievement(Achievement achievement);
     }
 
@@ -78,13 +77,13 @@ public class User {
             countRightQuestionsAnswered++;
 
             if (countRightQuestionsAnswered == 5) {
-                callback.onFiveAnsweredTrue();
+                //callback.onFiveAnsweredTrue();
                 kAchiev = 2; // очки умножаем на два
                 bonus = new Bonus(Bonus.Type.BY_TWO);
             }
 
             if (countRightQuestionsAnswered == 10) {
-                callback.onTenAnsweredTrue();
+                //callback.onTenAnsweredTrue();
                 kAchiev = 3;
                 bonus = new Bonus(Bonus.Type.BY_THREE);
             }

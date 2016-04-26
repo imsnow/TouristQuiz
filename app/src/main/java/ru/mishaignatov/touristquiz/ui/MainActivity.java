@@ -35,7 +35,7 @@ import ru.mishaignatov.touristquiz.ui.fragments.TipsFragment;
 public class MainActivity extends AppCompatActivity implements ActivityInterface {
 
     // bonus
-    private TextView mBonusText;
+    //private TextView mBonusText;
 
     // achievement views
     private LinearLayout mAchievementLayout;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mAchievementIcon = (ImageView) findViewById(R.id.achiev_image);
         mAchievemnetText = (TextView) findViewById(R.id.achiev_text);
 
-        mBonusText = (TextView) findViewById(R.id.bonus_text);
+       // mBonusText = (TextView) findViewById(R.id.bonus_text);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -120,10 +120,10 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         }
     }
 
-    @Override
-    public void onShowBonus(Bonus bonus) {
-        showBonus(bonus);
-    }
+//    @Override
+//    public void onShowBonus(Bonus bonus) {
+//        showBonus(bonus);
+//    }
 
     @Override
     public void onShowAchievement(Achievement achievement) {
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mTipsText.setText(s);
         showTip();
     }
-
+    /*
     private void showBonus(Bonus bonus) {
         mBonusText.bringToFront();
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.bonus);
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         mBonusText.startAnimation(anim);
         mBonusText.setVisibility(View.VISIBLE);
     }
-
+    */
     private void showAchievement(Achievement achievement) {
         mAchievementLayout.bringToFront();
 

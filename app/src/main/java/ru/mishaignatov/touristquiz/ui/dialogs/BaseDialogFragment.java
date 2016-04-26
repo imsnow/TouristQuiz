@@ -103,7 +103,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
         mViewList.add(ll);
     }
 
-    public void addImageAndTextView(int resImageId, int resTextId, String value){
+    // return text fo change it
+    public TextView addImageAndTextView(int resImageId, int resTextId, String value){
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.item_image_text, mContainer, false);
@@ -115,5 +116,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         text.setText(getString(resTextId, value));
 
         mViewList.add(ll);
+
+        return text;
     }
 }

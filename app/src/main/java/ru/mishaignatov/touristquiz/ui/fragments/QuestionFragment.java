@@ -145,7 +145,7 @@ public class QuestionFragment extends BaseToolbarFragment implements
         args.putString("KEY_MILLIS", String.valueOf(millis));
         if (bonus != null) {
             args.putBoolean("KEY_IS_BONUS", true);
-            args.putString("KEY_BONUS_FACTOR", bonus.getTitle());
+            args.putInt("KEY_BONUS_FACTOR", bonus.getType() == Bonus.Type.BY_TWO ? 2 : 3);
         }
 
         SuccessDialog successDialog = new SuccessDialog();
@@ -244,7 +244,7 @@ public class QuestionFragment extends BaseToolbarFragment implements
     public void onAnimationRepeat(Animation animation) {
         // unused
     }
-
+    /*
     @Override
     public void onFiveAnsweredTrue() {
         activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_TWO));
@@ -254,7 +254,7 @@ public class QuestionFragment extends BaseToolbarFragment implements
     public void onTenAnsweredTrue() {
         activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_THREE));
     }
-
+    */
     @Override
     public void onShowLevelsAchievement(Achievement achievement) {
         activityInterface.onShowAchievement(achievement);

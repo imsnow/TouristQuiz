@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.ui.ActivityInterface;
 import ru.mishaignatov.touristquiz.ui.MainActivity;
@@ -90,7 +89,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.fb:
-                activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_TWO));
+                //activityInterface.onShowBonus(new Bonus(Bonus.Type.BY_TWO));
                 Toast.makeText(getActivity(), "В разработке", Toast.LENGTH_LONG).show();
                 break;
         }

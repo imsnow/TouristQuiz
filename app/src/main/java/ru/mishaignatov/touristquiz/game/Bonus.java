@@ -19,11 +19,11 @@ public class Bonus  {
         this.type = type;
         switch (type) {
             case BY_TWO:
-                title = "x2";
+                title = "Бонус: очки на 2";
                 resource_color = R.color.by_two_achieve;
                 break;
             case BY_THREE:
-                title = "x3";
+                title = "Бонус: очки на 3";
                 resource_color = R.color.by_three_achieve;
                 break;
         }

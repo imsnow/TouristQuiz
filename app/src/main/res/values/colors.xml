@@ -47,8 +47,8 @@
   <color name="list_item_active_bg">#B5D197</color>
 
   <color name="default_achieve">#FDDA9D</color>
-  <color name="by_two_achieve">#AF69F0AE</color>
-  <color name="by_three_achieve">#AFFF7043</color>
+  <color name="by_two_achieve">#FF69F0AE</color>
+  <color name="by_three_achieve">#FFFF7043</color>
 
   <!-- yellow style
   <color name="button_start_active">@color/list_item_bg</color>
