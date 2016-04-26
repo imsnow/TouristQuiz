@@ -8,6 +8,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import org.json.JSONException;
@@ -108,6 +109,7 @@ public class EnterNamePresenterImpl implements EnterNamePresenter, Response.List
 
     @Override
     public void onCancel() {
+        LoginManager.getInstance().logOut();
         Log.d("TAG", "cancel");
     }
 

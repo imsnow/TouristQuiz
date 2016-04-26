@@ -96,12 +96,14 @@ public class LeaderBoardFragment extends BaseToolbarFragment implements LeaderBo
 
     @Override
     public void showProgressBar() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
