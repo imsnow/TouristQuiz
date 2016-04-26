@@ -80,7 +80,7 @@ public class LoadFragment extends Fragment implements
                 //((MainActivity)getActivity()).replaceFragment(new StartFragment());
             }
             else // что-то полшло не так
-                tipsInterface.onShowTip(response);
+                tipsInterface.onShowHiddenTip(response);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class LoadFragment extends Fragment implements
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        tipsInterface.onShowTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs());
+        tipsInterface.onShowHiddenTip("Error message = " + error.getMessage() + " time = " + error.getNetworkTimeMs());
         showButtonRetry();
     }
 
