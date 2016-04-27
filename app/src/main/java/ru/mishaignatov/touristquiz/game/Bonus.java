@@ -13,23 +13,25 @@ public class Bonus  {
 
     private String title;
 
-    private int resource_color;
+    private int drawable;
+    private int text_color = R.color.by_three_achieve;
 
     public Bonus(Type type) {
         this.type = type;
         switch (type) {
             case BY_TWO:
-                title = "Бонус: очки на 2";
-                resource_color = R.color.by_two_achieve;
+                title = "x2";
+                drawable = R.drawable.dialog_title_yellow;
                 break;
             case BY_THREE:
-                title = "Бонус: очки на 3";
-                resource_color = R.color.by_three_achieve;
+                title = "x3";
+                drawable = R.drawable.dialog_title_orange;
                 break;
         }
     }
 
     public String getTitle() {return title;}
-    public int getResourceColor() { return resource_color; }
+    public int getResourceColor() { return drawable; }
+    public int getTextColor() { return text_color; }
     public Type getType() { return type; }
 }

@@ -50,6 +50,9 @@
   <color name="by_two_achieve">#FF69F0AE</color>
   <color name="by_three_achieve">#FFFF7043</color>
 
+  <color name="bonus_by_two_title">#FFEE58</color> <!-- yellow 400 -->
+  <color name="bonus_by_three_title">#FFA726</color> <!-- orange 400 -->
+
   <!-- yellow style
   <color name="button_start_active">@color/list_item_bg</color>
   <color name="button_start_pressed">#DCAB47</color>

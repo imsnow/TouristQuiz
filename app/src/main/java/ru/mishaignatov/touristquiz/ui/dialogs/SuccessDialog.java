@@ -28,6 +28,8 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
     private int factor = 1;
     boolean isBonus = false;
 
+    private int titleColor = R.drawable.dialog_title_green;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,42 +51,29 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
 
             final Bonus b = new Bonus(factor == 2 ? Bonus.Type.BY_TWO : Bonus.Type.BY_THREE);
 
+            titleColor = b.getResourceColor();
+
             TextView text = new TextView(getContext());
             text.setText(b.getTitle());
             text.setGravity(Gravity.CENTER);
-            text.setTextColor(getResources().getColor(b.getResourceColor()));
-            text.setTextSize(22);
+            text.setTextColor(getResources().getColor(b.getTextColor()));
+            text.setTextSize(32);
 
             addView(text);
 
             AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
-            alphaAnimation.setDuration(750);
-            //alphaAnimation.setStartOffset(500);
+            alphaAnimation.setDuration(500);
+            alphaAnimation.setStartOffset(300);
             alphaAnimation.setFillAfter(true);
-            alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
 
-                }
+            int newValue = Integer.parseInt(scores);
+            int f = newValue * factor;
+            String newScores = String.valueOf(f);
+            scoresView.setTextColor(getResources().getColor(b.getTextColor()));
+            scoresView.setText(getString(R.string.show_plus_and_result, newScores));
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    int newValue = Integer.parseInt(scores);
-                    int f = newValue * factor;
-                    String newScores = String.valueOf(f);
-                    scoresView.setTextColor(getResources().getColor(b.getResourceColor()));
-                    scoresView.setText("+ " + newScores);
+            scoresView.startAnimation(alphaAnimation);
 
-                    AlphaAnimation anim = new AlphaAnimation(0f, 1f);
-                    anim.setDuration(500);
-                    scoresView.startAnimation(anim);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
             text.startAnimation(alphaAnimation);
         }
 
@@ -110,7 +99,7 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
 
     @Override
     public int getTitleColor() {
-        return R.drawable.dialog_title_green;
+        return titleColor;
     }
 
     @Override
