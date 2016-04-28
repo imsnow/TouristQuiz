@@ -57,8 +57,7 @@ public class ApiHelper {
     public void userRegister(User user, Response.Listener<String> listener, Response.ErrorListener errorListener){
 
         String param = APIStrings.USER_REGISTER +
-                        addParam(APIStrings.IMEI, encode(user.getImei())) +
-                        addParam(APIStrings.EMAIL, encode(user.getEmail())) +
+                        addParam(APIStrings.UNIQUE_ID, encode(user.getUniqueId())) +
                         addParam(APIStrings.DEVICE, encode(user.getDevice())) +
                         addParam(APIStrings.ANDROID, encode(user.getAndroidApi())) +
                         addParam(APIStrings.VERSION, encode(App.getVersion()));

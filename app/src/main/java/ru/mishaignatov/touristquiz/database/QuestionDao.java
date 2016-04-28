@@ -176,7 +176,7 @@ public class QuestionDao {
                     mQuestionDao.createOrUpdate(question);
                 }
                 else
-                    Log.d("TAG", "s = " + row);
+                    Log.d("TAG", "line error = " + s);
             }
         }catch (IOException e){
             e.printStackTrace();

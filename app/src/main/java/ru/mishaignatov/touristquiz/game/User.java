@@ -22,8 +22,7 @@ public class User {
     private AccessToken fbAccessToken; // facebook access token
 
     private String displayName;
-    private String email;
-    private String imei;   // _id
+    private String unique_id;
     private String deviceName;
     private String androidApi;
 
@@ -53,8 +52,7 @@ public class User {
 
         mContext = context;
 
-        email      = UserUtils.getGoogleEmail(context);
-        imei       = UserUtils.getIMEI(context);
+        unique_id  = UserUtils.getUniqueId(context);
         deviceName = UserUtils.getDeviceName() != null ? UserUtils.getDeviceName() : "null";
         androidApi = UserUtils.getAndroidAPI();
         // load from preference
@@ -70,7 +68,7 @@ public class User {
     }
 
     // invoke when user answer true
-    public Bonus addResult(int progressScore, int progressMiles, boolean isFirstAttempt, ResultInterface callback) {
+    public Bonus addResult(int progressScore, int progressMiles, boolean isFirstAttempt) {
 
         if (isFirstAttempt) {
             // the first time
@@ -143,22 +141,21 @@ public class User {
     // Getters
     public String getToken()      { return token;      }
     public String getDisplayName(){ return displayName;}
-    public String getEmail()      { return email;      }
-    public String getImei()       { return imei;       }
+    public String getUniqueId()   { return unique_id;  }
     public String getDevice()     { return deviceName; }
     public String getAndroidApi() { return androidApi; }
 
     public int getMillis()           {  return millis; }
     public int getScores()           {  return scores; }
     public int getCountLevelsDone()  {  return countLevelsDone; }
-    public int getCountRightQuestionsAnswered() { return countRightQuestionsAnswered; }
+    //public int getCountRightQuestionsAnswered() { return countRightQuestionsAnswered; }
 
     public void setDisplayName(String name) { displayName = name; }
     public void setToken(String token){ this.token = token; }
     public void setMillis(int millis)   { this.millis = millis; }
     public void setScores(int scores) { this.scores = scores; }
     public void setCountLevelsDone(int count) { countLevelsDone = count; }
-    public void setCountRightQuestionsAnswered(int count) { countRightQuestionsAnswered = count; }
+    //public void setCountRightQuestionsAnswered(int count) { countRightQuestionsAnswered = count; }
 
     public void setIsRegistration(boolean is) { isRegistered = is; }
     public boolean isRegistered() { return isRegistered; }
@@ -179,8 +176,7 @@ public class User {
                 "androidApi='" + androidApi + '\'' +
                 ", token='" + token + '\'' +
                 ", displayName='" + displayName + '\'' +
-                ", email='" + email + '\'' +
-                ", imei='" + imei + '\'' +
+                ", unique_id ='" + unique_id + '\'' +
                 ", deviceName='" + deviceName + '\'' +
                 ", millis=" + millis +
                 ", scores=" + scores +

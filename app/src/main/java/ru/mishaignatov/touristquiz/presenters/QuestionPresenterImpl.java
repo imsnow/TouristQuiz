@@ -19,7 +19,6 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     private GameManager mGameManager;
 
     private QuestionView questionView;
-    private User.ResultInterface resultInterface;
 
     private Question mCurrentQuestion;
     private Stopwatch mStopwatch;
@@ -29,7 +28,6 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     public QuestionPresenterImpl(QuestionView questionView, int country_id, User.ResultInterface resultInterface) {
         mStopwatch = new Stopwatch();
         this.questionView = questionView;
-        this.resultInterface = resultInterface;
         mGameManager = GameManager.getInstance(App.getContext());
         mCountryId = country_id;
     }
@@ -61,7 +59,7 @@ public class QuestionPresenterImpl implements QuestionPresenter {
             mCurrentQuestion.setAnswered();
             long time = mStopwatch.stop();
             int score = mCurrentQuestion.calcScore(time);
-            Bonus bonus = mGameManager.getUser().addResult(score, Question.PLUS_MILLIS, mCurrentQuestion.isFirstAttempt(), resultInterface);
+            Bonus bonus = mGameManager.getUser().addResult(score, Question.PLUS_MILLIS, mCurrentQuestion.isFirstAttempt());
             questionView.onTrueAnswer(time, score, Question.PLUS_MILLIS, bonus);
         }
         else { // Try again, buddy
