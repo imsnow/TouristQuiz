@@ -37,9 +37,11 @@ public class QuestionPresenterImpl implements QuestionPresenter {
     @Override
     public void takeQuestion() {
         mCurrentQuestion = mGameManager.getQuestion(mCountryId);
-        questionView.setQuestion(mCurrentQuestion);
-        if (mCurrentQuestion != null) {
-            mStopwatch.start();
+        if (questionView != null) {
+            questionView.setQuestion(mCurrentQuestion);
+            if (mCurrentQuestion != null) {
+                mStopwatch.start();
+            }
         }
     }
 

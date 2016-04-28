@@ -9,7 +9,6 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import com.facebook.appevents.AppEventsLogger;
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.database.Achievement;
 import ru.mishaignatov.touristquiz.game.App;
-import ru.mishaignatov.touristquiz.game.Bonus;
 import ru.mishaignatov.touristquiz.game.GameManager;
 import ru.mishaignatov.touristquiz.game.SessionManager;
 import ru.mishaignatov.touristquiz.ui.fragments.AchievementsFragment;
@@ -172,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     private void showAchievement(Achievement achievement) {
         mAchievementLayout.bringToFront();
 
-        mAchievementLayout.setBackgroundResource(achievement.color_resource);
+        //mAchievementLayout.setBackgroundResource(achievement.color_resource);
         mAchievementIcon.setImageResource(achievement.draw_resource);
         mAchievemnetText.setText(achievement.content);
 

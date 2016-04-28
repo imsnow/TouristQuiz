@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:padding="16dp"
     android:visibility="gone"
-    android:background="@color/list_item_bg"
+    android:background="@drawable/backgroung_achiev"
     android:layout_height="wrap_content">
 
     <ImageView

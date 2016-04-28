@@ -31,6 +31,7 @@ import ru.mishaignatov.touristquiz.ui.views.LevelListView;
  */
 public class LevelListFragment extends BaseToolbarFragment implements LevelListView, AdapterView.OnItemClickListener {
 
+    private ListView mLevelList;
     private LevelAdapter adapter;
     private ActivityInterface headerInterface;
 
@@ -75,12 +76,14 @@ public class LevelListFragment extends BaseToolbarFragment implements LevelListV
 
     @Override
     public void startLevel(int position) {
-        Bundle args = new Bundle();
-        args.putInt("COUNTRY_ID", position);
-        QuestionFragment fragment = new QuestionFragment();
-        fragment.setArguments(args);
+        if (getFragmentManager().findFragmentByTag("question") == null) {
+            Bundle args = new Bundle();
+            args.putInt("COUNTRY_ID", position);
+            QuestionFragment fragment = new QuestionFragment();
+            fragment.setArguments(args);
 
-        ((MainActivity) getActivity()).addFragment(fragment, "Question");
+            ((MainActivity) getActivity()).addFragment(fragment, "Question");
+        }
     }
 
     @Override
@@ -88,6 +91,7 @@ public class LevelListFragment extends BaseToolbarFragment implements LevelListV
         mPresenter.updateLevels();
         adapter.notifyDataSetChanged();
         updateHeader("Куда отправимся?");
+        mLevelList.setOnItemClickListener(this);
     }
 
     @Override
@@ -100,17 +104,20 @@ public class LevelListFragment extends BaseToolbarFragment implements LevelListV
 
         initHeader(v);
 
-        ListView mLevelList = (ListView) v.findViewById(R.id.level_list);
+        mLevelList = (ListView) v.findViewById(R.id.level_list);
         adapter = new LevelAdapter(getActivity(), mPresenter.getLevelList());
         mLevelList.setAdapter(adapter);
-        mLevelList.setOnItemClickListener(this);
+        //mLevelList.setOnItemClickListener(this);
 
         return v;
     }
 
+
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPresenter.onListItemClick(position);
+        mLevelList.setOnItemClickListener(null);
     }
 
     private class LevelAdapter extends ArrayAdapter<Level> {

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import ru.mishaignatov.touristquiz.R;
 import ru.mishaignatov.touristquiz.Utils;
+import ru.mishaignatov.touristquiz.game.GameManager;
 
 /***
  * Created by Mike on 26.02.2016.
@@ -31,8 +32,10 @@ public class LevelDoneDialog extends BaseDialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v.getTag().equals("next"))
+        if(v.getTag().equals("next")) {
             dismiss();
+            GameManager.getInstance(getContext()).getUser().addMiles(30);
+        }
     }
 
     @Override

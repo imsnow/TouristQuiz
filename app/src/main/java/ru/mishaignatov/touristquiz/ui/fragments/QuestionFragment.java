@@ -79,11 +79,6 @@ public class QuestionFragment extends BaseToolbarFragment implements
         button2      = (TextView)v.findViewById(R.id.button2);
         button3      = (TextView)v.findViewById(R.id.button3);
         button4      = (TextView)v.findViewById(R.id.button4);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
-
         //mStopwatch = new Stopwatch(this);
 
         shakeAnim = AnimationUtils.loadAnimation(App.getContext(), R.anim.shake);
@@ -106,6 +101,8 @@ public class QuestionFragment extends BaseToolbarFragment implements
             String s = ((TextView) v).getText().toString();
             mClickedButton = (TextView) v;
             mPresenter.onAnswerButtonClick(s, mClickedButton);
+            // чтобы избежать двойное нажатие на кнопку
+            v.setOnClickListener(null);
         }
     }
 
@@ -193,6 +190,10 @@ public class QuestionFragment extends BaseToolbarFragment implements
         button2.setVisibility(View.VISIBLE);
         button3.setVisibility(View.VISIBLE);
         button4.setVisibility(View.VISIBLE);
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
+        button4.setOnClickListener(this);
 
         if(question == null) { // Вопросы по этой стране закончились
             showDialogNextLevel();

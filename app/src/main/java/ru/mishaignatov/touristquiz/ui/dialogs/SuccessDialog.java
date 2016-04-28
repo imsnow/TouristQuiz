@@ -52,29 +52,26 @@ public class SuccessDialog extends BaseDialogFragment implements View.OnClickLis
             final Bonus b = new Bonus(factor == 2 ? Bonus.Type.BY_TWO : Bonus.Type.BY_THREE);
 
             titleColor = b.getResourceColor();
+            scoresView.setText(getString(R.string.show_plus_and_result, scores + " " + b.getTitle()));
 
-            TextView text = new TextView(getContext());
-            text.setText(b.getTitle());
-            text.setGravity(Gravity.CENTER);
-            text.setTextColor(getResources().getColor(b.getTextColor()));
-            text.setTextSize(32);
+            scoresView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                        AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
+                        alphaAnimation.setDuration(500);
+                        alphaAnimation.setFillAfter(true);
 
-            addView(text);
-
-            AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
-            alphaAnimation.setDuration(500);
-            alphaAnimation.setStartOffset(300);
-            alphaAnimation.setFillAfter(true);
-
-            int newValue = Integer.parseInt(scores);
-            int f = newValue * factor;
-            String newScores = String.valueOf(f);
-            scoresView.setTextColor(getResources().getColor(b.getTextColor()));
-            scoresView.setText(getString(R.string.show_plus_and_result, newScores));
-
-            scoresView.startAnimation(alphaAnimation);
-
-            text.startAnimation(alphaAnimation);
+                        int newValue = Integer.parseInt(scores);
+                        int f = newValue * factor;
+                        String newScores = String.valueOf(f);
+                    if (getDialog() != null && getDialog().isShowing()) {
+                        scoresView.setTextColor(getResources().getColor(b.getTextColor()));
+                        scoresView.setText(getString(R.string.show_plus_and_result, newScores));
+                        scoresView.startAnimation(alphaAnimation);
+                    }
+                }
+            }, 1000);
+            //text.startAnimation(alphaAnimation);
         }
 
         addNextButton(this);

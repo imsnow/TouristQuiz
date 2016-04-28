@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <solid android:color="@color/bonus_by_two_title"/>
+            <stroke android:width="2dp" android:color="@color/bonus_by_three_title"/>
+        </shape>
+    </item>
+</layer-list>
