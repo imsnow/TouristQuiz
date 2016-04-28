@@ -37,10 +37,8 @@ public class Process {
 
     protected boolean userRegister(JSONObject json) {
 
-        String imei = request.getParameter(APIStrings.IMEI);
-        if(imei == null) return false;
-        String email = request.getParameter(APIStrings.EMAIL);
-        if(email == null) return false;
+        String unique_id = request.getParameter(APIStrings.UNIQUE_ID);
+        if (unique_id == null) return false;
 
         String device = request.getParameter(APIStrings.DEVICE);
         if(device == null) return false;
@@ -50,15 +48,14 @@ public class Process {
         String date = regSDM.format(new Date());
         String version = request.getParameter(APIStrings.VERSION);
 
-        Entity entity = searchUser(imei, email);
+        Entity entity = searchUserById(unique_id);
         if (entity == null) {
             // new user
             String token = UUID.randomUUID().toString();
 
             entity = new Entity(DBStrings.USERS);
             entity.setProperty(APIStrings.TOKEN, token);
-            entity.setProperty(APIStrings.IMEI, imei);
-            entity.setProperty(APIStrings.EMAIL, email);
+            entity.setProperty(APIStrings.UNIQUE_ID, unique_id);
             entity.setProperty(APIStrings.DEVICE, device);
             entity.setProperty(APIStrings.ANDROID, api);
             entity.setProperty(APIStrings.REG_TIME, date);
@@ -87,7 +84,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -111,7 +108,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -143,7 +140,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -172,7 +169,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -190,7 +187,7 @@ public class Process {
         }
 
         JSONArray items = new JSONArray();
-        int size = list.size() >= 20 ? 20 : list.size();
+        int size = list.size() >= 200 ? 200 : list.size();
         for(int i=0; i<size; i++){
             JSONObject item = new JSONObject();
             Entity en = list.get(i);
@@ -214,7 +211,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -236,7 +233,7 @@ public class Process {
         String token = getParameter(request, APIStrings.TOKEN, json);
         if(token == null) return false;
 
-        Entity entity = searchUser(token);
+        Entity entity = searchUserByToken(token);
         if(entity == null){
             json.put(APIStrings.MESSAGE, "User doesn't exits");
             return false;
@@ -263,7 +260,7 @@ public class Process {
     }
 
     // get user entity from db
-    private Entity searchUser(String token){
+    private Entity searchUserByToken(String token){
 
         if(token == null || token.length() == 0)
             return null;
@@ -279,16 +276,14 @@ public class Process {
         return pq.asSingleEntity();
     }
 
-    private Entity searchUser(String imei, String email){
+    private Entity searchUserById(String unique_id) {
 
-        if(imei == null || imei.length() == 0 ||
-                email == null || email.length() == 0)
+        if(unique_id == null || unique_id.length() == 0)
             return null;
 
         Query query = new Query(DBStrings.USERS);
-        Query.Filter filter1 = new Query.FilterPredicate(APIStrings.IMEI, Query.FilterOperator.EQUAL, imei);
-        Query.Filter filter2 = new Query.FilterPredicate(APIStrings.EMAIL, Query.FilterOperator.EQUAL,email);
-        Query.Filter filter  = Query.CompositeFilterOperator.and(filter1, filter2);
+        Query.Filter filter = new Query.FilterPredicate(APIStrings.UNIQUE_ID, Query.FilterOperator.EQUAL, unique_id);
+        //Query.Filter filter  = Query.CompositeFilterOperator.and(filter1, filter2);
         query.setFilter(filter);
         PreparedQuery preparedQuery = database.prepare(query);
 
