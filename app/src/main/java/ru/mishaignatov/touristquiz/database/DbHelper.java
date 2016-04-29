@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DB_NAME = "tq.db";
-    private static final int DB_VERSION = 11;
+    private static final int DB_VERSION = 12;
 
     private LevelDao mLevelDao;
     private QuestionDao mQuestionDao;

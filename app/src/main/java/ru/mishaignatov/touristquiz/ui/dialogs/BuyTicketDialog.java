@@ -44,6 +44,8 @@ public class BuyTicketDialog extends BaseDialogFragment implements View.OnClickL
         String tag = (String)v.getTag();
         switch (tag){
             case "cancel":
+                LevelListFragment frag = (LevelListFragment)getTargetFragment();
+                frag.update();
                 dismiss();
                 break;
             case "send":

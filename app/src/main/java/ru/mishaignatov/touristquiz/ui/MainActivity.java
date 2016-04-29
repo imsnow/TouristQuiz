@@ -265,4 +265,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
         if(mFragmentManager != null)
             dialog.show(mFragmentManager, tag);
     }
+
+    public LevelListFragment getLevelListFragment() {
+        return (LevelListFragment) mFragmentManager.findFragmentByTag("LevelListFragment");
+    }
 }

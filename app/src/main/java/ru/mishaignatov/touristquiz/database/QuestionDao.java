@@ -157,7 +157,12 @@ public class QuestionDao {
                         question = new Question();
                         question.id = index;
                         question.quiz = text;
-                        question.answers = row[4].trim();
+                        String strAnswers = row[4].trim();
+                        if (strAnswers.split(",").length != 4 ) {
+                            Log.d("TAG", "answers error = " + strAnswers);
+                            continue;
+                        }
+                        question.answers = strAnswers;
                         question.type = row[7].trim();
                         question.is_answered = false;
                         question.is_shown = false;
